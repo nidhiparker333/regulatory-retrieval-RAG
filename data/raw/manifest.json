@@ -1,0 +1,97 @@
+[
+  {
+    "id": "eu_ai_act",
+    "name": "EU AI Act (consolidated, 27 July 2026)",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX%3A02024R1689-20260727",
+    "ext": "html",
+    "ok": true,
+    "bytes": 853875,
+    "path": "data/raw/eu_ai_act.html"
+  },
+  {
+    "id": "nist_ai_100_1",
+    "name": "NIST AI RMF 1.0",
+    "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+    "ext": "pdf",
+    "ok": true,
+    "bytes": 1946127,
+    "path": "data/raw/nist_ai_100_1.pdf"
+  },
+  {
+    "id": "nist_ai_600_1",
+    "name": "NIST Generative AI Profile",
+    "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+    "ext": "pdf",
+    "ok": true,
+    "bytes": 1174643,
+    "path": "data/raw/nist_ai_600_1.pdf"
+  },
+  {
+    "id": "owasp_llm_top10",
+    "name": "OWASP LLM Top 10 (2026)",
+    "ok": true,
+    "files": [
+      {
+        "file": "Appendix_A_Related_Framework_Mappings.md",
+        "bytes": 74693
+      },
+      {
+        "file": "Appendix_B_LLM_Application_Architecture_and_Threat_Modeling.md",
+        "bytes": 424
+      },
+      {
+        "file": "LLM00_Preface.md",
+        "bytes": 6397
+      },
+      {
+        "file": "LLM01_PromptInjection.md",
+        "bytes": 19879
+      },
+      {
+        "file": "LLM02_SensitiveInformationDisclosure.md",
+        "bytes": 12182
+      },
+      {
+        "file": "LLM03_ExcessiveAgency.md",
+        "bytes": 9410
+      },
+      {
+        "file": "LLM04_SupplyChain.md",
+        "bytes": 12752
+      },
+      {
+        "file": "LLM05_DataModelPoisoning.md",
+        "bytes": 10178
+      },
+      {
+        "file": "LLM06_UnboundedConsumption.md",
+        "bytes": 10003
+      },
+      {
+        "file": "LLM07_Misinformation.md",
+        "bytes": 5109
+      },
+      {
+        "file": "LLM08_HiddenContextExposure.md",
+        "bytes": 8667
+      },
+      {
+        "file": "LLM09_VectorAndEmbeddingWeaknesses.md",
+        "bytes": 12339
+      },
+      {
+        "file": "LLM10_ImproperOutputHandling.md",
+        "bytes": 6705
+      },
+      {
+        "file": "LLMZZ_Appendix_AISVS_Mapping.md",
+        "bytes": 4511
+      },
+      {
+        "file": "references.md",
+        "bytes": 34564
+      }
+    ],
+    "dir": "data/raw/owasp"
+  }
+]

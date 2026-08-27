@@ -1,0 +1,18 @@
+# Data layer and retrieval. No API key needed for any of this.
+beautifulsoup4==4.15.0
+fastembed==0.8.0
+lxml==6.1.2
+numpy==2.5.2
+pypdf==6.16.2
+requests==2.34.2
+
+# Sparse retrieval, for the hybrid arm.
+bm25s==0.2.13
+
+# Generation. Only these three need an API key at runtime.
+anthropic==0.75.0
+
+# HTTP layer over the pipeline.
+fastapi==0.121.2
+pydantic==2.12.4
+uvicorn==0.38.0

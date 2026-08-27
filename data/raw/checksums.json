@@ -1,0 +1,74 @@
+{
+  "eu_ai_act.html": {
+    "bytes": 853875,
+    "sha256": "6bef9c93b41eaf79150dc26f27a2aca5ad706d2d489a545948ebc9b1c5c63cec"
+  },
+  "nist_ai_100_1.pdf": {
+    "bytes": 1946127,
+    "sha256": "7576edb531d9848825814ee88e28b1795d3a84b435b4b797d3670eafdc4a89f1"
+  },
+  "nist_ai_600_1.pdf": {
+    "bytes": 1174643,
+    "sha256": "6e73620ab6b64e90ef2c04bf0e0d6246185a2f4b1b13cab0df494496cff89b6a"
+  },
+  "owasp/Appendix_A_Related_Framework_Mappings.md": {
+    "bytes": 74693,
+    "sha256": "291bb2f9cd79976ed236265d20816f0cbd395690602dc6c0a67cf4e8c29bd9b7"
+  },
+  "owasp/Appendix_B_LLM_Application_Architecture_and_Threat_Modeling.md": {
+    "bytes": 424,
+    "sha256": "c54695cfe6532fbe76ed322202806d8c9796cf22b41fcc11de1661984ea656b7"
+  },
+  "owasp/LLM00_Preface.md": {
+    "bytes": 6397,
+    "sha256": "e563f38b1bb6c6b7054ee70eb9a1b92293b6c2007c9ec6a97a7602a97c10c649"
+  },
+  "owasp/LLM01_PromptInjection.md": {
+    "bytes": 19879,
+    "sha256": "ff036047755c505e6d7837a0114f6056f8f751a3628061b6711b6eac19e1f8b0"
+  },
+  "owasp/LLM02_SensitiveInformationDisclosure.md": {
+    "bytes": 12182,
+    "sha256": "009153f4880fdabd79585cf1b74e60e2dfe79668c5581853890aa2bec36ab05e"
+  },
+  "owasp/LLM03_ExcessiveAgency.md": {
+    "bytes": 9410,
+    "sha256": "e961d0d9fe8382be4086aaddd65c1fad0d5d53220174493fe8c287f864c0529e"
+  },
+  "owasp/LLM04_SupplyChain.md": {
+    "bytes": 12752,
+    "sha256": "b5cb83fe937ecf38b8017918ac90b378da6d9c8ec9e2b485f422c08e4d66ac9e"
+  },
+  "owasp/LLM05_DataModelPoisoning.md": {
+    "bytes": 10178,
+    "sha256": "28ba5d86c102c82916066aae4bde2c10605cdb98cca51f572093ba002d2a198d"
+  },
+  "owasp/LLM06_UnboundedConsumption.md": {
+    "bytes": 10003,
+    "sha256": "e121147737d4750f89466fe191b5581fe71a822d8e1cfb621ea91d0d6a1dc6d5"
+  },
+  "owasp/LLM07_Misinformation.md": {
+    "bytes": 5109,
+    "sha256": "5686479c061cd2057b9905775ce70fc92b1b26e9daf296928521d56837ad4732"
+  },
+  "owasp/LLM08_HiddenContextExposure.md": {
+    "bytes": 8667,
+    "sha256": "e00d214f81757f626510df57e92116bec026b6c31ef7c3fb2bb52b71318c5ffe"
+  },
+  "owasp/LLM09_VectorAndEmbeddingWeaknesses.md": {
+    "bytes": 12339,
+    "sha256": "e1a3aff504a708d46c5dbf1c4bbc9ae05f3206cc6ea8e6e9d544b3f0d0ff7c23"
+  },
+  "owasp/LLM10_ImproperOutputHandling.md": {
+    "bytes": 6705,
+    "sha256": "d61a5ca0eddb38cdd0f485d642ed263c259638e2f1cf82eb1563c064491d67f0"
+  },
+  "owasp/LLMZZ_Appendix_AISVS_Mapping.md": {
+    "bytes": 4511,
+    "sha256": "73ca5470c4e949be3f8f3887764b20ff0073668d6d78fba2bdfab55e61bf058e"
+  },
+  "owasp/references.md": {
+    "bytes": 34564,
+    "sha256": "964e839ee8309cba203a4c22b950ab0fcc5f2e3125d9ae2a5e5983b225bec6d0"
+  }
+}

@@ -1,0 +1,14 @@
+# General rule first: later patterns override earlier ones in gitattributes,
+# so the specific exemption below has to come last to win.
+* text=auto
+
+# The raw sources are evidence, not text to be tidied.
+#
+# Git's default is to normalise line endings on checkout, which rewrites bytes
+# per platform. That would break every sha256 in data/raw/checksums.json the
+# moment someone cloned this on Linux or macOS - the integrity check would fail
+# and the failure would look like tampering rather than a git setting.
+#
+# `-text` disables all end-of-line conversion, so the committed bytes are the
+# bytes everyone gets.
+data/raw/** -text
