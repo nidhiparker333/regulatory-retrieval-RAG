@@ -28,6 +28,31 @@ OUT = ROOT / "data" / "clean" / "eu_ai_act.json"
 RE_ANNEX_REF = re.compile(r"\bAnnex\s+([IVXL]+)\b")
 RE_ARTICLE_REF = re.compile(r"\bArticle\s+(\d+[a-z]?)\b")
 
+# The Act cites other instruments by the same "Article N" form it uses for
+# itself: "Article 35 of Regulation (EU) 2016/679" is the GDPR's Article 35,
+# not this Regulation's. Reading it as a self-reference invents an edge in the
+# cross-reference graph - and following that edge pulls the AI Act's Article 35
+# into an answer about a GDPR obligation, which is a different subject.
+#
+# Measured on this corpus: 42 of 341 recorded references (12.3%) existed only
+# because of this, across 31 of 133 sections. Articles 40 and 59 had NO valid
+# references at all - every one was foreign.
+#
+# These spans are masked out before self-references are extracted. Plural and
+# compound forms matter: "Articles 9 and 10 of Regulation ..." must lose both
+# numbers, not just the first.
+RE_FOREIGN_REF = re.compile(
+    r"\bArticles?\s+\d+[a-z]?(?:\(\d+\))?"           # Article 9 / Article 6(1)
+    r"(?:\s*(?:,|and|to)\s*\d+[a-z]?(?:\(\d+\))?)*"  # ... and 10, 22 to 24
+    r"\s+of\s+(?:Regulation|Directive|Decision)",    # ... of Regulation (EU) 2016/679
+    re.IGNORECASE,
+)
+
+
+def _self_references(body: str) -> list[str]:
+    """Article numbers this section cites *within this Regulation*."""
+    return RE_ARTICLE_REF.findall(RE_FOREIGN_REF.sub(" ", body))
+
 
 def _article_sort_key(ref: str) -> tuple[int, str]:
     """
@@ -118,7 +143,7 @@ def main() -> None:
         annex_refs = sorted(set(RE_ANNEX_REF.findall(body)))
         # An article always mentions itself in passing; drop self-references.
         article_refs = sorted(
-            {a for a in RE_ARTICLE_REF.findall(body) if a != number},
+            {a for a in _self_references(body) if a != number},
             key=_article_sort_key,
         )
 
@@ -180,7 +205,7 @@ def main() -> None:
             "chars": len(body),
             "refs_annex": sorted(set(RE_ANNEX_REF.findall(body)) - {number}),
             "refs_article": sorted(
-                set(RE_ARTICLE_REF.findall(body)),
+                set(_self_references(body)),
                 key=_article_sort_key,
             ),
             "amended_2026": n_amended > 0,

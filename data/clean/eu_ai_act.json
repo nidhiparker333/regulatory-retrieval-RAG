@@ -44,8 +44,6 @@
     "refs_article": [
       "2",
       "4",
-      "9",
-      "10",
       "57"
     ],
     "amended_2026": true,
@@ -94,7 +92,6 @@
     ],
     "refs_article": [
       "2",
-      "9",
       "27",
       "49"
     ],
@@ -466,11 +463,7 @@
       "III"
     ],
     "refs_article": [
-      "9",
-      "10",
       "13",
-      "27",
-      "35",
       "49",
       "50",
       "71",
@@ -495,7 +488,6 @@
     "refs_article": [
       "6",
       "13",
-      "35",
       "46"
     ],
     "amended_2026": true,
@@ -702,10 +694,7 @@
     "refs_annex": [
       "I"
     ],
-    "refs_article": [
-      "10",
-      "24"
-    ],
+    "refs_article": [],
     "amended_2026": true,
     "amendment_markers": 1
   },
@@ -719,8 +708,6 @@
     "chars": 3844,
     "refs_annex": [],
     "refs_article": [
-      "10",
-      "22",
       "67",
       "98"
     ],
@@ -850,7 +837,6 @@
     "chars": 1384,
     "refs_annex": [],
     "refs_article": [
-      "30",
       "43"
     ],
     "amended_2026": false,
@@ -942,7 +928,6 @@
       "XII"
     ],
     "refs_article": [
-      "4",
       "56",
       "78",
       "97"
@@ -1045,10 +1030,7 @@
     "refs_annex": [
       "IV"
     ],
-    "refs_article": [
-      "35",
-      "39"
-    ],
+    "refs_article": [],
     "amended_2026": false,
     "amendment_markers": 0
   },
@@ -1163,7 +1145,6 @@
     "chars": 2865,
     "refs_annex": [],
     "refs_article": [
-      "30",
       "66",
       "67"
     ],
@@ -1305,8 +1286,6 @@
     ],
     "refs_article": [
       "3",
-      "19",
-      "20",
       "77"
     ],
     "amended_2026": false,
@@ -1326,9 +1305,7 @@
     ],
     "refs_article": [
       "2",
-      "9",
       "14",
-      "34",
       "78"
     ],
     "amended_2026": false,
@@ -1368,9 +1345,6 @@
     "refs_annex": [],
     "refs_article": [
       "14",
-      "15",
-      "16",
-      "17",
       "74",
       "75",
       "85",
@@ -1405,7 +1379,6 @@
     "refs_annex": [],
     "refs_article": [
       "14",
-      "16",
       "75",
       "75a",
       "75b",
@@ -1425,7 +1398,6 @@
     "chars": 1865,
     "refs_annex": [],
     "refs_article": [
-      "18",
       "75",
       "75c"
     ],
@@ -1479,7 +1451,6 @@
       "IV"
     ],
     "refs_article": [
-      "5",
       "74"
     ],
     "amended_2026": false,
@@ -1497,7 +1468,6 @@
     "refs_article": [
       "3",
       "5",
-      "18",
       "50",
       "77"
     ],
@@ -1515,7 +1485,6 @@
     "refs_annex": [],
     "refs_article": [
       "6",
-      "11",
       "71",
       "79",
       "99"
@@ -1534,7 +1503,6 @@
     "refs_annex": [],
     "refs_article": [
       "5",
-      "11",
       "79"
     ],
     "amended_2026": false,
@@ -1582,9 +1550,7 @@
     "text": "1. The Commission shall designate one or more Union AI testing support structures to perform the tasks listed under Article 21(6) of Regulation (EU) 2019/1020 in the area of AI. 2. Without prejudice to the tasks referred to in paragraph 1, Union AI testing support structures shall also provide independent technical or scientific advice at the request of the Board, the Commission, or of market surveillance authorities.",
     "chars": 421,
     "refs_annex": [],
-    "refs_article": [
-      "21"
-    ],
+    "refs_article": [],
     "amended_2026": false,
     "amendment_markers": 0
   },
@@ -1732,9 +1698,7 @@
     "text": "Article 18 of Regulation (EU) 2019/1020 shall apply mutatis mutandis to the providers of the general-purpose AI model, without prejudice to more specific procedural rights provided for in this Regulation.",
     "chars": 204,
     "refs_annex": [],
-    "refs_article": [
-      "18"
-    ],
+    "refs_article": [],
     "amended_2026": false,
     "amendment_markers": 0
   },
@@ -1806,9 +1770,7 @@
     "text": "1. The Commission shall be assisted by a committee. That committee shall be a committee within the meaning of Regulation (EU) No 182/2011. 2. Where reference is made to this paragraph, Article 5 of Regulation (EU) No 182/2011 shall apply.",
     "chars": 238,
     "refs_annex": [],
-    "refs_article": [
-      "5"
-    ],
+    "refs_article": [],
     "amended_2026": false,
     "amendment_markers": 0
   },
@@ -1881,9 +1843,7 @@
     "text": "In Article 4(3) of Regulation (EC) No 300/2008, the following subparagraph is added: ‘When adopting detailed measures related to technical specifications and procedures for approval and use of security equipment concerning Artificial Intelligence systems within the meaning of Regulation (EU) 2024/1689 of the European Parliament and of the Council ( *1 ), the requirements set out in Chapter III, Section 2, of that Regulation shall be taken into account.",
     "chars": 456,
     "refs_annex": [],
-    "refs_article": [
-      "4"
-    ],
+    "refs_article": [],
     "amended_2026": false,
     "amendment_markers": 0
   },
@@ -1896,9 +1856,7 @@
     "text": "In Article 17(5) of Regulation (EU) No 167/2013, the following subparagraph is added: ‘When adopting delegated acts pursuant to the first subparagraph concerning artificial intelligence systems which are safety components within the meaning of Regulation (EU) 2024/1689 of the European Parliament and of the Council ( *2 ), the requirements set out in Chapter III, Section 2, of that Regulation shall be taken into account.",
     "chars": 423,
     "refs_annex": [],
-    "refs_article": [
-      "17"
-    ],
+    "refs_article": [],
     "amended_2026": false,
     "amendment_markers": 0
   },
@@ -1911,9 +1869,7 @@
     "text": "In Article 22(5) of Regulation (EU) No 168/2013, the following subparagraph is added: ‘When adopting delegated acts pursuant to the first subparagraph concerning Artificial Intelligence systems which are safety components within the meaning of Regulation (EU) 2024/1689 of the European Parliament and of the Council ( *3 ), the requirements set out in Chapter III, Section 2, of that Regulation shall be taken into account.",
     "chars": 423,
     "refs_annex": [],
-    "refs_article": [
-      "22"
-    ],
+    "refs_article": [],
     "amended_2026": false,
     "amendment_markers": 0
   },
@@ -1926,9 +1882,7 @@
     "text": "In Article 8 of Directive 2014/90/EU, the following paragraph is added: ‘5. For Artificial Intelligence systems which are safety components within the meaning of Regulation (EU) 2024/1689 of the European Parliament and of the Council ( *4 ), when carrying out its activities pursuant to paragraph 1 and when adopting technical specifications and testing standards in accordance with paragraphs 2 and 3, the Commission shall take into account the requirements set out in Chapter III, Section 2, of that Regulation.",
     "chars": 513,
     "refs_annex": [],
-    "refs_article": [
-      "8"
-    ],
+    "refs_article": [],
     "amended_2026": false,
     "amendment_markers": 0
   },
@@ -1941,9 +1895,7 @@
     "text": "In Article 5 of Directive (EU) 2016/797, the following paragraph is added: ‘12. When adopting delegated acts pursuant to paragraph 1 and implementing acts pursuant to paragraph 11 concerning Artificial Intelligence systems which are safety components within the meaning of Regulation (EU) 2024/1689 of the European Parliament and of the Council ( *5 ), the requirements set out in Chapter III, Section 2, of that Regulation shall be taken into account.",
     "chars": 452,
     "refs_annex": [],
-    "refs_article": [
-      "5"
-    ],
+    "refs_article": [],
     "amended_2026": false,
     "amendment_markers": 0
   },
@@ -1956,9 +1908,7 @@
     "text": "In Article 5 of Regulation (EU) 2018/858 the following paragraph is added: ‘4. When adopting delegated acts pursuant to paragraph 3 concerning Artificial Intelligence systems which are safety components within the meaning of Regulation (EU) 2024/1689 of the European Parliament and of the Council ( *6 ), the requirements set out in Chapter III, Section 2, of that Regulation shall be taken into account.",
     "chars": 404,
     "refs_annex": [],
-    "refs_article": [
-      "5"
-    ],
+    "refs_article": [],
     "amended_2026": false,
     "amendment_markers": 0
   },
@@ -1991,9 +1941,7 @@
     "text": "In Article 11 of Regulation (EU) 2019/2144, the following paragraph is added: ‘3. When adopting the implementing acts pursuant to paragraph 2, concerning artificial intelligence systems which are safety components within the meaning of Regulation (EU) 2024/1689 of the European Parliament and of the Council ( *8 ), the requirements set out in Chapter III, Section 2, of that Regulation shall be taken into account.",
     "chars": 415,
     "refs_annex": [],
-    "refs_article": [
-      "11"
-    ],
+    "refs_article": [],
     "amended_2026": false,
     "amendment_markers": 0
   },
@@ -2113,7 +2061,6 @@
     "chars": 7340,
     "refs_annex": [],
     "refs_article": [
-      "3",
       "6"
     ],
     "amended_2026": false,
@@ -2203,7 +2150,6 @@
       "6",
       "26",
       "27",
-      "35",
       "47",
       "49"
     ],
