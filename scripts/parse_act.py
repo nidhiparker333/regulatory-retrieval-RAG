@@ -42,16 +42,46 @@ RE_ARTICLE_REF = re.compile(r"\bArticle\s+(\d+[a-z]?)\b")
 # compound forms matter: "Articles 9 and 10 of Regulation ..." must lose both
 # numbers, not just the first.
 RE_FOREIGN_REF = re.compile(
-    r"\bArticles?\s+\d+[a-z]?(?:\(\d+\))?"           # Article 9 / Article 6(1)
+    r"\b(?:"
+    r"Articles?\s+\d+[a-z]?(?:\(\d+\))?"             # Article 9 / Article 6(1)
     r"(?:\s*(?:,|and|to)\s*\d+[a-z]?(?:\(\d+\))?)*"  # ... and 10, 22 to 24
-    r"\s+of\s+(?:Regulation|Directive|Decision)",    # ... of Regulation (EU) 2016/679
+    r"|"
+    # `Annex(?:es)?`, not `Annexes?` - the latter reads as "Annexe" plus an
+    # optional "s" and so never matches the singular "Annex", which is the
+    # form the Act actually uses. `Articles?` is fine only because "Article"
+    # is itself the whole word.
+    r"Annex(?:es)?\s+[IVXL]+"                        # Annex I
+    r"(?:\s*(?:,|and|to)\s*[IVXL]+)*"                # ... and III
+    r")"
+    r"\s+(?:of|to)\s+(?:Regulation|Directive|Decision)",
     re.IGNORECASE,
 )
 
 
+def _strip_foreign(body: str) -> str:
+    """
+    Blank out references that name another instrument.
+
+    Annexes carry the same fault as articles: Article 110 amends Directive (EU)
+    2020/1828 and mentions "Annex I of Directive (EU) 2020/1828", which was
+    recorded as a reference to *this* Regulation's Annex I - a list of Union
+    harmonisation legislation, an unrelated subject.
+
+    Smaller than the article problem (1 of 70 annex references against 42 of
+    341) but the same defect, so it is removed the same way rather than left
+    because it is rare.
+    """
+    return RE_FOREIGN_REF.sub(" ", body)
+
+
 def _self_references(body: str) -> list[str]:
     """Article numbers this section cites *within this Regulation*."""
-    return RE_ARTICLE_REF.findall(RE_FOREIGN_REF.sub(" ", body))
+    return RE_ARTICLE_REF.findall(_strip_foreign(body))
+
+
+def _self_annexes(body: str) -> list[str]:
+    """Annex numbers this section cites *within this Regulation*."""
+    return RE_ANNEX_REF.findall(_strip_foreign(body))
 
 
 def _article_sort_key(ref: str) -> tuple[int, str]:
@@ -140,7 +170,7 @@ def main() -> None:
                 break
 
         # --- cross-references: the payload of this whole script ----------
-        annex_refs = sorted(set(RE_ANNEX_REF.findall(body)))
+        annex_refs = sorted(set(_self_annexes(body)))
         # An article always mentions itself in passing; drop self-references.
         article_refs = sorted(
             {a for a in _self_references(body) if a != number},
@@ -203,7 +233,7 @@ def main() -> None:
             "title": title,
             "text": body,
             "chars": len(body),
-            "refs_annex": sorted(set(RE_ANNEX_REF.findall(body)) - {number}),
+            "refs_annex": sorted(set(_self_annexes(body)) - {number}),
             "refs_article": sorted(
                 set(_self_references(body)),
                 key=_article_sort_key,
