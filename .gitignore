@@ -1,0 +1,32 @@
+# Virtual environment - rebuilt from requirements.txt, never committed.
+.venv/
+
+# Secrets. An API key must never reach the repo. This file is committed first,
+# before anything else, so there is no window in which a key could be staged.
+.env
+.env.local
+*.key
+api-key.txt
+*api-key*
+*secret*
+
+# Python noise
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Node / UI
+node_modules/
+.next/
+
+# OS noise
+Thumbs.db
+.DS_Store
+
+# NOTE on data/: the raw source documents ARE committed, deliberately.
+# Regulations get re-consolidated and repositories get reorganised, so
+# "re-download it yourself" is not reproducible. Committing the exact bytes
+# the results came from is what makes the evaluation checkable later.
+#
+# Derived files (data/clean/) are also committed: they are what the measured
+# numbers were computed from, and regenerating them requires the model.
