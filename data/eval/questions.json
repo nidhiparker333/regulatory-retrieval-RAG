@@ -1,0 +1,229 @@
+{
+  "_about": {
+    "purpose": "Fixed question set for measuring retrieval quality. Written from the source documents, never from retrieval output - a test shaped to fit the system measures nothing.",
+    "scoring": "expect_sections lists the section ids that must be retrieved for the answer to be possible. Retrieval is scored on whether they appear, which needs no model and costs nothing.",
+    "wording_note": "Some questions deliberately use everyday English and some use terms of art. The Act's vocabulary differs from ordinary usage - 'supervise' means market surveillance, not human oversight - so wording is a variable worth measuring, not one to control away.",
+    "categories": {
+      "direct": "Answer sits in one section",
+      "cross_ref": "Answer requires two or more sections that reference each other",
+      "cross_doc": "Answer spans different source documents",
+      "out_of_corpus": "Not answerable from these documents. The system should say so rather than improvise."
+    }
+  },
+
+  "questions": [
+    {
+      "id": "D01",
+      "category": "direct",
+      "wording": "plain",
+      "question": "What are the fines for breaking the AI Act?",
+      "expect_sections": ["art_99"],
+      "notes": "Penalties. Article 101 covers GPAI fines separately."
+    },
+    {
+      "id": "D02",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "What must the technical documentation for a high-risk AI system contain?",
+      "expect_sections": ["art_11", "anx_IV"],
+      "notes": "Article 11 imposes the duty; Annex IV lists the contents."
+    },
+    {
+      "id": "D03",
+      "category": "direct",
+      "wording": "plain",
+      "question": "Does the law require AI systems to keep logs?",
+      "expect_sections": ["art_12"],
+      "notes": "Record-keeping. Article 19 covers retention of automatically generated logs."
+    },
+    {
+      "id": "D04",
+      "category": "direct",
+      "wording": "plain",
+      "question": "Can an ordinary person complain about an AI system, and to whom?",
+      "expect_sections": ["art_85"],
+      "notes": "Right to lodge a complaint with a market surveillance authority."
+    },
+    {
+      "id": "D05",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "How does the Regulation define an AI system?",
+      "expect_sections": ["art_3"],
+      "notes": "Article 3(1). Article 3 is 12 chunks, so this also tests whether the right part surfaces."
+    },
+    {
+      "id": "D06",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "What obligations apply to providers of general-purpose AI models?",
+      "expect_sections": ["art_53"],
+      "notes": "GPAI regime is separate from the high-risk regime - a common confusion."
+    },
+    {
+      "id": "D07",
+      "category": "direct",
+      "wording": "plain",
+      "question": "When does the AI Act actually start applying?",
+      "expect_sections": ["art_113"],
+      "notes": "Entry into force and staggered application."
+    },
+    {
+      "id": "D08",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "What are the rules for affixing the CE marking to an AI system?",
+      "expect_sections": ["art_48"],
+      "notes": null
+    },
+    {
+      "id": "D09",
+      "category": "direct",
+      "wording": "plain",
+      "question": "If an AI system makes a decision about me, can I demand an explanation?",
+      "expect_sections": ["art_86"],
+      "notes": "Right to explanation of individual decision-making."
+    },
+    {
+      "id": "D10",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "What does the Act require regarding accuracy, robustness and cybersecurity?",
+      "expect_sections": ["art_15"],
+      "notes": "Near-verbatim title match. Should be the easiest question in the set - a floor."
+    },
+
+    {
+      "id": "D11",
+      "category": "direct",
+      "wording": "plain",
+      "question": "Does the EU AI Act apply to a company based in the United States?",
+      "expect_sections": ["art_2"],
+      "added": "2026-08-23",
+      "notes": "Added after the baseline run. Known to fail: retrieval returns Article 2 part 7 of 10 (research exclusions) rather than part 1 (extraterritorial scope). The right article, the wrong chunk - a failure mode the original 25 did not cover. Article 2(1) applies the Regulation to providers in a third country placing systems on the Union market, and to third-country providers and deployers where the output is used in the Union."
+    },
+    {
+      "id": "X01",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "Is my CV screening tool for hiring considered high-risk?",
+      "expect_sections": ["anx_III", "art_6"],
+      "notes": "The flagship case. Article 6 defines high-risk by pointing at Annex III; the employment category is Annex III item 4."
+    },
+    {
+      "id": "X02",
+      "category": "cross_ref",
+      "wording": "term_of_art",
+      "question": "Who is responsible for human oversight of a high-risk AI system, and what must that person be able to do?",
+      "expect_sections": ["art_14", "art_26"],
+      "notes": "Article 14 sets the requirement; Article 26 makes the deployer assign it."
+    },
+    {
+      "id": "X03",
+      "category": "cross_ref",
+      "wording": "term_of_art",
+      "question": "When is a general-purpose AI model considered to pose systemic risk?",
+      "expect_sections": ["art_51", "anx_XIII"],
+      "notes": "Article 51 classifies; Annex XIII gives the designation criteria."
+    },
+    {
+      "id": "X04",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "What AI uses are banned outright, and does that connect to any list of crimes?",
+      "expect_sections": ["art_5", "anx_II"],
+      "notes": "Article 5 prohibits; Annex II lists the criminal offences it refers to."
+    },
+    {
+      "id": "X05",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "How long does a provider have to keep documentation, and what documentation is it?",
+      "expect_sections": ["art_18", "art_11"],
+      "notes": "Article 18 sets the retention period; Article 11 defines what is retained."
+    },
+    {
+      "id": "X06",
+      "category": "cross_ref",
+      "wording": "term_of_art",
+      "question": "What conformity assessment procedure applies to a high-risk AI system listed in Annex III?",
+      "expect_sections": ["art_43", "anx_VI"],
+      "notes": "Article 43 routes to the annexes; Annex VI is internal control."
+    },
+    {
+      "id": "X07",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "What information has to be registered in the EU database before a high-risk system goes live?",
+      "expect_sections": ["art_49", "anx_VIII"],
+      "notes": "Article 49 requires registration; Annex VIII lists the fields. Article 71 covers the database itself."
+    },
+
+    {
+      "id": "C01",
+      "category": "cross_doc",
+      "wording": "term_of_art",
+      "question": "How does the Act's risk management requirement compare with the NIST AI Risk Management Framework?",
+      "expect_sections": ["art_9"],
+      "expect_sources": ["EU AI Act", "NIST"],
+      "notes": "Needs Article 9 plus any NIST section. Scored on both sources appearing, since NIST has no single canonical section for this."
+    },
+    {
+      "id": "C02",
+      "category": "cross_doc",
+      "wording": "plain",
+      "question": "What can go wrong with the embeddings and vector search in a retrieval system?",
+      "expect_sources": ["OWASP"],
+      "notes": "OWASP LLM09. The system being asked about the risks of how it is itself built."
+    },
+    {
+      "id": "C03",
+      "category": "cross_doc",
+      "wording": "term_of_art",
+      "question": "What are the four core functions of the NIST AI Risk Management Framework?",
+      "expect_sources": ["NIST"],
+      "notes": "Govern, Map, Measure, Manage."
+    },
+    {
+      "id": "C04",
+      "category": "cross_doc",
+      "wording": "plain",
+      "question": "What is prompt injection and why is it hard to defend against?",
+      "expect_sources": ["OWASP"],
+      "notes": "OWASP LLM01."
+    },
+
+    {
+      "id": "O01",
+      "category": "out_of_corpus",
+      "wording": "plain",
+      "question": "What does ISO/IEC 42001 require for certification, and what does it cost?",
+      "expect_sections": [],
+      "notes": "ISO is paywalled and deliberately excluded. The system should decline, not improvise from adjacent material."
+    },
+    {
+      "id": "O02",
+      "category": "out_of_corpus",
+      "wording": "plain",
+      "question": "What are the penalties under the Colorado AI Act?",
+      "expect_sections": [],
+      "notes": "US state law, not in the corpus. Tempting to answer from the EU penalties article."
+    },
+    {
+      "id": "O03",
+      "category": "out_of_corpus",
+      "wording": "term_of_art",
+      "question": "What do the recitals say about the intent behind the high-risk classification rules?",
+      "expect_sections": [],
+      "notes": "Tests the known limitation: EUR-Lex consolidated texts carry operative text only, so this corpus holds no recitals. The system must not answer from the articles as though they were recitals."
+    },
+    {
+      "id": "O04",
+      "category": "out_of_corpus",
+      "wording": "plain",
+      "question": "How many companies have been fined under the AI Act so far?",
+      "expect_sections": [],
+      "notes": "A factual question about the world, not about the text. No document can answer it."
+    }
+  ]
+}
