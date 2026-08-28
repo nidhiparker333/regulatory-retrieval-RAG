@@ -1,0 +1,1610 @@
+{
+  "k=5": [
+    {
+      "id": "D01",
+      "category": "direct",
+      "wording": "plain",
+      "question": "What are the fines for breaking the AI Act?",
+      "expect_sections": [
+        "art_99"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8258671164512634,
+      "n_retrieved": 5
+    },
+    {
+      "id": "D02",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "What must the technical documentation for a high-risk AI system contain?",
+      "expect_sections": [
+        "art_11",
+        "anx_IV"
+      ],
+      "strict": false,
+      "partial": 0.5,
+      "top_score": 0.8316292762756348,
+      "n_retrieved": 5
+    },
+    {
+      "id": "D03",
+      "category": "direct",
+      "wording": "plain",
+      "question": "Does the law require AI systems to keep logs?",
+      "expect_sections": [
+        "art_12"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8426685333251953,
+      "n_retrieved": 5
+    },
+    {
+      "id": "D04",
+      "category": "direct",
+      "wording": "plain",
+      "question": "Can an ordinary person complain about an AI system, and to whom?",
+      "expect_sections": [
+        "art_85"
+      ],
+      "strict": false,
+      "partial": 0.0,
+      "top_score": 0.7298500537872314,
+      "n_retrieved": 5
+    },
+    {
+      "id": "D05",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "How does the Regulation define an AI system?",
+      "expect_sections": [
+        "art_3"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8472094535827637,
+      "n_retrieved": 5
+    },
+    {
+      "id": "D06",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "What obligations apply to providers of general-purpose AI models?",
+      "expect_sections": [
+        "art_53"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8832180500030518,
+      "n_retrieved": 5
+    },
+    {
+      "id": "D07",
+      "category": "direct",
+      "wording": "plain",
+      "question": "When does the AI Act actually start applying?",
+      "expect_sections": [
+        "art_113"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7478975057601929,
+      "n_retrieved": 5
+    },
+    {
+      "id": "D08",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "What are the rules for affixing the CE marking to an AI system?",
+      "expect_sections": [
+        "art_48"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8042230606079102,
+      "n_retrieved": 5
+    },
+    {
+      "id": "D09",
+      "category": "direct",
+      "wording": "plain",
+      "question": "If an AI system makes a decision about me, can I demand an explanation?",
+      "expect_sections": [
+        "art_86"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7652018070220947,
+      "n_retrieved": 5
+    },
+    {
+      "id": "D10",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "What does the Act require regarding accuracy, robustness and cybersecurity?",
+      "expect_sections": [
+        "art_15"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7940136194229126,
+      "n_retrieved": 5
+    },
+    {
+      "id": "D11",
+      "category": "direct",
+      "wording": "plain",
+      "question": "Does the EU AI Act apply to a company based in the United States?",
+      "expect_sections": [
+        "art_2"
+      ],
+      "added": "2026-08-23",
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7347899675369263,
+      "n_retrieved": 5
+    },
+    {
+      "id": "X01",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "Is my CV screening tool for hiring considered high-risk?",
+      "expect_sections": [
+        "anx_III",
+        "art_6"
+      ],
+      "strict": false,
+      "partial": 0.5,
+      "top_score": 0.6777821183204651,
+      "n_retrieved": 5
+    },
+    {
+      "id": "X02",
+      "category": "cross_ref",
+      "wording": "term_of_art",
+      "question": "Who is responsible for human oversight of a high-risk AI system, and what must that person be able to do?",
+      "expect_sections": [
+        "art_14",
+        "art_26"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8336120843887329,
+      "n_retrieved": 5
+    },
+    {
+      "id": "X03",
+      "category": "cross_ref",
+      "wording": "term_of_art",
+      "question": "When is a general-purpose AI model considered to pose systemic risk?",
+      "expect_sections": [
+        "art_51",
+        "anx_XIII"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8600857257843018,
+      "n_retrieved": 5
+    },
+    {
+      "id": "X04",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "What AI uses are banned outright, and does that connect to any list of crimes?",
+      "expect_sections": [
+        "art_5",
+        "anx_II"
+      ],
+      "strict": false,
+      "partial": 0.5,
+      "top_score": 0.7519335150718689,
+      "n_retrieved": 5
+    },
+    {
+      "id": "X05",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "How long does a provider have to keep documentation, and what documentation is it?",
+      "expect_sections": [
+        "art_18",
+        "art_11"
+      ],
+      "strict": false,
+      "partial": 0.5,
+      "top_score": 0.8077577352523804,
+      "n_retrieved": 5
+    },
+    {
+      "id": "X06",
+      "category": "cross_ref",
+      "wording": "term_of_art",
+      "question": "What conformity assessment procedure applies to a high-risk AI system listed in Annex III?",
+      "expect_sections": [
+        "art_43",
+        "anx_VI"
+      ],
+      "strict": false,
+      "partial": 0.5,
+      "top_score": 0.878491222858429,
+      "n_retrieved": 5
+    },
+    {
+      "id": "X07",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "What information has to be registered in the EU database before a high-risk system goes live?",
+      "expect_sections": [
+        "art_49",
+        "anx_VIII"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8076239824295044,
+      "n_retrieved": 5
+    },
+    {
+      "id": "C01",
+      "category": "cross_doc",
+      "wording": "term_of_art",
+      "question": "How does the Act's risk management requirement compare with the NIST AI Risk Management Framework?",
+      "expect_sections": [
+        "art_9"
+      ],
+      "expect_sources": [
+        "EU AI Act",
+        "NIST"
+      ],
+      "strict": false,
+      "partial": 0.3333333333333333,
+      "top_score": 0.8064348697662354,
+      "n_retrieved": 5
+    },
+    {
+      "id": "C02",
+      "category": "other_source",
+      "wording": "plain",
+      "question": "What can go wrong with the embeddings and vector search in a retrieval system?",
+      "expect_sources": [
+        "OWASP"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8152079582214355,
+      "n_retrieved": 5
+    },
+    {
+      "id": "C03",
+      "category": "other_source",
+      "wording": "term_of_art",
+      "question": "What are the four core functions of the NIST AI Risk Management Framework?",
+      "expect_sources": [
+        "NIST"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8652818202972412,
+      "n_retrieved": 5
+    },
+    {
+      "id": "C04",
+      "category": "other_source",
+      "wording": "plain",
+      "question": "What is prompt injection and why is it hard to defend against?",
+      "expect_sources": [
+        "OWASP"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7590582370758057,
+      "n_retrieved": 5
+    },
+    {
+      "id": "O01",
+      "category": "out_of_corpus",
+      "wording": "plain",
+      "question": "What does ISO/IEC 42001 require for certification, and what does it cost?",
+      "expect_sections": [],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.634043276309967,
+      "n_retrieved": 5
+    },
+    {
+      "id": "O02",
+      "category": "out_of_corpus",
+      "wording": "plain",
+      "question": "What are the penalties under the Colorado AI Act?",
+      "expect_sections": [],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7503213286399841,
+      "n_retrieved": 5
+    },
+    {
+      "id": "O03",
+      "category": "out_of_corpus",
+      "wording": "term_of_art",
+      "question": "What do the recitals say about the intent behind the high-risk classification rules?",
+      "expect_sections": [],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.768979012966156,
+      "n_retrieved": 5
+    },
+    {
+      "id": "O04",
+      "category": "out_of_corpus",
+      "wording": "plain",
+      "question": "How many companies have been fined under the AI Act so far?",
+      "expect_sections": [],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7601196765899658,
+      "n_retrieved": 5
+    },
+    {
+      "id": "D12",
+      "category": "direct",
+      "wording": "plain",
+      "question": "Can we use sensitive personal data like ethnicity to check whether our AI system is biased?",
+      "expect_sections": [
+        "art_4a"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7695075869560242,
+      "n_retrieved": 5
+    },
+    {
+      "id": "D13",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "Can the AI Office itself impose fines, and on whom?",
+      "expect_sections": [
+        "art_75c"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8105898499488831,
+      "n_retrieved": 5
+    },
+    {
+      "id": "X08",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "If we want to test our high-risk AI system on real people before launch, what are the rules?",
+      "expect_sections": [
+        "art_60",
+        "art_60a"
+      ],
+      "strict": false,
+      "partial": 0.5,
+      "top_score": 0.781002402305603,
+      "n_retrieved": 5
+    },
+    {
+      "id": "C05",
+      "category": "cross_doc",
+      "wording": "plain",
+      "question": "What does the Act require for cybersecurity of high-risk systems, and what attacks should we actually defend against?",
+      "expect_sections": [
+        "art_15"
+      ],
+      "expect_sources": [
+        "EU AI Act",
+        "OWASP"
+      ],
+      "strict": false,
+      "partial": 0.6666666666666666,
+      "top_score": 0.7461181879043579,
+      "n_retrieved": 5
+    }
+  ],
+  "k=5 +follow": [
+    {
+      "id": "D01",
+      "category": "direct",
+      "wording": "plain",
+      "question": "What are the fines for breaking the AI Act?",
+      "expect_sections": [
+        "art_99"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8258671164512634,
+      "n_retrieved": 27
+    },
+    {
+      "id": "D02",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "What must the technical documentation for a high-risk AI system contain?",
+      "expect_sections": [
+        "art_11",
+        "anx_IV"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8316292762756348,
+      "n_retrieved": 11
+    },
+    {
+      "id": "D03",
+      "category": "direct",
+      "wording": "plain",
+      "question": "Does the law require AI systems to keep logs?",
+      "expect_sections": [
+        "art_12"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8426685333251953,
+      "n_retrieved": 18
+    },
+    {
+      "id": "D04",
+      "category": "direct",
+      "wording": "plain",
+      "question": "Can an ordinary person complain about an AI system, and to whom?",
+      "expect_sections": [
+        "art_85"
+      ],
+      "strict": false,
+      "partial": 0.0,
+      "top_score": 0.7298500537872314,
+      "n_retrieved": 7
+    },
+    {
+      "id": "D05",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "How does the Regulation define an AI system?",
+      "expect_sections": [
+        "art_3"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8472094535827637,
+      "n_retrieved": 19
+    },
+    {
+      "id": "D06",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "What obligations apply to providers of general-purpose AI models?",
+      "expect_sections": [
+        "art_53"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8832180500030518,
+      "n_retrieved": 11
+    },
+    {
+      "id": "D07",
+      "category": "direct",
+      "wording": "plain",
+      "question": "When does the AI Act actually start applying?",
+      "expect_sections": [
+        "art_113"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7478975057601929,
+      "n_retrieved": 15
+    },
+    {
+      "id": "D08",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "What are the rules for affixing the CE marking to an AI system?",
+      "expect_sections": [
+        "art_48"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8042230606079102,
+      "n_retrieved": 12
+    },
+    {
+      "id": "D09",
+      "category": "direct",
+      "wording": "plain",
+      "question": "If an AI system makes a decision about me, can I demand an explanation?",
+      "expect_sections": [
+        "art_86"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7652018070220947,
+      "n_retrieved": 8
+    },
+    {
+      "id": "D10",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "What does the Act require regarding accuracy, robustness and cybersecurity?",
+      "expect_sections": [
+        "art_15"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7940136194229126,
+      "n_retrieved": 10
+    },
+    {
+      "id": "D11",
+      "category": "direct",
+      "wording": "plain",
+      "question": "Does the EU AI Act apply to a company based in the United States?",
+      "expect_sections": [
+        "art_2"
+      ],
+      "added": "2026-08-23",
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7347899675369263,
+      "n_retrieved": 18
+    },
+    {
+      "id": "X01",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "Is my CV screening tool for hiring considered high-risk?",
+      "expect_sections": [
+        "anx_III",
+        "art_6"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.6777821183204651,
+      "n_retrieved": 6
+    },
+    {
+      "id": "X02",
+      "category": "cross_ref",
+      "wording": "term_of_art",
+      "question": "Who is responsible for human oversight of a high-risk AI system, and what must that person be able to do?",
+      "expect_sections": [
+        "art_14",
+        "art_26"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8336120843887329,
+      "n_retrieved": 13
+    },
+    {
+      "id": "X03",
+      "category": "cross_ref",
+      "wording": "term_of_art",
+      "question": "When is a general-purpose AI model considered to pose systemic risk?",
+      "expect_sections": [
+        "art_51",
+        "anx_XIII"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8600857257843018,
+      "n_retrieved": 9
+    },
+    {
+      "id": "X04",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "What AI uses are banned outright, and does that connect to any list of crimes?",
+      "expect_sections": [
+        "art_5",
+        "anx_II"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7519335150718689,
+      "n_retrieved": 13
+    },
+    {
+      "id": "X05",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "How long does a provider have to keep documentation, and what documentation is it?",
+      "expect_sections": [
+        "art_18",
+        "art_11"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8077577352523804,
+      "n_retrieved": 14
+    },
+    {
+      "id": "X06",
+      "category": "cross_ref",
+      "wording": "term_of_art",
+      "question": "What conformity assessment procedure applies to a high-risk AI system listed in Annex III?",
+      "expect_sections": [
+        "art_43",
+        "anx_VI"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.878491222858429,
+      "n_retrieved": 20
+    },
+    {
+      "id": "X07",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "What information has to be registered in the EU database before a high-risk system goes live?",
+      "expect_sections": [
+        "art_49",
+        "anx_VIII"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8076239824295044,
+      "n_retrieved": 16
+    },
+    {
+      "id": "C01",
+      "category": "cross_doc",
+      "wording": "term_of_art",
+      "question": "How does the Act's risk management requirement compare with the NIST AI Risk Management Framework?",
+      "expect_sections": [
+        "art_9"
+      ],
+      "expect_sources": [
+        "EU AI Act",
+        "NIST"
+      ],
+      "strict": false,
+      "partial": 0.3333333333333333,
+      "top_score": 0.8064348697662354,
+      "n_retrieved": 5
+    },
+    {
+      "id": "C02",
+      "category": "other_source",
+      "wording": "plain",
+      "question": "What can go wrong with the embeddings and vector search in a retrieval system?",
+      "expect_sources": [
+        "OWASP"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8152079582214355,
+      "n_retrieved": 5
+    },
+    {
+      "id": "C03",
+      "category": "other_source",
+      "wording": "term_of_art",
+      "question": "What are the four core functions of the NIST AI Risk Management Framework?",
+      "expect_sources": [
+        "NIST"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8652818202972412,
+      "n_retrieved": 5
+    },
+    {
+      "id": "C04",
+      "category": "other_source",
+      "wording": "plain",
+      "question": "What is prompt injection and why is it hard to defend against?",
+      "expect_sources": [
+        "OWASP"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7590582370758057,
+      "n_retrieved": 5
+    },
+    {
+      "id": "O01",
+      "category": "out_of_corpus",
+      "wording": "plain",
+      "question": "What does ISO/IEC 42001 require for certification, and what does it cost?",
+      "expect_sections": [],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.634043276309967,
+      "n_retrieved": 16
+    },
+    {
+      "id": "O02",
+      "category": "out_of_corpus",
+      "wording": "plain",
+      "question": "What are the penalties under the Colorado AI Act?",
+      "expect_sections": [],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7503213286399841,
+      "n_retrieved": 22
+    },
+    {
+      "id": "O03",
+      "category": "out_of_corpus",
+      "wording": "term_of_art",
+      "question": "What do the recitals say about the intent behind the high-risk classification rules?",
+      "expect_sections": [],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.768979012966156,
+      "n_retrieved": 12
+    },
+    {
+      "id": "O04",
+      "category": "out_of_corpus",
+      "wording": "plain",
+      "question": "How many companies have been fined under the AI Act so far?",
+      "expect_sections": [],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7601196765899658,
+      "n_retrieved": 30
+    },
+    {
+      "id": "D12",
+      "category": "direct",
+      "wording": "plain",
+      "question": "Can we use sensitive personal data like ethnicity to check whether our AI system is biased?",
+      "expect_sections": [
+        "art_4a"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7695075869560242,
+      "n_retrieved": 6
+    },
+    {
+      "id": "D13",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "Can the AI Office itself impose fines, and on whom?",
+      "expect_sections": [
+        "art_75c"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8105898499488831,
+      "n_retrieved": 23
+    },
+    {
+      "id": "X08",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "If we want to test our high-risk AI system on real people before launch, what are the rules?",
+      "expect_sections": [
+        "art_60",
+        "art_60a"
+      ],
+      "strict": false,
+      "partial": 0.5,
+      "top_score": 0.781002402305603,
+      "n_retrieved": 17
+    },
+    {
+      "id": "C05",
+      "category": "cross_doc",
+      "wording": "plain",
+      "question": "What does the Act require for cybersecurity of high-risk systems, and what attacks should we actually defend against?",
+      "expect_sections": [
+        "art_15"
+      ],
+      "expect_sources": [
+        "EU AI Act",
+        "OWASP"
+      ],
+      "strict": false,
+      "partial": 0.6666666666666666,
+      "top_score": 0.7461181879043579,
+      "n_retrieved": 12
+    }
+  ],
+  "k=10": [
+    {
+      "id": "D01",
+      "category": "direct",
+      "wording": "plain",
+      "question": "What are the fines for breaking the AI Act?",
+      "expect_sections": [
+        "art_99"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8258671164512634,
+      "n_retrieved": 10
+    },
+    {
+      "id": "D02",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "What must the technical documentation for a high-risk AI system contain?",
+      "expect_sections": [
+        "art_11",
+        "anx_IV"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8316292762756348,
+      "n_retrieved": 10
+    },
+    {
+      "id": "D03",
+      "category": "direct",
+      "wording": "plain",
+      "question": "Does the law require AI systems to keep logs?",
+      "expect_sections": [
+        "art_12"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8426685333251953,
+      "n_retrieved": 10
+    },
+    {
+      "id": "D04",
+      "category": "direct",
+      "wording": "plain",
+      "question": "Can an ordinary person complain about an AI system, and to whom?",
+      "expect_sections": [
+        "art_85"
+      ],
+      "strict": false,
+      "partial": 0.0,
+      "top_score": 0.7298500537872314,
+      "n_retrieved": 10
+    },
+    {
+      "id": "D05",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "How does the Regulation define an AI system?",
+      "expect_sections": [
+        "art_3"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8472094535827637,
+      "n_retrieved": 10
+    },
+    {
+      "id": "D06",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "What obligations apply to providers of general-purpose AI models?",
+      "expect_sections": [
+        "art_53"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8832180500030518,
+      "n_retrieved": 10
+    },
+    {
+      "id": "D07",
+      "category": "direct",
+      "wording": "plain",
+      "question": "When does the AI Act actually start applying?",
+      "expect_sections": [
+        "art_113"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7478975057601929,
+      "n_retrieved": 10
+    },
+    {
+      "id": "D08",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "What are the rules for affixing the CE marking to an AI system?",
+      "expect_sections": [
+        "art_48"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8042230606079102,
+      "n_retrieved": 10
+    },
+    {
+      "id": "D09",
+      "category": "direct",
+      "wording": "plain",
+      "question": "If an AI system makes a decision about me, can I demand an explanation?",
+      "expect_sections": [
+        "art_86"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7652018070220947,
+      "n_retrieved": 10
+    },
+    {
+      "id": "D10",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "What does the Act require regarding accuracy, robustness and cybersecurity?",
+      "expect_sections": [
+        "art_15"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7940136194229126,
+      "n_retrieved": 10
+    },
+    {
+      "id": "D11",
+      "category": "direct",
+      "wording": "plain",
+      "question": "Does the EU AI Act apply to a company based in the United States?",
+      "expect_sections": [
+        "art_2"
+      ],
+      "added": "2026-08-23",
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7347899675369263,
+      "n_retrieved": 10
+    },
+    {
+      "id": "X01",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "Is my CV screening tool for hiring considered high-risk?",
+      "expect_sections": [
+        "anx_III",
+        "art_6"
+      ],
+      "strict": false,
+      "partial": 0.5,
+      "top_score": 0.6777821183204651,
+      "n_retrieved": 10
+    },
+    {
+      "id": "X02",
+      "category": "cross_ref",
+      "wording": "term_of_art",
+      "question": "Who is responsible for human oversight of a high-risk AI system, and what must that person be able to do?",
+      "expect_sections": [
+        "art_14",
+        "art_26"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8336120843887329,
+      "n_retrieved": 10
+    },
+    {
+      "id": "X03",
+      "category": "cross_ref",
+      "wording": "term_of_art",
+      "question": "When is a general-purpose AI model considered to pose systemic risk?",
+      "expect_sections": [
+        "art_51",
+        "anx_XIII"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8600857257843018,
+      "n_retrieved": 10
+    },
+    {
+      "id": "X04",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "What AI uses are banned outright, and does that connect to any list of crimes?",
+      "expect_sections": [
+        "art_5",
+        "anx_II"
+      ],
+      "strict": false,
+      "partial": 0.5,
+      "top_score": 0.7519335150718689,
+      "n_retrieved": 10
+    },
+    {
+      "id": "X05",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "How long does a provider have to keep documentation, and what documentation is it?",
+      "expect_sections": [
+        "art_18",
+        "art_11"
+      ],
+      "strict": false,
+      "partial": 0.5,
+      "top_score": 0.8077577352523804,
+      "n_retrieved": 10
+    },
+    {
+      "id": "X06",
+      "category": "cross_ref",
+      "wording": "term_of_art",
+      "question": "What conformity assessment procedure applies to a high-risk AI system listed in Annex III?",
+      "expect_sections": [
+        "art_43",
+        "anx_VI"
+      ],
+      "strict": false,
+      "partial": 0.5,
+      "top_score": 0.878491222858429,
+      "n_retrieved": 10
+    },
+    {
+      "id": "X07",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "What information has to be registered in the EU database before a high-risk system goes live?",
+      "expect_sections": [
+        "art_49",
+        "anx_VIII"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8076239824295044,
+      "n_retrieved": 10
+    },
+    {
+      "id": "C01",
+      "category": "cross_doc",
+      "wording": "term_of_art",
+      "question": "How does the Act's risk management requirement compare with the NIST AI Risk Management Framework?",
+      "expect_sections": [
+        "art_9"
+      ],
+      "expect_sources": [
+        "EU AI Act",
+        "NIST"
+      ],
+      "strict": false,
+      "partial": 0.3333333333333333,
+      "top_score": 0.8064348697662354,
+      "n_retrieved": 10
+    },
+    {
+      "id": "C02",
+      "category": "other_source",
+      "wording": "plain",
+      "question": "What can go wrong with the embeddings and vector search in a retrieval system?",
+      "expect_sources": [
+        "OWASP"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8152079582214355,
+      "n_retrieved": 10
+    },
+    {
+      "id": "C03",
+      "category": "other_source",
+      "wording": "term_of_art",
+      "question": "What are the four core functions of the NIST AI Risk Management Framework?",
+      "expect_sources": [
+        "NIST"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8652818202972412,
+      "n_retrieved": 10
+    },
+    {
+      "id": "C04",
+      "category": "other_source",
+      "wording": "plain",
+      "question": "What is prompt injection and why is it hard to defend against?",
+      "expect_sources": [
+        "OWASP"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7590582370758057,
+      "n_retrieved": 10
+    },
+    {
+      "id": "O01",
+      "category": "out_of_corpus",
+      "wording": "plain",
+      "question": "What does ISO/IEC 42001 require for certification, and what does it cost?",
+      "expect_sections": [],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.634043276309967,
+      "n_retrieved": 10
+    },
+    {
+      "id": "O02",
+      "category": "out_of_corpus",
+      "wording": "plain",
+      "question": "What are the penalties under the Colorado AI Act?",
+      "expect_sections": [],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7503213286399841,
+      "n_retrieved": 10
+    },
+    {
+      "id": "O03",
+      "category": "out_of_corpus",
+      "wording": "term_of_art",
+      "question": "What do the recitals say about the intent behind the high-risk classification rules?",
+      "expect_sections": [],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.768979012966156,
+      "n_retrieved": 10
+    },
+    {
+      "id": "O04",
+      "category": "out_of_corpus",
+      "wording": "plain",
+      "question": "How many companies have been fined under the AI Act so far?",
+      "expect_sections": [],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7601196765899658,
+      "n_retrieved": 10
+    },
+    {
+      "id": "D12",
+      "category": "direct",
+      "wording": "plain",
+      "question": "Can we use sensitive personal data like ethnicity to check whether our AI system is biased?",
+      "expect_sections": [
+        "art_4a"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7695075869560242,
+      "n_retrieved": 10
+    },
+    {
+      "id": "D13",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "Can the AI Office itself impose fines, and on whom?",
+      "expect_sections": [
+        "art_75c"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8105898499488831,
+      "n_retrieved": 10
+    },
+    {
+      "id": "X08",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "If we want to test our high-risk AI system on real people before launch, what are the rules?",
+      "expect_sections": [
+        "art_60",
+        "art_60a"
+      ],
+      "strict": false,
+      "partial": 0.5,
+      "top_score": 0.781002402305603,
+      "n_retrieved": 10
+    },
+    {
+      "id": "C05",
+      "category": "cross_doc",
+      "wording": "plain",
+      "question": "What does the Act require for cybersecurity of high-risk systems, and what attacks should we actually defend against?",
+      "expect_sections": [
+        "art_15"
+      ],
+      "expect_sources": [
+        "EU AI Act",
+        "OWASP"
+      ],
+      "strict": false,
+      "partial": 0.6666666666666666,
+      "top_score": 0.7461181879043579,
+      "n_retrieved": 10
+    }
+  ],
+  "k=10 +follow": [
+    {
+      "id": "D01",
+      "category": "direct",
+      "wording": "plain",
+      "question": "What are the fines for breaking the AI Act?",
+      "expect_sections": [
+        "art_99"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8258671164512634,
+      "n_retrieved": 38
+    },
+    {
+      "id": "D02",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "What must the technical documentation for a high-risk AI system contain?",
+      "expect_sections": [
+        "art_11",
+        "anx_IV"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8316292762756348,
+      "n_retrieved": 25
+    },
+    {
+      "id": "D03",
+      "category": "direct",
+      "wording": "plain",
+      "question": "Does the law require AI systems to keep logs?",
+      "expect_sections": [
+        "art_12"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8426685333251953,
+      "n_retrieved": 27
+    },
+    {
+      "id": "D04",
+      "category": "direct",
+      "wording": "plain",
+      "question": "Can an ordinary person complain about an AI system, and to whom?",
+      "expect_sections": [
+        "art_85"
+      ],
+      "strict": false,
+      "partial": 0.0,
+      "top_score": 0.7298500537872314,
+      "n_retrieved": 25
+    },
+    {
+      "id": "D05",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "How does the Regulation define an AI system?",
+      "expect_sections": [
+        "art_3"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8472094535827637,
+      "n_retrieved": 27
+    },
+    {
+      "id": "D06",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "What obligations apply to providers of general-purpose AI models?",
+      "expect_sections": [
+        "art_53"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8832180500030518,
+      "n_retrieved": 17
+    },
+    {
+      "id": "D07",
+      "category": "direct",
+      "wording": "plain",
+      "question": "When does the AI Act actually start applying?",
+      "expect_sections": [
+        "art_113"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7478975057601929,
+      "n_retrieved": 31
+    },
+    {
+      "id": "D08",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "What are the rules for affixing the CE marking to an AI system?",
+      "expect_sections": [
+        "art_48"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8042230606079102,
+      "n_retrieved": 33
+    },
+    {
+      "id": "D09",
+      "category": "direct",
+      "wording": "plain",
+      "question": "If an AI system makes a decision about me, can I demand an explanation?",
+      "expect_sections": [
+        "art_86"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7652018070220947,
+      "n_retrieved": 28
+    },
+    {
+      "id": "D10",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "What does the Act require regarding accuracy, robustness and cybersecurity?",
+      "expect_sections": [
+        "art_15"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7940136194229126,
+      "n_retrieved": 17
+    },
+    {
+      "id": "D11",
+      "category": "direct",
+      "wording": "plain",
+      "question": "Does the EU AI Act apply to a company based in the United States?",
+      "expect_sections": [
+        "art_2"
+      ],
+      "added": "2026-08-23",
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7347899675369263,
+      "n_retrieved": 31
+    },
+    {
+      "id": "X01",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "Is my CV screening tool for hiring considered high-risk?",
+      "expect_sections": [
+        "anx_III",
+        "art_6"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.6777821183204651,
+      "n_retrieved": 20
+    },
+    {
+      "id": "X02",
+      "category": "cross_ref",
+      "wording": "term_of_art",
+      "question": "Who is responsible for human oversight of a high-risk AI system, and what must that person be able to do?",
+      "expect_sections": [
+        "art_14",
+        "art_26"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8336120843887329,
+      "n_retrieved": 23
+    },
+    {
+      "id": "X03",
+      "category": "cross_ref",
+      "wording": "term_of_art",
+      "question": "When is a general-purpose AI model considered to pose systemic risk?",
+      "expect_sections": [
+        "art_51",
+        "anx_XIII"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8600857257843018,
+      "n_retrieved": 17
+    },
+    {
+      "id": "X04",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "What AI uses are banned outright, and does that connect to any list of crimes?",
+      "expect_sections": [
+        "art_5",
+        "anx_II"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7519335150718689,
+      "n_retrieved": 30
+    },
+    {
+      "id": "X05",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "How long does a provider have to keep documentation, and what documentation is it?",
+      "expect_sections": [
+        "art_18",
+        "art_11"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8077577352523804,
+      "n_retrieved": 34
+    },
+    {
+      "id": "X06",
+      "category": "cross_ref",
+      "wording": "term_of_art",
+      "question": "What conformity assessment procedure applies to a high-risk AI system listed in Annex III?",
+      "expect_sections": [
+        "art_43",
+        "anx_VI"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.878491222858429,
+      "n_retrieved": 33
+    },
+    {
+      "id": "X07",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "What information has to be registered in the EU database before a high-risk system goes live?",
+      "expect_sections": [
+        "art_49",
+        "anx_VIII"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8076239824295044,
+      "n_retrieved": 28
+    },
+    {
+      "id": "C01",
+      "category": "cross_doc",
+      "wording": "term_of_art",
+      "question": "How does the Act's risk management requirement compare with the NIST AI Risk Management Framework?",
+      "expect_sections": [
+        "art_9"
+      ],
+      "expect_sources": [
+        "EU AI Act",
+        "NIST"
+      ],
+      "strict": false,
+      "partial": 0.3333333333333333,
+      "top_score": 0.8064348697662354,
+      "n_retrieved": 10
+    },
+    {
+      "id": "C02",
+      "category": "other_source",
+      "wording": "plain",
+      "question": "What can go wrong with the embeddings and vector search in a retrieval system?",
+      "expect_sources": [
+        "OWASP"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8152079582214355,
+      "n_retrieved": 10
+    },
+    {
+      "id": "C03",
+      "category": "other_source",
+      "wording": "term_of_art",
+      "question": "What are the four core functions of the NIST AI Risk Management Framework?",
+      "expect_sources": [
+        "NIST"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8652818202972412,
+      "n_retrieved": 10
+    },
+    {
+      "id": "C04",
+      "category": "other_source",
+      "wording": "plain",
+      "question": "What is prompt injection and why is it hard to defend against?",
+      "expect_sources": [
+        "OWASP"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7590582370758057,
+      "n_retrieved": 10
+    },
+    {
+      "id": "O01",
+      "category": "out_of_corpus",
+      "wording": "plain",
+      "question": "What does ISO/IEC 42001 require for certification, and what does it cost?",
+      "expect_sections": [],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.634043276309967,
+      "n_retrieved": 23
+    },
+    {
+      "id": "O02",
+      "category": "out_of_corpus",
+      "wording": "plain",
+      "question": "What are the penalties under the Colorado AI Act?",
+      "expect_sections": [],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7503213286399841,
+      "n_retrieved": 37
+    },
+    {
+      "id": "O03",
+      "category": "out_of_corpus",
+      "wording": "term_of_art",
+      "question": "What do the recitals say about the intent behind the high-risk classification rules?",
+      "expect_sections": [],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.768979012966156,
+      "n_retrieved": 24
+    },
+    {
+      "id": "O04",
+      "category": "out_of_corpus",
+      "wording": "plain",
+      "question": "How many companies have been fined under the AI Act so far?",
+      "expect_sections": [],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7601196765899658,
+      "n_retrieved": 39
+    },
+    {
+      "id": "D12",
+      "category": "direct",
+      "wording": "plain",
+      "question": "Can we use sensitive personal data like ethnicity to check whether our AI system is biased?",
+      "expect_sections": [
+        "art_4a"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.7695075869560242,
+      "n_retrieved": 11
+    },
+    {
+      "id": "D13",
+      "category": "direct",
+      "wording": "term_of_art",
+      "question": "Can the AI Office itself impose fines, and on whom?",
+      "expect_sections": [
+        "art_75c"
+      ],
+      "strict": true,
+      "partial": 1.0,
+      "top_score": 0.8105898499488831,
+      "n_retrieved": 28
+    },
+    {
+      "id": "X08",
+      "category": "cross_ref",
+      "wording": "plain",
+      "question": "If we want to test our high-risk AI system on real people before launch, what are the rules?",
+      "expect_sections": [
+        "art_60",
+        "art_60a"
+      ],
+      "strict": false,
+      "partial": 0.5,
+      "top_score": 0.781002402305603,
+      "n_retrieved": 22
+    },
+    {
+      "id": "C05",
+      "category": "cross_doc",
+      "wording": "plain",
+      "question": "What does the Act require for cybersecurity of high-risk systems, and what attacks should we actually defend against?",
+      "expect_sections": [
+        "art_15"
+      ],
+      "expect_sources": [
+        "EU AI Act",
+        "OWASP"
+      ],
+      "strict": false,
+      "partial": 0.6666666666666666,
+      "top_score": 0.7461181879043579,
+      "n_retrieved": 32
+    }
+  ]
+}
