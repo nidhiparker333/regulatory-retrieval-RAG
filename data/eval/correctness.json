@@ -1,0 +1,55 @@
+{
+  "_about": {
+    "what": "Hand-graded correctness for every answer in the run recorded in full_eval_results.json. Grounding is checkable by code - did the answer cite a section the key requires. Correctness is not: whether a claim is true, whether the cited passage supports it, and whether the answer misreads what it quotes all need someone to read both and decide.",
+    "method": "Each answer read against the source text in data/clean/corpus.json. Every quoted string checked verbatim against chunk text. Numbers, dates and thresholds checked against the article they came from.",
+    "limits": "One reader, one pass, and the reader is the same assistant that built the surrounding pipeline. An independent grader would be better. Verdicts are a judgement about whether the answer is defensible from the sources, not a claim that it is the only defensible answer.",
+    "verdicts": {
+      "correct": "everything stated is supported by the sources and the citations hold",
+      "correct_partial": "nothing stated is false, but the answer does not cover the question fully and says so",
+      "wrong": "states something the sources do not support, or fails to answer when the corpus could",
+      "refused_correct": "declined, and the corpus genuinely cannot answer"
+    }
+  },
+  "summary": {
+    "answerable": 26,
+    "correct": 25,
+    "of_which_partial_with_disclosure": 3,
+    "wrong": 1,
+    "unanswerable": 4,
+    "refused_correct": 4,
+    "quotes_checked": 18,
+    "quotes_fabricated": 0
+  },
+  "answers": [
+    {"id": "D01", "verdict": "correct", "note": "Article 99 (EUR 35,000,000 / 7%), Article 100 (EUR 1,500,000 / 750,000), Article 101 (3% / EUR 15,000,000) and Article 75c all stated correctly, and it flags that Article 99's remaining tiers were not in the passages."},
+    {"id": "D02", "verdict": "correct_partial", "note": "Article 11 duty correct. Retrieval supplied only Annex IV's header, so the actual contents are not listed - the answer says exactly that rather than inventing a list."},
+    {"id": "D03", "verdict": "correct", "note": "Article 12 logging, Article 19 provider retention, Article 26 deployer retention, and the Annex III point 1(a) biometric detail all correct."},
+    {"id": "D04", "verdict": "wrong", "note": "Refused. Article 85 is in the corpus and answers the question directly. Retrieval never surfaced it, so the refusal was correct given what it held - but the question is answerable and went unanswered. The known vocabulary failure."},
+    {"id": "D05", "verdict": "correct", "note": "Article 3(1) definition quoted verbatim."},
+    {"id": "D06", "verdict": "correct", "note": "Article 53(1) obligations, the Annex XI/XII references, the open-source exemption, Article 54 representative and Article 55 systemic-risk duties all correct."},
+    {"id": "D07", "verdict": "correct", "note": "Every date checked against Article 113 verbatim, including the amended 2 December 2027 / 2 August 2028 split and the 27 July 2026 date for Articles 102-110. Article 111 transitional deadlines correct."},
+    {"id": "D08", "verdict": "correct", "note": "Article 48 CE marking rules, including the digital marking provision and the notified body number, all correct."},
+    {"id": "D09", "verdict": "correct", "note": "Article 86 right to explanation, including the Annex III point 2 exception and the limits, stated correctly."},
+    {"id": "D10", "verdict": "correct", "note": "Article 15 accuracy, robustness and cybersecurity correct, including the instructions-for-use link to Article 13."},
+    {"id": "D11", "verdict": "correct", "note": "Article 2 territorial scope correct - this is the case anchor expansion was built for, and it worked."},
+    {"id": "D12", "verdict": "correct", "note": "Article 4a conditions for processing special categories for bias detection, correct. An amendment-only article, which nothing in the previous question set tested."},
+    {"id": "D13", "verdict": "correct", "note": "Correctly identifies Article 75c and the Article 75(1) scope, rather than Article 99 or Article 101 which were the intended traps."},
+    {"id": "X01", "verdict": "correct_partial", "note": "Annex III employment category correct and quoted accurately. Notes that only Article 6(1) was supplied, not 6(2), so it cannot confirm conditions on the Annex III route - which is true of what it held."},
+    {"id": "X02", "verdict": "correct", "note": "Article 14 provider duty and Article 26 deployer duty correctly separated; the oversight capabilities correct."},
+    {"id": "X03", "verdict": "correct", "note": "Article 51 systemic risk, including the 10^25 FLOP presumption and the Commission decision route."},
+    {"id": "X04", "verdict": "correct", "note": "Article 5 prohibitions and the Annex II link to the crimes list, correct."},
+    {"id": "X05", "verdict": "correct", "note": "Article 18 ten-year retention and what it covers, correct."},
+    {"id": "X06", "verdict": "correct", "note": "Article 43 routing: Annex III points 2-8 to Annex VI internal control, point 1 layered. Correct."},
+    {"id": "X07", "verdict": "correct", "note": "Article 49 registration duties including the point 2 national-level exception and the public-authority deployer duty."},
+    {"id": "X08", "verdict": "correct", "note": "Article 60 real-world testing correct. Article 60a never surfaced, but the answer's substance covers the Annex I Section A case anyway."},
+    {"id": "C01", "verdict": "correct", "note": "States what each framework requires and says plainly that the sources contain no direct comparison, which is true. Both sides now present after source diversification."},
+    {"id": "C02", "verdict": "correct", "note": "OWASP LLM09 risks correct; the 50-70% and 92% Vec2Text recovery figures match the source verbatim."},
+    {"id": "C03", "verdict": "correct_partial", "note": "Govern, Map, Measure, Manage correct. Says Measure was not detailed in the passages rather than filling it in."},
+    {"id": "C04", "verdict": "correct", "note": "Direct and indirect prompt injection, correct, drawing on both OWASP LLM01 and NIST AI 600-1."},
+    {"id": "C05", "verdict": "correct", "note": "Article 15 obligation correct and OWASP now cited for the attacks - the half that was missing before source diversification."},
+    {"id": "O01", "verdict": "refused_correct", "note": "ISO/IEC 42001 is deliberately excluded (paywalled). Refused and named what it held instead."},
+    {"id": "O02", "verdict": "refused_correct", "note": "Colorado law is not in the corpus. Refused with EU penalty articles in context - the tempting near-answer."},
+    {"id": "O03", "verdict": "refused_correct", "note": "Checked the document type: the passages are operative articles, not recitals. The consolidated text holds no recitals."},
+    {"id": "O04", "verdict": "refused_correct", "note": "Distinguished maximum fine amounts from a count of fines issued, which is the distinction that makes it unanswerable."}
+  ]
+}
