@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+@theme {
+  /*
+   * Deep blue-black rather than neutral grey. The subject is regulation and
+   * systems; a cool ground reads institutional where a warm one reads cosy.
+   *
+   * Amber is the only accent, and it means exactly one thing: this is
+   * evidence. It appears on scores, on citations, on the passages a claim
+   * rests on - and nowhere else. Nothing decorative is amber, so amber is
+   * always worth looking at.
+   */
+  --color-void: #070910;
+  --color-ground: #0a0d16;
+  --color-panel: #10141f;
+  --color-raised: #161b28;
+
+  --color-ink: #e9edf6;
+  --color-dim: #8792a6;
+  --color-faint: #5a6478;
+
+  --color-amber: #f0a63c;
+  --color-amberdim: #a8722a;
+  --color-cyan: #4fd1c5;
+
+  --color-rule: rgba(233, 237, 246, 0.08);
+  --color-rulelit: rgba(240, 166, 60, 0.28);
+
+  --font-display: var(--font-display), Georgia, serif;
+  --font-sans: var(--font-sans), -apple-system, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
+}
+
+html,
+body {
+  background: var(--color-void);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Small-caps technical label. Every machine-facing string uses it. */
+.label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-faint);
+}
+
+/*
+ * Ambient drift behind the header. Very slow and very dark - you should
+ * notice it only if you look, the way a room's light changes.
+ */
+@keyframes drift {
+  0%   { transform: translate3d(-4%, -2%, 0) scale(1.05); opacity: 0.55; }
+  50%  { transform: translate3d(4%, 3%, 0) scale(1.15);   opacity: 0.85; }
+  100% { transform: translate3d(-4%, -2%, 0) scale(1.05); opacity: 0.55; }
+}
+.ambient {
+  animation: drift 34s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Trace steps reveal in sequence; delay is set per element. */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.rise { animation: rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* Score bars fill from zero as their row appears. */
+@keyframes fill {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.bar {
+  transform-origin: left;
+  animation: fill 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes blink {
+  0%, 45%   { opacity: 1; }
+  55%, 100% { opacity: 0; }
+}
+.caret { animation: blink 1.1s steps(1) infinite; }
+
+/* The thread running down the left of the trace, tying the steps together. */
+.step-thread::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 18px;
+  bottom: -22px;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-rule),
+    rgba(240, 166, 60, 0.14) 40%,
+    transparent
+  );
+}
+.step-thread:last-child::before { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient, .rise, .bar, .caret {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+::selection { background: rgba(240, 166, 60, 0.25); }
+
+::-webkit-scrollbar { width: 9px; height: 9px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(233, 237, 246, 0.12);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(233, 237, 246, 0.2); }
