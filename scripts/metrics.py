@@ -153,7 +153,7 @@ rule("WHAT IS NOT MEASURED")
 print("""  - Answer quality beyond citation grounding. Whether an answer is a
     good summary, not merely supported, is unassessed.
   - Performance on any corpus but this one.
-  - Anything at scale. 26 questions is a small sample and every figure
+  - Anything at scale. 30 questions - 26 of them answerable - is a small sample, and every figure
     above should be read as a fraction, not a percentage.
   - Whether the answer keys are the only defensible ones. They are one
     reading of what a complete answer requires.""")
