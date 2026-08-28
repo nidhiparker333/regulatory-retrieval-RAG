@@ -49,6 +49,12 @@ MODEL = "claude-sonnet-5"
 MAX_TOKENS = 4000
 THINKING = {"type": "adaptive"}
 
+# Dense retrieval, chosen by measurement rather than by default. Hybrid
+# BM25+RRF was built and scored alongside it and did not help on this corpus:
+# 16/26 against dense's 17/26 alone, and 20/26 against 21/26 once expansion
+# and diversification were added. See scripts/compare_arms.py.
+ARM = "dense"
+
 # Prices per million tokens, for the cost line in the trace.
 #
 # NOTE: these are Sonnet 5 *introductory* rates, which run to 31 August 2026.
@@ -112,105 +118,30 @@ def load_env() -> None:
                 os.environ.setdefault(k, v)
 
 
-_model = None
-_chunks = None
-_vectors = None
+_engine = None
 
 
-def _load():
-    global _model, _chunks, _vectors
-    if _chunks is None:
-        from fastembed import TextEmbedding
-        _chunks = json.loads((CLEAN / "chunks.json").read_text(encoding="utf-8"))
-        store = np.load(CLEAN / "index.npz", allow_pickle=True)
-        _vectors = store["vectors"]
-        _model = TextEmbedding(model_name=str(store["model"]))
-    return _chunks, _vectors, _model
+def _get_engine():
+    """Shared retrieval engine - the same object the evaluation scores."""
+    global _engine
+    if _engine is None:
+        sys.path.insert(0, str(ROOT / "scripts"))
+        from retrieval import Retrieval
+        _engine = Retrieval()
+    return _engine
 
 
 def retrieve(question: str, k: int = 5, follow: bool = True):
-    """Returns (passages, trace_steps)."""
-    chunks, vectors, model = _load()
-    steps = []
+    """
+    Returns (passages, trace_steps).
 
-    t0 = time.perf_counter()
-    q = np.array(list(model.query_embed([question])), dtype=np.float32)[0]
-    q /= max(float(np.linalg.norm(q)), 1e-9)
-    embed_ms = (time.perf_counter() - t0) * 1000
-
-    t0 = time.perf_counter()
-    scores = vectors @ q
-    order = np.argsort(-scores)[:k]
-    search_ms = (time.perf_counter() - t0) * 1000
-
-    hits = [dict(chunks[i], score=float(scores[i])) for i in order]
-    steps.append({
-        "step": "search",
-        "detail": f"compared the question against all {len(chunks)} passages",
-        "ms": round(embed_ms + search_ms, 2),
-        "results": [{"citation": h["citation"], "score": round(h["score"], 3),
-                     "source": h["source_group"]} for h in hits],
-    })
-
-    # --- anchor expansion ------------------------------------------------
-    # Landing in the middle of a long article is a distinct failure from
-    # missing the article entirely. Article 2 is ten chunks covering
-    # territorial scope, military exclusions, research exclusions and
-    # interaction with other Union law; retrieval found the research chunk
-    # and the scope chunk sat at rank 11, 0.012 behind it.
-    #
-    # Legal drafting puts the general rule in paragraph 1 and the exceptions
-    # after it - Article 2(1) is literally "This Regulation applies to:".
-    # So whenever a later part of an article is retrieved, its opening part
-    # is pulled in too. Deterministic, free, and it cannot mislead: the
-    # opening of an article is always relevant context for any part of it.
-    anchors = []
-    if follow:
-        have_chunks = {h["id"] for h in hits}
-        for h in hits:
-            if h.get("part", 1) == 1 or h.get("of_parts", 1) == 1:
-                continue
-            first = next((c for c in chunks
-                          if c["section_id"] == h["section_id"] and c["part"] == 1), None)
-            if first and first["id"] not in have_chunks:
-                anchors.append(dict(first, score=None))
-                have_chunks.add(first["id"])
-        if anchors:
-            steps.append({
-                "step": "anchor_expansion",
-                "detail": "landed mid-article, so the article's opening paragraph was added",
-                # `source` is carried here too, so expanded rows are labelled
-                # in the trace exactly like the searched ones. Without it the
-                # source column simply vanishes partway down the panel.
-                "results": [{"citation": a["citation"], "source": a["source_group"]}
-                            for a in anchors],
-            })
-        hits = hits + anchors
-
-    followed = []
-    if follow:
-        have = {h["section_id"] for h in hits}
-        want_anx = {a for h in hits for a in h.get("refs_annex", [])}
-        want_art = {a for h in hits for a in h.get("refs_article", [])}
-        for c in chunks:
-            sid = c["section_id"]
-            if sid in have:
-                continue
-            if (sid.startswith("anx_") and sid[4:] in want_anx) or \
-               (sid.startswith("art_") and sid[4:] in want_art):
-                followed.append(dict(c, score=None))
-                have.add(sid)
-        followed = followed[:4]
-        if followed:
-            steps.append({
-                "step": "follow_cross_references",
-                "detail": "the retrieved passages cite these, so they were pulled in too",
-                "results": [{"citation": f["citation"], "source": f["source_group"]}
-                            for f in followed],
-            })
-        hits = hits + followed
-
-    return hits, steps
+    Delegates to retrieval.Retrieval so the answering path and the evaluation
+    cannot diverge. `follow` keeps the old parameter name and now switches
+    both post-retrieval steps: cross-reference expansion and source
+    diversification, which were measured together and adopted together.
+    """
+    return _get_engine().search_traced(
+        question, arm=ARM, k=k, expand=follow, diverse=follow)
 
 
 def build_context(passages: list) -> str:
