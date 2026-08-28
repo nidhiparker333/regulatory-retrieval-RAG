@@ -89,11 +89,8 @@ def main() -> int:
     check("both", both, f"of {s['quotes_checked']}", "quotes checked")
     check("README", readme, f"{answered}/{len(answerable)}", "answered count")
     check("both", both, f"${cost:.4f}", "cost per question")
-    check("both", both, f"{arm_strict('dense +exp +div')}", "final retrieval score")
-    check("FINDINGS", findings, f"{arm_strict('dense')}", "dense-alone arm")
-    check("FINDINGS", findings, f"{arm_strict('bm25')}", "bm25 arm")
-    check("FINDINGS", findings, f"{arm_strict('rrf')}", "rrf arm")
-    check("FINDINGS", findings, f"{arm_strict('rrf +exp +div')}", "rrf+exp+div arm")
+    check("both", both, f"{arm_strict('+ both (shipped)')}", "final retrieval score")
+    check("FINDINGS", findings, f"{arm_strict('search only')}", "search-only arm")
 
     print("\n" + "=" * 70)
     print("CLAIMS THAT MUST STAY TRUE")

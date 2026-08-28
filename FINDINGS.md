@@ -75,25 +75,21 @@ passages. None invents the missing half.
 
 ---
 
-## What was measured and rejected
+## What each step is worth
 
-### Hybrid retrieval does not help on this corpus
+Every part of retrieval was scored separately against the question set, for
+free, so nothing is in the pipeline on the strength of sounding sensible.
 
-Built properly — BM25 with a tokeniser that preserves citation forms, because the
-standard pattern drops one- and two-character tokens, so `Article 6(2)` reduces to
-`article` and the identifiers BM25 exists to catch are discarded before scoring.
-
-| Arm | Strict |
+| | Strict |
 |---|---|
-| BM25 alone | 14/26 |
-| RRF fusion | 16/26 |
-| Dense alone | **17/26** |
-| RRF + expansion + diversity | 23/26 |
-| Dense + expansion + diversity | **24/26** |
+| Search alone | 17/26 |
+| + following cross-references | 22/26 |
+| + source diversity | 19/26 |
+| **+ both (shipped)** | **24/26** |
 
-BM25 is better on exact identifiers and on cross-document questions, and worse
-everywhere else. The trade is not favourable here. The code stays in the
-repository so the claim can be re-checked rather than believed.
+The two steps fix different failures and barely overlap. Following references
+recovers the multi-hop questions and does nothing for cross-document ones;
+diversity does the reverse. Together they are worth more than either alone.
 
 ### The cross-reference cap was costing three questions
 
@@ -113,10 +109,11 @@ reaches Article 85, titled *"Right to lodge a complaint with a market
 surveillance authority"*. Asked in those words it returns at **rank 1, 0.901**.
 The article is perfectly findable; the everyday phrasing does not reach it.
 
-All eight retrieval arms score **0.00** on it. That confirms a prediction made
-before any of them were built: keyword search cannot help where the question and
-the text share no keywords. It needs the question rewritten into the register of
-the source — a different mechanism, and not built.
+No retrieval arm recovers it — **0.00** on every one. Neither following
+references nor source diversity touches it, because both operate on what search
+already returned, and search never returns Article 85 at all. It needs the
+question rewritten into the register of the source before searching, which is a
+different mechanism and is not built.
 
 Structural problems — cross-references, multi-hop, buried list items — are
 solved. What remains is the distance between how a person asks and how a
@@ -124,7 +121,7 @@ legislature writes.
 
 ---
 
-## Two that were worth the detour
+## The detour worth recording
 
 ### The sophisticated-looking failure had the least sophisticated cause
 
@@ -142,16 +139,6 @@ hiring.
 Giving each list item its own chunk moved the correct answer to rank 1. The most
 sophisticated-looking failure had the least sophisticated cause, and it was found
 by printing the data and reading it.
-
-### Building the thing properly is what let us reject it
-
-Hybrid retrieval could have been dismissed on intuition or adopted on reputation.
-Instead it was built to a standard where the negative result means something —
-including the tokeniser fix, without which BM25 would have lost for a reason that
-had nothing to do with hybrid retrieval.
-
-That it still lost is the useful part. A queued improvement that is never
-measured gets credited with gains it did not produce.
 
 ---
 
@@ -192,7 +179,8 @@ because the failures that matter here produce output that still reads perfectly.
 
 - Does rewriting a question into the register of the source recover the
   vocabulary failure? It is the one remaining failure mode with a named cause.
-- Does a cross-encoder reranker help where hybrid retrieval did not? Untested.
+- Does a cross-encoder reranker - a second pass that reads candidates rather
+  than comparing them by distance - help here? Untested.
 - **Is retrieval necessary at all?** The Act alone is ~94k tokens and fits in a
   modern context window. Retrieval costs $0.0216 a question; stuffing the full
   text would cost more, but accuracy, not cost, is the question worth answering.
