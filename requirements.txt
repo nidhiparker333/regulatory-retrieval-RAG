@@ -6,9 +6,6 @@ numpy==2.5.2
 pypdf==6.16.2
 requests==2.34.2
 
-# Sparse retrieval, for the hybrid arm.
-bm25s==0.2.13
-
 # Generation. Only these three need an API key at runtime.
 anthropic==0.75.0
 

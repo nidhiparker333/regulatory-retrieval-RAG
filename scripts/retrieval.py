@@ -1,34 +1,30 @@
 """
-Retrieval arms, so they can be compared instead of argued about.
+Retrieval, and the post-retrieval steps layered on it.
 
-Each arm is one retrieval strategy. Scoring them is free - no model, no API -
-so a candidate fix can be measured before it is adopted, and dropped when it
-turns out to buy nothing.
+Search is dense: every chunk is a 384-number vector, the question becomes one
+too, and similarity is a single matrix multiply over all 856 of them. Brute
+force, exact, and sub-millisecond at this size - there is no vector database
+and nothing to run.
 
-  dense    embedding similarity, brute force over all chunks
-  bm25     sparse lexical scoring
-  rrf      reciprocal rank fusion of the two
+Two steps are layered on top of the raw ranking, and both were adopted because
+they were measured, not because they sounded right:
 
-and two post-retrieval steps that can be layered on any of them:
+  expand   pull in an article's opening paragraph when retrieval landed in the
+           middle of it, then follow the references the retrieved passages make
+  diverse  give each source group its best chunk, so a question needing two
+           documents cannot be answered from one
 
-  expand   anchor expansion + cross-reference following (the current default)
-  diverse  guarantee each source group its best chunk in the result
-
-Nothing here decides which arm is right. compare_arms.py measures that.
+compare_arms.py scores these against the question set, for free, so a candidate
+change can be checked before it is adopted.
 """
 
 import json
 import pathlib
-import re
-from collections import defaultdict
 
 import numpy as np
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 CLEAN = ROOT / "data" / "clean"
-
-K_RRF = 60          # RRF smoothing constant; 60 is the standard default
-CANDIDATE_K = 50    # per-retriever candidates before fusion
 
 # Cross-reference following used to stop after four references. Measured on the
 # question set, that cap cost three questions: cross_ref went 5/8 at cap 4 and
@@ -42,45 +38,6 @@ CANDIDATE_K = 50    # per-retriever candidates before fusion
 MAX_CONTEXT_CHARS = 60_000
 
 
-# ---------------------------------------------------------------------------
-# Tokenisation
-# ---------------------------------------------------------------------------
-# bm25s tokenises on `\b\w\w+\b` by default, which is the wrong pattern for
-# this corpus: it drops every one- and two-character token, so "Article 6(2)"
-# reduces to "article" and "Annex III" to "annex". The identifiers are the one
-# thing BM25 is better at than embeddings, and the default tokeniser throws
-# them away before scoring starts.
-#
-# Rather than loosen the pattern - which would flood the index with stray
-# digits - citation forms are rewritten into single tokens and appended, so
-# "Article 6(2)" also indexes as `article_6_2`.
-RE_ARTICLE = re.compile(r"\bArticle\s+(\d+[a-z]?)(?:\((\d+)\))?", re.I)
-RE_ANNEX = re.compile(r"\bAnnex\s+([IVXL]+)", re.I)
-RE_OWASP = re.compile(r"\b(LLM\d{2})\b", re.I)
-RE_NIST = re.compile(r"\bAI\s+(\d{3}-\d)\b", re.I)
-
-
-def citation_tokens(text: str) -> list[str]:
-    """Canonical single tokens for the identifiers in a passage or question."""
-    out = []
-    for num, sub in RE_ARTICLE.findall(text):
-        out.append(f"article_{num.lower()}")
-        if sub:
-            out.append(f"article_{num.lower()}_{sub}")
-    out += [f"annex_{n.lower()}" for n in RE_ANNEX.findall(text)]
-    out += [m.lower() for m in RE_OWASP.findall(text)]
-    out += [f"nist_{m.replace('-', '_')}" for m in RE_NIST.findall(text)]
-    return out
-
-
-def augment(text: str) -> str:
-    toks = citation_tokens(text)
-    return f"{text} {' '.join(toks)}" if toks else text
-
-
-# ---------------------------------------------------------------------------
-# Index
-# ---------------------------------------------------------------------------
 class Retrieval:
     def __init__(self) -> None:
         self.chunks = json.loads((CLEAN / "chunks.json").read_text(encoding="utf-8"))
@@ -88,9 +45,7 @@ class Retrieval:
         self.vectors = store["vectors"]
         self.model_name = str(store["model"])
         self._embedder = None
-        self._bm25 = None
 
-    # -- lazily built, so a dense-only run never pays for either -------------
     @property
     def embedder(self):
         if self._embedder is None:
@@ -98,55 +53,26 @@ class Retrieval:
             self._embedder = TextEmbedding(model_name=self.model_name)
         return self._embedder
 
-    @property
-    def bm25(self):
-        if self._bm25 is None:
-            import bm25s
-            texts = [augment(c["text"]) for c in self.chunks]
-            tokens = bm25s.tokenize(texts, stopwords="en", show_progress=False)
-            retriever = bm25s.BM25()
-            retriever.index(tokens, show_progress=False)
-            self._bm25 = retriever
-        return self._bm25
-
-    # -- individual retrievers ----------------------------------------------
-    def dense_rank(self, question: str, k: int) -> list[int]:
-        q = np.array(list(self.embedder.query_embed([question])), dtype=np.float32)[0]
-        q /= max(float(np.linalg.norm(q)), 1e-9)
-        return list(np.argsort(-(self.vectors @ q))[:k])
-
     def dense_scores(self, question: str) -> np.ndarray:
         q = np.array(list(self.embedder.query_embed([question])), dtype=np.float32)[0]
         q /= max(float(np.linalg.norm(q)), 1e-9)
         return self.vectors @ q
 
-    def bm25_rank(self, question: str, k: int) -> list[int]:
-        import bm25s
-        toks = bm25s.tokenize(augment(question), stopwords="en", show_progress=False)
-        idx, _ = self.bm25.retrieve(toks, k=min(k, len(self.chunks)),
-                                    show_progress=False)
-        return [int(i) for i in idx[0]]
-
-    # -- fusion --------------------------------------------------------------
-    @staticmethod
-    def rrf(rankings: list[list[int]], k: int = K_RRF) -> list[int]:
-        """
-        Fuse ranked lists by position, not score.
-
-        BM25 scores are unbounded and cosine similarities sit in a narrow band;
-        any attempt to normalise them into a common scale is doing hidden work
-        that shifts per query. Rank is the one thing the two retrievers report
-        on the same footing.
-        """
-        scores: dict[int, float] = defaultdict(float)
-        for ranking in rankings:
-            for rank, doc in enumerate(ranking, start=1):
-                scores[doc] += 1.0 / (k + rank)
-        return [d for d, _ in sorted(scores.items(), key=lambda x: -x[1])]
-
     # -- post-retrieval ------------------------------------------------------
     def expand(self, hits: list[dict]) -> list[dict]:
-        """Anchor expansion, then cross-reference following. Unchanged."""
+        """
+        Add an article's opening, then follow the references it makes.
+
+        Legal drafting states the general rule in paragraph 1 and the
+        exceptions after it, so landing mid-article is a distinct failure from
+        missing the article: the opening of an article is always relevant
+        context for any part of it.
+
+        Following references is what closes a multi-hop question. Retrieving
+        any part of Annex III pulls in Article 6, because Annex III's own
+        heading cites it - a link recorded when the document was parsed, not
+        one a model decided on.
+        """
         chunks = self.chunks
         out = list(hits)
 
@@ -186,13 +112,13 @@ class Retrieval:
         Give every source group its best chunk.
 
         A question spanning two documents fails when one of them wins every
-        slot: C01 returned five NIST passages and no Article 9, C05 returned
-        the Act and no OWASP. In both cases the missing side was present in
-        the corpus and simply out-ranked.
+        slot: one returned five NIST passages and no Article 9, another the Act
+        and no OWASP. In both cases the missing side was present in the corpus
+        and simply out-ranked.
 
         This adds at most two chunks - the best from each source group not
-        already represented - which is cheap and query-independent. Whether it
-        actually recovers those questions is for compare_arms.py to say.
+        already represented - which is cheap and query-independent. Measured:
+        cross-document questions went 0/2 to 2/2.
         """
         present = {h["source_group"] for h in hits}
         have = {h["id"] for h in hits}
@@ -206,13 +132,13 @@ class Retrieval:
                 extra.append(dict(self.chunks[best], score=float(scores[best])))
         return hits + extra
 
-    # -- the arms ------------------------------------------------------------
-    def search(self, question: str, arm: str = "dense", k: int = 5,
-               expand: bool = True, diverse: bool = False) -> list[dict]:
-        return self.search_traced(question, arm, k, expand, diverse)[0]
+    # -- entry points --------------------------------------------------------
+    def search(self, question: str, k: int = 5,
+               expand: bool = True, diverse: bool = True) -> list[dict]:
+        return self.search_traced(question, k, expand, diverse)[0]
 
-    def search_traced(self, question: str, arm: str = "dense", k: int = 5,
-                      expand: bool = True, diverse: bool = False,
+    def search_traced(self, question: str, k: int = 5,
+                      expand: bool = True, diverse: bool = True,
                       ) -> tuple[list[dict], list[dict]]:
         """
         Same retrieval, plus the step-by-step record the answer path shows.
@@ -229,17 +155,7 @@ class Retrieval:
         dense_s = self.dense_scores(question)
         search_ms = (time.perf_counter() - t0) * 1000
 
-        if arm == "dense":
-            order = list(np.argsort(-dense_s)[:k])
-        elif arm == "bm25":
-            order = self.bm25_rank(question, k)
-        elif arm == "rrf":
-            d = list(np.argsort(-dense_s)[:CANDIDATE_K])
-            b = self.bm25_rank(question, CANDIDATE_K)
-            order = self.rrf([d, b])[:k]
-        else:
-            raise ValueError(f"unknown arm: {arm}")
-
+        order = list(np.argsort(-dense_s)[:k])
         hits = [dict(self.chunks[i], score=float(dense_s[i])) for i in order]
         steps.append({
             "step": "search",

@@ -49,11 +49,6 @@ MODEL = "claude-sonnet-5"
 MAX_TOKENS = 4000
 THINKING = {"type": "adaptive"}
 
-# Dense retrieval, chosen by measurement rather than by default. Hybrid
-# BM25+RRF was built and scored alongside it and did not help on this corpus:
-# 16/26 against dense's 17/26 alone, and 20/26 against 21/26 once expansion
-# and diversification were added. See scripts/compare_arms.py.
-ARM = "dense"
 
 # Prices per million tokens, for the cost line in the trace.
 #
@@ -140,8 +135,7 @@ def retrieve(question: str, k: int = 5, follow: bool = True):
     both post-retrieval steps: cross-reference expansion and source
     diversification, which were measured together and adopted together.
     """
-    return _get_engine().search_traced(
-        question, arm=ARM, k=k, expand=follow, diverse=follow)
+    return _get_engine().search_traced(question, k=k, expand=follow, diverse=follow)
 
 
 def build_context(passages: list) -> str:

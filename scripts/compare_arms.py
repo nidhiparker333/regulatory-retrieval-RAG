@@ -31,14 +31,10 @@ EVAL = ROOT / "data" / "eval"
 CATS = ["direct", "cross_ref", "cross_doc", "other_source"]
 
 ARMS = [
-    ("dense",              dict(arm="dense", expand=False, diverse=False)),
-    ("bm25",               dict(arm="bm25",  expand=False, diverse=False)),
-    ("rrf",                dict(arm="rrf",   expand=False, diverse=False)),
-    ("dense +expand",      dict(arm="dense", expand=True,  diverse=False)),
-    ("bm25 +expand",       dict(arm="bm25",  expand=True,  diverse=False)),
-    ("rrf +expand",        dict(arm="rrf",   expand=True,  diverse=False)),
-    ("dense +exp +div",    dict(arm="dense", expand=True,  diverse=True)),
-    ("rrf +exp +div",      dict(arm="rrf",   expand=True,  diverse=True)),
+    ("search only",        dict(expand=False, diverse=False)),
+    ("+ expansion",        dict(expand=True,  diverse=False)),
+    ("+ diversity",        dict(expand=False, diverse=True)),
+    ("+ both (shipped)",   dict(expand=True,  diverse=True)),
 ]
 
 
