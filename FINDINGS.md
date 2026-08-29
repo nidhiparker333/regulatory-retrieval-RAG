@@ -160,10 +160,23 @@ re-embedded and re-scored:
 | 1200 / 1800 / 150 | 1063 | 23/26 | 0.929 |
 | 900 / 1400 / 100 | 1227 | 23/26 | 0.929 |
 
-Smaller is worse, and consistently: both smaller configurations lose the same
-question. Cutting finer separates a provision from the conditions attached to
-it, which is the failure the chunker's numbering-aware boundaries exist to
-avoid.
+Smaller is worse, and both smaller configurations lose the same question — C01,
+which needs Article 9 alongside NIST. The reason is not the one that suggests
+itself.
+
+Article 9 is split into eight parts under every configuration, so fragmentation
+is not the cause. Its best chunk ranks **62 of 856** in the shipped corpus and
+**93 of 1227** in the smallest: search never surfaces it at either size. Article
+9 reaches the answer entirely through cross-reference following — some retrieved
+passage cites it.
+
+So what smaller chunks break is not the target but the **seed**. Cutting finer
+changes which passages win the top five, and those passages carry different
+citations. The reference graph is only as good as what retrieval hands it, and
+chunk size moves that quietly.
+
+That makes chunk size and multi-hop retrieval coupled rather than independent
+knobs, which is not how either is usually discussed.
 
 **Overlap contributes nothing measurable.** Dropping it entirely — 1800/2600/0 —
 scores identically to the shipped 200 characters, which cost 2.6% duplicated
