@@ -199,17 +199,54 @@ def answer(question: str, k: int = 5, follow: bool = True) -> dict:
     })
 
     refused = text.upper().startswith("NOT IN THE SOURCES")
+
+    # A refusal that does not use the required opening is still a refusal, and
+    # for a while this code could not see one.
+    #
+    # Rule 3 of the system prompt asks for the exact string "NOT IN THE
+    # SOURCES." Across 45 held-out questions the model declined 11 times and
+    # used that opening 8 times. The other three declined in plain English -
+    # "this specific scenario is not addressed", "I cannot fully answer this
+    # question" - and every strict check read them as ordinary answers.
+    #
+    # That was found by an independent grader disagreeing with this file, not
+    # by any check in the repository. It matters more than a counting error:
+    # refusal is the safety-critical behaviour here, and anything consuming
+    # this output programmatically would have treated those three as answers.
+    #
+    # Both signals are kept rather than merging them. `refused` stays the
+    # strict marker, so every previously reported figure means what it meant.
+    # `declined` is the real behaviour, and the gap between them measures how
+    # reliably an instructed output format is actually followed.
+    import re as _re
+    _SOFT = _re.compile(
+        r"^.{0,220}?\b(?:"
+        r"not (?:addressed|covered|answered|contained|included) (?:in|by) (?:the|these) passages"
+        r"|(?:do|does)(?: not|n't) (?:directly )?(?:address|answer|contain|cover)"
+        r"|cannot (?:fully |directly )?answer"
+        r"|can(?:not|'t) be answered"
+        r"|(?:this )?specific scenario is not addressed"
+        r")", _re.IGNORECASE | _re.DOTALL)
+    soft_refused = (not refused) and bool(_SOFT.match(text))
+    declined = refused or soft_refused
+
     cited = sorted({int(n) for n in __import__("re").findall(r"\[(\d+)\]", text)})
 
     # An answer with no citations is unverifiable, which defeats the point of
     # the system. It happened once in a 25-question run and nothing caught it,
     # so it is now surfaced rather than left for a reader to notice.
-    uncited = (not refused) and not cited
+    # `declined`, not `refused`: an answer that says it cannot answer has
+    # nothing to cite, and flagging it as unverifiable points at the wrong
+    # thing. Both sets currently report 0 uncited either way, so this changes
+    # no published figure - it stops a future soft refusal being miscounted.
+    uncited = (not declined) and not cited
 
     return {
         "question": question,
         "answer": text,
         "refused": refused,
+        "soft_refused": soft_refused,
+        "declined": declined,
         "uncited": uncited,
         "truncated": truncated,
         "stop_reason": resp.stop_reason,
