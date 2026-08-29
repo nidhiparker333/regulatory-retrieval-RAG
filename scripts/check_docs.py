@@ -13,6 +13,7 @@ A figure that changes without the prose changing fails the build.
 Run:  .venv\\Scripts\\python.exe scripts\\check_docs.py
 """
 
+import collections
 import json
 import pathlib
 import re
@@ -91,6 +92,55 @@ def main() -> int:
     check("both", both, f"${cost:.4f}", "cost per question")
     check("both", both, f"{arm_strict('+ both (shipped)')}", "final retrieval score")
     check("FINDINGS", findings, f"{arm_strict('search only')}", "search-only arm")
+
+    # ---------------------------------------------------------- held-out set
+    #
+    # These are the figures a reviewer will press hardest on, because they are
+    # the only ones the system was not tuned against. If the prose and the
+    # result files ever drift apart here, the drift is worse than anywhere
+    # else in the repository: it would be overstating the one number that was
+    # produced honestly.
+    hold_res = EVAL / "holdout_results.json"
+    hold_grade = EVAL / "holdout_graded.json"
+    if hold_res.exists() and hold_grade.exists():
+        hr = json.loads(hold_res.read_text(encoding="utf-8"))
+        hg = json.loads(hold_grade.read_text(encoding="utf-8"))["graded"]
+        n_hold = hr["retrieval"]["total"]
+        found = hr["retrieval"]["found"]
+        ss_hit, ss_n = hr["retrieval"]["same_shape_in_sample"]
+        v = collections.Counter(g["verdict"] for g in hg)
+
+        print(f"\n  held-out set ({n_hold} questions)")
+        check("both", both, f"{found}/{n_hold}", "held-out retrieval")
+        check("both", both, f"{ss_hit}/{ss_n}", "same-shape in-sample retrieval")
+        check("both", both, f"| **{v['correct']}** |", "held-out correct")
+        check("README", readme, f"| {v['partial']} |", "held-out partial")
+
+        # The k curve is the claim that changed a shipped decision's reasoning.
+        k5 = next(r["holdout"] for r in hr["k_sweep"] if r["k"] == 5)
+        k20 = next(r["holdout"] for r in hr["k_sweep"] if r["k"] == 20)
+        check("both", both, f"{k5}/{n_hold} to {k20}/{n_hold}", "held-out k curve")
+
+        # Split table: the point of the whole exercise.
+        miss = [g for g in hg if not g["retrieval_found"]]
+        hit_g = [g for g in hg if g["retrieval_found"]]
+        mw = sum(1 for g in miss if g["verdict"] == "wrong")
+        hw = sum(1 for g in hit_g if g["verdict"] == "wrong")
+        ok = (mw + hw) == v["wrong"]
+        print(f"  [{'ok ' if ok else 'FAIL'}]  wrong answers reconcile across the split table")
+        if not ok:
+            failures.append("held-out split table")
+
+        # A refusal count that disagrees with the grader is the defect this
+        # set found once already. It must not silently come back.
+        blind_ref = v["refused"]
+        strict_ref = sum(1 for q in hr["questions"] if q.get("answered") is False)
+        if blind_ref != strict_ref:
+            phrase = f"{blind_ref} refusals where `answer.py` counted {strict_ref}"
+            check("FINDINGS", findings, phrase, "refusal detection gap disclosed")
+    else:
+        print("\n  [FAIL]  held-out results missing; README cites them")
+        failures.append("held-out results absent")
 
     print("\n" + "=" * 70)
     print("CLAIMS THAT MUST STAY TRUE")

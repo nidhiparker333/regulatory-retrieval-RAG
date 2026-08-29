@@ -139,6 +139,12 @@ the multi-hop result found, now bounded: more passages of the same kind do not
 help. Fifteen adds one question and then twenty adds nothing, so the curve has
 an elbow rather than a slope.
 
+> **This elbow does not exist out of sample.** On 45 held-out questions the
+> curve climbs the whole way — 26/45 at k=5 to 36/45 at k=20, with no flat
+> stretch anywhere. The elbow above is an artefact of a 26-question set that
+> had already saturated. See *Tuned on the test set* below; `k=5` still ships,
+> but the reason has changed, and the reason above is not one that survives.
+
 `k=5` still ships. The question k=15 recovers is X08, whose missing half —
 Article 60a — sits at rank 11. But X08 was already graded **correct** at k=5:
 it answered from Article 60, and grounding passes on any overlap with the key.
@@ -197,6 +203,162 @@ Following stopped after four references — and the fourth is not reliably the
 useful one, because references are collected in corpus order, not by relevance.
 Uncapped: **21/26 → 24/26**. It is now bounded by context size rather than count,
 because characters are the cost and passage count is only a proxy.
+
+---
+
+## Tuned on the test set — and what happens when that stops
+
+Everything above this line was measured against the same 30 questions the
+system was tuned on. The 30-question set has a defence that is true and
+narrower than it sounds: the keys were written from the sources and committed
+before the first run, so they cannot have been fitted to the output, and
+`git log` proves the ordering.
+
+That answers the wrong question. `k=5`, the chunk size and both retrieval arms
+were each **chosen by scoring against those same 30 questions**. Every
+retrieval figure above is in-sample. No commit timestamp touches that.
+
+So: **45 held-out questions**, generated from 203 sections the tuning set never
+used as a key, by Opus 5, which was shown one section of source text and nothing
+about this system. The key is the section each question was written from —
+mechanical, not a judgement about what a complete answer needs. Seeded and
+recorded. Committed before being run. 15 per source, none discarded.
+
+### Out of sample, retrieval is much worse
+
+| | in sample | out of sample |
+|---|---|---|
+| found the required section | 11/12 | **26/45** |
+
+Comparable questions only: the 12 tuning questions whose key is a single section
+with no source requirement, which is the same shape of task as a held-out
+question. By source, held-out: EU AI Act 9/15, NIST 8/15, OWASP 9/15 — the drop
+is not one document being weak.
+
+### The k=5 decision does not survive the move
+
+| k | held-out | tuning set |
+|---|---|---|
+| 3 | 20/45 | 9/12 |
+| **5** | **26/45** | **11/12** |
+| 8 | 31/45 | 11/12 |
+| 10 | 33/45 | 11/12 |
+| 15 | 34/45 | 11/12 |
+| 20 | 36/45 | 11/12 |
+
+In sample the curve is flat from k=5 and the elbow argument is clean. Out of
+sample **there is no elbow** — every increase buys questions, all the way to 20.
+The flat stretch was a 26-question set running out of headroom, and it produced
+a confident conclusion about diminishing returns that was really a statement
+about the sample size.
+
+`k=5` still ships, because context cost is real and the answers at k=5 are
+graded below. But it now ships as a cost trade with a known price, not as the
+free lunch the in-sample curve implied.
+
+### What the held-out set structurally cannot test
+
+| | held-out | tuning set |
+|---|---|---|
+| search alone | 25/45 | 11/12 |
+| + cross-references | 26/45 | 11/12 |
+| + source diversity | 25/45 | 11/12 |
+| + both (shipped) | 26/45 | 11/12 |
+
+Both arms together are worth **one question out of 45**, which looks like a
+refutation and is not. Every held-out key is a *single* section, because each
+question was generated from one. Cross-reference following and source diversity
+exist for questions that need **two or more** sections or sources — the multi-hop
+and cross-document cases. This set contains none, by construction.
+
+So this table is not evidence the arms are worthless. It is evidence that a
+generated set does not produce the question type they were built for, which is
+a limitation of the held-out set and is why the in-sample 3/8 → 7/8 multi-hop
+result is not withdrawn. Testing those arms out of sample needs a held-out set
+built specifically for multi-hop, and that has not been done.
+
+---
+
+## Graded by a model that has never seen the system
+
+Every correctness verdict here was mine, in one pass, and I built the pipeline.
+That was disclosed as a weakness in three places. Disclosure is not repair.
+
+**Opus 5 grades Sonnet 5's answers.** It sees the question, the answer, and the
+ground-truth source text. It does not see the pipeline, the retrieval design,
+which passages were retrieved, whether retrieval hit, or any earlier verdict —
+so it cannot be lenient towards a near miss, because it cannot tell one from a
+direct hit.
+
+### On the held-out set
+
+| | of 45 |
+|---|---|
+| correct | **27** |
+| partial | 6 |
+| refused | 11 |
+| **wrong** | **1** |
+| uncited | **0** |
+
+Split by whether retrieval found the exact section:
+
+| | correct | partial | wrong | refused |
+|---|---|---|---|---|
+| retrieval hit (26) | 23 | 1 | **0** | 2 |
+| retrieval missed (19) | 4 | 5 | **1** | 9 |
+
+**This is the result the whole project rests on.** When retrieval fails, the
+system refuses 9 times out of 19 and is still substantively right 9 more. It
+fabricated once. Retrieval at 26/45 looks poor until you see what the other 19
+did with it: mostly declined, rarely wrong.
+
+The one failure is H33, *"which body gives the Commission opinions on qualified
+alerts about general-purpose models"*. The answer names the wrong body; Article
+66(n) gives it to the Board. Retrieval never returned Article 66 — its best
+chunk ranks 26 of 856 — and the model answered confidently from what it had
+instead of declining. That is the failure mode the refusal instruction exists to
+prevent, and here it did not fire.
+
+### On the original 30, the grader is harsher than I was
+
+| | mine | blind |
+|---|---|---|
+| correct | 25/26 | **16/23** |
+| partial | — | 6 |
+| wrong | 1 | **0** |
+
+Agreement on 15 of 23; disagreement on 8, and **five run the same way**: D01,
+X04, X07, X08 and C01 I marked correct and the grader marks partial, each for
+omitting substantive material the source contains.
+
+The gap is a rubric, not an error. I counted an answer that flags its own
+incompleteness as correct, and wrote that up approvingly — *"Answers decline the
+part they cannot cover"*. An independent grader counts the same answer as
+partial: saying so is better than not saying so, and it is still incomplete.
+Both readings are defensible. Only one of them was mine to choose, which is the
+entire problem with grading your own system.
+
+What holds under both rubrics: **zero wrong answers on the tuning set, one on
+the held-out set.** The system's accuracy claim was generous. Its
+does-not-fabricate claim was not.
+
+### The grader found a defect in the code
+
+It counted **11 refusals where `answer.py` counted 8**. Rule 3 of the system
+prompt asks a refusal to open with the exact string `NOT IN THE SOURCES`. Three
+answers declined in plain English instead — *"this specific scenario is not
+addressed"*, *"I cannot fully answer this question"* — and the strict check read
+all three as ordinary answers.
+
+Refusal is the most safety-critical behaviour in this system and it was detected
+by matching one string. Anything consuming this output programmatically would
+have treated those three as answers. `answer.py` now reports `refused` (strict,
+so every published figure still means what it meant) alongside `declined`, which
+agrees with the independent grader on all 45 with no false positives.
+
+Instructed refusal works in substance and not reliably in form. Nothing in the
+repository could have found that, because every check in it was written by the
+person who wrote the prompt.
 
 ---
 
@@ -265,11 +427,23 @@ because the failures that matter here produce output that still reads perfectly.
 
 - **Answer quality beyond citation grounding.** Whether an answer is a good
   summary, not merely a supported one, is unassessed.
-- **Correctness was graded by one reader in one pass**, and that reader built the
-  pipeline. Per-answer reasoning is in `data/eval/correctness.json` so it can be
-  disputed. An independent grader would be better.
-- **Sample size.** 30 questions, 26 answerable. Every figure is a fraction, not a
-  percentage; one question is 3.8 points.
+- **Human correctness was graded by one reader in one pass**, and that reader
+  built the pipeline. That is now cross-checked rather than merely disclosed:
+  Opus 5 grades both sets blind, disagrees on 8 of 23, and is harsher in five.
+  Both graders are still models or me — **no second human has read these
+  answers**, and a second model is not an independent human.
+- **Sample size.** 30 questions, 26 answerable, plus 45 held out. Every figure is
+  a fraction, not a percentage.
+- **Generalisation to unseen users.** The held-out set is questions about text,
+  written from text by a model, so they are better posed than a real user's.
+  It measures generalisation to unseen *material*. D04 — the everyday-phrasing
+  failure — is exactly the kind of question this process under-produces, so the
+  held-out numbers are, if anything, optimistic about phrasing.
+- **The retrieval arms, out of sample.** Held-out keys are single sections, so
+  the set cannot contain the multi-hop and cross-document questions the two arms
+  exist for. Their 3/8 → 7/8 result remains in-sample only.
+- **Chunk size, out of sample.** The sweep was scored against the tuning set
+  alone and has not been re-run against the held-out questions.
 - **Any corpus but this one**, and anything at scale.
 - **The embedding model.** `bge-small-en-v1.5` was never compared against a
   larger model or a different family. Whether a bigger encoder closes the
