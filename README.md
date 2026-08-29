@@ -261,7 +261,3 @@ a *good* summary, not merely a supported one.
 
 Engineering notes, including what was measured and rejected, are in
 [FINDINGS.md](FINDINGS.md).
-
-[DEFENCE.md](DEFENCE.md) collects the hardest questions that can be put to this
-work — including the ones it cannot answer — and points at the evidence for
-each.
