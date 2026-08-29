@@ -1,0 +1,880 @@
+{
+  "_about": {
+    "set": "data/eval/holdout.json - never used for any tuning decision",
+    "note": "Held-out keys are one section required exactly; tuning keys can require several sections and sources. The same-shape subset is the comparable figure."
+  },
+  "retrieval": {
+    "found": 26,
+    "total": 45,
+    "per_source": {
+      "EU AI Act": [
+        9,
+        15
+      ],
+      "NIST": [
+        8,
+        15
+      ],
+      "OWASP": [
+        9,
+        15
+      ]
+    },
+    "same_shape_in_sample": [
+      11,
+      12
+    ]
+  },
+  "k_sweep": [
+    {
+      "k": 3,
+      "holdout": 20,
+      "tuning": 9
+    },
+    {
+      "k": 5,
+      "holdout": 26,
+      "tuning": 11
+    },
+    {
+      "k": 8,
+      "holdout": 31,
+      "tuning": 11
+    },
+    {
+      "k": 10,
+      "holdout": 33,
+      "tuning": 11
+    },
+    {
+      "k": 15,
+      "holdout": 34,
+      "tuning": 11
+    },
+    {
+      "k": 20,
+      "holdout": 36,
+      "tuning": 11
+    }
+  ],
+  "arms": [
+    {
+      "arm": "search alone",
+      "holdout": 25,
+      "tuning": 11
+    },
+    {
+      "arm": "+ cross-references",
+      "holdout": 26,
+      "tuning": 11
+    },
+    {
+      "arm": "+ source diversity",
+      "holdout": 25,
+      "tuning": 11
+    },
+    {
+      "arm": "+ both (shipped)",
+      "holdout": 26,
+      "tuning": 11
+    }
+  ],
+  "questions": [
+    {
+      "id": "H01",
+      "question": "Which EU border, migration and security databases count as the large-scale IT systems that the AI rules single out for special treatment?",
+      "source": "EU AI Act",
+      "expect": "anx_X",
+      "found": true,
+      "answered": true,
+      "n_citations": 4,
+      "cited": [
+        "Annex III (part 8 of 9)",
+        "Annex X (part 4 of 7)",
+        "Annex X (part 7 of 7)",
+        "Annex X (part 1 of 7)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.02001,
+      "answer": "Based on the passages, Annex X lists the Union legislative acts on large-scale IT systems in the area of Freedom, Security and Justice that the AI rules single out. The passages provided cover the following:\n\n- **Schengen Information System (SIS)** — three related regulations covering return of illegally staying third-country nationals, border checks, and police/judicial cooperation in criminal matters [5].\n- **Entry/Exit System (EES)** — Regulation (EU) 2017/2226, which registers entry, exit and refusal-of-entry data for third-country nationals crossing external borders, and sets conditions for law enforcement access [2].\n- **Interoperability frameworks** — Regulation (EU) 2019/817, establishing interoperability between EU information systems in the field of borders and visas, and Regulation (EU) 2019/818, establishing interoperability between EU information systems in the field of police and judicial cooperation, asylum and migration [4].\n\n**What I cannot fully answer:** Annex X is described as having 7 parts, but only parts 1, 4, and 7 are included in these passages [5][2][4]. Parts 2, 3, 5, and 6 are not in the sources, so any other systems listed there (which might include databases such as visa or entry systems not covered above) cannot be confirmed here.\n\nSeparately, these large-scale IT systems connect to the AI Act's high-risk framework through Annex III, which flags AI systems used in migration, asylum and border control management — including risk-assessment tools, polygraphs, and systems used to examine asylum, visa or residence permit applications — as high-risk where their use is legally permitted [1]."
+    },
+    {
+      "id": "H02",
+      "question": "When deciding whether to tell end users that generative AI was involved, what factors should we weigh in making that call?",
+      "source": "NIST",
+      "expect": "nist_ai_600-1_038",
+      "found": false,
+      "answered": true,
+      "n_citations": 2,
+      "cited": [
+        "NIST AI 600-1, MEASURE 3.3 p.42",
+        "Article 50 (part 1 of 6)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.02081,
+      "answer": "Based on the passages provided, the clearest guidance on this comes from Article 50 of the AI Act, which sets out a transparency obligation for AI systems that interact directly with people.\n\n**The core rule:** providers must design AI systems that interact directly with natural persons so that those people are told they're dealing with an AI system [6].\n\n**The main factor that changes this obligation:** disclosure isn't required if it would already be obvious to a \"reasonably well-informed, observant and circumspect\" person, given the circumstances and context of use, that they're interacting with an AI [6]. So one key question to weigh is whether an ordinary, attentive user in that specific situation would already understand AI is involved — if so, an explicit disclosure isn't required under this provision.\n\n**An exception to weigh in law-enforcement contexts:** the obligation does not apply to AI systems authorised by law to detect, prevent, investigate or prosecute criminal offences, subject to appropriate safeguards for the rights and freedoms of third parties — unless the system is one the public can use to report a crime, in which case the disclosure duty applies again [6].\n\n**What the passages do not cover:** the sources here don't provide a broader checklist of practical or ethical factors (such as risk of manipulation, vulnerability of the audience, or business considerations) beyond the \"obviousness\" test and the law-enforcement carve-out. If you're looking for guidance on content-provenance labeling or user-perception research (as opposed to the direct \"you are talking to an AI\" disclosure), the passages touch on related but distinct territory — for example, studying how end users perceive AI-generated content and its provenance [2] — but this addresses evaluating provenance signals rather than the yes/no decision of disclosing AI involvement itself, so I can't extend it into a direct answer to your question."
+    },
+    {
+      "id": "H03",
+      "question": "How can an organization identify what work is needed to reach its desired AI risk management goals, and how should it prioritize that work?",
+      "source": "NIST",
+      "expect": "nist_ai_100-1_023",
+      "found": false,
+      "answered": true,
+      "n_citations": 5,
+      "cited": [
+        "NIST AI 100-1, 1.2.4 p.13",
+        "NIST AI 100-1, 5.4 p.36 (part 2 of 3)",
+        "NIST AI 100-1, 5.1 p.26 (part 2 of 5)",
+        "NIST AI 100-1, 5.4 p.36 (part 1 of 3)",
+        "NIST AI 100-1, 5.1 p.26 (part 1 of 5)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.02431,
+      "answer": "Based on these passages, NIST's AI Risk Management Framework speaks most directly to the *prioritization* half of your question, with more limited material on the *identification* half.\n\n**Identifying what work is needed**\n\nThe passages indicate that an organization's own risk tolerance is the starting point: under the GOVERN function, \"processes, procedures, and practices are in place to determine the needed level of risk management activities based on the organization's risk tolerance\" [3]. Governing authorities set the overarching policies — mission, goals, values, culture, and risk tolerance — that this determination flows from [3][8]. The GOVERN function also calls for the risk management process and its outcomes to be established \"through transparent policies, procedures, and other controls based on organizational risk priorities\" [3].\n\nBeyond this, the passages don't describe a specific gap-analysis method for comparing an organization's current state to its desired state, so I can't say more on exactly how that identification step is meant to work.\n\n**Prioritizing the work**\n\nThe MANAGE function gives more concrete guidance here. Once risks have been documented (through the MAP and MEASURE functions referenced alongside MANAGE) [2][7], the framework specifies that \"treatment of documented AI risks is prioritized based on impact, likelihood, and available resources or methods\" [2]. High-priority risks then get responses that are \"developed, planned, and documented,\" with options including mitigating, transferring, avoiding, or accepting the risk [2]. The framework also calls for resources required to manage AI risks to be weighed alongside viable non-AI alternatives, in order to reduce the magnitude or likelihood of potential impacts [2].\n\nMore broadly, this prioritization work is meant to sit inside the organization's wider enterprise risk management, rather than be handled in isolation — the passages note that treating AI risks alongside other risks such as cybersecurity and privacy produces a more integrated and efficient outcome [1]. Effective execution of this also depends on senior-level organizational commitment and appropriate accountability structures, not just on applying the framework itself [1].\n\n**What isn't covered**\n\nThe passages don't include a step-by-step method for diagnosing gaps between an organization's current AI risk posture and its desired goals — only the general principle that the needed level of activity should be tied to risk tolerance [3]. If you're looking for that kind of gap-assessment methodology specifically, it isn't in the material provided here."
+    },
+    {
+      "id": "H04",
+      "question": "When harms from a deployed model are already occurring or catastrophic outcomes look imminent, what course of action is expected of the organization?",
+      "source": "NIST",
+      "expect": "nist_ai_100-1_006",
+      "found": true,
+      "answered": true,
+      "n_citations": 1,
+      "cited": [
+        "NIST AI 100-1, 1.2.3 p.12 (part 1 of 2)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.01895,
+      "answer": "When harms are already occurring or catastrophic outcomes seem imminent, the expected response is to stop using the system. Specifically, if an AI system's negative risk level is judged \"unacceptable\" — meaning significant negative impacts are imminent, severe harms are actually occurring, or catastrophic risks are present — its development and deployment \"should cease in a safe manner until risks can be sufficiently managed\" [2].\n\nThis sits within a broader risk-prioritization approach: organizations are expected to triage AI risks rather than try to eliminate all risk, allocating the most urgent attention and the most thorough risk-management process to whatever is assessed as highest-risk in a given context of use [2]. Lower-risk systems, by contrast, may warrant lower prioritization [2]."
+    },
+    {
+      "id": "H05",
+      "question": "If our industry has no established guidance on how much AI risk is acceptable, does the NIST framework tell us what level to accept?",
+      "source": "NIST",
+      "expect": "nist_ai_100-1_005",
+      "found": false,
+      "answered": true,
+      "n_citations": 3,
+      "cited": [
+        "NIST AI 100-1, Appendix D p.47",
+        "NIST AI 100-1, 1.2.3 p.12 (part 1 of 2)",
+        "NIST AI 100-1, 1.2.1 p.10 (part 1 of 3)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.02215,
+      "answer": "Based on these passages, no — the NIST AI Risk Management Framework does not specify what level of AI risk is acceptable for you to adopt.\n\nThe framework is explicitly designed to be \"outcome-focused and non-prescriptive,\" offering \"a catalog of outcomes and approaches rather than prescribe one-size-fits-all requirements\" [1]. It is also meant to be \"risk-based\" and \"voluntary,\" leaving room for organizations to apply it to their own context rather than imposing a fixed threshold [1].\n\nOn risk levels specifically, the framework says that trying to eliminate all negative risk is often counterproductive, since \"not all incidents and failures can be eliminated\" [2]. It instructs organizations to build their own \"risk management culture\" that recognizes not all AI risks are equal, and to prioritize resources \"based on the assessed risk level and potential impact of an AI system\" [2]. The one boundary it does draw is at the extreme end: if an AI system's risk is \"unacceptable\" — for example, where \"significant negative impacts are imminent, severe harms are actually occurring, or catastrophic risks are present\" — development and deployment \"should cease in a safe manner until risks can be sufficiently managed\" [2]. But this is a description of an extreme category, not a general definition of an acceptable risk threshold for ordinary use.\n\nThe passages also note that risk measurement itself is often difficult — risks that aren't \"well-defined or adequately understood are difficult to measure quantitatively or qualitatively,\" and this difficulty \"does not imply that an AI system necessarily poses either a high or low risk\" [5]. This reinforces that the framework expects organizations to work out risk levels themselves rather than supplying a benchmark.\n\nSo: the framework gives you a process for identifying, measuring, and prioritizing risk, and flags when risk is clearly too high to proceed, but it does not hand you a specific acceptable risk level to use when your industry lacks its own established guidance [1][2][5]."
+    },
+    {
+      "id": "H06",
+      "question": "If we cryptographically sign a downloaded model artifact, does that assure us the model is safe to deploy?",
+      "source": "OWASP",
+      "expect": "owasp_llm04_08",
+      "found": true,
+      "answered": true,
+      "n_citations": 4,
+      "cited": [
+        "OWASP LLM04 - Prevention and Mitigation Strategies (part 5 of 6)",
+        "OWASP LLM04 - 3. Vulnerable or Tampered Pre-Trained Models",
+        "OWASP LLM04 - Scenario #2: Tampered Model Published to a Hub",
+        "OWASP LLM04 - Scenario #7: Compromised Build Pipeline for Model "
+      ],
+      "uncited": false,
+      "cost_usd": 0.01725,
+      "answer": "No — signing does not by itself assure safety. Cryptographic signing (backed by a transparency log, such as the OpenSSF Model Signing project and Sigstore) binds the model artifact to a signer identity, proving *integrity and origin*, not safety [1]. A model can be validly signed by a compromised supplier, or by a trusted-but-malicious one, and still contain a backdoor [1].\n\nThere's also a specific risk relevant here: even a signature from your own organization's release infrastructure doesn't guarantee safety. If an attacker compromises the build pipeline itself (for example, through a malicious dependency, stolen registry credential, or cache poisoning), the resulting backdoored artifact is built and signed by that organization's own infrastructure — so it passes downstream provenance checks and supply-chain scanners that only flag externally sourced components [5].\n\nSeparately, model files are hard to inspect comprehensively, and static analysis can't establish behavioral safety [3]. A backdoor can be embedded directly in the model's computational graph and can persist even in formats considered safe, such as ONNX, and crafted files can exploit parser vulnerabilities (for example, heap overflows found in llama.cpp's GGUF parsing, CVE-2024-23496) [3]. A real-world example is the PoisonGPT proof-of-concept, where a model with surgically altered parameters spread misinformation while evading standard benchmark evaluations — despite appearing under a trusted name [4].\n\nBecause of this, the recommended approach pairs signing with additional safeguards: immutable artifact references, provenance policy, policy-based release gates (e.g., SLSA), behavioral evaluation, and continuous validation of upstream model integrity [1]. Signing is one useful control, but it addresses provenance, not the separate question of whether a model behaves safely [1]."
+    },
+    {
+      "id": "H07",
+      "question": "What safeguards should we put in place so that streaming responses and shared caching in a multi-tenant LLM deployment don't leak one customer's data to another?",
+      "source": "OWASP",
+      "expect": "owasp_llm02_04",
+      "found": true,
+      "answered": true,
+      "n_citations": 8,
+      "cited": [
+        "OWASP LLM09 - 6. Monitoring, Logging, and Incident Response",
+        "OWASP LLM02 - Tier 2: Hardening (regulated / high-sensitivity)",
+        "OWASP LLM09 - 1. Cross-Tenant Leakage via Shared Similarity Sear",
+        "OWASP LLM09 - Scenario #2: Cross-Tenant Inference in a Shared Ve",
+        "Article 26 (part 5 of 11)",
+        "Article 26 (part 1 of 11)",
+        "Article 13 (part 1 of 3)",
+        "Article 72"
+      ],
+      "uncited": false,
+      "cost_usd": 0.02324,
+      "answer": "Based on the passages, here's what's relevant to protecting against cross-tenant leakage from streaming and shared caching:\n\n**Side-channel defenses for streaming and caching**\n\nFor hardened, regulated, or high-sensitivity environments, recommended measures include:\n\n- **Random padding and token batching** applied to streaming responses, to prevent attackers from inferring content through timing or size patterns [2].\n- **Segregation of high-sensitivity tenants** onto dedicated prefix caches, rather than sharing cache infrastructure across all tenants [2].\n- **Partitioned KV caches** when co-tenancy (multiple tenants sharing infrastructure) is unavoidable [2].\n\n**Related protections worth pairing with the above**\n\nThe same hardening tier also recommends several adjacent controls that reduce the risk of data crossing tenant boundaries more generally:\n\n- Vector-store protections such as encryption, access-control lists kept separate from document ACLs, restricted export APIs, minimum-scope k-NN search, and detection of embedding-space probing [2].\n- Gating log-probabilities, confidence scores, and explanations on production endpoints, since these can leak information about other tenants' data if not restricted [2].\n- Classifying and redacting reasoning traces as first-class output, and never logging raw traces to unrestricted observability systems [2].\n- Format-preserving encryption for structured identifiers, with strict separation between internal and external routing and field allowlists on the external path [2].\n\n**Why this matters even without a conventional bug**\n\nA related risk described in the passages is that in multi-tenant deployments, similarity search or shared infrastructure can leak the *existence* or *topic* of another tenant's data through timing, result counts, or score-distribution gaps — even when access control is technically correctly applied and no document is ever directly exposed [3][4]. This suggests that timing and side-channel behavior in shared infrastructure (which would include streaming and caching) deserves attention independent of standard access-control checks [3].\n\n**Monitoring and incident response**\n\nSupporting controls include keeping immutable logs of retrieval activity (tenant scope, query, returned IDs, similarity scores) and monitoring for cross-tenant retrieval anomalies or abnormal consumption patterns [1]. Incident-response playbooks should also treat leaks of derived data (such as embeddings) as source-data leaks for breach-notification purposes [1].\n\n**What the passages do not cover**\n\nThe passages do not provide EU AI Act–specific requirements on streaming or caching architecture for multi-tenant systems — the AI Act passages provided concern logging retention, registration, transparency, and post-market monitoring obligations generally [7][9][10][14], not technical cache/stream isolation. If you need that specific angle, it is **NOT IN THE SOURCES** provided here."
+    },
+    {
+      "id": "H08",
+      "question": "If a country's authority fails to act after being told one of its conformity assessment bodies no longer meets the qualification requirements, can anyone else strip that body of its status?",
+      "source": "EU AI Act",
+      "expect": "art_37",
+      "found": false,
+      "answered": true,
+      "n_citations": 1,
+      "cited": [
+        "Article 36 (part 3 of 7)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.01375,
+      "answer": "Based on the passages provided, this specific scenario is not addressed.\n\nWhat the passages do say is that when a notifying authority has sufficient reason to believe a notified body no longer meets the requirements in Article 31, or is failing its obligations, that same notifying authority is responsible for investigating and, if warranted, restricting, suspending or withdrawing the body's designation [2]. The notifying authority must then inform the Commission and other Member States [2].\n\nHowever, the passages do not describe what happens if the notifying authority fails to act on such information, and they do not indicate whether the Commission, another Member State, or any other body has independent power to withdraw a notified body's status in that situation.\n\n**NOT IN THE SOURCES** — the passages do not answer whether another party can strip a notified body of its status if the responsible national authority fails to act."
+    },
+    {
+      "id": "H09",
+      "question": "What factors tend to make the consequences worse when an application feeds model-generated text straight into downstream components without checking it?",
+      "source": "OWASP",
+      "expect": "owasp_llm10_00",
+      "found": true,
+      "answered": true,
+      "n_citations": 1,
+      "cited": [
+        "OWASP LLM10 - Description"
+      ],
+      "uncited": false,
+      "cost_usd": 0.01947,
+      "answer": "Several conditions are described in the sources as increasing the impact of feeding model-generated text straight into downstream components without checking it (a vulnerability the sources label \"Improper Output Handling\") [4]:\n\n- **Excessive privileges granted to the LLM**, which can enable privilege escalation or remote code execution [4].\n- **Susceptibility to indirect prompt injection**, which can give an attacker privileged access to a target user's environment [4].\n- **Unvalidated inputs from third-party tools** [4].\n- **Missing context-specific output encoding**, for example failing to encode output correctly for HTML, JavaScript, or SQL contexts [4].\n- **Insufficient monitoring and logging of LLM outputs** [4].\n- **Missing rate limiting or anomaly detection** for LLM usage [4].\n- **Terminal, log, or IDE sinks that render model output without neutralizing control characters**, such as ANSI escape sequences [4].\n- **Client renderers (browsers, chat UIs, IDEs, terminals) that automatically fetch external resources referenced in model output** — for example Markdown images, link previews, or iframes — which can enable exfiltration of context data through outbound requests [4].\n\nThe sources note that when these conditions are present, unhandled output can lead to consequences such as cross-site scripting (XSS) and cross-site request forgery (CSRF) in browsers, as well as server-side request forgery (SSRF), privilege escalation, or remote code execution on backend systems [4]."
+    },
+    {
+      "id": "H10",
+      "question": "How long does an EU-based representative for a non-EU supplier of a high-risk AI system have to keep the conformity declaration and technical files available for authorities?",
+      "source": "EU AI Act",
+      "expect": "art_22",
+      "found": true,
+      "answered": false,
+      "n_citations": 4,
+      "cited": [
+        "Article 47",
+        "Article 23",
+        "Article 18",
+        "Article 22 (part 1 of 3)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.02323,
+      "answer": "NOT IN THE SOURCES.\n\nThe passages include retention rules for providers (10 years for technical documentation and the EU declaration of conformity, kept at the disposal of national authorities) [4][1], and for importers (10 years for the certificate, instructions for use, and EU declaration of conformity) [3]. However, the passage on authorised representatives [13] only describes the requirement to appoint a representative and to let that representative perform the tasks in the written mandate — it does not state any specific retention period for the conformity declaration or technical files held by an authorised representative. None of the other passages fill this gap, so the sources do not answer the specific question asked."
+    },
+    {
+      "id": "H11",
+      "question": "If a backup of our vector store gets exposed, should we treat that as a leak of the original documents for breach-notification purposes?",
+      "source": "OWASP",
+      "expect": "owasp_llm09_02",
+      "found": false,
+      "answered": true,
+      "n_citations": 4,
+      "cited": [
+        "OWASP LLM02 - Scenario #6",
+        "OWASP LLM09 - Scenario #3: Embedding Inversion from a Leaked Vec",
+        "OWASP LLM09 - 6. Monitoring, Logging, and Incident Response",
+        "OWASP LLM09 - 5. Storage Lifecycle Controls"
+      ],
+      "uncited": false,
+      "cost_usd": 0.01593,
+      "answer": "Yes. According to the OWASP material, an \"embeddings-only\" leak should not be treated as a safe classification for breach-notification purposes — leaked embeddings can be reverse-engineered to recover a substantial fraction of the original source content, including PII, through a technique called embedding inversion, even without access to the original encoder [2]. Because of this, an incident initially classified as low-severity should be reclassified as equivalent to a source-document breach once inversion is shown to be possible, and notification obligations should be reassessed accordingly [2].\n\nThis applies specifically to backups: the sources state that a leaked \"embeddings-only\" vector backup is reclassified as a source-document breach after inversion, which restarts the relevant notification clock — referred to in the passage as the \"72-hour clock\" [1]. Consistent with this, incident-response guidance recommends updating playbooks so that \"embeddings only\" leaks are treated as source-data leaks for breach assessment and notification, referencing obligations such as GDPR Article 33 and analogous regimes [4].\n\nThe sources also recommend preventive steps that reflect this same principle: vector-database backups should be treated at the same sensitivity tier as the source documents they were derived from, and embeddings should be encrypted at rest with separately managed keys [5].\n\n**Summary:** Based on these passages, a vector-store backup leak should generally be treated as equivalent to a leak of the original documents, since \"embeddings only\" is explicitly stated not to be a safe-harbor classification [2]."
+    },
+    {
+      "id": "H12",
+      "question": "What role do advocacy organizations, standards bodies, end users and affected communities play in AI risk management, given they aren't the ones building or deploying the systems?",
+      "source": "NIST",
+      "expect": "nist_ai_100-1_008",
+      "found": true,
+      "answered": true,
+      "n_citations": 4,
+      "cited": [
+        "NIST AI 100-1, Appendix A p.40 (part 8 of 8)",
+        "NIST AI 100-1, 2 p.14 (part 2 of 4)",
+        "NIST AI 100-1, Appendix A p.40 (part 7 of 8)",
+        "NIST AI 100-1, 2 p.14 (part 1 of 4)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.02612,
+      "answer": "Although advocacy groups, standards bodies, end users, and affected communities don't design or deploy AI systems themselves, NIST's AI Risk Management Framework treats them as important actors in the risk management process.\n\n**A separate but connected audience.** These groups sit in what NIST calls the \"People & Planet\" dimension, which represents human rights and the broader well-being of society and the planet [9]. This dimension is described as \"a separate AI RMF audience who informs the primary audience\" — meaning they don't run the technical risk management process, but they shape and inform those who do [9].\n\n**Specific contributions they make.** According to the framework, these actors can [2]:\n\n- Help provide context and understanding of an AI system's potential and actual impacts [2]\n- Serve as a source of formal or quasi-formal norms and guidance for AI risk management [2]\n- Help designate boundaries for AI operation — technical, societal, legal, and ethical [2]\n- Promote discussion of the tradeoffs needed to balance values like civil liberties, equity, the environment, and the economy [2]\n\n**Who specifically is included.** This category can include trade associations, standards developing organizations, advocacy groups, researchers, environmental groups, and civil society organizations [1]. The general public is described as the group \"most likely to directly experience positive and negative impacts of AI technologies,\" and their reactions \"may provide the motivation for actions taken by the AI actors\" who do build and deploy systems [1].\n\n**End users specifically.** End users are the individuals or groups who actually use a deployed AI system for a specific purpose, and they interact with it in a specific context; their competence can range from AI experts to first-time technology users [5].\n\n**Affected communities specifically.** Affected individuals and communities are defined more broadly as anyone directly or indirectly affected by an AI system or by decisions based on its output — importantly, this group does not need to have ever interacted with the system itself to be included [5].\n\n**The overall framing.** NIST states that successful risk management \"depends upon a sense of collective responsibility\" among all these AI actors, not just the developers and deployers [2]. In short, the sources describe these outside groups as providing context, norms, boundaries, and accountability pressure that inform and constrain the technical risk management done by those who actually build and deploy the systems [1][2][9]."
+    },
+    {
+      "id": "H13",
+      "question": "How can we stop a chatbot's replies from silently pulling data out to an attacker's server when they're rendered in a chat window or IDE?",
+      "source": "OWASP",
+      "expect": "owasp_llm10_02",
+      "found": false,
+      "answered": false,
+      "n_citations": 1,
+      "cited": [
+        "OWASP Appendix - MITRE CWE (Common Weakness Enumeration) — 4.20 (part 6 of 6)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.00993,
+      "answer": "NOT IN THE SOURCES.\n\nThe passages describe related risks — such as sensitive data being smuggled into the hostname or query string of an auto-fetched Markdown-image request, which is one way output can leak information to an attacker [4] — but they do not provide guidance or defenses for preventing a chatbot's replies from exfiltrating data when rendered in a chat window or IDE. Since the question asks specifically \"how to stop\" this, and no mitigation steps are described in the provided material, I can't assemble an answer from what's here."
+    },
+    {
+      "id": "H14",
+      "question": "If we don't have measured energy figures for a foundation model we've released, can we still satisfy the documentation requirement?",
+      "source": "EU AI Act",
+      "expect": "anx_XI",
+      "found": true,
+      "answered": true,
+      "n_citations": 2,
+      "cited": [
+        "Annex XI (part 3 of 5)",
+        "Article 53 (part 1 of 6)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.01682,
+      "answer": "Yes. The technical documentation for providers of general-purpose AI models must include the model's known or estimated energy consumption [2]. If the actual energy consumption is unknown, the passage specifies that this figure \"may be based on information about computational resources used\" [2] — meaning you can satisfy the requirement with an estimate derived from computational resource data (such as the number of floating point operations used in training) rather than a direct measurement [2].\n\nThis documentation requirement falls under Article 53(1)(a), which requires providers to draw up and keep up to date technical documentation containing, at a minimum, the information set out in Annex XI [11]."
+    },
+    {
+      "id": "H15",
+      "question": "If a company that supplies a high-risk AI system suspects it no longer meets legal requirements after it's already on the market, what steps must it take and who must it notify?",
+      "source": "EU AI Act",
+      "expect": "art_20",
+      "found": false,
+      "answered": false,
+      "n_citations": 9,
+      "cited": [
+        "Article 79 (part 4 of 8)",
+        "Article 79 (part 8 of 8)",
+        "Article 80 (part 5 of 6)",
+        "Article 80 (part 2 of 6)",
+        "Article 75 (part 6 of 6)",
+        "Article 75 (part 1 of 6)",
+        "Article 73 (part 1 of 10)",
+        "Article 74 (part 1 of 14)",
+        "Article 75a (part 1 of 8)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.02181,
+      "answer": "NOT IN THE SOURCES.\n\nThe passages provided describe what *market surveillance authorities* must do when they investigate or find that an AI system presents a risk or is misclassified [1][2][3][4][5], and general procedural rules for market surveillance and enforcement [10][19][20]. They also cover a provider's duty to report *serious incidents* involving high-risk AI systems already on the market [18]. However, none of the passages address the specific situation asked about: the steps a provider itself must take, or who it must notify, when the provider *suspects on its own* that its high-risk AI system no longer meets legal requirements after being placed on the market. That obligation is not described in any of the passages given here."
+    },
+    {
+      "id": "H16",
+      "question": "When we retire a generative AI model from production, what kinds of issues should we be weighing before shutting it down?",
+      "source": "NIST",
+      "expect": "nist_ai_600-1_022",
+      "found": false,
+      "answered": false,
+      "n_citations": 21,
+      "cited": [
+        "NIST AI 600-1, 2.6 p.12 (part 2 of 2)",
+        "NIST AI 600-1, MANAGE 3.2 p.47 (part 1 of 2)",
+        "OWASP Appendix - NIST AI 600-1 (Generative AI Profile) — v1.0 (July (part 3 of 4)",
+        "OWASP Appendix - NIST AI 600-1 (Generative AI Profile) — v1.0 (July (part 4 of 4)",
+        "NIST AI 100-1, 5.2 p.29 (part 4 of 5)",
+        "Article 60 (part 8 of 11)",
+        "NIST AI 600-1, 2.6 p.12 (part 1 of 2)",
+        "OWASP Appendix - NIST AI 600-1 (Generative AI Profile) — v1.0 (July (part 1 of 4)",
+        "NIST AI 100-1, 5.2 p.29 (part 1 of 5)",
+        "Article 60 (part 1 of 11)",
+        "Article 5 (part 1 of 15)",
+        "Article 13 (part 1 of 3)",
+        "Article 49",
+        "Article 61",
+        "Article 71",
+        "Article 73 (part 1 of 10)",
+        "Article 75 (part 1 of 6)",
+        "Article 98",
+        "Annex I (part 1 of 11)",
+        "Annex III (part 1 of 9)",
+        "Annex IX"
+      ],
+      "uncited": false,
+      "cost_usd": 0.02171,
+      "answer": "NOT IN THE SOURCES.\n\nThe passages provided cover topics like harmful bias and homogenization in GAI systems [1][7], suggested actions for monitoring and documenting pre-trained models during development [2], OWASP risk mappings to NIST categories [3][4][8], the NIST MAP function for establishing risk context [5][9], and various EU AI Act provisions on testing, registration, and incident reporting [6][10][11][12][13][14][15][16][17][18][19][20][21]. None of these passages address decommissioning, retiring, or shutting down a generative AI model from production, so I cannot answer what issues should be weighed in that specific scenario."
+    },
+    {
+      "id": "H17",
+      "question": "When an AI assistant that can call tools ends up taking harmful actions, what underlying design weaknesses are usually to blame?",
+      "source": "OWASP",
+      "expect": "owasp_llm03_00",
+      "found": true,
+      "answered": true,
+      "n_citations": 6,
+      "cited": [
+        "NIST AI 100-1, Appendix C p.45 (part 3 of 5)",
+        "OWASP Appendix - OWASP AIVSS (AI Vulnerability Scoring System) — v0 (part 4 of 5)",
+        "OWASP LLM06 - 8. Agent-Tool Interactions Flooding Model Resource",
+        "OWASP LLM03 - Description",
+        "NIST AI 600-1, 2.7 p.13",
+        "NIST AI 100-1, Appendix C p.45 (part 1 of 5)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.02137,
+      "answer": "Based on the passages, when an LLM-based system with tool-calling ability (\"agency\") takes harmful actions, the underlying problem is called **Excessive Agency** [4]. This vulnerability allows damaging actions to occur in response to unexpected, ambiguous, or manipulated outputs from the LLM, regardless of what caused the LLM to malfunction [4].\n\nThe root cause of Excessive Agency is typically one or more of three design weaknesses [4]:\n\n- **Excessive functionality** – the system can do more than it needs to [4]\n- **Excessive permissions** – the system has more access rights than necessary [4]\n- **Excessive autonomy** – the system can act with too little oversight or checks [4]\n\nCommon triggers that expose these weaknesses include [4]:\n\n- Hallucination or confabulation caused by a poorly-engineered prompt, or a poorly-performing or misaligned model [4]\n- Direct or indirect prompt injection, whether from a malicious user, an earlier invocation of a malicious or compromised tool, or, in multi-agent systems, a malicious or compromised peer agent [4]\n\nThe passages note that sanitizing model inputs and outputs is not considered a root control for Excessive Agency itself — that is treated as a separate issue (prompt injection for inputs, improper output handling for outputs) [4].\n\nIn agentic system contexts specifically, Excessive Agency can show up as tool misuse and exploitation, identity and privilege abuse, or cascading failures across a multi-agent workflow [4]. Related failure patterns described elsewhere in the passages include agents being forced into recursive or infinite tool-calling loops by a malicious tool, which drains resources and can cause financial or service harm [3][2], and incorrect state or evidence produced by one agent being trusted and acted on by another, letting a false conclusion (e.g., wrongly approving a refund or firing a false alert) trigger a high-impact automated action [2].\n\n**What the passages don't address:** they don't discuss human cognitive or organizational biases in AI design as a cause of harmful tool-calling actions — that material [1][7] and the human-AI interaction/automation-bias material [5] relate to a different topic (human-AI interaction risk generally) rather than specifically to tool-calling agents, so I have not applied it here."
+    },
+    {
+      "id": "H18",
+      "question": "When people distinguish between being able to explain a model's inner workings and being able to make sense of what its output means for the user, what's the actual difference, and how does that relate to transparency?",
+      "source": "NIST",
+      "expect": "nist_ai_100-1_014",
+      "found": true,
+      "answered": true,
+      "n_citations": 2,
+      "cited": [
+        "NIST AI 100-1, 3.4 p.20 (part 1 of 2)",
+        "NIST AI 100-1, 3.5 p.21"
+      ],
+      "uncited": false,
+      "cost_usd": 0.01577,
+      "answer": "Good question — the passages draw a clear three-way distinction here.\n\n**Explainability vs. interpretability**\n\n- **Explainability** refers to a representation of the *mechanisms* underlying how an AI system operates [2]. It's about \"how\" a decision was made inside the system [2].\n- **Interpretability** refers to the *meaning* of the system's output in the context of its designed functional purpose [2]. It's about \"why\" a decision was made and what that decision means or how it applies to the user [2].\n\nSo the difference you're describing maps directly onto this: explainability is about the mechanics of the model itself, while interpretability is about making sense of what a given output signifies for the person relying on it [2]. Both are meant to help people operating, overseeing, or using an AI system gain deeper insight into its functioning and trustworthiness [2]. The underlying assumption is that a lot of the perceived risk around AI comes from people simply being unable to make sense of, or contextualize, the system's output [2].\n\nPractically, risks from lack of explainability are addressed by describing how the system functions, tailored to the user's role, knowledge, and skill level — and explainable systems are easier to debug, monitor, document, audit, and govern [2]. Risks to interpretability are addressed by communicating a description of why the system produced a particular prediction or recommendation [2].\n\n**How this relates to transparency**\n\nTransparency is presented as a third, related but distinct characteristic: it answers \"what happened\" in the system, whereas explainability answers \"how\" and interpretability answers \"why\" [2]. Transparency itself is about the extent to which information about an AI system and its outputs is available to people interacting with it, whether or not they know they're interacting with it, and it should be tailored to the stage of the AI lifecycle and to the role or knowledge of the person receiving it [1]. So transparency, explainability, and interpretability are described as distinct but mutually supporting characteristics [2] — transparency provides the underlying access to information, while explainability and interpretability turn that information into an understanding of mechanism and meaning, respectively [1][2]."
+    },
+    {
+      "id": "H19",
+      "question": "What happens when a generative model is trained too heavily on data produced by other models, and why is that a concern?",
+      "source": "NIST",
+      "expect": "nist_ai_600-1_008",
+      "found": true,
+      "answered": true,
+      "n_citations": 1,
+      "cited": [
+        "NIST AI 600-1, 2.6 p.12 (part 2 of 2)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.01136,
+      "answer": "When a generative model relies too heavily on synthetic data (data generated by other models) during training, it can suffer from \"model collapse\" [1]. This happens because over-reliance on synthetic data causes certain data points to disappear from the distribution of the new model's outputs [1].\n\nThis is a concern for two main reasons:\n\n- **It threatens the robustness of the model overall** [1].\n- **It can lead to homogenized outputs** — meaning the model's outputs become overly uniform, such as repetitive styles or reduced content diversity — and this effect can be amplified if the synthetic training data itself already reflected homogenization from the model that generated it [1].\n\nMore broadly, homogenization and bias are described as mutually reinforcing problems: skewed, overly uniform outputs can themselves be incorrect, can lead to unreliable decision-making, or can amplify harmful biases [1]. This risk is also not contained to one system — it can flow from foundation models down into other models and systems built on top of them, since foundation models can act as a \"bottleneck,\" or single point of failure, for these problems [1]."
+    },
+    {
+      "id": "H20",
+      "question": "When running structured human feedback or red-teaming exercises on a generative model, is there any restriction on who can participate from within the organization?",
+      "source": "NIST",
+      "expect": "nist_ai_600-1_041",
+      "found": true,
+      "answered": true,
+      "n_citations": 4,
+      "cited": [
+        "NIST AI 600-1, MAP 1.2 p.27",
+        "NIST AI 600-1, Appendix A p.51 (part 7 of 13)",
+        "NIST AI 600-1, MEASURE 1.3 p.33",
+        "NIST AI 600-1, Appendix A p.51 (part 8 of 13)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.02196,
+      "answer": "Yes. According to NIST AI 600-1, those conducting structured human feedback exercises should be verified as **not directly involved in system development tasks for the same GAI model** [4]. This is listed as a suggested action (MS-1.3-003) tied to Human-AI Configuration and Data Privacy risks [4].\n\nMore broadly, the sources recommend that participants in these exercises include a mix of internal experts (who did not serve as front-line developers), independent reviewers, domain experts, users, AI Actors external to the development team, and affected communities, consulted as necessary depending on the organization's risk tolerance [4]. Related guidance also emphasizes that risk measurement and feedback exercises should draw on interdisciplinary teams reflecting diverse capabilities, competencies, demographic groups, and professional backgrounds [1], and that any data, benchmarks, or feedback participants should be representative of diverse in-context user populations [1].\n\nFor AI red-teaming specifically, the sources note that team composition can vary by context: exercises may be run by general public participants, domain experts, a combination of both, or humans working alongside GAI systems, with the choice depending on the use case and the difficulty of recruiting specialists [5]. The quality of red-teaming results is described as linked to the diversity and domain expertise of the team involved [2].\n\n**What the sources don't address:** they do not specify any formal restriction (such as clearance levels, role titles, or contractual barriers) on organizational insiders beyond the separation from direct development work noted above [4]. If you're asking about a different kind of restriction — e.g., legal, contractual, or seniority-based limits — that is not covered in these passages."
+    },
+    {
+      "id": "H21",
+      "question": "If a national oversight body learns of a serious incident during live trials of an AI system outside a lab, what actions can it take against the trial?",
+      "source": "EU AI Act",
+      "expect": "art_76",
+      "found": false,
+      "answered": true,
+      "n_citations": 4,
+      "cited": [
+        "Article 60 (part 10 of 11)",
+        "Article 60 (part 11 of 11)",
+        "Article 60 (part 8 of 11)",
+        "Article 73 (part 1 of 10)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.02969,
+      "answer": "Based on the passages, the direct powers described belong mainly to the **provider**, who must respond once a serious incident is identified — but the **market surveillance authority** is the body that receives the reports and is kept informed throughout.\n\n**What happens when a serious incident is identified:**\n- The incident must be reported to the national market surveillance authority in the Member State where the testing is happening, following the general serious-incident reporting rules in Article 73 [1][5].\n- The provider (or prospective provider) is then required to take **immediate mitigation measures**, or — if that isn't possible — to **suspend** the testing until mitigation happens, or to **terminate** it outright [1].\n- If the testing is terminated, the provider must also have a procedure ready for the **prompt recall** of the AI system [1].\n- The provider must notify the authority of the **suspension or termination** and the **final outcomes** of the testing [2].\n- Separately, the provider remains **liable under applicable EU and national law** for any damage caused during the testing [2].\n\n**What this means for the authority's role:** the passages describe the authority as the recipient of these reports and notifications — it is informed of the incident, of any suspension or termination, and of the final results [1][2]. They do not spell out further enforcement steps the authority itself can take against the trial (for example, ordering a suspension on its own initiative) — that detail is not in the passages provided.\n\n**Related safeguard for participants:** independent of what the authority does, any individual subject of the testing can withdraw at any time without needing to give a reason, and can request immediate deletion of their personal data, though this doesn't undo activities already carried out [4].\n\n**Not covered in the sources:** whether the market surveillance authority has its own independent power to halt, restrict, or penalize the trial beyond receiving these reports and notifications is not addressed in the passages given."
+    },
+    {
+      "id": "H22",
+      "question": "If we run downloaded model files through a malware scanner and only load them with the loader flag that's supposed to block code execution, is that enough to consider third-party weights safe?",
+      "source": "OWASP",
+      "expect": "owasp_llm04_14",
+      "found": true,
+      "answered": true,
+      "n_citations": 3,
+      "cited": [
+        "OWASP LLM04 - Scenario #6: Scanner, Safe-Loader, and Safe-Format",
+        "OWASP LLM04 - 3. Vulnerable or Tampered Pre-Trained Models",
+        "NIST AI 600-1, MANAGE 3.1 p.46"
+      ],
+      "uncited": false,
+      "cost_usd": 0.01664,
+      "answer": "No, that's not enough. Scanners and \"safe-loader\" flags are best treated as defense-in-depth layers rather than guarantees that a model is safe [1].\n\nHere's why:\n\n- **Scanners can be bypassed.** Corrupted or compression-wrapped pickle files can execute their payload before the scanner even reaches the broken part of the file, as seen in the \"nullifAI\" models found on Hugging Face [1]. Model scanners themselves have had bypasses assigned CVEs, including PickleScan zero-days [1].\n\n- **\"Safe\" loader flags have also been bypassed.** The `torch.load` function's `weights_only` flag, which is meant to block code execution, has its own documented CVE (CVE-2025-32434) [1].\n\n- **Even \"safe\" formats aren't automatically safe.** A backdoor can be embedded directly in a model's computational graph, as in \"ShadowLogic\"-style backdoors — this leaves no executable code for a serialization scanner to flag, even in a format like ONNX that's widely considered safe [1][3]. Crafted model files can also exploit memory-corruption bugs in a format's native parser, as shown by heap overflows in llama.cpp's GGUF parsing (CVE-2024-23496) [3].\n\n- **Static inspection has limits generally.** Model artifacts are difficult to inspect comprehensively, and static analysis alone cannot establish behavioral safety — a model can carry hidden biases or backdoors from poisoned training data or direct tampering, which scanning for malicious code wouldn't catch [3].\n\nWhat the sources recommend instead: treating scanners and safe-loader flags as one layer among several, alongside **provenance verification** and **patched loaders and parsers** [1]. Separately, NIST guidance suggests applying organizational risk tolerances and controls to third-party GAI resources, testing for value-chain risks like data poisoning and malware, reassessing risk after any fine-tuning or new use case, and reviewing transparency artifacts such as model cards for third-party models [6]."
+    },
+    {
+      "id": "H23",
+      "question": "If an assessment of a foundation model raises a serious, well-founded concern about systemic risk across the EU, what can the Commission require its developer to do?",
+      "source": "EU AI Act",
+      "expect": "art_93",
+      "found": false,
+      "answered": true,
+      "n_citations": 6,
+      "cited": [
+        "Article 55",
+        "Article 92",
+        "Article 78 (part 1 of 5)",
+        "Article 90",
+        "Article 91",
+        "Article 101"
+      ],
+      "uncited": false,
+      "cost_usd": 0.0285,
+      "answer": "Based on the passages, once there's a well-founded concern about a general-purpose AI model's systemic risk (for example triggered by a \"qualified alert\" from the scientific panel, as described in Article 90 [14]), the Commission has several tools it can use against the model's provider:\n\n**1. Request documents and information.** The Commission can require the provider to hand over the documentation it is legally required to keep, or \"any additional information that is necessary for the purpose of assessing compliance,\" and the provider (or its authorised representative) must supply it [15]. This request must state its legal basis, purpose, what's needed, a deadline, and the fines that apply if the provider gives incorrect, incomplete or misleading information [15].\n\n**2. Conduct a formal evaluation of the model.** The AI Office, after consulting the Board, can carry out an evaluation of the model itself, specifically to investigate systemic risks at EU level, particularly following a qualified alert [5]. For this, the Commission may:\n- Appoint independent experts, including from the scientific panel, to carry out the evaluation on its behalf [5].\n- Request access to the model \"through APIs or further appropriate technical means and tools, including source code\" [5].\n- Before demanding that access, first open a \"structured dialogue\" with the provider to learn about its internal testing, safeguards, and risk-mitigation procedures [5].\n\nThe provider (or its legal representative) must supply the access requested [5], and any request must state the legal basis, purpose, a deadline, and the fines that apply for failing to provide access [5].\n\n**3. Underlying substantive obligations the provider must already meet.** Separately from these investigative powers, a provider of a model designated as carrying systemic risk is obliged to: perform model evaluation including documented adversarial testing to find and mitigate systemic risks; assess and mitigate possible systemic risks at EU level; track, document and promptly report serious incidents and corrective measures to the AI Office; and ensure adequate cybersecurity protection for the model and its physical infrastructure [3].\n\n**4. Confidentiality and enforcement.** Any information or documentation obtained this way, including trade secrets, must be handled under the confidentiality rules in Article 78 [3][13]. If a provider fails to comply with these information or access requests, or supplies misleading information, or fails to provide model access for an evaluation, the Commission may impose fines of up to 3% of annual worldwide turnover or €15,000,000, whichever is higher [18].\n\nOne gap: fines can also apply for failing to comply with \"a measure requested under Article 93\" [18], but the passages provided do not include the text of Article 93 itself, so I cannot describe what that specific measure involves."
+    },
+    {
+      "id": "H24",
+      "question": "How often do EU countries have to tell the Commission whether their AI oversight bodies have enough staff and funding, and when does that start?",
+      "source": "EU AI Act",
+      "expect": "art_70",
+      "found": false,
+      "answered": false,
+      "n_citations": 3,
+      "cited": [
+        "Article 112 (part 2 of 12)",
+        "Article 112 (part 6 of 12)",
+        "Article 112 (part 5 of 12)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.01155,
+      "answer": "NOT IN THE SOURCES.\n\nThe passages describe several review and reporting obligations placed on the *Commission* — for example, evaluating whether the AI Office itself has sufficient powers, competences, and resources, with a report due by 2 August 2028 [3], and periodic four-yearly reviews on other topics such as Annex III amendments and supervision/governance effectiveness [1][2]. However, none of the passages describe a requirement for **Member States** to report to the Commission on whether their own national AI oversight bodies have enough staff or funding, nor any recurring schedule for such a submission. That specific obligation is not covered in the material provided."
+    },
+    {
+      "id": "H25",
+      "question": "Beyond the usual model and risk details, what additional information should we capture in inventory records for generative AI systems?",
+      "source": "NIST",
+      "expect": "nist_ai_600-1_021",
+      "found": false,
+      "answered": false,
+      "n_citations": 0,
+      "cited": [],
+      "uncited": false,
+      "cost_usd": 0.01134,
+      "answer": "NOT IN THE SOURCES."
+    },
+    {
+      "id": "H26",
+      "question": "If we license a foundation model from a vendor and then fine-tune it or bolt on a retrieval layer, do we need to redo our risk evaluation?",
+      "source": "NIST",
+      "expect": "nist_ai_600-1_060",
+      "found": true,
+      "answered": true,
+      "n_citations": 4,
+      "cited": [
+        "NIST AI 600-1, MAP 4.1 p.30 (part 2 of 2)",
+        "NIST AI 600-1, MANAGE 3.1 p.46",
+        "NIST AI 600-1, 2.12 p.16",
+        "NIST AI 600-1, MAP 4.1 p.30 (part 1 of 2)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.02047,
+      "answer": "Yes. According to NIST AI 600-1, organizations are advised to re-assess model risks after fine-tuning or implementing retrieval-augmented generation, and this applies to any third-party GAI model deployed for applications or use cases that were not covered in initial testing [3]. The same guidance appears in the risk-mapping actions, which recommend re-evaluating models that were fine-tuned or enhanced on top of third-party models [2][8].\n\nMore specifically, the suggested actions state that organizations should apply their risk tolerances to fine-tuned third-party models and reassess risk measurements after fine-tuning third-party GAI models [3]. This sits within a broader recommendation to apply organizational risk controls to third-party GAI resources generally, including procured datasets and models adapted to new domains [3].\n\nThe rationale given is that GAI value chains involve many third-party components — datasets, pre-trained models, software libraries — that may be improperly vetted, and this risk is described as exacerbated for GAI because of the scale of training data and the extensive reuse of a limited number of foundation models [4]. Because of this, it can be difficult to attribute problems in a system's behavior to any one component, which is part of why re-evaluation after modification is recommended [4].\n\nSeparately, the sources note that re-evaluation is also suggested when adapting a GAI model to a new domain, including establishing warning systems to flag when previous risk assumptions (e.g., about security or safety) may no longer hold [2] — which would be relevant if fine-tuning or adding retrieval changes the model's use context.\n\n**What isn't addressed here:** the passages don't specify a mandatory legal deadline or enforcement mechanism for this re-evaluation — it is framed as a \"suggested action\" within NIST's voluntary risk management guidance [2][3]. If you're asking whether this is a binding legal obligation under a specific regulation, that is NOT IN THE SOURCES provided."
+    },
+    {
+      "id": "H27",
+      "question": "How should we tier the different places our AI assistant pulls text from when judging injection risk — is content from our own internal repos and databases safe to treat as clean?",
+      "source": "OWASP",
+      "expect": "owasp_llm01_02",
+      "found": false,
+      "answered": true,
+      "n_citations": 2,
+      "cited": [
+        "OWASP LLM01 - Prevention and Mitigation Strategies (part 3 of 4)",
+        "OWASP LLM01 - Prevention and Mitigation Strategies (part 1 of 4)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.02388,
+      "answer": "**Short answer:** The passages don't directly answer whether your internal repos and databases can be treated as \"clean\" — that specific tiering question isn't addressed in the material provided. What the sources do offer is a general architectural principle about untrusted content that you may find relevant, but you'd need to draw your own conclusion about where internal sources fit.\n\n**What the sources do say:**\n\nThe consistent design assumption in the OWASP material is that prompt injection defenses can't rely on the model reliably telling instructions apart from data, because \"LLMs make no architectural distinction between instructions and data\" [7]. Rather than trying to detect malicious content, the guidance is to assume the model's instruction boundary \"will eventually be bypassed\" and to limit what the model can do and reach so that an injection doesn't turn into an exploit [7].\n\nOne relevant control is passing **external** content through \"a structurally separate, provenance-labeled channel so the model can distinguish data from instructions\" [2]. This implies a tiering logic based on provenance — external/untrusted content is flagged and separated — but the passage only discusses external content; it does not state anything about how internal repositories or databases should be classified [2].\n\nThe related concept of the \"lethal trifecta\" is also framed around an agent that can simultaneously access private data, **ingest untrusted content**, and communicate externally — again treating \"untrusted content\" as the risk category, without defining what counts as trusted versus untrusted [7].\n\n**What's missing:** None of the passages state that content pulled from an organization's own internal repositories or databases is inherently safe, low-risk, or exempt from provenance/separation controls. The material also doesn't discuss internal-source risks like stale permissions, poisoned internal documents, or compromised internal systems. On the specific question of tiering internal versus external sources, this is **NOT IN THE SOURCES**."
+    },
+    {
+      "id": "H28",
+      "question": "What controls can stop an AI agent from acting on fabricated or unverified claims before it executes a tool call?",
+      "source": "OWASP",
+      "expect": "owasp_llm07_02",
+      "found": true,
+      "answered": true,
+      "n_citations": 2,
+      "cited": [
+        "OWASP LLM07 - Prevention and Mitigation Strategies",
+        "OWASP LLM05 - Scenario #9"
+      ],
+      "uncited": false,
+      "cost_usd": 0.0259,
+      "answer": "Based on the OWASP passage on LLM07 mitigation strategies, several controls are described for preventing an AI agent from acting on fabricated or unverified claims before executing a tool call:\n\n- **Grounding requirements**: Outputs should be required to be grounded in authoritative and current sources before being acted on [1].\n- **Claim-Check-Act pattern**: Generation of a claim should be separated from execution, with the claim verified before any action is taken [1].\n- **Tool call validation**: Arguments, authorization, preconditions, and the current state of the system should be checked before a tool call is executed [1].\n- **Verification signals**: Checks for groundedness and consistency should be used, rather than relying on the model's confidence alone [1].\n- **Runtime verification for high-impact actions**: Approval workflows and system checks can be introduced for actions with significant consequences [1].\n- **Detection of omission failures**: Structured outputs with mandatory fields can be required, to catch cases where necessary information is missing [1].\n- **Limiting blast radius**: Least privilege, sandboxing, and rate limits can be applied so that even if a bad action occurs, its impact is contained [1].\n- **Monitoring and testing**: Claims, evidence, and outcomes can be logged, and systems can be tested against adversarial misinformation scenarios [1].\n- **Trust calibration**: Verified facts should be distinguished from assumptions, for both human and system trust [1].\n- **Adversarial evaluation**: Workflows can be regularly tested against misleading scenarios on an ongoing basis [1].\n\nSeparately, the passages note a related risk: an attacker can inject malicious instructions into an AI agent's persistent memory across sessions, causing the agent to prioritize attacker-controlled logic and act on that manipulated basis over time [3]. This is relevant context for why claim verification before tool execution matters, though the sources don't tie a specific one of the above controls directly to that memory-injection scenario.\n\nI don't have further sources addressing this question beyond the OWASP LLM07 mitigation list and the LLM05 scenario noted above."
+    },
+    {
+      "id": "H29",
+      "question": "If a non-EU company selling a general-purpose AI model appoints someone in Europe to act on its behalf, how long does that person have to keep the model's technical documentation available to regulators?",
+      "source": "EU AI Act",
+      "expect": "art_54",
+      "found": true,
+      "answered": true,
+      "n_citations": 3,
+      "cited": [
+        "Article 53 (part 1 of 6)",
+        "Article 54 (part 1 of 4)",
+        "Annex XI (part 1 of 5)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.01946,
+      "answer": "Based on the passages provided, I cannot fully answer this question.\n\nThe passages confirm that non-EU providers of general-purpose AI models must appoint an authorised representative established in the Union, via written mandate, before placing the model on the Union market [4]. That representative is enabled by the provider to perform the tasks specified in the mandate [4]. Separately, providers of general-purpose AI models must draw up and keep up-to-date technical documentation of the model, containing at least the information in Annex XI, for the purpose of providing it upon request to the AI Office and national competent authorities [1][18].\n\nHowever, none of the passages state a specific time period or duration for which the authorised representative (or the provider) must keep this technical documentation available to regulators. The passages describe the obligation to maintain and make the documentation available on request [1], and describe the representative's role in general terms [4], but they do not specify a retention period.\n\n**NOT IN THE SOURCES** — a specific retention duration for the technical documentation is not stated in the passages given."
+    },
+    {
+      "id": "H30",
+      "question": "When setting up testing and validation activities across the AI lifecycle, should the people doing verification and validation be the same staff who run test and evaluation?",
+      "source": "NIST",
+      "expect": "nist_ai_100-1_024",
+      "found": true,
+      "answered": true,
+      "n_citations": 2,
+      "cited": [
+        "NIST AI 100-1, Appendix A p.40 (part 5 of 8)",
+        "NIST AI 100-1, 2 p.14 (part 4 of 4)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.01333,
+      "answer": "Based on the sources, the recommended practice is to keep these roles separate.\n\nNIST's AI RMF states that \"ideally, AI actors carrying out verification and validation tasks are distinct from those who perform test and evaluation actions\" [1]. This is reinforced elsewhere in the same framework, which describes it as \"a best practice\" to separate \"those building and using the models\" from \"those verifying and validating the models\" [3].\n\nSo the guidance points toward separating these functions rather than having the same staff perform both. The passages don't specify a legal requirement to do so — this is framed as an ideal or best practice rather than a mandatory rule [1][3]."
+    },
+    {
+      "id": "H31",
+      "question": "How do AI risk frameworks distinguish between false content that spreads unintentionally versus content created deliberately to deceive?",
+      "source": "NIST",
+      "expect": "nist_ai_600-1_010",
+      "found": true,
+      "answered": true,
+      "n_citations": 4,
+      "cited": [
+        "OWASP LLM07 - Common Examples of Risk",
+        "NIST AI 600-1, 2.8 p.13",
+        "OWASP LLM07 - Description",
+        "OWASP Appendix - NIST AI 600-1 (Generative AI Profile) — v1.0 (July (part 3 of 4)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.02007,
+      "answer": "Based on the passages, this distinction is drawn most clearly by NIST AI 600-1.\n\n**Unintentional spread: \"misinformation\"**\nNIST AI 600-1 describes misinformation as false, inaccurate, or misleading content that GAI systems can \"ease the unintentional production or dissemination\" of, \"at scale, particularly if the content stems from confabulations\" [3]. Confabulation is NIST's term for confidently stated but false output, and it is named as a primary source of this kind of misinformation [5].\n\n**Deliberate deception: \"disinformation\"**\nBy contrast, NIST AI 600-1 defines disinformation as \"the deliberate production or dissemination of false or misleading information,\" where \"an actor has the explicit intent to deceive or cause harm to others\" [3]. The passage notes that GAI can raise the sophistication of such deliberate campaigns, including generating text-based disinformation, realistic \"deepfakes,\" and targeted propaganda aimed at specific demographics, as well as fraudulent content meant to impersonate real people [3].\n\n**How the two relate**\nBoth are framed under the umbrella of \"information integrity,\" which concerns whether information can be trusted, verified, traced to a source, and distinguished as fact versus opinion or inference [3]. The key dividing line NIST draws is intent: misinformation lacks deliberate intent to deceive (often arising from model confabulation), while disinformation involves an actor deliberately producing or spreading falsehoods to deceive or harm [3].\n\n**The OWASP framing**\nOWASP's LLM07 entry uses \"misinformation\" as a broader umbrella term covering incorrect, incomplete, unsupported, or misleading output that appears credible enough to influence decisions or actions [4]. Within its list of risk examples, OWASP does separate out a deliberate category — \"Adversarially Induced Misinformation,\" where \"attackers craft inputs that cause false claims or omission of critical facts\" [2] — from unintentional failure modes such as hallucinated code, misleading summaries, or incorrect state inference that are not attributed to deliberate actor intent [2]. OWASP's own cross-reference to NIST confirms that its misinformation entry corresponds to NIST's definition of GenAI producing false information that degrades human decisions, with confabulation named as a primary source [5].\n\nSo across both sources, the distinguishing factor is intent and mechanism: content that spreads because a model confidently generates falsehoods (confabulation-driven misinformation) versus content that a human or automated actor deliberately crafts or induces to deceive (disinformation, or \"adversarially induced misinformation\") [3][2][5]."
+    },
+    {
+      "id": "H32",
+      "question": "How are teams advised to actually apply the ten LLM risk categories once they have them?",
+      "source": "OWASP",
+      "expect": "owasp_llm00_02",
+      "found": false,
+      "answered": false,
+      "n_citations": 3,
+      "cited": [
+        "OWASP LLMZZ - Purpose",
+        "OWASP LLM07 - Common Examples of Risk",
+        "OWASP LLM04 - Description"
+      ],
+      "uncited": false,
+      "cost_usd": 0.01064,
+      "answer": "NOT IN THE SOURCES.\n\nThe passages describe individual risks (such as supply-chain vulnerabilities [5] and misinformation [4]) and note that the OWASP Top 10 is a \"risk-awareness\" document that names critical failure categories and explains prevention principles [1]. Passage [1] also mentions that a companion verification standard (AISVS) exists to translate a Top 10 entry into \"concrete, auditable controls\" [1]. However, none of the passages provided actually describe the process or method teams should follow to apply all ten risk categories once identified — that connecting guidance is only gestured at, not included here."
+    },
+    {
+      "id": "H33",
+      "question": "Under the EU AI Act, which body gives the Commission opinions on qualified alerts about general-purpose AI models, and what else does it do to help align enforcement across Member States?",
+      "source": "EU AI Act",
+      "expect": "art_66",
+      "found": false,
+      "answered": true,
+      "n_citations": 4,
+      "cited": [
+        "Article 90",
+        "Article 92",
+        "Article 68 (part 1 of 5)",
+        "Article 91"
+      ],
+      "uncited": false,
+      "cost_usd": 0.03296,
+      "answer": "**Short answer:** The passages describe a **scientific panel of independent experts**, but it doesn't quite work the way the question suggests. According to the sources, the panel doesn't give the Commission \"opinions on\" qualified alerts — it is the body that *issues* the qualified alerts in the first place [3].\n\n**What the scientific panel does, per the passages:**\n\n- It can send a \"qualified alert\" to the AI Office if it suspects a general-purpose AI model poses a concrete risk at Union level, or meets the criteria for being classified as posing systemic risk [3]. This alert must be reasoned and include a point of contact for the provider, a description of the facts, and any other relevant information the panel has gathered [3].\n- The panel was established by the Commission specifically to \"support the enforcement activities\" under the Regulation [13].\n- Following a qualified alert, the Commission may act through the AI Office, and the AI Office must keep the Board informed of any resulting measures [3] — this is the closest the passages come to describing cross-body coordination, though it is the AI Office informing the Board, not the panel itself acting across Member States.\n- Panel members can be appointed by the Commission as independent experts to carry out formal evaluations of a general-purpose AI model, including where a qualified alert triggered the investigation [4].\n- The panel can also make a \"duly substantiated request\" asking the Commission to seek information from a provider, where that access is necessary for the panel's own tasks [16].\n\n**What the passages do not cover:** None of the supplied material describes the scientific panel as having a role in aligning enforcement *across Member States* specifically. The only related detail is that the AI Office informs the Board (not national authorities generally) of measures taken after an alert [3]. If there is a broader Member-State-alignment function, it is **NOT IN THE SOURCES** provided."
+    },
+    {
+      "id": "H34",
+      "question": "We're a bank already bound by EU internal governance requirements — can that stand in for the AI quality management obligations, or are there elements we'd still have to build separately?",
+      "source": "EU AI Act",
+      "expect": "art_17",
+      "found": true,
+      "answered": true,
+      "n_citations": 5,
+      "cited": [
+        "Article 17 (part 4 of 4)",
+        "Article 17 (part 1 of 4)",
+        "Article 40 (part 1 of 3)",
+        "Article 9 (part 1 of 8)",
+        "Article 72"
+      ],
+      "uncited": false,
+      "cost_usd": 0.024,
+      "answer": "Yes — with some exceions carved out.\n\n**The general rule:** If your bank is a financial institution subject to internal governance requirements under Union financial services law, complying with those internal governance rules is deemed to fulfil the AI Act's quality management system obligation [1].\n\n**But three elements are excluded from that substitution.** The deeming does *not* cover paragraph 1, points (g), (h) and (i) of Article 17 [1]. Based on the full list of quality management system elements, those points are:\n\n- **(g)** the risk management system referred to in Article 9 [8] — a separate risk management system that must be established, implemented, documented and maintained for high-risk AI systems [13].\n- **(h)** the setting-up, implementation and maintenance of a post-market monitoring system, in accordance with Article 72 [8].\n- **(i)** procedures related to the reporting of a serious incident in accordance with Article 73 [8].\n\nSo a bank would still need to build these three pieces separately, even if its existing internal governance arrangements satisfy the rest of the quality management system requirements (such as regulatory compliance strategy, design/development controls, data management procedures, record-keeping, and the accountability framework) [1][8].\n\nOne relevant note on the post-market monitoring piece: where a post-market monitoring system and plan are already established under Union harmonisation legislation, providers — including financial institutions subject to internal governance requirements — have a choice of integrating the necessary elements into their existing systems and plans, provided this achieves an equivalent level of protection [17]. This doesn't remove the obligation itself, but it does allow integration rather than building something entirely separate.\n\n**Standards reference:** when relying on the deemed-compliance route, any harmonised standards referred to in Article 40 should be taken into account [1], and compliance with such published harmonised standards creates a presumption of conformity with the relevant requirements [10]."
+    },
+    {
+      "id": "H35",
+      "question": "Our vector store risk review flagged two things: a backdoored embedding model, and long-term corruption of an agent's stored memory that has nothing to do with embedding geometry. Which agentic risk category should the second one be handled under?",
+      "source": "OWASP",
+      "expect": "owasp_appendix_03",
+      "found": true,
+      "answered": true,
+      "n_citations": 2,
+      "cited": [
+        "OWASP LLM09 - Description",
+        "OWASP Appendix - OWASP Top 10 for Agentic Applications (ASI) — 2026 (part 5 of 5)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.01383,
+      "answer": "The second issue — corruption of an agent's stored memory that doesn't depend on embedding geometry — falls under **ASI06 (Memory & Context Poisoning)** in the OWASP Top 10 for Agentic Applications [3]. The passages are explicit that \"agent-memory poisoning that does not rely on embedding geometry is out of scope\" for LLM09 and is instead \"referred to ASI06\" [3]. This is consistent with the LLM09 description itself, which notes that \"agent-memory attacks that do not rely on embedding geometry\" are covered in ASI06 [1].\n\nFor context, the first issue you mentioned — a backdoored embedding model — is treated separately, under **ASI04 (Agentic Supply Chain Vulnerabilities)**, since \"the embedding model itself must be vetted\" because a backdoored embedding model \"corrupts the geometry of everything ingested\" [3]."
+    },
+    {
+      "id": "H36",
+      "question": "When bringing in an outside vendor's generative AI model or service, what kinds of contractual or procurement mechanisms can we use to get visibility into what we're buying?",
+      "source": "NIST",
+      "expect": "nist_ai_600-1_065",
+      "found": false,
+      "answered": true,
+      "n_citations": 5,
+      "cited": [
+        "Article 25 (part 4 of 5)",
+        "Article 53 (part 2 of 6)",
+        "Article 53 (part 1 of 6)",
+        "OWASP Appendix - NIST AI RMF (AI 100-1) — v1.0 (2023) (part 2 of 4)",
+        "Annex XII"
+      ],
+      "uncited": false,
+      "cost_usd": 0.03561,
+      "answer": "Here's what the passages say about getting visibility into a vendor's generative AI model or service:\n\n**1. Written agreements specifying information, access and assistance (EU AI Act, Article 25)**\nWhen a high-risk AI system incorporates a third party's AI model, tools, services, components, or processes, the provider and that third party are expected to use a **written agreement** that spells out the necessary information, capabilities, technical access, and other assistance the supplier will provide, based on the state of the art, so the provider can meet its own compliance obligations [1]. This requirement does not apply to third parties who make free and open-source tools, services, processes, or components (other than general-purpose AI models) available to the public [1]. To make this easier, the AI Office may draft **voluntary model contract terms** for these supplier arrangements, taking sector-specific contractual practices into account, and publish them free of charge in an easily usable electronic format [1].\n\n**2. Mandatory documentation from providers of general-purpose AI models (Article 53)**\nProviders of general-purpose AI models (which would include many generative AI vendors) must draw up and keep updated **technical documentation**, covering the training and testing process and evaluation results, at minimum the information listed in Annex XI, and must make it available on request to the AI Office and national authorities [4].\n\nSeparately, they must draw up and give downstream integrators (i.e., a business buying the model to build on top of it) **information and documentation** allowing those integrators to understand the model's capabilities and limitations and comply with their own obligations, containing at least the elements in Annex XII [4]. Annex XII specifies this must include things like: the tasks the model is intended to perform, acceptable use policies, date of release, architecture and number of parameters, input/output modality and format, the licence, technical means needed for integration, and information on the data used for training, testing and validation, including type, provenance, and curation methods [19].\n\nThis documentation duty is qualified: it must respect intellectual property rights and confidential business information or trade secrets [4].\n\n**3. Exception for open-source models**\nThese documentation obligations (both the internal technical documentation and the downstream-integrator information) do **not** apply to models released under a free and open-source licence that allows access, use, modification and distribution, where parameters, weights, architecture information, and usage information are publicly available — unless the model is a general-purpose AI model with systemic risk, in which case the exception does not apply [3].\n\n**4. Supply-chain vetting and inventory practices**\nSeparate from the AI Act text, one source describes practical procurement/governance mechanisms mapped to supply-chain risk categories: **supplier vetting and re-vetting, review of terms-and-conditions, and component-patching policies**; maintaining a **signed SBOM, AIBOM, and ML-SBOM** (component inventories) to map risk across every third-party model, dataset, and dependency; treating **model conversion or merge services as high-risk promotion points** requiring extra scrutiny; and running **red-teaming or adversarial-robustness testing** when selecting third-party models, along with continuous validation of upstream model integrity and periodic re-audits of suppliers and bills of materials [7].\n\n**What the passages don't cover:** They don't discuss procurement clauses specific to indemnification, liability caps, audit rights enforcement mechanics, or pricing/negotiation tactics — only the categories above are addressed in the material provided."
+    },
+    {
+      "id": "H37",
+      "question": "Why is a chatbot giving plausible but wrong answers treated as a system-level security risk rather than just a quality issue when the model drives tool calls in an agent pipeline?",
+      "source": "OWASP",
+      "expect": "owasp_llm07_00",
+      "found": true,
+      "answered": true,
+      "n_citations": 2,
+      "cited": [
+        "OWASP LLM07 - Description",
+        "NIST AI 600-1, MEASURE 4.2 p.43"
+      ],
+      "uncited": false,
+      "cost_usd": 0.02107,
+      "answer": "Based on the passages, this is addressed directly in the description of **LLM07 Misinformation**.\n\n**The core reasoning:** Misinformation happens when an LLM produces \"incorrect, incomplete, unsupported, or misleading information that appears credible enough to influence a human decision, an automated workflow, or an agent action\" [5]. The risk isn't the wrong output itself — it's that the wrong output \"is trusted and acted upon\" [5].\n\n**Why this becomes a system-level issue in agent pipelines specifically:** In modern systems, model outputs don't just get read by a person — they \"drive tool calls, generate code, infer system state, authorize actions, and coordinate across agents\" [5]. Because the output feeds directly into further automated actions rather than stopping at a human reader, a plausible-but-wrong answer can cascade into \"financial loss, security incidents, safety risks, or operational disruption\" [5]. In agentic systems specifically, the passage notes that misinformation \"often manifests as incorrect state, reasoning, or evidence that is consumed by downstream components, leading directly to unintended actions\" [5] — meaning the false output isn't just displayed, it becomes an input that triggers real-world effects.\n\n**Why \"quality\" framing understates it:** The passage attributes part of the danger to overreliance — \"humans and systems often treat fluent, confident, or well-structured outputs as authoritative,\" and it notes this overreliance \"is frequently embedded in system design\" in agentic architectures [5]. So the failure isn't just that the answer is wrong, but that the surrounding system is built to trust and act on it without adequate checks, which is what turns a correctness problem into a security-relevant one.\n\nOne related NIST measure supports this framing from a testing perspective: it recommends evaluating \"GAI system performance in real-world scenarios to observe its behavior in practical environments,\" tying this to risks including confabulation and human-AI configuration [6] — i.e., testing must account for exactly this failure mode of confidently wrong output being acted on.\n\n**What the passages don't cover:** They don't give a technical explanation of *why* models generate wrong-but-plausible output (hallucination mechanics), beyond listing possible causes like \"weak grounding, ambiguous prompts, biased or corrupted data\" [5]. If you wanted that deeper mechanism, it isn't in these sources."
+    },
+    {
+      "id": "H38",
+      "question": "Under what circumstances can a certification body demand to see the actual trained model and its parameters, rather than just documentation?",
+      "source": "EU AI Act",
+      "expect": "anx_VII",
+      "found": true,
+      "answered": true,
+      "n_citations": 2,
+      "cited": [
+        "Annex VII (part 5 of 7)",
+        "Annex VII (part 4 of 7)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.01797,
+      "answer": "A notified body can get access to the trained model itself only as a last resort. Specifically, this is allowed **\"where necessary to assess the conformity of the high-risk AI system with the requirements set out in Chapter III, Section 2, after all other reasonable means to verify conformity have been exhausted and have proven to be insufficient, and upon a reasoned request\"** [2].\n\nA few key conditions apply:\n\n- **It's a fallback measure, not a routine step.** The notified body must first try other ways of checking compliance, and only turn to this if those methods prove inadequate [2].\n- **A reasoned request is required** — the notified body can't simply ask; it must justify why this access is needed [2].\n- **What can be accessed:** the training and trained models, \"including its relevant parameters\" [2].\n- **Safeguards on that access:** any such access \"shall be subject to existing Union law on the protection of intellectual property and trade secrets\" [2].\n\nThis is distinct from the earlier, more routine step where the notified body examines the technical documentation and can be given full access to the training, validation, and testing **data sets** (as opposed to the model itself) — including remote access via API where appropriate — as a normal part of reviewing the technical documentation [3]. Access to the actual model and its parameters is the more intrusive step, reserved for cases where documentation and data review alone aren't enough [2]."
+    },
+    {
+      "id": "H39",
+      "question": "What types of rules does the EU's AI law actually establish — what does it cover overall?",
+      "source": "EU AI Act",
+      "expect": "art_1",
+      "found": true,
+      "answered": true,
+      "n_citations": 1,
+      "cited": [
+        "Article 1"
+      ],
+      "uncited": false,
+      "cost_usd": 0.01699,
+      "answer": "Based on the passages provided, Article 1 sets out what the Regulation establishes. It lays down [4]:\n\n- **Harmonised rules** for placing on the market, putting into service, and use of AI systems in the Union [4].\n- **Prohibitions** of certain AI practices [4].\n- **Specific requirements** for high-risk AI systems, along with obligations for the operators of such systems [4].\n- **Harmonised transparency rules** for certain AI systems [4].\n- **Harmonised rules** for placing general-purpose AI models on the market [4].\n- **Rules on market monitoring, market surveillance, governance and enforcement** [4].\n- **Measures to support innovation**, with a particular focus on small mid-cap enterprises (SMCs) and small and medium-sized enterprises (SMEs), including start-ups [4].\n\nThe stated overall purpose behind these rules is to improve the functioning of the internal market and promote the uptake of human-centric and trustworthy AI, while ensuring a high level of protection for health, safety, and fundamental rights (including democracy, the rule of law, and environmental protection) against the harmful effects of AI systems, and while supporting innovation [4]."
+    },
+    {
+      "id": "H40",
+      "question": "If an attacker succeeds in getting our chatbot to reveal its system prompt, tool list and refusal rules, which adversary objectives in the ATLAS threat model does that correspond to?",
+      "source": "OWASP",
+      "expect": "owasp_appendix_05",
+      "found": true,
+      "answered": true,
+      "n_citations": 2,
+      "cited": [
+        "OWASP Appendix - NIST AI RMF (AI 100-1) — v1.0 (2023) (part 3 of 4)",
+        "OWASP Appendix - MITRE ATLAS — content v2026.06 (format-version 6.0 (part 4 of 5)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.01808,
+      "answer": "Based on the passages, an attacker extracting a chatbot's system prompt, tool list, and refusal logic corresponds to the **LLM08 Hidden Context Exposure** category in the MITRE ATLAS mapping, and it maps to several adversary objectives:\n\n- **AML.TA0008 Discovery** — the attack itself is characterized as discovering the AI system's hidden configuration by extracting and reconstructing the system prompt, tool list, roles, and refusal logic [4].\n\n- **AML.TA0010 Exfiltration** — once that hidden context crosses the trust boundary, it counts as model data leakage, moving information the operator intended to keep private into the attacker's hands [4].\n\n- **AML.TA0002 Reconnaissance** — the extracted context gives the attacker concrete targets, functioning as reconnaissance that enables follow-on prompt injection and further action chaining [4].\n\n- **AML.TA0013 Credential Access** — if any credentials were embedded in the system prompt, leaking the hidden context hands the attacker those usable secrets [4].\n\nA related passage on NIST RMF mapping also notes that detecting this kind of exposure is treated as a security-evaluation activity, involving red-teaming for prompt and context extraction grounded in techniques for privacy leakage [2], though that passage addresses defensive evaluation rather than the ATLAS adversary objectives themselves."
+    },
+    {
+      "id": "H41",
+      "question": "For an AI agent that calls external tools, where should the decision about whether an action is permitted actually be made, and how should high-risk versus low-risk actions be treated differently?",
+      "source": "OWASP",
+      "expect": "owasp_llm03_13",
+      "found": false,
+      "answered": false,
+      "n_citations": 2,
+      "cited": [
+        "OWASP Appendix - OWASP Top 10 for Agentic Applications (ASI) — 2026 (part 2 of 5)",
+        "OWASP Appendix - OWASP Top 10 for Agentic Applications (ASI) — 2026 (part 1 of 5)"
+      ],
+      "uncited": false,
+      "cost_usd": 0.024,
+      "answer": "NOT IN THE SOURCES.\n\nThe passages describe general categories of agentic-application risks (e.g., excessive agency, tool misuse, identity and privilege abuse, human-agent trust exploitation) [7][12], but they do not specify where a permission decision should architecturally be made (e.g., in the agent, in the tool, in a gateway, or elsewhere), nor do they set out a scheme for treating high-risk versus low-risk actions differently. Answering that question would require assembling an answer from related but non-responsive material, which I can't do."
+    },
+    {
+      "id": "H42",
+      "question": "If EU regulators want to test a foundation model themselves, what kind of technical access can they compel the provider to give them?",
+      "source": "EU AI Act",
+      "expect": "art_92",
+      "found": true,
+      "answered": true,
+      "n_citations": 2,
+      "cited": [
+        "Article 92",
+        "Article 101"
+      ],
+      "uncited": false,
+      "cost_usd": 0.02755,
+      "answer": "When EU regulators want to test a general-purpose AI model (\"foundation model\") themselves, they can compel the provider to give them technical access to the model — specifically, the Commission may request access \"through APIs or further appropriate technical means and tools, including source code\" [1].\n\n**How this works:**\n\n- This power sits within the AI Office's authority to conduct evaluations of general-purpose AI models, either to check compliance where information already gathered is insufficient, or to investigate systemic risks at EU level, particularly following a flagged concern from the scientific panel [1].\n- The Commission can also appoint independent experts, including from the scientific panel, to carry out these evaluations on its behalf [1].\n- Before demanding access, the AI Office may first try a \"structured dialogue\" with the provider to gather information about the provider's internal testing, safeguards, and risk-mitigation procedures [1].\n- Any formal request for access must state its legal basis, purpose and reasons, and set a deadline for providing access, and must warn of the fines that apply if the provider fails to comply [1].\n- Providers (or their legal representatives) are obliged to supply the access requested [1].\n- Failure to make the model available for such an evaluation can result in fines of up to 3% of the provider's annual worldwide turnover or €15,000,000, whichever is higher [3].\n\n**What isn't covered here:** The passages don't specify further technical detail on what \"further appropriate technical means and tools\" might include beyond APIs and source code, nor do they describe the implementing act referenced in Article 92(6) that would set out detailed arrangements for these evaluations [1]."
+    },
+    {
+      "id": "H43",
+      "question": "Why can retrieval over a shared vector store let one customer end up seeing another customer's documents?",
+      "source": "OWASP",
+      "expect": "owasp_appendix_11",
+      "found": false,
+      "answered": true,
+      "n_citations": 4,
+      "cited": [
+        "OWASP LLM09 - Scenario #2: Cross-Tenant Inference in a Shared Ve",
+        "OWASP LLM09 - 1. Cross-Tenant Leakage via Shared Similarity Sear",
+        "OWASP LLM09 - Description",
+        "OWASP LLM09 - 4. Anomaly Detection at Ingest and Retrieval"
+      ],
+      "uncited": false,
+      "cost_usd": 0.01793,
+      "answer": "Based on the passages, the issue isn't quite that one customer directly *sees* another's documents — it's that they can infer sensitive information about those documents without ever viewing them.\n\n**Why this happens:** In many multi-tenant systems, the similarity search runs across the *entire* shared vector index — including every tenant's embeddings — before any access-control filter is applied at the application layer [1][2]. In other words, the system checks who's allowed to see what only *after* it has already searched everyone's data.\n\nBecause of this ordering, an attacker (Tenant A) can send crafted \"probing\" queries and never see Tenant B's actual documents, but can still learn things like:\n\n- **Whether B's data exists**, and roughly what topics it covers, from result counts and score distributions [1][2]\n- **Timing differences** in how the query is processed, which reveal similar clues [1][2]\n- Over many repeated queries, this can be pieced together into \"a useful map of B's data\" [1]\n\nCritically, the passages note this attack works \"even when every document is correctly tagged and every API call authenticated\" [2] — because the vulnerability isn't a broken permission check, it's a structural one: the geometric search step happens *before* the access-control decision [2]. This is described as an \"access-control failure\" that makes the system \"indiscriminate,\" distinct from attacks that rely on tricking the model itself [3].\n\n**What can compound this:** The passages note that unrelated authentication bugs in vector-database software (for example, CVE-2025-64513 in Milvus and CVE-2025-69286 in RAGFlow) are a separate category of flaw, but they make the consequences worse — because vector-store leaks can potentially be reverse-engineered back to source content, an auth bug in a vector database is considered higher-consequence than the same bug in an ordinary database [1][2].\n\n**What isn't covered here:** The passages don't explain remediation in full detail beyond noting general anomaly-detection measures like not returning raw similarity scores, rate-limiting, and re-ranking [5], so I can't say more about fixes than that."
+    },
+    {
+      "id": "H44",
+      "question": "When red-teaming a generative model for resilience, what categories of attacks should the exercise cover?",
+      "source": "NIST",
+      "expect": "nist_ai_600-1_046",
+      "found": false,
+      "answered": true,
+      "n_citations": 3,
+      "cited": [
+        "OWASP Appendix - NIST AI RMF (AI 100-1) — v1.0 (2023) (part 3 of 4)",
+        "NIST AI 100-1, 3.3 p.20",
+        "Article 15"
+      ],
+      "uncited": false,
+      "cost_usd": 0.02046,
+      "answer": "Based on the passages, red-teaming aimed at a generative model's **resilience** should cover several specific attack categories:\n\n- **Adversarial examples** – inputs designed to make the model behave incorrectly or make mistakes [2][6].\n- **Data poisoning** – attacks that corrupt the training dataset [2][6].\n- **Model poisoning** – attacks on pre-trained components used in training [6].\n- **Exfiltration/confidentiality attacks** – attempts to extract the model itself, its training data, or other intellectual property through system endpoints [2][6].\n- **Model evasion** – closely related to adversarial examples, where inputs are crafted to cause the model to err [6].\n- **Resource-consumption and adversarial-perturbation attacks** – specifically flagged as tests for the \"secure-and-resilient\" availability characteristic in red-teaming exercises, alongside adversarial and trigger-based prompts used to probe for hidden backdoors after alignment cycles [1].\n\nOne source frames the underlying goal of this testing: resilience means the system can withstand unexpected adverse events or environmental changes, or degrade safely when it cannot, while security (a related but broader concept) covers the full cycle of preventing, protecting against, responding to, and recovering from such attacks [2].\n\nI cannot fully confirm whether the passages describe this as an exhaustive list — they present these as the \"common security concerns\" and \"AI specific vulnerabilities\" relevant to resilience testing, but do not claim the list is complete [2][6]."
+    },
+    {
+      "id": "H45",
+      "question": "When a body applies to be authorised to carry out conformity assessments for high-risk AI, how is it supposed to express which kinds of AI systems its authorisation should cover?",
+      "source": "EU AI Act",
+      "expect": "anx_XIV",
+      "found": true,
+      "answered": true,
+      "n_citations": 4,
+      "cited": [
+        "Annex XIV (part 2 of 5)",
+        "Annex XIV (part 1 of 5)",
+        "Article 29",
+        "Article 30"
+      ],
+      "uncited": false,
+      "cost_usd": 0.0229,
+      "answer": "When a conformity assessment body applies for notification, it must submit its application to the notifying authority of the Member State where it is established, along with a description of the conformity assessment activities, the conformity assessment module or modules, and the types of AI systems for which it claims to be competent [14]. This description is generally accompanied by an accreditation certificate (where one exists) confirming the body meets the requirements of Article 31, or, if no such certificate exists, by documentary evidence supporting the same [14].\n\nThe scope of what the body can be authorised for is expressed using a standardised reference system: the list of codes, categories, and corresponding types of AI systems set out in Annex XIV [3][9]. This list is specifically designed for the notification procedure and defines the scope of a body's designation as a notified body [9]. When the notifying authority subsequently notifies the Commission and other Member States about the body, that notification is also based on this same list of codes, categories, and types of AI systems from Annex XIV [15].\n\nSo, in short: the applicant describes the types of AI systems it is competent to assess [14], and this is then mapped onto the standard codes/categories system in Annex XIV, which is what ultimately defines and communicates the scope of its authorisation [3][9][15]."
+    }
+  ],
+  "generation": {
+    "answered": 37,
+    "refused": 8,
+    "uncited": 0,
+    "cost_usd": 0.9108
+  }
+}
