@@ -33,3 +33,6 @@ Thumbs.db
 
 # Kept locally, deliberately not published.
 DEFENCE.md
+
+# Temporary working directory created by scripts/sweep_chunking.py.
+.sweep-backup/
