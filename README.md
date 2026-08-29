@@ -37,6 +37,12 @@ Retrieval scored separately, and free: **24 / 26**.
 Three answers are correct but incomplete, and each says which part it cannot
 cover rather than filling the gap. One is wrong — see *Known limits*.
 
+**These are one run.** Generation is stochastic, so the set was run three times:
+answered (25), refused (4/4) and uncited (0) are identical in every run;
+grounded moves between 24 and 25. The question that moves is the cross-document
+one — in one run of three the model had the OWASP passage and answered without
+it. `scripts/run_variance.py` reproduces this.
+
 ## The problem this solves
 
 Two properties of this material break ordinary retrieval.
