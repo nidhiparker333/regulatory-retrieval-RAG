@@ -1,0 +1,510 @@
+{
+  "_about": {
+    "purpose": "Held-out set. The system was never tuned against these.",
+    "generated_by": "claude-opus-5",
+    "answered_by": "claude-sonnet-5 (deliberately a different model)",
+    "seed": 20260829,
+    "per_source_sampled": 15,
+    "excluded": "every section used as a key by data/eval/questions.json",
+    "key_derivation": "The key is the section the question was generated from. The question was written by reading that section, so that section answers it by construction - the key is mechanical, not a judgement about what a complete answer requires.",
+    "limitation": "Generated from text by a model, so these are better posed than real user questions. This measures generalisation to unseen material, not to unseen users.",
+    "skipped": []
+  },
+  "questions": [
+    {
+      "id": "H01",
+      "question": "Which EU border, migration and security databases count as the large-scale IT systems that the AI rules single out for special treatment?",
+      "category": "holdout",
+      "source_group": "EU AI Act",
+      "expect_sections": [
+        "anx_X"
+      ],
+      "asks_about": "list of EU large-scale IT systems (SIS, VIS, Eurodac, EES, ETIAS, ECRIS-TCN, interoperability)",
+      "generated_from": "anx_X"
+    },
+    {
+      "id": "H02",
+      "question": "When deciding whether to tell end users that generative AI was involved, what factors should we weigh in making that call?",
+      "category": "holdout",
+      "source_group": "NIST",
+      "expect_sections": [
+        "nist_ai_600-1_038"
+      ],
+      "asks_about": "factors for deciding on disclosure of GAI use to end users",
+      "generated_from": "nist_ai_600-1_038"
+    },
+    {
+      "id": "H03",
+      "question": "How can an organization identify what work is needed to reach its desired AI risk management goals, and how should it prioritize that work?",
+      "category": "holdout",
+      "source_group": "NIST",
+      "expect_sections": [
+        "nist_ai_100-1_023"
+      ],
+      "asks_about": "comparing current vs. target state descriptions to reveal gaps and build prioritized action plans",
+      "generated_from": "nist_ai_100-1_023"
+    },
+    {
+      "id": "H04",
+      "question": "When harms from a deployed model are already occurring or catastrophic outcomes look imminent, what course of action is expected of the organization?",
+      "category": "holdout",
+      "source_group": "NIST",
+      "expect_sections": [
+        "nist_ai_100-1_006"
+      ],
+      "asks_about": "ceasing development/deployment for unacceptable risk levels",
+      "generated_from": "nist_ai_100-1_006"
+    },
+    {
+      "id": "H05",
+      "question": "If our industry has no established guidance on how much AI risk is acceptable, does the NIST framework tell us what level to accept?",
+      "category": "holdout",
+      "source_group": "NIST",
+      "expect_sections": [
+        "nist_ai_100-1_005"
+      ],
+      "asks_about": "framework does not prescribe risk tolerance; organizations must define it themselves absent existing guidelines",
+      "generated_from": "nist_ai_100-1_005"
+    },
+    {
+      "id": "H06",
+      "question": "If we cryptographically sign a downloaded model artifact, does that assure us the model is safe to deploy?",
+      "category": "holdout",
+      "source_group": "OWASP",
+      "expect_sections": [
+        "owasp_llm04_08"
+      ],
+      "asks_about": "limits of model signing and complementary integrity/provenance controls",
+      "generated_from": "owasp_llm04_08"
+    },
+    {
+      "id": "H07",
+      "question": "What safeguards should we put in place so that streaming responses and shared caching in a multi-tenant LLM deployment don't leak one customer's data to another?",
+      "category": "holdout",
+      "source_group": "OWASP",
+      "expect_sections": [
+        "owasp_llm02_04"
+      ],
+      "asks_about": "side-channel mitigations: padding, token batching, dedicated prefix caches, partitioned KV caches",
+      "generated_from": "owasp_llm02_04"
+    },
+    {
+      "id": "H08",
+      "question": "If a country's authority fails to act after being told one of its conformity assessment bodies no longer meets the qualification requirements, can anyone else strip that body of its status?",
+      "category": "holdout",
+      "source_group": "EU AI Act",
+      "expect_sections": [
+        "art_37"
+      ],
+      "asks_about": "Commission power to suspend/restrict/withdraw a notified body's designation via implementing act when the Member State doesn't take corrective measures",
+      "generated_from": "art_37"
+    },
+    {
+      "id": "H09",
+      "question": "What factors tend to make the consequences worse when an application feeds model-generated text straight into downstream components without checking it?",
+      "category": "holdout",
+      "source_group": "OWASP",
+      "expect_sections": [
+        "owasp_llm10_00"
+      ],
+      "asks_about": "conditions that amplify the impact of unsanitized LLM output",
+      "generated_from": "owasp_llm10_00"
+    },
+    {
+      "id": "H10",
+      "question": "How long does an EU-based representative for a non-EU supplier of a high-risk AI system have to keep the conformity declaration and technical files available for authorities?",
+      "category": "holdout",
+      "source_group": "EU AI Act",
+      "expect_sections": [
+        "art_22"
+      ],
+      "asks_about": "10-year document retention duty of the authorised representative",
+      "generated_from": "art_22"
+    },
+    {
+      "id": "H11",
+      "question": "If a backup of our vector store gets exposed, should we treat that as a leak of the original documents for breach-notification purposes?",
+      "category": "holdout",
+      "source_group": "OWASP",
+      "expect_sections": [
+        "owasp_llm09_02"
+      ],
+      "asks_about": "recoverability of source text from leaked embeddings and breach risk implications",
+      "generated_from": "owasp_llm09_02"
+    },
+    {
+      "id": "H12",
+      "question": "What role do advocacy organizations, standards bodies, end users and affected communities play in AI risk management, given they aren't the ones building or deploying the systems?",
+      "category": "holdout",
+      "source_group": "NIST",
+      "expect_sections": [
+        "nist_ai_100-1_008"
+      ],
+      "asks_about": "the secondary audience representing human rights/society and their four contributions",
+      "generated_from": "nist_ai_100-1_008"
+    },
+    {
+      "id": "H13",
+      "question": "How can we stop a chatbot's replies from silently pulling data out to an attacker's server when they're rendered in a chat window or IDE?",
+      "category": "holdout",
+      "source_group": "OWASP",
+      "expect_sections": [
+        "owasp_llm10_02"
+      ],
+      "asks_about": "client-side rendering controls against exfiltration via auto-loaded images/links",
+      "generated_from": "owasp_llm10_02"
+    },
+    {
+      "id": "H14",
+      "question": "If we don't have measured energy figures for a foundation model we've released, can we still satisfy the documentation requirement?",
+      "category": "holdout",
+      "source_group": "EU AI Act",
+      "expect_sections": [
+        "anx_XI"
+      ],
+      "asks_about": "estimating unknown model energy consumption from compute resources used",
+      "generated_from": "anx_XI"
+    },
+    {
+      "id": "H15",
+      "question": "If a company that supplies a high-risk AI system suspects it no longer meets legal requirements after it's already on the market, what steps must it take and who must it notify?",
+      "category": "holdout",
+      "source_group": "EU AI Act",
+      "expect_sections": [
+        "art_20"
+      ],
+      "asks_about": "provider obligations on suspected non-conformity: corrective action, withdrawal/recall, informing distributors, deployers, representatives, importers",
+      "generated_from": "art_20"
+    },
+    {
+      "id": "H16",
+      "question": "When we retire a generative AI model from production, what kinds of issues should we be weighing before shutting it down?",
+      "category": "holdout",
+      "source_group": "NIST",
+      "expect_sections": [
+        "nist_ai_600-1_022"
+      ],
+      "asks_about": "factors to consider when decommissioning a GAI system",
+      "generated_from": "nist_ai_600-1_022"
+    },
+    {
+      "id": "H17",
+      "question": "When an AI assistant that can call tools ends up taking harmful actions, what underlying design weaknesses are usually to blame?",
+      "category": "holdout",
+      "source_group": "OWASP",
+      "expect_sections": [
+        "owasp_llm03_00"
+      ],
+      "asks_about": "root causes of excessive agency in tool-using LLM systems",
+      "generated_from": "owasp_llm03_00"
+    },
+    {
+      "id": "H18",
+      "question": "When people distinguish between being able to explain a model's inner workings and being able to make sense of what its output means for the user, what's the actual difference, and how does that relate to transparency?",
+      "category": "holdout",
+      "source_group": "NIST",
+      "expect_sections": [
+        "nist_ai_100-1_014"
+      ],
+      "asks_about": "distinction between explainability, interpretability, and transparency",
+      "generated_from": "nist_ai_100-1_014"
+    },
+    {
+      "id": "H19",
+      "question": "What happens when a generative model is trained too heavily on data produced by other models, and why is that a concern?",
+      "category": "holdout",
+      "source_group": "NIST",
+      "expect_sections": [
+        "nist_ai_600-1_008"
+      ],
+      "asks_about": "model collapse from over-reliance on synthetic training data",
+      "generated_from": "nist_ai_600-1_008"
+    },
+    {
+      "id": "H20",
+      "question": "When running structured human feedback or red-teaming exercises on a generative model, is there any restriction on who can participate from within the organization?",
+      "category": "holdout",
+      "source_group": "NIST",
+      "expect_sections": [
+        "nist_ai_600-1_041"
+      ],
+      "asks_about": "independence of evaluators from system development",
+      "generated_from": "nist_ai_600-1_041"
+    },
+    {
+      "id": "H21",
+      "question": "If a national oversight body learns of a serious incident during live trials of an AI system outside a lab, what actions can it take against the trial?",
+      "category": "holdout",
+      "source_group": "EU AI Act",
+      "expect_sections": [
+        "art_76"
+      ],
+      "asks_about": "authority powers to suspend, terminate or require modification of real-world testing after a serious incident",
+      "generated_from": "art_76"
+    },
+    {
+      "id": "H22",
+      "question": "If we run downloaded model files through a malware scanner and only load them with the loader flag that's supposed to block code execution, is that enough to consider third-party weights safe?",
+      "category": "holdout",
+      "source_group": "OWASP",
+      "expect_sections": [
+        "owasp_llm04_14"
+      ],
+      "asks_about": "limits of model scanners and safe-loading flags against evasion techniques",
+      "generated_from": "owasp_llm04_14"
+    },
+    {
+      "id": "H23",
+      "question": "If an assessment of a foundation model raises a serious, well-founded concern about systemic risk across the EU, what can the Commission require its developer to do?",
+      "category": "holdout",
+      "source_group": "EU AI Act",
+      "expect_sections": [
+        "art_93"
+      ],
+      "asks_about": "Commission's powers to demand compliance, mitigation, or market withdrawal of a general-purpose AI model",
+      "generated_from": "art_93"
+    },
+    {
+      "id": "H24",
+      "question": "How often do EU countries have to tell the Commission whether their AI oversight bodies have enough staff and funding, and when does that start?",
+      "category": "holdout",
+      "source_group": "EU AI Act",
+      "expect_sections": [
+        "art_70"
+      ],
+      "asks_about": "biennial reporting obligation on competent authority resources starting 2 August 2025",
+      "generated_from": "art_70"
+    },
+    {
+      "id": "H25",
+      "question": "Beyond the usual model and risk details, what additional information should we capture in inventory records for generative AI systems?",
+      "category": "holdout",
+      "source_group": "NIST",
+      "expect_sections": [
+        "nist_ai_600-1_021"
+      ],
+      "asks_about": "recommended content of GAI system inventory entries",
+      "generated_from": "nist_ai_600-1_021"
+    },
+    {
+      "id": "H26",
+      "question": "If we license a foundation model from a vendor and then fine-tune it or bolt on a retrieval layer, do we need to redo our risk evaluation?",
+      "category": "holdout",
+      "source_group": "NIST",
+      "expect_sections": [
+        "nist_ai_600-1_060"
+      ],
+      "asks_about": "triggers for re-assessing risk of externally sourced GAI models",
+      "generated_from": "nist_ai_600-1_060"
+    },
+    {
+      "id": "H27",
+      "question": "How should we tier the different places our AI assistant pulls text from when judging injection risk — is content from our own internal repos and databases safe to treat as clean?",
+      "category": "holdout",
+      "source_group": "OWASP",
+      "expect_sections": [
+        "owasp_llm01_02"
+      ],
+      "asks_about": "trust tiers of ingestion sources for indirect prompt injection, including why internal sources aren't inherently safe",
+      "generated_from": "owasp_llm01_02"
+    },
+    {
+      "id": "H28",
+      "question": "What controls can stop an AI agent from acting on fabricated or unverified claims before it executes a tool call?",
+      "category": "holdout",
+      "source_group": "OWASP",
+      "expect_sections": [
+        "owasp_llm07_02"
+      ],
+      "asks_about": "mitigation controls for model-generated misinformation in agentic workflows",
+      "generated_from": "owasp_llm07_02"
+    },
+    {
+      "id": "H29",
+      "question": "If a non-EU company selling a general-purpose AI model appoints someone in Europe to act on its behalf, how long does that person have to keep the model's technical documentation available to regulators?",
+      "category": "holdout",
+      "source_group": "EU AI Act",
+      "expect_sections": [
+        "art_54"
+      ],
+      "asks_about": "10-year retention period for technical documentation by the authorised representative",
+      "generated_from": "art_54"
+    },
+    {
+      "id": "H30",
+      "question": "When setting up testing and validation activities across the AI lifecycle, should the people doing verification and validation be the same staff who run test and evaluation?",
+      "category": "holdout",
+      "source_group": "NIST",
+      "expect_sections": [
+        "nist_ai_100-1_024"
+      ],
+      "asks_about": "separation of TEVV roles (verification/validation vs. test/evaluation)",
+      "generated_from": "nist_ai_100-1_024"
+    },
+    {
+      "id": "H31",
+      "question": "How do AI risk frameworks distinguish between false content that spreads unintentionally versus content created deliberately to deceive?",
+      "category": "holdout",
+      "source_group": "NIST",
+      "expect_sections": [
+        "nist_ai_600-1_010"
+      ],
+      "asks_about": "misinformation vs. disinformation distinction in GAI risk",
+      "generated_from": "nist_ai_600-1_010"
+    },
+    {
+      "id": "H32",
+      "question": "How are teams advised to actually apply the ten LLM risk categories once they have them?",
+      "category": "holdout",
+      "source_group": "OWASP",
+      "expect_sections": [
+        "owasp_llm00_02"
+      ],
+      "asks_about": "recommended way to act on the risk list (address all ten, in order, assuming adversarial use)",
+      "generated_from": "owasp_llm00_02"
+    },
+    {
+      "id": "H33",
+      "question": "Under the EU AI Act, which body gives the Commission opinions on qualified alerts about general-purpose AI models, and what else does it do to help align enforcement across Member States?",
+      "category": "holdout",
+      "source_group": "EU AI Act",
+      "expect_sections": [
+        "art_66"
+      ],
+      "asks_about": "advisory and coordination duties of the European AI Board, including opinions on qualified alerts",
+      "generated_from": "art_66"
+    },
+    {
+      "id": "H34",
+      "question": "We're a bank already bound by EU internal governance requirements — can that stand in for the AI quality management obligations, or are there elements we'd still have to build separately?",
+      "category": "holdout",
+      "source_group": "EU AI Act",
+      "expect_sections": [
+        "art_17"
+      ],
+      "asks_about": "financial institutions' partial exemption and the carved-out elements (risk management, post-market monitoring, incident reporting)",
+      "generated_from": "art_17"
+    },
+    {
+      "id": "H35",
+      "question": "Our vector store risk review flagged two things: a backdoored embedding model, and long-term corruption of an agent's stored memory that has nothing to do with embedding geometry. Which agentic risk category should the second one be handled under?",
+      "category": "holdout",
+      "source_group": "OWASP",
+      "expect_sections": [
+        "owasp_appendix_03"
+      ],
+      "asks_about": "scope boundary between vector/embedding weaknesses and memory & context poisoning",
+      "generated_from": "owasp_appendix_03"
+    },
+    {
+      "id": "H36",
+      "question": "When bringing in an outside vendor's generative AI model or service, what kinds of contractual or procurement mechanisms can we use to get visibility into what we're buying?",
+      "category": "holdout",
+      "source_group": "NIST",
+      "expect_sections": [
+        "nist_ai_600-1_065"
+      ],
+      "asks_about": "due diligence tools for third-party GAI (SBOMs, SLAs, SSAE reports)",
+      "generated_from": "nist_ai_600-1_065"
+    },
+    {
+      "id": "H37",
+      "question": "Why is a chatbot giving plausible but wrong answers treated as a system-level security risk rather than just a quality issue when the model drives tool calls in an agent pipeline?",
+      "category": "holdout",
+      "source_group": "OWASP",
+      "expect_sections": [
+        "owasp_llm07_00"
+      ],
+      "asks_about": "why false model output constitutes a system-level failure in agentic architectures",
+      "generated_from": "owasp_llm07_00"
+    },
+    {
+      "id": "H38",
+      "question": "Under what circumstances can a certification body demand to see the actual trained model and its parameters, rather than just documentation?",
+      "category": "holdout",
+      "source_group": "EU AI Act",
+      "expect_sections": [
+        "anx_VII"
+      ],
+      "asks_about": "conditions for notified body access to training/trained models and parameters",
+      "generated_from": "anx_VII"
+    },
+    {
+      "id": "H39",
+      "question": "What types of rules does the EU's AI law actually establish — what does it cover overall?",
+      "category": "holdout",
+      "source_group": "EU AI Act",
+      "expect_sections": [
+        "art_1"
+      ],
+      "asks_about": "scope and objectives of the AI Act",
+      "generated_from": "art_1"
+    },
+    {
+      "id": "H40",
+      "question": "If an attacker succeeds in getting our chatbot to reveal its system prompt, tool list and refusal rules, which adversary objectives in the ATLAS threat model does that correspond to?",
+      "category": "holdout",
+      "source_group": "OWASP",
+      "expect_sections": [
+        "owasp_appendix_05"
+      ],
+      "asks_about": "ATLAS tactics mapped to system prompt/configuration leakage",
+      "generated_from": "owasp_appendix_05"
+    },
+    {
+      "id": "H41",
+      "question": "For an AI agent that calls external tools, where should the decision about whether an action is permitted actually be made, and how should high-risk versus low-risk actions be treated differently?",
+      "category": "holdout",
+      "source_group": "OWASP",
+      "expect_sections": [
+        "owasp_llm03_13"
+      ],
+      "asks_about": "authorization enforced in code/policy decision point rather than by the model, with graduated enforcement routing irreversible actions to human approval",
+      "generated_from": "owasp_llm03_13"
+    },
+    {
+      "id": "H42",
+      "question": "If EU regulators want to test a foundation model themselves, what kind of technical access can they compel the provider to give them?",
+      "category": "holdout",
+      "source_group": "EU AI Act",
+      "expect_sections": [
+        "art_92"
+      ],
+      "asks_about": "scope of model access the Commission can request (APIs, technical means, source code)",
+      "generated_from": "art_92"
+    },
+    {
+      "id": "H43",
+      "question": "Why can retrieval over a shared vector store let one customer end up seeing another customer's documents?",
+      "category": "holdout",
+      "source_group": "OWASP",
+      "expect_sections": [
+        "owasp_appendix_11"
+      ],
+      "asks_about": "cross-tenant exposure from similarity search preceding authorization checks",
+      "generated_from": "owasp_appendix_11"
+    },
+    {
+      "id": "H44",
+      "question": "When red-teaming a generative model for resilience, what categories of attacks should the exercise cover?",
+      "category": "holdout",
+      "source_group": "NIST",
+      "expect_sections": [
+        "nist_ai_600-1_046"
+      ],
+      "asks_about": "attack types to include in GAI red-teaming for security resilience",
+      "generated_from": "nist_ai_600-1_046"
+    },
+    {
+      "id": "H45",
+      "question": "When a body applies to be authorised to carry out conformity assessments for high-risk AI, how is it supposed to express which kinds of AI systems its authorisation should cover?",
+      "category": "holdout",
+      "source_group": "EU AI Act",
+      "expect_sections": [
+        "anx_XIV"
+      ],
+      "asks_about": "use of standardised code list to define scope in designation applications",
+      "generated_from": "anx_XIV"
+    }
+  ]
+}
