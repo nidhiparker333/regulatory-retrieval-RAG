@@ -148,10 +148,14 @@ def build_context(passages: list) -> str:
 def answer(question: str, k: int = 5, follow: bool = True) -> dict:
     load_env()
     if not os.environ.get("ANTHROPIC_API_KEY"):
+        # The path is derived, never typed. It used to be a literal pointing at
+        # this project's predecessor, so the one message a person sees before
+        # they have got anything working sent them to a directory that does not
+        # exist on their machine.
         raise SystemExit(
             "\nNo API key found.\n\n"
-            "  Open this file and paste your key into it:\n"
-            "      C:\\governance-rag\\api-key.txt\n\n"
+            "  Create this file and paste your key into it:\n"
+            f"      {ROOT / 'api-key.txt'}\n\n"
             "  The key on its own line is enough. It is in .gitignore, so it\n"
             "  can never be committed or pushed.\n\n"
             "  Set a spend cap in the Anthropic console first - $5 is plenty.\n"
