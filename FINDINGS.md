@@ -59,12 +59,16 @@ Enforced at generation instead: **4/4**. Each refusal names what it actually hel
 and why that was not enough — the Colorado question identifies the passages as EU
 provisions, the recitals question checks the document type of what it was given.
 
-### Every source gets representation, and cross-document questions stop failing
+### Nearest-neighbour search cannot span two documents on its own
 
-Two questions needed two documents and got one, because the other won every slot:
-one returned five NIST passages and no Article 9, the other the Act and no OWASP.
-Giving each unrepresented source group its best chunk costs at most two passages
-and took cross-document from **0/2 to 2/2**.
+Top-k returns whatever scores highest, and on a cross-document question that is
+routinely one document five times over. C01 retrieved five NIST passages and no
+Article 9; C05 retrieved the Act and no OWASP. Both then behaved correctly on
+what they held — C01 refused rather than write a one-sided comparison — but the
+missing half was in the corpus the whole time, out-ranked rather than absent.
+
+Reserving one slot per unrepresented source group fixes it for at most two extra
+passages, and needs no knowledge of the question: **0/2 → 2/2**.
 
 ### Answers decline the part they cannot cover
 
