@@ -237,9 +237,9 @@ of them can gate a build.
 **One question fails, for a diagnosed reason.** "Can an ordinary person complain
 about an AI system?" never reaches Article 85, *"Right to lodge a complaint with
 a market surveillance authority"*. Asked in those words it returns at rank 1.
-The question and the text share no vocabulary, and no retrieval arm recovers it —
-the later steps operate on what search returned, and search never returns Article
-85. It needs the question rewritten into the register of the source before
+The question and the text share no vocabulary, and this is not a cutoff problem:
+**Article 85 does not appear in the top 50 of 856 passages.** The later steps
+operate on what search returned, and search never returns it at any depth. It needs the question rewritten into the register of the source before
 searching, which is not built.
 
 **Correctness was graded by one reader, in one pass, and that reader built the
