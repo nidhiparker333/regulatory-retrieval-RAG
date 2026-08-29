@@ -5,7 +5,10 @@ two US risk frameworks, and a security standard — where every answer cites the
 article, annex or page it came from, and the system declines when the documents
 cannot answer.
 
-**The evaluation is the point.** The system exists to be measured.
+Retrieval-augmented generation: the model answers from passages fetched out of
+these four documents at query time, not from what it learned in training. Which
+means the quality of the system is the quality of the retrieval, and that is the
+part this repository measures.
 
 ## Results
 
@@ -60,8 +63,58 @@ inventing a link that is not in the text. Measured: cross-reference questions go
 found — because the measurement above shows confidence scores cannot separate
 answerable from unanswerable.
 
-**Every source gets representation** when a question needs more than one
-document. Two questions previously failed because one document won every slot.
+**Every source group is guaranteed its best passage.** Nearest-neighbour search
+returns whatever scores highest, which on a cross-document question is routinely
+five passages from one document and none from the other. Reserving a slot per
+source costs at most two extra passages and is query-independent.
+
+## How it works
+
+```
+403 sections ──chunk──> 856 passages ──embed──> 856 × 384 float32  (1.2 MB)
+                                                        │
+question ──embed──> 384-d vector ──── dot product ──────┘
+                                          │
+                                     top-k = 5
+                                          │
+                    ┌─────────────────────┼─────────────────────┐
+              source diversity      anchor expansion     cross-references
+              (best passage per     (part 1 of a         (sections the hits
+               missing source)       split section)       cite, by parse-time
+                                                          metadata)
+                    └─────────────────────┼─────────────────────┘
+                                          │
+                              context, bounded at 60,000 chars
+                                          │
+                          one generation call, citation required
+                                          │
+                            cited answer  │  "NOT IN THE SOURCES"
+```
+
+**Embeddings** are `BAAI/bge-small-en-v1.5`, 384 dimensions, run locally on CPU.
+The whole corpus embeds in 170s, once, for nothing.
+
+**Search is brute force** — one matrix multiply against all 856 vectors,
+unit-normalised so cosine similarity is a dot product. Exact, 141 ms at the
+median, and no approximate-nearest-neighbour index to be wrong. A vector
+database exists to avoid comparing against every vector; at this size that
+trade is not worth making, and the index stays a file that ships with the
+application.
+
+**Chunk boundaries come from the drafter's own numbering** (`1.`, `(a)`) before
+falling back to sentence ends, so provisions stay whole. Enumerated lists get one
+chunk per item with no packing — Annex III's eight high-risk categories are eight
+separate chunks, which is what makes "is my CV screening tool high-risk"
+answerable at all.
+
+**Cross-references are extracted at parse time**, not inferred at query time.
+Every chunk carries the article and annex numbers its section cites, including
+chunks that never mention them — Article 6 and Annex III are different documents
+and can never share a chunk, so the link survives only as metadata.
+
+**Generation is a single call** to `claude-sonnet-5` with adaptive thinking,
+constrained to the retrieved passages, with refusal and per-claim citation
+required by the system prompt and verified afterwards in code.
 
 ## The corpus
 
