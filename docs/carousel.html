@@ -1,0 +1,245 @@
+<meta charset="utf-8">
+<title>regulatory-retrieval carousel</title>
+<style>
+  @page { size: 1080px 1350px; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  :root {
+    --bg:    #0B0D12;
+    --ink:   #F3F1EE;
+    --dim:   #8B919B;
+    --faint: #5C6470;
+    --amber: #F0A63C;
+    --rule:  #1F2530;
+    --card:  #12151C;
+    --serif: Georgia, "Times New Roman", serif;
+    --sans:  system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono:  "Cascadia Mono", Consolas, "SF Mono", Menlo, monospace;
+  }
+
+  body { background: var(--bg); }
+
+  .slide {
+    position: relative;
+    width: 1080px; height: 1350px;
+    background: var(--bg);
+    padding: 96px 88px;
+    display: flex; flex-direction: column;
+    page-break-after: always;
+    overflow: hidden;
+  }
+  .slide:last-child { page-break-after: auto; }
+
+  /* a soft light source, so the deck reads as one object */
+  .slide::before {
+    content: ""; position: absolute; top: -260px; left: -180px;
+    width: 900px; height: 620px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,166,60,0.11), rgba(240,166,60,0) 68%);
+  }
+  .slide > * { position: relative; }
+
+  .eyebrow {
+    font: 600 15px/1 var(--mono); letter-spacing: 3.4px;
+    color: var(--faint); text-transform: uppercase; margin-bottom: 40px;
+  }
+  h1 { font: 400 88px/1.04 var(--serif); color: var(--ink); letter-spacing: -1.5px; }
+  h1 .amber { color: var(--amber); }
+  h2 { font: 400 62px/1.14 var(--serif); color: var(--ink); letter-spacing: -0.8px; }
+  p  { font: 400 27px/1.62 var(--sans); color: var(--dim); max-width: 20ch; }
+  p.wide { max-width: none; }
+  p.lead { color: var(--ink); font-size: 30px; }
+  .spacer { flex: 1; }
+
+  .foot {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-top: 1px solid var(--rule); padding-top: 26px; margin-top: 56px;
+    font: 500 17px/1 var(--mono); color: var(--faint); letter-spacing: 1.4px;
+  }
+
+  ul { list-style: none; }
+  li {
+    font: 400 27px/1.5 var(--sans); color: var(--ink);
+    padding: 22px 0; border-bottom: 1px solid var(--rule);
+    display: flex; justify-content: space-between; align-items: baseline; gap: 28px;
+  }
+  li span { font: 500 19px/1 var(--mono); color: var(--faint); letter-spacing: 1px; text-align: right; white-space: nowrap; }
+
+  .stat { display: flex; align-items: baseline; gap: 26px; padding: 26px 0; border-bottom: 1px solid var(--rule); }
+  .stat b { font: 600 62px/1 var(--mono); color: var(--ink); min-width: 210px; letter-spacing: -1px; }
+  .stat b.on { color: var(--amber); }
+  .stat i { font: 400 25px/1.4 var(--sans); color: var(--dim); font-style: normal; }
+
+  .huge { font: 600 172px/1 var(--mono); color: var(--amber); letter-spacing: -6px; }
+  .rule { height: 1px; background: var(--rule); margin: 44px 0; }
+
+  .chip {
+    display: inline-block; font: 500 19px/1 var(--mono); letter-spacing: 1.2px;
+    color: var(--amber); border: 1px solid #6B4E1E; background: #15120C;
+    padding: 13px 20px; border-radius: 8px; margin-bottom: 34px;
+  }
+
+  .hop { display: flex; align-items: center; gap: 26px; margin: 16px 0; }
+  .hop .box {
+    flex: 1; background: var(--card); border: 1px solid var(--rule); border-radius: 12px; padding: 26px 28px;
+  }
+  .hop .box.lit { border-color: #6B4E1E; background: #15120C; }
+  .hop .box b { display: block; font: 600 27px/1.3 var(--sans); color: var(--ink); }
+  .hop .box i { display: block; font: 400 21px/1.45 var(--sans); color: var(--dim); font-style: normal; margin-top: 8px; }
+  .hop .arrow { font: 400 34px/1 var(--sans); color: var(--amber); }
+</style>
+
+<!-- 1 ................................................................. -->
+<div class="slide">
+  <div class="eyebrow">Retrieval-augmented generation</div>
+  <div class="spacer"></div>
+  <h1>What it takes to<br>make RAG work on<br><span class="amber">regulation.</span></h1>
+  <p class="wide lead" style="margin-top:44px; max-width:26ch">
+    Four AI-governance documents. 30 questions to test it, then 45 more it had never seen.
+  </p>
+  <div class="spacer"></div>
+  <div class="foot"><span>NIDHI PARKER</span><span>01</span></div>
+</div>
+
+<!-- 2 ................................................................. -->
+<div class="slide">
+  <div class="eyebrow">The problem</div>
+  <div class="spacer"></div>
+  <h2>A model on its own<br>generates from what<br>it learned in training.</h2>
+  <div class="rule"></div>
+  <p class="wide" style="max-width:24ch">
+    It doesn't inherently give you source-level provenance, and its knowledge has a cutoff.
+  </p>
+  <p class="wide lead" style="margin-top:40px; max-width:24ch">
+    On regulation, that gap matters. An answer you can't trace back to the source is hard to trust.
+  </p>
+  <div class="spacer"></div>
+  <div class="foot"><span>THE PROBLEM</span><span>02</span></div>
+</div>
+
+<!-- 3 ................................................................. -->
+<div class="slide">
+  <div class="eyebrow">What RAG changes</div>
+  <div class="spacer"></div>
+  <h2>Retrieve first.<br>Then answer only<br>from what came back.</h2>
+  <p class="wide" style="margin:44px 0 56px; max-width:26ch">
+    Built over four real-world governance sources:
+  </p>
+  <ul>
+    <li>EU AI Act <span>BINDING REGULATION</span></li>
+    <li>NIST AI Risk Management Framework <span>RISK GUIDANCE</span></li>
+    <li>NIST Generative AI Profile <span>GENAI RISK</span></li>
+    <li>OWASP LLM Top 10 <span>SECURITY</span></li>
+  </ul>
+  <div class="spacer"></div>
+  <div class="foot"><span>THE CORPUS</span><span>03</span></div>
+</div>
+
+<!-- 4 ................................................................. -->
+<div class="slide">
+  <div class="eyebrow">The corpus</div>
+  <div class="spacer"></div>
+  <div class="stat"><b>403</b><i>sections parsed from four documents</i></div>
+  <div class="stat"><b>856</b><i>passages, chunked so no rule is split from its conditions</i></div>
+  <div class="stat"><b>204K</b><i>tokens of source material</i></div>
+  <div class="stat"><b class="on">1.2 MB</b><i>the entire search index. No vector database</i></div>
+  <div class="spacer"></div>
+  <p class="wide" style="max-width:28ch">
+    At this size an exact search across every passage takes 141 milliseconds.
+  </p>
+  <div class="foot"><span>THE CORPUS</span><span>04</span></div>
+</div>
+
+<!-- 5 ................................................................. -->
+<div class="slide">
+  <div class="eyebrow">What the evaluation found</div>
+  <div class="spacer"></div>
+  <h2>Retrieving more<br>context didn't help<br>the hard questions.</h2>
+  <div class="rule"></div>
+  <div class="stat"><b>3/8</b><i>top 5 passages</i></div>
+  <div class="stat"><b>3/8</b><i>top 10 passages &mdash; twice as much, no change</i></div>
+  <div class="spacer"></div>
+  <div class="foot"><span>THE FINDING</span><span>05</span></div>
+</div>
+
+<!-- 6 ................................................................. -->
+<div class="slide">
+  <div class="eyebrow">Why more didn't work</div>
+  <div class="spacer"></div>
+  <p class="wide lead" style="max-width:27ch; margin-bottom:44px">
+    Some answers required following a trail. One section points at another, and neither means anything alone.
+  </p>
+  <div class="hop">
+    <div class="box"><b>Annex III</b><i>lists CV screening as high-risk</i></div>
+    <div class="arrow">&rarr;</div>
+    <div class="box lit"><b>Article 6</b><i>defines the conditions</i></div>
+  </div>
+  <p class="wide" style="margin-top:40px; max-width:28ch">
+    111 of the 403 sections cite another section like this. In retrieval terms: multi-hop.
+  </p>
+  <div class="spacer"></div>
+  <div class="foot"><span>MULTI-HOP</span><span>06</span></div>
+</div>
+
+<!-- 7 ................................................................. -->
+<div class="slide">
+  <div class="eyebrow">Following the citations instead</div>
+  <div class="spacer"></div>
+  <p class="wide" style="max-width:24ch; margin-bottom:18px">Cross-reference questions answered</p>
+  <div class="huge">7/8</div>
+  <p class="wide lead" style="margin-top:34px; max-width:27ch">
+    Up from 3/8. The system records every cross-reference when it parses the documents, then follows them at query time.
+  </p>
+  <div class="rule"></div>
+  <p class="wide" style="max-width:29ch">
+    No agent. No second model call. It can't invent a link that isn't in the text.
+  </p>
+  <div class="spacer"></div>
+  <div class="foot"><span>THE FIX</span><span>07</span></div>
+</div>
+
+<!-- 8 ................................................................. -->
+<div class="slide">
+  <div class="eyebrow">Across the full evaluation</div>
+  <div class="spacer"></div>
+  <div class="stat"><b>24/26</b><i>retrieved the evidence needed</i></div>
+  <div class="stat"><b class="on">4/4</b><i>unsupported questions correctly refused</i></div>
+  <div class="stat"><b class="on">0</b><i>answers returned without citations</i></div>
+  <div class="spacer"></div>
+  <p class="wide" style="max-width:28ch">
+    Refusal is enforced where the answer is written, not by a confidence score. The highest-scoring unanswerable question outscored the lowest-scoring answerable one.
+  </p>
+  <div class="foot"><span>RESULTS</span><span>08</span></div>
+</div>
+
+<!-- 9 ................................................................. -->
+<div class="slide">
+  <div class="eyebrow">One evaluation set is never enough</div>
+  <div class="spacer"></div>
+  <div class="chip">45 QUESTIONS IT HAD NEVER BEEN TESTED AGAINST</div>
+  <h2>One fabricated<br>answer in 45.</h2>
+  <p class="wide lead" style="margin-top:40px; max-width:28ch">
+    Graded by a separate model against the source material, blind to how the system produced the answers.
+  </p>
+  <div class="rule"></div>
+  <p class="wide" style="max-width:30ch">
+    When retrieval fell short, it declined nine times for every answer it got wrong.
+  </p>
+  <div class="spacer"></div>
+  <div class="foot"><span>HELD OUT</span><span>09</span></div>
+</div>
+
+<!-- 10 ................................................................ -->
+<div class="slide">
+  <div class="eyebrow">What I'd take from it</div>
+  <div class="spacer"></div>
+  <h2>RAG isn't &ldquo;put<br>documents in a model<br>and ask questions.&rdquo;</h2>
+  <div class="rule"></div>
+  <p class="wide lead" style="max-width:30ch">
+    It's the source data. The retrieval logic. The failure modes.
+  </p>
+  <p class="wide lead" style="margin-top:34px; max-width:30ch">
+    And whether your evaluation is actually testing the system, or <span style="color:var(--amber)">quietly validating the choices you already made.</span>
+  </p>
+  <div class="spacer"></div>
+  <div class="foot"><span>github.com/nidhiparker333/regulatory-retrieval-RAG</span><span>10</span></div>
+</div>
