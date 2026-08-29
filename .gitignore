@@ -30,3 +30,6 @@ Thumbs.db
 #
 # Derived files (data/clean/) are also committed: they are what the measured
 # numbers were computed from, and regenerating them requires the model.
+
+# Kept locally, deliberately not published.
+DEFENCE.md
