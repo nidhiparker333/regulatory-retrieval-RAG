@@ -142,6 +142,33 @@ def main() -> int:
         print("\n  [FAIL]  held-out results missing; README cites them")
         failures.append("held-out results absent")
 
+    # ------------------------------------------------------------- diagram
+    #
+    # The architecture diagram carries figures too, and a picture is the last
+    # place anyone thinks to re-check. It shipped with "399 sections" against a
+    # 403-section corpus - 399 is the number that produce chunks, which is a
+    # different step - and nothing here would have caught it.
+    svg = ROOT / "docs" / "architecture.svg"
+    if svg.exists():
+        art = svg.read_text(encoding="utf-8")
+        n_chunked = len({c["section_id"] for c in chunks})
+        print("\n  architecture.svg")
+        check("diagram", art, f"{n_sections} sections", "section count")
+        check("diagram", art, f"{n_chunks} chunks from {n_chunked}", "chunk count")
+        check("diagram", art, f"{len(xref)} cite another section", "cross-reference count")
+        check("diagram", art, f"{index_mb} MB file", "index size")
+        check("diagram", art, f"{arm_strict('search only').replace('/', ' / ')}",
+              "search-alone arm")
+    else:
+        print("\n  [FAIL]  docs/architecture.svg missing; README embeds it")
+        failures.append("architecture.svg absent")
+
+    for img in ("docs/ui-answer.png", "docs/ui-refusal.png"):
+        ok = (ROOT / img).exists() and img in readme
+        print(f"  [{'ok ' if ok else 'FAIL'}]  README        embeds {img}")
+        if not ok:
+            failures.append(f"missing image: {img}")
+
     print("\n" + "=" * 70)
     print("CLAIMS THAT MUST STAY TRUE")
     print("=" * 70)

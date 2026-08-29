@@ -10,6 +10,14 @@ these four documents at query time, not from what it learned in training. Which
 means the quality of the system is the quality of the retrieval, and that is the
 part this repository measures.
 
+![The interface: an answer beside the retrieval trace that produced it](docs/ui-answer.png)
+
+*Every answer ships with how it was found. Here, search returned Annex III —
+which says a CV screening tool is high-risk — and step 03 followed Annex III's
+own citation to Article 6, which says under what conditions. Neither section
+answers the question alone, and no amount of retrieving more would have found
+the second one.*
+
 ## Results
 
 Two sets. **The second one matters more**, and it is the one most RAG writeups
@@ -129,6 +137,10 @@ five passages from one document and none from the other. Reserving a slot per
 source costs at most two extra passages and is query-independent.
 
 ## How it works
+
+![Pipeline: four documents parsed into 403 sections, chunked, embedded into one 1.2 MB index; then per question, search the 856 passages, pull the article opening, follow cross-references, give each source a voice, and write a cited answer or refuse](docs/architecture.svg)
+
+The same thing in text, for anyone reading this in a terminal:
 
 ```
 403 sections ──chunk──> 856 passages ──embed──> 856 × 384 float32  (1.2 MB)
@@ -331,6 +343,18 @@ npm install --prefix ui
 ```bash
 npm run dev --prefix ui
 ```
+
+`/?q=your+question` asks on load, and asking rewrites the address bar — so an
+answer, with the passages and scores that produced it, is a link you can send
+someone. Both images in this README were produced from such a URL rather than by
+driving the page by hand.
+
+![Refusing a question the corpus cannot answer, and naming what it did hold instead](docs/ui-refusal.png)
+
+*The behaviour worth showing is the one where it stops. Asked about the Colorado
+AI Act — deliberately not in the corpus — it declines, then names what it
+actually retrieved (Articles 99, 100 and 75c) and states that none of them
+mention Colorado. It refuses without pretending the shelf was empty.*
 
 ## Verification
 
