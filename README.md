@@ -207,10 +207,30 @@ of them can gate a build.
 | `verify_upstream.py` | The committed bytes still match what the publishers serve |
 | `verify_sources.py` | Integrity (sha256) and identity (is this the document it claims to be) |
 | `validate.py` | Parsing coverage, article numbering, cross-reference integrity |
+| `check_chunks.py` | Chunk boundary quality — where cuts landed, what they broke |
 | `verify_index.py` | 15 checks: alignment, vector sanity, self-retrieval |
 | `verify_embeddings.py` | The embedding step does what the code says it does |
+| `validate_questions.py` | Every answer key names a section that exists |
 | `test_scoring.py` | The graders agree with 18 hand-computed verdicts |
 | `check_docs.py` | Every figure in this file matches the pipeline |
+
+## Everything else in `scripts/`
+
+| Script | Does |
+|---|---|
+| `fetch.py` | Downloads the four sources. Already committed, so this is only needed to re-fetch |
+| `parse_act.py` `parse_nist.py` `parse_owasp.py` | One parser per format. The two NIST documents needed **different** rules — forcing one across both is what produced an 80,000-character "section" |
+| `build_corpus.py` | Merges the three into `corpus.json` |
+| `chunk.py` | 403 sections → 856 passages |
+| `embed.py` | Builds `index.npz`. Local, CPU, no key |
+| `retrieval.py` | **The retrieval engine.** Search, source diversity, anchor expansion, cross-reference following. `answer.py` and the evaluation both call this, so they cannot drift apart |
+| `answer.py` | Retrieval plus one generation call, with the trace |
+| `score_retrieval.py` | Scores retrieval alone against the question set. No model, no cost |
+| `compare_arms.py` | Scores each retrieval step separately, so a change can be measured before it is adopted |
+| `run_full_eval.py` | All 30 questions end to end. The only script here that spends money |
+| `metrics.py` | Reads the saved run and reports it. Regenerating this is free |
+| `report_scores.py` | Per-question scorecard for a retrieval-only run |
+| `review_answers.py` | Prints each answer beside its citations, for the hand grading in `data/eval/correctness.json` |
 
 ## Known limits
 
