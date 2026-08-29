@@ -94,6 +94,31 @@ export default function Home() {
     };
   }, []);
 
+  /**
+   * Deep link: /?q=... asks that question on load, and asking rewrites the
+   * address bar to match.
+   *
+   * An answer here is worth linking to - it carries the passages and the
+   * scores that produced it, which is the whole argument of the project - and
+   * without this there is no way to send someone one. It also makes a
+   * screenshot reproducible: the README's image can be regenerated from a URL
+   * instead of by driving the page by hand.
+   *
+   * Runs once. `ask` is a function declaration, so it is hoisted and safe to
+   * call from an effect defined above it.
+   */
+  useEffect(() => {
+    const p = new URLSearchParams(window.location.search);
+    const initial = p.get("q");
+    if (initial && initial.trim().length >= MIN_QUESTION) {
+      const only = p.get("search") === "1";
+      setSearchOnly(only);
+      void ask(initial, only);
+    }
+    // Intentionally once, on mount: a re-run would re-ask and re-charge.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   async function ask(question: string, retrievalOnly = searchOnly) {
     const trimmed = question.trim();
     if (loading) return;
@@ -117,6 +142,12 @@ export default function Home() {
         throw new ApiError(readError(res.status, d));
       }
       setResult(await res.json());
+      // Make the answer linkable. replaceState rather than pushState: asking
+      // three questions should not mean three presses of the back button to
+      // leave the page.
+      const p = new URLSearchParams({ q: trimmed });
+      if (retrievalOnly) p.set("search", "1");
+      window.history.replaceState(null, "", `?${p.toString()}`);
     } catch (e) {
       setError(
         e instanceof ApiError
@@ -318,8 +349,9 @@ export default function Home() {
           <p className="max-w-3xl text-[11.5px] leading-relaxed text-faint">
             Research project. Not legal advice. Answers are drawn only from the
             documents listed above and are not a substitute for reading them.
-            Measured on a fixed 30-question set: 25 of 26 answerable questions
-            correct, 4 of 4 unanswerable ones refused.
+            Measured on 45 held-out questions the system was never tuned
+            against, graded blind by a different model: 27 correct, 6 partial,
+            11 declined, 1 wrong.
           </p>
         </footer>
       </div>

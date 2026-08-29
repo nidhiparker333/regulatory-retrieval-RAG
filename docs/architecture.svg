@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 900" width="1160" height="900" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <title>How regulatory-retrieval produces an answer</title>
+
+  <defs>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F0A63C" stop-opacity="0.10"/>
+      <stop offset="60%" stop-color="#F0A63C" stop-opacity="0"/>
+    </linearGradient>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,1 L9,5 L0,9" fill="none" stroke="#5A6270" stroke-width="1.6"/>
+    </marker>
+    <marker id="ar-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,1 L9,5 L0,9" fill="none" stroke="#F0A63C" stroke-width="1.8"/>
+    </marker>
+    <style>
+      .bg    { fill: #0B0D12; }
+      .card  { fill: #12151C; stroke: #232935; stroke-width: 1; rx: 10; }
+      .hot   { fill: #15120C; stroke: #6B4E1E; stroke-width: 1.2; rx: 10; }
+      .h1    { fill: #F2F0ED; font-size: 25px; font-weight: 600; letter-spacing: -0.2px; }
+      .sub   { fill: #8A8F98; font-size: 13.5px; }
+      .band  { fill: #6E7684; font-size: 11px; letter-spacing: 2.2px; font-weight: 600;
+               font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .t     { fill: #EDEBE8; font-size: 14.5px; font-weight: 600; }
+      .d     { fill: #868C96; font-size: 12px; }
+      .n     { fill: #F0A63C; font-size: 12px; font-weight: 600;
+               font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .step  { fill: #4E5665; font-size: 11px; font-weight: 600;
+               font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .win   { fill: #F0A63C; font-size: 12.5px; font-weight: 700;
+               font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .foot  { fill: #7B828E; font-size: 12.5px; }
+      .footb { fill: #D8D5D1; font-size: 12.5px; font-weight: 600; }
+      .line  { stroke: #5A6270; stroke-width: 1.6; fill: none; }
+      .lineA { stroke: #F0A63C; stroke-width: 1.8; fill: none; }
+      .rule  { stroke: #1E242E; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1160" height="900"/>
+  <ellipse cx="230" cy="90" rx="420" ry="200" fill="url(#glow)"/>
+
+  <text class="h1" x="48" y="56">How an answer gets made</text>
+  <text class="sub" x="48" y="80">Retrieval over four AI-governance documents. Every step is measured; the numbers in amber are what that step is worth.</text>
+
+  <!-- ============================ BUILD ============================ -->
+  <text class="band" x="48" y="132">BUILT ONCE · OFFLINE · NO API KEY · FREE</text>
+  <line class="rule" x1="48" y1="144" x2="1112" y2="144"/>
+
+  <g>
+    <rect class="card" x="48" y="164" width="230" height="120"/>
+    <text class="step" x="66" y="188">01</text>
+    <text class="t" x="66" y="208">Four documents</text>
+    <text class="d" x="66" y="230">EU AI Act, consolidated</text>
+    <text class="d" x="66" y="248">NIST AI RMF + GenAI Profile</text>
+    <text class="d" x="66" y="266">OWASP LLM Top 10</text>
+  </g>
+  <line class="line" x1="286" y1="224" x2="306" y2="224" marker-end="url(#ar)"/>
+
+  <g>
+    <rect class="card" x="314" y="164" width="230" height="120"/>
+    <text class="step" x="332" y="188">02</text>
+    <text class="t" x="332" y="208">Parse</text>
+    <text class="d" x="332" y="230">403 sections</text>
+    <text class="n" x="332" y="250">111 cite another section</text>
+    <text class="d" x="332" y="268">citations recorded here, not guessed</text>
+  </g>
+  <line class="line" x1="552" y1="224" x2="572" y2="224" marker-end="url(#ar)"/>
+
+  <g>
+    <rect class="card" x="580" y="164" width="230" height="120"/>
+    <text class="step" x="598" y="188">03</text>
+    <text class="t" x="598" y="208">Chunk</text>
+    <text class="d" x="598" y="230">856 chunks from 399 of them</text>
+    <text class="d" x="598" y="248">each Annex III category</text>
+    <text class="d" x="598" y="266">kept whole, not spliced</text>
+  </g>
+  <line class="line" x1="818" y1="224" x2="838" y2="224" marker-end="url(#ar)"/>
+
+  <g>
+    <rect class="card" x="846" y="164" width="230" height="120"/>
+    <text class="step" x="864" y="188">04</text>
+    <text class="t" x="864" y="208">Embed</text>
+    <text class="d" x="864" y="230">bge-small-en-v1.5 · 384d</text>
+    <text class="n" x="864" y="250">one 1.2 MB file</text>
+    <text class="d" x="864" y="268">no vector database</text>
+  </g>
+
+  <!-- ============================ QUERY ============================ -->
+  <text class="band" x="48" y="348">PER QUESTION</text>
+  <line class="rule" x1="48" y1="360" x2="1112" y2="360"/>
+
+  <g>
+    <rect class="card" x="48" y="380" width="230" height="86"/>
+    <text class="t" x="66" y="412">Your question</text>
+    <text class="d" x="66" y="434">plain English, not the</text>
+    <text class="d" x="66" y="450">document's vocabulary</text>
+  </g>
+  <line class="line" x1="286" y1="423" x2="306" y2="423" marker-end="url(#ar)"/>
+
+  <g>
+    <rect class="card" x="314" y="380" width="230" height="86"/>
+    <text class="t" x="332" y="412">Compare all 856</text>
+    <text class="d" x="332" y="434">one matrix multiply, exact</text>
+    <text class="n" x="332" y="452">141 ms</text>
+  </g>
+  <line class="line" x1="552" y1="423" x2="572" y2="423" marker-end="url(#ar)"/>
+
+  <g>
+    <rect class="card" x="580" y="380" width="230" height="86"/>
+    <text class="t" x="598" y="412">Top 5 passages</text>
+    <text class="d" x="598" y="434">nearest by meaning</text>
+    <text class="n" x="598" y="452">on its own: 17 / 26</text>
+  </g>
+
+  <line class="line" x1="818" y1="423" x2="838" y2="423" marker-end="url(#ar)"/>
+
+  <g>
+    <rect class="hot" x="846" y="380" width="230" height="86"/>
+    <text class="t" x="864" y="412" fill="#F0A63C">Article 6 is not in it</text>
+    <text class="d" x="864" y="434">Annex III says a CV screener is</text>
+    <text class="d" x="864" y="450">high-risk. Article 6 says when.</text>
+  </g>
+
+  <path class="lineA" d="M 961 474 L 961 500" marker-end="url(#ar-a)"/>
+
+  <!-- enrichment -->
+  <rect class="hot" x="48" y="512" width="1028" height="152"/>
+  <text class="band" x="70" y="540" fill="#B98A3E">WHAT THE TOP 5 IS MISSING · THE PART THAT ISN'T A SEARCH</text>
+
+  <g>
+    <text class="step" x="70" y="576">05</text>
+    <text class="t" x="70" y="596">Pull the article's opening</text>
+    <text class="d" x="70" y="618">Landed mid-article? In law the</text>
+    <text class="d" x="70" y="634">general rule sits in paragraph 1.</text>
+  </g>
+  <line class="rule" x1="404" y1="556" x2="404" y2="644"/>
+
+  <g>
+    <text class="step" x="428" y="576">06</text>
+    <text class="t" x="428" y="596">Follow cross-references</text>
+    <text class="d" x="428" y="618">Annex III cites Article 6, so</text>
+    <text class="d" x="428" y="634">Article 6 comes too.</text>
+    <text class="win" x="428" y="656">3/8 → 7/8   ·   top-10 gives 3/8</text>
+  </g>
+  <line class="rule" x1="762" y1="556" x2="762" y2="644"/>
+
+  <g>
+    <text class="step" x="786" y="576">07</text>
+    <text class="t" x="786" y="596">Give each source a voice</text>
+    <text class="d" x="786" y="618">One document was winning every</text>
+    <text class="d" x="786" y="634">slot. The others get their best.</text>
+    <text class="win" x="786" y="656">0/2 → 2/2 across documents</text>
+  </g>
+
+  <path class="lineA" d="M 562 672 L 562 700" marker-end="url(#ar-a)"/>
+
+  <g>
+    <rect class="card" x="48" y="712" width="1028" height="86"/>
+    <text class="step" x="70" y="738">08</text>
+    <text class="t" x="70" y="758">Write the answer from those passages only — or say NOT IN THE SOURCES</text>
+    <text class="d" x="70" y="780">Refusal is enforced here, not by a score: the highest-scoring unanswerable question (0.769) beats the lowest-scoring answerable one (0.678).</text>
+    <text class="win" x="880" y="738">0 answers uncited</text>
+  </g>
+
+  <!-- ============================ FOOTER ============================ -->
+  <line class="rule" x1="48" y1="836" x2="1112" y2="836"/>
+  <text class="foot" x="48" y="862">Measured on 45 held-out questions the system was never tuned against, graded blind by a different model:</text>
+  <text class="footb" x="48" y="882">27 correct · 6 partial · 11 declined · 1 wrong.<tspan class="foot">   When retrieval fails it declines rather than invents.</tspan></text>
+</svg>
