@@ -70,6 +70,31 @@ missing half was in the corpus the whole time, out-ranked rather than absent.
 Reserving one slot per unrepresented source group fixes it for at most two extra
 passages, and needs no knowledge of the question: **0/2 → 2/2**.
 
+### Run it three times and one question moves
+
+Generation is stochastic, so every end-to-end figure above is a sample. Three
+full runs:
+
+| | runs | |
+|---|---|---|
+| answered | 25, 25, 25 | **stable** |
+| refused when unanswerable | 4, 4, 4 | **stable** |
+| answers with no citation | 0, 0, 0 | **stable** |
+| grounded | 25, 25, 24 | **varies** |
+
+The behaviours that matter for safety do not move. Refusal is 4/4 in every run,
+and no run produced an uncited answer.
+
+What moves is **C05**, the cross-document cybersecurity question: in one run of
+three it answered from the Act and never cited OWASP. So "cross-document 2/2" is
+true of the reported run and is not a reliable 2/2 — source diversity puts the
+OWASP passage in front of the model, and the model does not always use it.
+Retrieval is deterministic here; generation is not, and this is the seam.
+
+Citation counts move further than verdicts do. O03 ranged from 0 to 14 citations
+across three runs while refusing correctly every time — the refusal is stable,
+the wording around it is not.
+
 ### Answers decline the part they cannot cover
 
 Three correct answers are incomplete and each says so: one was handed only Annex

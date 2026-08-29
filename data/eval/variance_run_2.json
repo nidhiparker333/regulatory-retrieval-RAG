@@ -1,0 +1,726 @@
+{
+  "results": [
+    {
+      "id": "D01",
+      "category": "direct",
+      "question": "What are the fines for breaking the AI Act?",
+      "elapsed_ms": 14028,
+      "search_ms": 1356.21,
+      "generate_ms": 10828,
+      "tokens_in": 12781,
+      "tokens_out": 955,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 7,
+      "cited_sections": [
+        "Article 100",
+        "Article 101",
+        "Article 75c",
+        "Article 99"
+      ],
+      "expected_sections": [
+        "Article 99"
+      ],
+      "answer": "The passages describe several different fine schedules, depending on who breaks which rule and who is enforcing it.\n\n**Fines on general operators (set by Member States, within EU limits)**\n\n- Breaching the prohibited AI practices listed in Article 5 (such as manipulative or exploitative AI systems) can bring administrative fines of up to €35,000,000, or up to 7% of the offender's total worldwide annual turnover for the previous financial year, whichever is higher [1].\n- Beyond this figure, the passages don't specify the exact amounts for other categories of infringement by ordinary operators — Article 99 only confirms that Member States must set penalty rules (including fines, warnings, or non-monetary measures) and enforce them effectively [8].\n\n**Fines on EU institutions and bodies**\n\n- If an EU institution, body, office, or agency breaches the Article 5 prohibitions, the European Data Protection Supervisor can impose fines of up to €1,500,000 [2].\n- For non-compliance with other requirements or obligations under the Regulation (i.e., not the Article 5 prohibitions), fines of up to €750,000 apply [2]. When deciding on the amount, the Supervisor must weigh factors such as the nature, gravity and duration of the infringement, the level of damage caused, cooperation shown, and the institution's annual budget [9].\n\n**Fines on providers of general-purpose AI models**\n\n- The Commission may fine these providers up to 3% of their annual total worldwide turnover in the preceding financial year or €15,000,000, whichever is higher [4].\n- This applies where the provider intentionally or negligently infringed relevant provisions of the Regulation, failed to properly respond to a request for information, failed to comply with a requested measure, or failed to give the Commission access to the model for evaluation [4]. Before fining, the Commission must share its preliminary findings and give the provider a chance to be heard, and any fine must be effective, proportionate and dissuasive [4].\n\n**Fines imposed by the AI Office**\n\n- The AI Office, when it finds non-compliance by an operator within its scope, can impose penalties in line with Article 99(4), covering infringements of any applicable provision, failure to comply with certain enforcement decisions, or failure to honor a binding commitment [5]. Supplying incorrect, incomplete or misleading information to the AI Office is subject to fines under Article 99(5) [5]. The passages don't give the specific euro or turnover figures tied to Article 99(4) and (5) themselves.\n- These AI Office enforcement powers are subject to a five-year limitation period, running from when the infringement was committed (or, for continuing infringements, from when it ceases) [3].\n\n**What isn't covered here:** the passages reference Article 99(4) through (7) as containing further fine tiers for general infringements, but the actual figures in those subsections are not included in the material provided, so I can't state them [1][5].",
+      "cost_usd": 0.03511
+    },
+    {
+      "id": "D02",
+      "category": "direct",
+      "question": "What must the technical documentation for a high-risk AI system contain?",
+      "elapsed_ms": 9727,
+      "search_ms": 135.89,
+      "generate_ms": 9026,
+      "tokens_in": 7650,
+      "tokens_out": 726,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 2,
+      "cited_sections": [
+        "Annex IV",
+        "Article 11"
+      ],
+      "expected_sections": [
+        "Annex IV",
+        "Article 11"
+      ],
+      "answer": "Under the AI Act, the technical documentation for a high-risk AI system must be drawn up **before** the system is placed on the market or put into service, and it must be kept up to date [2]. Its purpose is to show that the system meets the applicable requirements and to give national authorities and notified bodies clear, comprehensive information so they can assess that compliance [2].\n\nAt a minimum, the documentation must contain the elements set out in Annex IV [2]. However, the passages provided only give the introductory line of Annex IV, stating that it lists information \"at a minimum... as applicable to the relevant AI system,\" without listing the actual items [17]. So the specific contents of that list are **not in the sources**.\n\nA few related points that are covered:\n\n- Small and medium-sized enterprises (SMEs), including start-ups, and small mid-cap companies (SMCs) may provide the Annex IV information in a simplified manner, using a simplified form the Commission is required to create for this purpose; notified bodies must accept this simplified form for conformity assessment [2].\n- If a high-risk AI system is related to a product covered by certain EU harmonisation legislation (listed in Annex I, Section A), a single set of technical documentation must be produced covering both the AI Act's requirements and those of the other legislation [2].\n- The Commission has the power to update Annex IV through delegated acts to keep the documentation requirements aligned with technical progress [2].\n\nIn short: the sources confirm *that* Annex IV defines the required content, and describe the surrounding rules (timing, purpose, SME simplification, combined documentation, and the power to amend it), but they do not include the actual itemized list of what Annex IV requires.",
+      "cost_usd": 0.02256
+    },
+    {
+      "id": "D03",
+      "category": "direct",
+      "question": "Does the law require AI systems to keep logs?",
+      "elapsed_ms": 6998,
+      "search_ms": 136.74,
+      "generate_ms": 6349,
+      "tokens_in": 7846,
+      "tokens_out": 477,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 3,
+      "cited_sections": [
+        "Article 12",
+        "Article 19",
+        "Article 26"
+      ],
+      "expected_sections": [
+        "Article 12"
+      ],
+      "answer": "Yes. High-risk AI systems must be technically capable of automatically recording events (\"logs\") over their lifetime, so that it's possible to trace how the system is functioning [3]. This logging must specifically support identifying situations where the system might present a risk or need substantial modification, support post-market monitoring, and support monitoring of the system's operation [3]. For certain systems used in law enforcement-style verification (biometric identification against a reference database, under point 1(a) of Annex III), the logs must at minimum record the start and end time of each use, which reference database was checked, which input data produced a match, and who verified the results [3].\n\nBeyond just generating logs, the law also requires people to keep them:\n\n- **Providers** of high-risk AI systems must retain the automatically generated logs that are under their control, for a period suited to the system's purpose and at least six months, unless other EU or national law (especially data protection law) requires otherwise [1]. Providers that are financial institutions must instead keep these logs as part of the documentation already required under financial services law [1].\n- **Deployers** of high-risk AI systems have the same six-month-minimum retention obligation for logs under their control, again subject to other applicable law, with the same alternative arrangement for financial institutions [2].\n\nSo the requirement covers both the technical capability to log (built into the system) and the retention of those logs once generated [3][1][2].",
+      "cost_usd": 0.02046
+    },
+    {
+      "id": "D04",
+      "category": "direct",
+      "question": "Can an ordinary person complain about an AI system, and to whom?",
+      "elapsed_ms": 3098,
+      "search_ms": 122.5,
+      "generate_ms": 2497,
+      "tokens_in": 4170,
+      "tokens_out": 132,
+      "refused": true,
+      "behaved": false,
+      "grounded": false,
+      "n_citations": 10,
+      "cited_sections": [
+        "Article 50",
+        "Article 56",
+        "Article 98",
+        "NIST AI 100-1, Appendix C p.45",
+        "OWASP Appendix - OWASP Top 10 for Agentic Applications (ASI) — 2026"
+      ],
+      "expected_sections": [
+        "Article 85"
+      ],
+      "answer": "NOT IN THE SOURCES.\n\nThe passages provided cover transparency obligations for AI systems [1][3][4], human-AI interaction considerations [2][5][7], agentic application security risks [6][8], codes of practice [9], and committee procedure [10]. None of them describe a process by which an ordinary person can file a complaint about an AI system, or identify a body to whom such a complaint could be made.",
+      "cost_usd": 0.00966
+    },
+    {
+      "id": "D05",
+      "category": "direct",
+      "question": "How does the Regulation define an AI system?",
+      "elapsed_ms": 4163,
+      "search_ms": 130.3,
+      "generate_ms": 3570,
+      "tokens_in": 7493,
+      "tokens_out": 286,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 1,
+      "cited_sections": [
+        "Article 3"
+      ],
+      "expected_sections": [
+        "Article 3"
+      ],
+      "answer": "Based on Article 3, an **AI system** is defined as \"a machine-based system that is designed to operate with varying levels of autonomy and that may exhibit adaptiveness after deployment, and that, for explicit or implicit objectives, infers, from the input it receives, how to generate outputs such as predictions, content, recommendations, or decisions that can influence physical or virtual environments\" [1].\n\nBreaking that down, the definition rests on a few key features:\n\n- It is **machine-based** [1].\n- It can operate with **varying levels of autonomy**, and may **adapt after it has been deployed** [1].\n- It works towards **explicit or implicit objectives** [1].\n- It **infers** from the inputs it receives how to produce outputs — such as predictions, content, recommendations, or decisions [1].\n- Those outputs are capable of **influencing physical or virtual environments** [1].",
+      "cost_usd": 0.01785
+    },
+    {
+      "id": "D06",
+      "category": "direct",
+      "question": "What obligations apply to providers of general-purpose AI models?",
+      "elapsed_ms": 13498,
+      "search_ms": 120.61,
+      "generate_ms": 12885,
+      "tokens_in": 4840,
+      "tokens_out": 1265,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 10,
+      "cited_sections": [
+        "Annex XII",
+        "Article 53",
+        "Article 54",
+        "Article 55",
+        "Article 56",
+        "Article 78"
+      ],
+      "expected_sections": [
+        "Article 53"
+      ],
+      "answer": "Providers of general-purpose AI models face several core obligations under Article 53, plus extra obligations if their model is considered to carry \"systemic risk.\"\n\n**Obligations for all providers of general-purpose AI models (Article 53(1)):**\n\n- Draw up and keep up to date technical documentation of the model, including its training and testing process and evaluation results, containing at least the information listed in Annex XI, to be provided on request to the AI Office and national authorities [3].\n- Draw up, keep up to date, and make available information and documentation to providers of AI systems who want to integrate the model into their own systems. This documentation must let those downstream providers understand the model's capabilities and limitations and must contain at least the elements set out in Annex XII (e.g. the model's intended tasks, acceptable use policies, release date, architecture and parameter count, input/output format, licence, and information on training/testing/validation data), while still protecting intellectual property and trade secrets [3][15].\n- Put in place a policy to comply with EU copyright law, including identifying and respecting rights reservations under Article 4(3) of Directive (EU) 2019/790, using state-of-the-art technologies where needed [3].\n- Draw up and publish a sufficiently detailed summary of the content used to train the model, following a template provided by the AI Office [3].\n- Cooperate as necessary with the Commission and national competent authorities in exercising their powers under the Regulation [1].\n\n**Compliance route:** Providers can rely on codes of practice (drawn up under Article 56) to show compliance with these obligations until a harmonised standard exists; compliance with an EU harmonised standard gives a presumption of conformity, and providers who use neither must demonstrate \"alternative adequate means of compliance\" to the Commission [5][11].\n\n**Exemption for open-source models:** The documentation obligations in points (a) and (b) above (technical documentation and downstream information) do not apply to models released under a free and open-source licence that allows access, use, modification and distribution, and whose parameters, weights, architecture information, and usage information are made publicly available — unless the model is one with systemic risk, in which case the exemption does not apply [2].\n\n**Authorised representative requirement:** Providers established outside the EU must, before placing the model on the EU market, appoint by written mandate an authorised representative established in the Union, and must let that representative carry out the tasks specified in the mandate [8]. This authorised-representative obligation also does not apply to qualifying open-source models, unless they present systemic risk [4].\n\n**Additional obligations for models with systemic risk (Article 55):** On top of the above, providers of general-purpose AI models with systemic risk must:\n- Perform model evaluations using standardised, state-of-the-art protocols and tools, including conducting and documenting adversarial testing to identify and mitigate systemic risks [10].\n- Assess and mitigate possible systemic risks at EU level, including their sources, arising from developing, marketing, or using the model [10].\n- Track, document, and report without undue delay to the AI Office (and national authorities where relevant) information about serious incidents and possible corrective measures [10].\n- Ensure an adequate level of cybersecurity for the model and its physical infrastructure [10].\n\nThese systemic-risk providers can likewise rely on codes of practice or harmonised standards, or otherwise demonstrate alternative adequate means of compliance [10]. Any information or documentation gathered under these systemic-risk provisions, including trade secrets, must be handled under the confidentiality rules of Article 78, which protect intellectual property, confidential business information, and other specified interests [10][12].",
+      "cost_usd": 0.02233
+    },
+    {
+      "id": "D07",
+      "category": "direct",
+      "question": "When does the AI Act actually start applying?",
+      "elapsed_ms": 10446,
+      "search_ms": 135.52,
+      "generate_ms": 9853,
+      "tokens_in": 6766,
+      "tokens_out": 862,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 2,
+      "cited_sections": [
+        "Article 111",
+        "Article 113"
+      ],
+      "expected_sections": [
+        "Article 113"
+      ],
+      "answer": "The AI Act generally applies from **2 August 2026** [2]. However, different parts of the law switch on at different times, so \"application\" isn't a single date:\n\n- **Chapters I and II** (general provisions and the prohibited-practices rules) apply earlier, from **2 February 2025** — except for two specific prohibitions (Article 5(1), first subparagraph, points (ba) and (bb), and Article 5(1a) and (1b)), which don't apply until **2 December 2026** [2].\n- **Chapter III Section 4, Chapter V, Chapter VII, Chapter XII, and Article 78** apply from **2 August 2025**, with the exception of Article 101 [2].\n- **Chapter III, Sections 1–3** (the core high-risk AI system rules), apart from Article 6(5), apply later still:\n  - **2 December 2027** for AI systems classed as high-risk under Article 6(2) and Annex III [2];\n  - **2 August 2028** for AI systems classed as high-risk under Article 6(1) and Annex I [2].\n- **Articles 102 to 110** apply from **27 July 2026** [2].\n\nOn top of this general timetable, there are separate transitional rules for AI systems and models already on the market before these dates:\n\n- AI systems that are components of certain large-scale EU IT systems (listed in Annex X) and were already placed on the market or in service before 2 August 2027 have until **31 December 2030** to come into compliance [1].\n- For other high-risk AI systems already on the market or in service before Chapter III applies, the Regulation only applies if they undergo significant design changes afterward — except that providers and deployers of high-risk AI systems meant for use by public authorities must comply by **2 August 2030** regardless [1].\n- Providers of general-purpose AI models already on the market before 2 August 2025 have until **2 August 2027** to comply [1].\n- Providers of AI systems (including general-purpose ones) that generate synthetic audio, image, video or text and were on the market before 2 August 2026 must comply with the transparency-marking rule in Article 50(2) by **2 December 2026** [1].\n\nSo in short: the Act's obligations phase in over several years between February 2025 and 2030, rather than starting all at once [2][1].",
+      "cost_usd": 0.02215
+    },
+    {
+      "id": "D08",
+      "category": "direct",
+      "question": "What are the rules for affixing the CE marking to an AI system?",
+      "elapsed_ms": 7761,
+      "search_ms": 129.63,
+      "generate_ms": 7137,
+      "tokens_in": 7158,
+      "tokens_out": 706,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 4,
+      "cited_sections": [
+        "Article 16",
+        "Article 23",
+        "Article 24",
+        "Article 48"
+      ],
+      "expected_sections": [
+        "Article 48"
+      ],
+      "answer": "CE marking for high-risk AI systems is governed mainly by Article 48, with a related duty on providers set out in Article 16.\n\n**General principle**\nThe CE marking is subject to the general principles in Article 30 of Regulation (EC) No 765/2008 [1].\n\n**Digital systems**\nWhere a high-risk AI system is provided digitally, a digital CE marking must be used, but only if it can be easily accessed either through the interface from which the system is accessed, or via an easily accessible machine-readable code or other electronic means [1].\n\n**Physical affixing**\nThe CE marking must be affixed visibly, legibly and indelibly to the high-risk AI system [1]. If that isn't possible or isn't warranted given the nature of the system, it should instead be affixed to the packaging or to the accompanying documentation, as appropriate [1]. This mirrors the provider's general obligation to indicate identifying information (name, trade name/mark, contact address) on the system itself or, where not possible, on its packaging or accompanying documentation [10].\n\n**Notified body identification number**\nWhere a notified body has been involved in the conformity assessment procedure under Article 43, its identification number must follow the CE marking [1]. That number is affixed by the notified body itself, or under its instructions by the provider or the provider's authorised representative [1]. The number must also appear in any promotional material stating that the system meets the CE marking requirements [1].\n\n**Overlap with other EU law**\nIf a high-risk AI system is also subject to other Union law that requires CE marking, the marking must indicate that the system meets the requirements of that other law as well [1].\n\n**Who is responsible**\nAffixing the CE marking (to the system or, where not possible, to its packaging or accompanying documentation) is listed as one of the providers' obligations under Article 16 [10]. Before making a high-risk AI system available on the market, distributors must in turn verify that it bears the required CE marking, along with a copy of the EU declaration of conformity and instructions for use [2]. Similarly, importers must verify before placing such a system on the market that it bears the required CE marking and is accompanied by the EU declaration of conformity and instructions for use [11].",
+      "cost_usd": 0.02138
+    },
+    {
+      "id": "D09",
+      "category": "direct",
+      "question": "If an AI system makes a decision about me, can I demand an explanation?",
+      "elapsed_ms": 7984,
+      "search_ms": 134.57,
+      "generate_ms": 7355,
+      "tokens_in": 2789,
+      "tokens_out": 593,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 2,
+      "cited_sections": [
+        "Annex III",
+        "Article 86"
+      ],
+      "expected_sections": [
+        "Article 86"
+      ],
+      "answer": "Yes, but only under specific conditions. The passages describe a \"right to explanation of individual decision-making\" that applies when a decision affecting you is based on the output of a **high-risk AI system** listed in Annex III of the regulation — with one exception (systems listed under point 2 of that Annex are excluded) [4].\n\nFor this right to apply, the decision must also **produce legal effects on you or similarly significantly affect you**, in a way you consider to have an adverse impact on your health, safety, or fundamental rights [4]. If those conditions are met, you can ask the deployer (the organisation using the AI system) for a \"clear and meaningful explanation\" of the role the AI system played in the decision and the main elements of the decision itself [4].\n\nThere are some limits worth noting:\n\n- The right doesn't apply if other Union or national law already provides exceptions or restrictions to it, as long as that law is itself compliant with EU law [4].\n- The right only applies \"to the extent\" that this same kind of explanation right isn't already provided somewhere else in Union law [4].\n\n**What the passages don't cover:** they don't specify what counts as a \"high-risk\" system in detail (Annex III is only introduced by title here, not its full contents) [10], nor do they describe the explanation right for AI systems that are *not* classified as high-risk. So if your question is about a decision made by an ordinary, non-high-risk AI system, the passages provided don't say whether a similar right exists.",
+      "cost_usd": 0.01151
+    },
+    {
+      "id": "D10",
+      "category": "direct",
+      "question": "What does the Act require regarding accuracy, robustness and cybersecurity?",
+      "elapsed_ms": 7885,
+      "search_ms": 148.77,
+      "generate_ms": 7381,
+      "tokens_in": 5746,
+      "tokens_out": 721,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 2,
+      "cited_sections": [
+        "Article 13",
+        "Article 15"
+      ],
+      "expected_sections": [
+        "Article 15"
+      ],
+      "answer": "Article 15 of the Act sets out the requirements for accuracy, robustness and cybersecurity of high-risk AI systems.\n\n**Accuracy, robustness and cybersecurity in general**\nHigh-risk AI systems must be designed and developed to achieve an \"appropriate level\" of accuracy, robustness and cybersecurity, and must perform consistently in these respects throughout their lifecycle [1]. To help measure this, the Commission is expected to encourage, with relevant stakeholders such as metrology and benchmarking authorities, the development of benchmarks and measurement methodologies [1]. The levels of accuracy and the relevant accuracy metrics must be declared in the system's accompanying instructions of use [1], and the instructions for use must also state the level of accuracy, robustness and cybersecurity the system has been tested and validated against, along with any known circumstances that could affect these [2].\n\n**Robustness specifically**\nSystems must be \"as resilient as possible\" against errors, faults or inconsistencies that may arise within the system or its operating environment, particularly from interactions with people or other systems, and both technical and organisational measures must be taken to this end [1]. Robustness can be achieved through technical redundancy, such as backup or fail-safe plans [1]. Systems that keep learning after being placed on the market must be built to eliminate or reduce, as far as possible, the risk of biased outputs feeding back into future operations (\"feedback loops\"), with appropriate mitigation measures in place [1].\n\n**Cybersecurity specifically**\nHigh-risk systems must be resilient against unauthorised third parties trying to alter their use, outputs or performance by exploiting vulnerabilities [1]. The technical solutions used must be appropriate to the circumstances and risks involved [1]. Where appropriate, these solutions must include measures to prevent, detect, respond to, resolve and control for AI-specific attacks, including [1]:\n- data poisoning (manipulating training data) [1]\n- model poisoning (manipulating pre-trained components used in training) [1]\n- adversarial examples or model evasion (inputs designed to cause mistakes) [1]\n- confidentiality attacks [1]\n- model flaws [1]",
+      "cost_usd": 0.0187
+    },
+    {
+      "id": "D11",
+      "category": "direct",
+      "question": "Does the EU AI Act apply to a company based in the United States?",
+      "elapsed_ms": 7394,
+      "search_ms": 143.54,
+      "generate_ms": 6752,
+      "tokens_in": 8576,
+      "tokens_out": 512,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 2,
+      "cited_sections": [
+        "Article 2"
+      ],
+      "expected_sections": [
+        "Article 2"
+      ],
+      "answer": "Yes — the AI Act can apply to a US-based company, but it depends on what the company does and where its AI's effects are felt.\n\nAccording to the scope provisions, the Act applies to:\n\n- **Providers** placing AI systems (or general-purpose AI models) on the EU market or putting them into service in the EU, \"irrespective of whether those providers are established or located within the Union or in a third country\" [8].\n- **Providers and deployers located in a third country** (such as the US) \"where the output produced by the AI system is used in the Union\" [8].\n- **Importers and distributors** of AI systems (which would cover companies bringing a US-made system into the EU market) [8].\n- **Product manufacturers** placing an AI system on the market together with their product under their own name or trademark [8].\n- **Authorised representatives of providers** not established in the Union [8].\n- **Affected persons located in the Union**, i.e., people in the EU impacted by such a system [8].\n\nSo a US company that sells or deploys an AI system into the EU market, or whose AI system's output is used in the EU, falls within scope, even though it is not established in the Union [8]. A US company with no EU market presence and no EU-used output would fall outside these listed categories, though the passages don't give a more specific standalone test beyond this list.\n\nOne limited exception: the Regulation does not apply to research, testing, or development activity on AI systems or models before they are placed on the market or put into service, though real-world testing is not covered by that exclusion [3]. This exclusion would apply regardless of the company's location, but it's narrow and doesn't itself determine geographic scope.",
+      "cost_usd": 0.02227
+    },
+    {
+      "id": "X01",
+      "category": "cross_ref",
+      "question": "Is my CV screening tool for hiring considered high-risk?",
+      "elapsed_ms": 5008,
+      "search_ms": 130.62,
+      "generate_ms": 4425,
+      "tokens_in": 3491,
+      "tokens_out": 319,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 2,
+      "cited_sections": [
+        "Annex III"
+      ],
+      "expected_sections": [
+        "Annex III",
+        "Article 6"
+      ],
+      "answer": "Based on the passages, **yes** — an AI system used to screen job applications for hiring would be classified as high-risk.\n\nAnnex III specifically lists, under the category of \"Employment, workers' management and access to self-employment,\" AI systems \"intended to be used for the recruitment or selection of natural persons, in particular to place targeted job advertisements, to analyse and filter job applications, and to evaluate candidates\" [1]. A CV screening tool falls squarely within \"analyse and filter job applications\" and \"evaluate candidates\" [1].\n\nOne caveat: the passages don't include the introductory language of Article 6(2) that formally links Annex III to the high-risk classification — I only have a fragment noting that Annex III systems are \"high-risk AI systems pursuant to Article 6(2)\" [6]. There may be additional conditions or exemptions elsewhere in Article 6 that could affect specific cases, but those are not included in the passages provided, so I can't confirm whether any apply to your situation.",
+      "cost_usd": 0.01017
+    },
+    {
+      "id": "X02",
+      "category": "cross_ref",
+      "question": "Who is responsible for human oversight of a high-risk AI system, and what must that person be able to do?",
+      "elapsed_ms": 8506,
+      "search_ms": 170.7,
+      "generate_ms": 7843,
+      "tokens_in": 6319,
+      "tokens_out": 690,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 4,
+      "cited_sections": [
+        "Article 14",
+        "Article 26"
+      ],
+      "expected_sections": [
+        "Article 14",
+        "Article 26"
+      ],
+      "answer": "Responsibility for human oversight is split between the provider and the deployer, and the passages describe what the overseeing person must be able to do.\n\n**Who is responsible**\n\n- High-risk AI systems must be designed and developed so they can be effectively overseen by natural persons while in use — this is a design obligation on the system (and thus its provider) [2].\n- Oversight measures must be proportionate to the system's risk, autonomy, and context, and can be achieved either through measures built into the system by the provider before it goes on the market, or through measures the provider identifies for the deployer to implement [5].\n- Deployers, for their part, must assign human oversight to natural persons who have the \"necessary competence, training and authority, as well as the necessary support\" [4]. Deployers must also use the system according to its instructions for use [4].\n\nSo the provider is responsible for designing the system to enable oversight and for identifying the appropriate oversight measures [2][5], while the deployer is responsible for actually assigning a suitably qualified person to carry out that oversight [4].\n\n**What the overseeing person must be able to do**\n\nThe system must be provided to the deployer in a way that lets the assigned person, as appropriate and proportionate [1]:\n\n- Properly understand the system's capacities and limitations, and be able to monitor its operation, including spotting anomalies, dysfunctions, and unexpected performance [1].\n- Stay aware of the risk of \"automation bias\" — the tendency to automatically rely or over-rely on the system's output, particularly where the system produces information or recommendations for a human decision [1].\n- Correctly interpret the system's output, using available interpretation tools and methods [1].\n- Decide, in any given situation, not to use the system, or to disregard, override, or reverse its output [1].\n- Intervene in the system's operation or interrupt it via a \"stop\" button or similar procedure, allowing it to come to a safe halt [1].\n\nThe purpose of all this oversight is to prevent or minimise risks to health, safety, or fundamental rights that can arise when the system is used as intended or under reasonably foreseeable misuse — especially where those risks remain despite other safeguards [2].",
+      "cost_usd": 0.01954
+    },
+    {
+      "id": "X03",
+      "category": "cross_ref",
+      "question": "When is a general-purpose AI model considered to pose systemic risk?",
+      "elapsed_ms": 9703,
+      "search_ms": 147.08,
+      "generate_ms": 9096,
+      "tokens_in": 6074,
+      "tokens_out": 845,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 6,
+      "cited_sections": [
+        "Annex XIII",
+        "Article 51",
+        "Article 52",
+        "Article 90"
+      ],
+      "expected_sections": [
+        "Annex XIII",
+        "Article 51"
+      ],
+      "answer": "A general-purpose AI model is classified as posing \"systemic risk\" if it meets either of two conditions [1].\n\n**Condition 1: High-impact capabilities**\nThe model is classified this way if it has \"high impact capabilities\" evaluated using appropriate technical tools and methodologies, including indicators and benchmarks [1]. There is a specific presumption built into the rule: if the cumulative amount of computation used to train the model, measured in floating point operations (FLOPs), is greater than 10^25, the model is presumed to have these high-impact capabilities [1].\n\n**Condition 2: Commission decision based on equivalent impact**\nAlternatively, a model can be designated as systemic-risk if the Commission decides—either on its own initiative or following a \"qualified alert\" from the scientific panel—that the model has capabilities or an impact equivalent to the high-impact category, judged against the criteria in Annex XIII [1].\n\n**What the Annex XIII criteria cover**\nWhen making that equivalence judgment, the Commission looks at factors including [5]:\n- the number of parameters in the model [5]\n- the quality or size of the training data set, e.g. measured in tokens [5]\n- the amount of computation used for training, in FLOPs or via related measures like estimated cost, time, or energy consumption [5]\n- the model's input/output modalities (text-to-text, text-to-image, multi-modal, etc.) and state-of-the-art thresholds for each [5]\n- benchmark results and capability evaluations, including task range, adaptability, autonomy, scalability, and tool access [5]\n- market reach, which is presumed high-impact if the model is available to at least 10,000 registered business users in the EU [5]\n- the number of registered end-users [5]\n\n**How the process works in practice**\nIf a model meets the FLOP-based threshold, its provider must notify the Commission without delay, and in any case within two weeks of the threshold being met or becoming foreseeable [8]. A provider can also argue that, despite meeting the threshold, the model's specific characteristics mean it doesn't actually present systemic risk and shouldn't be so classified [3]. Separately, the scientific panel can raise a \"qualified alert\" flagging a suspected systemic-risk model, which can trigger Commission action [12]. The Commission can also update the thresholds and benchmarks over time via delegated acts to keep pace with technological change [1].\n\nI cannot answer questions about how a provider disputes a designation after the fact or requests reassessment, since that goes beyond what was asked here — though the passages do touch on it if you'd like that covered separately [4].",
+      "cost_usd": 0.0206
+    },
+    {
+      "id": "X04",
+      "category": "cross_ref",
+      "question": "What AI uses are banned outright, and does that connect to any list of crimes?",
+      "elapsed_ms": 10982,
+      "search_ms": 161.79,
+      "generate_ms": 10328,
+      "tokens_in": 8737,
+      "tokens_out": 895,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 5,
+      "cited_sections": [
+        "Annex II",
+        "Article 5"
+      ],
+      "expected_sections": [
+        "Annex II",
+        "Article 5"
+      ],
+      "answer": "Based on the passages, several categories of AI practices are banned outright under Article 5, and one of them does connect to a specific list of crimes in Annex II.\n\n**Banned AI practices**\n\n- AI systems using **subliminal, manipulative or deceptive techniques** that materially distort a person's behaviour in a way likely to cause them significant harm [8].\n- AI systems that **exploit vulnerabilities** related to a person's age, disability, or social/economic situation to distort their behaviour in a way likely to cause significant harm [8].\n- AI systems that **generate or manipulate sexually explicit deepfake material** of an identifiable person's intimate parts or sexual activity without that person's freely given, informed consent [8].\n- AI systems that generate or manipulate certain other prohibited material or performances, with detailed conditions on when this is only a genuine breach (e.g. where the harmful output is the intended purpose, or a reasonably foreseeable and reproducible outcome that the provider has failed to safeguard against) [1][8].\n- **Social scoring**: evaluating or classifying people based on social behaviour or inferred personal characteristics, where this leads to unfavourable treatment unrelated to the original context, or disproportionate to the behaviour itself [5].\n- AI systems that assess or predict a person's risk of committing a **criminal offence** based *solely* on profiling or personality traits — though this does not apply to tools that merely support a human assessment already grounded in objective, verifiable facts linked to a criminal activity [5].\n- AI systems that build or expand **facial recognition databases** by untargeted scraping of images from the internet or CCTV [5].\n\n**Connection to a list of crimes**\n\nYes — one part of Article 5 does link to a specific crime list. The Article addresses **real-time remote biometric identification in publicly accessible spaces for law enforcement**, which is restricted (with exceptions) [1][4]. One of the exceptions allows use for locating or identifying a suspect for prosecuting offences **listed in Annex II**, provided the offence carries a maximum custodial sentence of at least four years in the relevant Member State [1].\n\nAnnex II lists offences including terrorism, trafficking in human beings, sexual exploitation of children and child pornography, illicit trafficking in drugs, weapons, or nuclear materials, murder, rape, kidnapping, organised or armed robbery, sabotage, environmental crime, and participation in a criminal organisation involved in these offences, among others [19].\n\n**What the passages don't cover**\n\nThe passages don't specify the full text of every prohibited practice in Article 5(1) (parts of the list are cut off between the numbered passages), so this answer may not be fully exhaustive of every banned use.",
+      "cost_usd": 0.02642
+    },
+    {
+      "id": "X05",
+      "category": "cross_ref",
+      "question": "How long does a provider have to keep documentation, and what documentation is it?",
+      "elapsed_ms": 8808,
+      "search_ms": 148.53,
+      "generate_ms": 8171,
+      "tokens_in": 7171,
+      "tokens_out": 780,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 5,
+      "cited_sections": [
+        "Article 11",
+        "Article 17",
+        "Article 18",
+        "Article 19",
+        "Article 47"
+      ],
+      "expected_sections": [
+        "Article 11",
+        "Article 18"
+      ],
+      "answer": "Based on the passages, there are two separate documentation retention obligations for providers of high-risk AI systems, both running for **10 years** after the high-risk AI system has been placed on the market or put into service:\n\n**1. General technical and compliance documentation (Article 18)**\n\nThe provider must keep the following at the disposal of national competent authorities for 10 years [1]:\n- (a) the technical documentation referred to in Article 11 [1]\n- (b) the documentation concerning the quality management system referred to in Article 17 [1]\n- (c) documentation concerning changes approved by notified bodies, where applicable [1]\n- (d) decisions and other documents issued by notified bodies, where applicable [1]\n- (e) the EU declaration of conformity referred to in Article 47 [1]\n\nThe technical documentation itself must be drawn up before the system is placed on the market, kept up to date, and must contain at least the elements set out in Annex IV [9]. The quality management system documentation must cover things like the provider's regulatory compliance strategy, design and development procedures, testing and validation procedures, data management systems, the risk management system, post-market monitoring arrangements, and an accountability framework, among other elements [11].\n\n**2. The EU declaration of conformity specifically (Article 47)**\n\nThe provider must separately draw up a written EU declaration of conformity for each high-risk AI system and keep it at the disposal of national competent authorities for 10 years after the system has been placed on the market or put into service [13]. This declaration states that the system meets the requirements in Section 2 and must contain the information set out in Annex V [13].\n\n**Exception for financial institutions:** Providers that are financial institutions subject to internal governance requirements under EU financial services law must instead maintain the technical documentation as part of the documentation they already keep under that financial services law [1].\n\n**Note on logs:** Separately, automatically generated logs from high-risk AI systems must be kept for a period appropriate to the system's intended purpose, of at least six months (not 10 years), unless other EU or national law — particularly data protection law — requires otherwise [3]. Financial institution providers again maintain these logs as part of their existing financial services documentation [3].\n\n**What I cannot answer:** The passages do not specify what happens to this 10-year retention obligation if a provider goes out of business — Article 18 only says that each Member State determines the conditions for this scenario, without giving further detail here [1].",
+      "cost_usd": 0.02214
+    },
+    {
+      "id": "X06",
+      "category": "cross_ref",
+      "question": "What conformity assessment procedure applies to a high-risk AI system listed in Annex III?",
+      "elapsed_ms": 10639,
+      "search_ms": 141.15,
+      "generate_ms": 10025,
+      "tokens_in": 9985,
+      "tokens_out": 970,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 6,
+      "cited_sections": [
+        "Annex VI",
+        "Annex VII",
+        "Article 43"
+      ],
+      "expected_sections": [
+        "Annex VI",
+        "Article 43"
+      ],
+      "answer": "The procedure depends on which part of Annex III the system falls under.\n\n**Systems listed in point 1 of Annex III:** The provider can choose between two options if it has applied harmonised standards (under Article 40) or common specifications (under Article 41): (a) an internal-control assessment under Annex VI, or (b) an assessment involving a notified body, covering both the quality management system and the technical documentation, under Annex VII [2]. However, the provider must use the notified-body route in Annex VII if any of the following apply: no relevant harmonised standards or common specifications exist; the provider has only partly applied a harmonised standard; common specifications exist but weren't used; or a harmonised standard was published with a restriction affecting the relevant part [2]. If the system is intended for use by law enforcement, immigration, asylum authorities, or EU institutions/bodies, the role of \"notified body\" is instead performed by the relevant market surveillance authority [2].\n\n**Systems listed in points 2 to 8 of Annex III:** Providers must follow the internal-control procedure set out in Annex VI, and there is no involvement of a notified body at all [1].\n\n**What internal control (Annex VI) involves:** the provider verifies that its quality management system complies with Article 17, examines the technical documentation to check the system meets the essential requirements in Chapter III, Section 2, and confirms that the design, development, and post-market monitoring process (per Article 72) matches the technical documentation [25].\n\n**What the notified-body route (Annex VII) involves:** it examines both the provider's quality management system and the technical documentation [8]. If unsatisfied with the provider's own tests, the notified body can run its own tests, and in limited circumstances—after other verification methods have failed—it may request access to the training and trained models, subject to intellectual-property and trade-secret protections [3]. If the system passes, the notified body issues a Union technical documentation assessment certificate; if not, it refuses and gives reasons [3].\n\n**Substantial modifications:** Regardless of which procedure was originally used, a high-risk AI system must go through a new conformity assessment if it undergoes a substantial modification, whether or not it continues to be used by the same deployer [4]. For systems that keep learning after deployment, changes that were pre-determined by the provider at the time of the original assessment and documented in the technical file do not count as a substantial modification [4].",
+      "cost_usd": 0.02967
+    },
+    {
+      "id": "X07",
+      "category": "cross_ref",
+      "question": "What information has to be registered in the EU database before a high-risk system goes live?",
+      "elapsed_ms": 14970,
+      "search_ms": 158.56,
+      "generate_ms": 14282,
+      "tokens_in": 8848,
+      "tokens_out": 1369,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 3,
+      "cited_sections": [
+        "Annex VIII",
+        "Article 49"
+      ],
+      "expected_sections": [
+        "Annex VIII",
+        "Article 49"
+      ],
+      "answer": "Before a high-risk AI system covered by Annex III can be placed on the market or put into service, the provider (or its authorised representative) must register both themselves and the system in the EU database set up under Article 71 — this applies to all Annex III high-risk systems except those in point 2 of Annex III [2]. If the provider has instead concluded, under Article 6(3), that its system is *not* high-risk, it still has to register itself and the system in the EU database before market placement or use [2]. Where the deployer is a public authority, EU institution, body, office or agency (or someone acting on their behalf), that deployer must also register itself, select the relevant system, and register its intended use before putting the system into service [2].\n\nSystems in point 2 of Annex III are handled differently: they are registered at national level rather than in the EU database [2].\n\nFor a subset of high-risk systems — those in points 1, 6 and 7 of Annex III, used in law enforcement, migration, asylum or border control — registration goes into a secure, non-public section of the database, accessible only to the Commission and specified national authorities, and only a limited set of the standard data fields is required [2].\n\nAs for what specific information must be entered, the passages only show fragments of Annex VIII's requirements rather than the full list. What is confirmed is:\n\n- Providers must submit their name, address and contact details, and, if someone else is submitting on the provider's behalf, that person's name, address and contact details [8].\n- Elsewhere in Annex VIII, additional items include the URL of the system's database entry, a summary of the findings of the fundamental rights impact assessment carried out under Article 27, and a summary of the data protection impact assessment carried out under Article 35 of Regulation (EU) 2016/679 or Article 27 of Directive (EU) 2016/680, where applicable [4].\n\nThe passages do not give the complete Section A, B and C lists of Annex VIII (only parts 1 and 7 of 7 are provided), so a full inventory of every required data field cannot be answered from the sources given.",
+      "cost_usd": 0.03139
+    },
+    {
+      "id": "C01",
+      "category": "cross_doc",
+      "question": "How does the Act's risk management requirement compare with the NIST AI Risk Management Framework?",
+      "elapsed_ms": 20261,
+      "search_ms": 160.88,
+      "generate_ms": 19581,
+      "tokens_in": 6080,
+      "tokens_out": 1898,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 9,
+      "cited_sections": [
+        "Article 13",
+        "Article 60",
+        "Article 72",
+        "Article 9",
+        "NIST AI 100-1, 1.2.1 p.10",
+        "NIST AI 100-1, 5.4 p.36",
+        "NIST AI 100-1, Appendix D p.47"
+      ],
+      "expected_sections": [
+        "Article 9"
+      ],
+      "answer": "Based on the passages provided, the EU AI Act and the NIST AI Risk Management Framework (AI RMF) share the same general goal — managing risks from AI systems — but they differ significantly in legal status, structure, and specificity.\n\n**Legal status: mandatory vs. voluntary**\nThe Act's Article 9 states plainly that \"a risk management system shall be established, implemented, documented and maintained in relation to high-risk AI systems\" [9] — this is a binding legal obligation, not a suggestion. By contrast, the NIST AI RMF describes itself as one of its core attributes to \"be risk-based, resource-efficient, pro-innovation, and voluntary\" [1]. So where the Act requires a risk management system as a matter of law for high-risk systems, NIST's framework is explicitly optional guidance.\n\n**Prescriptive vs. outcome-focused**\nThe Act sets out specific, testable requirements: high-risk systems \"shall be tested for the purpose of identifying the most appropriate and targeted risk management measures,\" and testing must ensure the system \"perform[s] consistently for their intended purpose\" and complies with the Act's requirements [7]. Testing may include real-world conditions under a defined regime (Article 60) [7][11]. NIST, in contrast, says it strives to \"be outcome-focused and non-prescriptive,\" offering \"a catalog of outcomes and approaches rather than prescribe one-size-fits-all requirements\" [1]. NIST is meant to be usable across \"a wide range of perspectives, sectors, and technology domains\" rather than tied to one regulatory scheme, and is explicitly designed to be \"law- and regulation-agnostic\" so organizations can use it under whatever legal regime applies to them [1].\n\n**Structure**\nNIST's risk management approach is organized into functions — the passages describe the MANAGE function, which \"entails allocating risk resources to mapped and measured risks on a regular basis,\" including plans to \"respond to, recover from, and communicate about incidents or events\" [3], building on contextual information and documentation established in other functions (GOVERN and MAP, per [3]). The Act's risk management obligations, by contrast, are tied to specific articles: Article 9 for the risk management system itself [9], Article 13 for transparency to deployers so they can \"interpret a system's output and use it appropriately\" [10], and Article 72 for post-market monitoring, requiring providers to \"actively and systematically collect, document and analyse relevant data\" on system performance throughout its lifetime [12].\n\n**Measurement challenges**\nNIST's materials acknowledge open difficulties in risk measurement, such as the lack of \"consensus on robust and verifiable measurement methods for risk and trustworthiness\" [4][8], and note that risk perspectives can differ across developers and deployers in ways that complicate measurement [4]. The Act passages provided do not discuss these measurement-methodology challenges; they focus instead on the obligation to test and monitor rather than on the epistemic difficulty of measuring risk.\n\n**What the sources don't say**\nThe passages do not contain a direct, explicit comparison between the Act and the NIST AI RMF (for example, no passage states that the Act \"aligns with\" or \"differs from\" NIST by name). The comparison above is built from reading the two sets of provisions side by side, using only what each passage states about its own regime.",
+      "cost_usd": 0.03114
+    },
+    {
+      "id": "C02",
+      "category": "other_source",
+      "question": "What can go wrong with the embeddings and vector search in a retrieval system?",
+      "elapsed_ms": 14589,
+      "search_ms": 142.5,
+      "generate_ms": 13984,
+      "tokens_in": 5300,
+      "tokens_out": 1296,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 5,
+      "cited_sections": [
+        "OWASP Appendix - MITRE ATLAS — content v2026.06 (format-version 6.0",
+        "OWASP LLM09 - 2. Embedding Inversion",
+        "OWASP LLM09 - 4. Anomaly Detection at Ingest and Retrieval",
+        "OWASP LLM09 - 5. Storage Lifecycle Controls",
+        "OWASP LLM09 - Description"
+      ],
+      "expected_sections": [],
+      "answer": "Based on the passages, a retrieval system's embedding layer creates several distinct risks. As passage [1] frames it, these problems exploit the geometry of the embedding space and the mechanics of similarity search rather than the model's instruction-following behavior, so they are separate from prompt injection and many succeed even when the retrieved content has no malicious instructions at all [1].\n\n**The core failure modes**\n\nPassage [1] summarizes four ways things go wrong: poisoning makes the system wrong, inversion makes it leak, jamming makes it silent, and access-control failure makes it indiscriminate [1]. In more detail:\n\n- **Embedding inversion (leakage):** Stored embeddings can be reversed to recover the original text. Recovery rates range from roughly 50–70% of words using sentence embeddings up to 92% exact reconstruction of short inputs with certain inversion methods, and newer zero-shot techniques work even in cross-domain, black-box settings and remain effective against added privacy noise [2]. This means vector-database backups, embeddings sent to third parties, or embeddings exposed via misconfigured storage should be treated as equivalent to leaking the underlying documents, which matters for breach-notification obligations under regimes like GDPR [2].\n\n- **Retrieval poisoning:** New vectors can be crafted to sit unusually close to a wide range of common queries, hijacking retrieval so poisoned content gets surfaced [3]. Related MITRE ATLAS mapping notes that poisoned corpus or cache entries can persist in the vector store and re-trigger whenever a matching query comes in, giving an attacker a durable foothold [5].\n\n- **Retrieval jamming:** Related attack activity can flood the index, functioning as an availability attack that silences or degrades retrieval [5].\n\n- **Access-control failures / indiscriminate exposure:** Unusual volumes of queries against embedding endpoints can be a precursor to query-based inversion, and clusters growing faster than expected after ingest are a warning sign [3]. The MITRE ATLAS mapping also flags cross-tenant probing, which can infer the existence, topic, and rough volume of another tenant's documents, and membership inference, which can reveal whether a specific document is indexed at all [5].\n\n- **Encoder/key compromise:** A leaked embedding-API key gives an attacker query access to the exact encoder in use, and mixing embeddings from different model versions after a rotation creates \"heterogeneous embeddings\" that open exploitable gaps in similarity behavior [4].\n\n- **Staging attacks:** Attackers can craft content whose embedding deliberately lands near a target query, using surrogate encoders to engineer vectors that straddle similarity thresholds [5].\n\n**What the passages say helps mitigate this**\n\nDefenses mentioned include not returning raw similarity scores to clients, adding noise and diversification at the ranking layer, rate-limiting embedding endpoints, and using cross-encoder re-ranking (though this raises attack cost rather than replacing provenance and ingest controls) [3]. On the storage side: deleting embeddings when source documents are deleted, treating vector-database backups at the same sensitivity level as source documents, encrypting embeddings at rest with separately managed keys, and re-embedding the whole corpus on model rotation rather than mixing old and new vectors [4].\n\n**What this doesn't cover**\n\nThe passages note that this entry specifically excludes indirect prompt injection via retrieved content, training-time poisoning of the embedding model itself, serialization flaws in vector-store libraries, and agent-memory attacks not based on embedding geometry — those are addressed elsewhere [1]. Systems that don't use embeddings at all (e.g., BM25-only or LLM-native tree navigation) inherit some non-geometric risks but are not subject to these particular embedding-based attacks [1].",
+      "cost_usd": 0.02356
+    },
+    {
+      "id": "C03",
+      "category": "other_source",
+      "question": "What are the four core functions of the NIST AI Risk Management Framework?",
+      "elapsed_ms": 5081,
+      "search_ms": 150.41,
+      "generate_ms": 4462,
+      "tokens_in": 6699,
+      "tokens_out": 349,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 4,
+      "cited_sections": [
+        "NIST AI 100-1, 5 p.25",
+        "NIST AI 100-1, 5.2 p.29",
+        "NIST AI 100-1, 5.4 p.36"
+      ],
+      "expected_sections": [],
+      "answer": "The four core functions of the NIST AI RMF Core are **GOVERN, MAP, MEASURE, and MANAGE** [5]. Each of these high-level functions is broken down into categories and subcategories, which are further subdivided into specific actions and outcomes [5].\n\nAccording to the passages, Governance is designed to be a cross-cutting function that informs and is infused throughout the other three functions [2]. After a governance structure is in place, most framework users would start with the MAP function and continue on to MEASURE or MANAGE, though the functions can be applied in any order across the AI lifecycle as deemed useful [2].\n\nBriefly, based on the passages:\n- **MAP** establishes the context needed to frame risks related to an AI system [8].\n- **MANAGE** involves allocating risk resources to the risks identified and measured, including plans to respond to, recover from, and communicate about incidents [3].\n\nThe passages provided do not include a dedicated description of the **MEASURE** function itself, so I cannot detail its specific content here beyond noting it is one of the four Core functions [5].",
+      "cost_usd": 0.01689
+    },
+    {
+      "id": "C04",
+      "category": "other_source",
+      "question": "What is prompt injection and why is it hard to defend against?",
+      "elapsed_ms": 16549,
+      "search_ms": 145.13,
+      "generate_ms": 15933,
+      "tokens_in": 4554,
+      "tokens_out": 1252,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 5,
+      "cited_sections": [
+        "NIST AI 600-1, 2.9 p.14",
+        "OWASP LLM01 - Direct Prompt Injection",
+        "OWASP LLM01 - Indirect Prompt Injection",
+        "OWASP LLM01 - Prevention and Mitigation Strategies"
+      ],
+      "expected_sections": [],
+      "answer": "Prompt injection is an attack on AI systems where the input given to a generative AI (GAI) system is crafted or modified so that the system behaves in ways it wasn't intended to [3][7]. There are two main forms:\n\n- **Direct prompt injection**: a user (or an attacker using the user's access) supplies input that changes the model's behavior in undesired ways [4]. This can be intentional, such as a deliberate jailbreak attempt to make the model violate its safety rules, or unintentional, such as a legitimate user pasting content that happens to contain conflicting instructions [4]. Attackers might also craft malicious prompts and feed them directly into a system, with various downstream negative consequences for connected systems [3].\n\n- **Indirect prompt injection**: the model reads content from an external source — a web page, document, email, tool response, retrieved passage, image, or database entry — that itself contains hidden instructions, and the user never supplied or saw them [5]. Adversaries can exploit this remotely, without any direct interface to the system, by planting prompts in data they expect the model to retrieve later [3]. Security researchers have shown this technique can be used to steal proprietary data or even run malicious code remotely [3]. The danger is structural: an attacker doesn't need to breach the backend directly — they just place text somewhere the victim's LLM will read it, and the LLM then acts using the victim's own privileges [5].\n\n**Why it's hard to defend against:**\n\n1. **No architectural separation between instructions and data.** Current large language models don't structurally distinguish between \"this is a command\" and \"this is content to process\" — combined with the model's stochastic (probabilistic, not fully predictable) behavior, this means no reliable prevention mechanism exists today, a view described as consistent across NIST (2025), NCSC (2025), and Debenedetti et al. (2025) [1].\n\n2. **The attack surface is broad and hard to police.** Untrusted content can enter through many channels — web pages, emails, tool outputs, RAG passages, images, MCP server responses, database rows, even issue titles — and the level of trust in each surface varies, making blanket defenses impractical [5]. Content on \"trusted\" surfaces, like a developer's own repositories, may still have been poisoned by an attacker via some unrelated low-privilege entry point, without the developer realizing it [5].\n\n3. **A single querying interaction can leak information.** Even without any special injection, merely querying a closed production model can cause it to reveal previously undisclosed information about itself [3].\n\n4. **Consequences come from what the compromised model is *allowed to do*, not just the injection itself.** Most severe real-world incidents became damaging because the injected instructions reached a system where the model's tools, permissions, or ability to output/act let it operate on the attacker's behalf but with the user's privilege level [1]. This is why defenses increasingly focus on limiting what a model can access or do (bounding the \"blast radius\") rather than trying to stop injection from happening in the first place, since preventive filters are expected to degrade against motivated, adaptive attackers [1].\n\n5. **Jailbreaking, a subtype of direct injection aimed at breaking safety rules, is contained only partially by application-level safeguards** — genuinely reducing it requires ongoing changes to the model's own training and safety mechanisms, not just external filters [4].\n\nIn short, prompt injection is treated as an intrinsic property of how current generative AI works rather than a bug that can be patched away, so the recommended posture is architectural (assuming injection will eventually succeed and limiting its consequences) rather than purely preventive [1].",
+      "cost_usd": 0.02163
+    },
+    {
+      "id": "O01",
+      "category": "out_of_corpus",
+      "question": "What does ISO/IEC 42001 require for certification, and what does it cost?",
+      "elapsed_ms": 2845,
+      "search_ms": 156.16,
+      "generate_ms": 2187,
+      "tokens_in": 8652,
+      "tokens_out": 112,
+      "refused": true,
+      "behaved": true,
+      "grounded": null,
+      "n_citations": 0,
+      "cited_sections": [],
+      "expected_sections": [],
+      "answer": "NOT IN THE SOURCES.\n\nThe passages provided cover EU AI Act obligations (technical documentation, conformity assessment, provider/importer/distributor duties), NIST AI 600-1, and an OWASP mapping appendix, but none of them discuss ISO/IEC 42001, its certification requirements, or associated costs.",
+      "cost_usd": 0.01842
+    },
+    {
+      "id": "O02",
+      "category": "out_of_corpus",
+      "question": "What are the penalties under the Colorado AI Act?",
+      "elapsed_ms": 3022,
+      "search_ms": 137.84,
+      "generate_ms": 2474,
+      "tokens_in": 10450,
+      "tokens_out": 114,
+      "refused": true,
+      "behaved": true,
+      "grounded": null,
+      "n_citations": 6,
+      "cited_sections": [
+        "Article 100",
+        "Article 75c",
+        "Article 99",
+        "NIST AI 600-1, MEASURE 2.10 p.39",
+        "OWASP Appendix - NIST AI 600-1 (Generative AI Profile) — v1.0 (July"
+      ],
+      "expected_sections": [],
+      "answer": "NOT IN THE SOURCES.\n\nThe passages provided cover penalties and enforcement under EU-related instruments (such as Articles 99 and 100, and Article 75c) [1][2][3], as well as NIST and OWASP materials [6][7][11]. None of them mention the Colorado AI Act or any penalty provisions associated with it.",
+      "cost_usd": 0.02204
+    },
+    {
+      "id": "O03",
+      "category": "out_of_corpus",
+      "question": "What do the recitals say about the intent behind the high-risk classification rules?",
+      "elapsed_ms": 3020,
+      "search_ms": 154.52,
+      "generate_ms": 2357,
+      "tokens_in": 6956,
+      "tokens_out": 114,
+      "refused": true,
+      "behaved": true,
+      "grounded": null,
+      "n_citations": 0,
+      "cited_sections": [],
+      "expected_sections": [],
+      "answer": "NOT IN THE SOURCES.\n\nThe passages provided include Articles 6, 7, 10, 4a, 49, 96, and 97 of the AI Act, plus material from NIST and OWASP documents and Annex excerpts — but no recitals are included in these passages. I cannot answer a question about what the recitals say without recital text to draw from.",
+      "cost_usd": 0.01505
+    },
+    {
+      "id": "O04",
+      "category": "out_of_corpus",
+      "question": "How many companies have been fined under the AI Act so far?",
+      "elapsed_ms": 3148,
+      "search_ms": 162.87,
+      "generate_ms": 2500,
+      "tokens_in": 14104,
+      "tokens_out": 127,
+      "refused": true,
+      "behaved": true,
+      "grounded": null,
+      "n_citations": 5,
+      "cited_sections": [
+        "Article 100",
+        "Article 101",
+        "Article 99"
+      ],
+      "expected_sections": [],
+      "answer": "NOT IN THE SOURCES.\n\nThe passages describe the penalty frameworks and fine amounts that apply under the Regulation — for example, fines for prohibited AI practices [1][8], fines on Union institutions [2][9], and fines for providers of general-purpose AI models [3] — but none of them report any actual enforcement actions, decisions, or a count of companies that have been fined.",
+      "cost_usd": 0.02948
+    },
+    {
+      "id": "D12",
+      "category": "direct",
+      "question": "Can we use sensitive personal data like ethnicity to check whether our AI system is biased?",
+      "elapsed_ms": 9696,
+      "search_ms": 176.36,
+      "generate_ms": 8958,
+      "tokens_in": 5654,
+      "tokens_out": 748,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 7,
+      "cited_sections": [
+        "Article 10",
+        "Article 4a",
+        "NIST AI 100-1, 3.7 p.22",
+        "NIST AI 600-1, MEASURE 2.11 p.40",
+        "NIST AI 600-1, MEASURE 3.3 p.42"
+      ],
+      "expected_sections": [
+        "Article 4a"
+      ],
+      "answer": "Yes, but only under narrow conditions and with significant safeguards.\n\n**For high-risk AI systems:** Providers may process special categories of personal data (such as ethnicity) if it is *strictly necessary* to detect and correct bias in accordance with Article 10(2), points (f) and (g) [7]. This is only allowed if all of the following conditions are met:\n\n- The bias detection/correction cannot be effectively achieved using other data, including synthetic or anonymised data [7].\n- The sensitive data is subject to technical limits on re-use, plus state-of-the-art security and privacy-preserving measures such as pseudonymisation [7].\n- The data is protected with strict access controls, documentation, and confidentiality obligations to prevent misuse [7].\n- The data is not transmitted, transferred, or accessed by other parties [7].\n- The data is deleted once the bias has been corrected, or when its retention period ends — whichever happens first [7].\n- The organisation's records of processing activities must document why this sensitive data processing was strictly necessary and why other data couldn't achieve the same goal [7].\n\n**For other AI systems/models and deployers of high-risk systems:** The same kind of processing is *exceptionally* allowed, but only where it's strictly necessary to address biases that are likely to affect health and safety, negatively impact fundamental rights, or lead to prohibited discrimination — particularly where the AI's outputs feed into future decisions [1]. All the same safeguards listed above still apply [1].\n\nImportantly, none of this creates an obligation to actually carry out bias detection and correction — it only permits it under these conditions if an organisation chooses to do so [1].\n\nThis connects to the wider data governance rules for high-risk systems, which require that training, validation, and testing data sets meet quality criteria, including the conditions in this special-category-data provision when such data is used [9].\n\n**Related context on measuring bias:** Separately, the sources also describe technical practices for identifying and measuring bias in AI outputs — for example, using benchmarks, fairness assessments across demographic subgroups, and structured feedback from affected communities [8][2][3][5]. These passages describe *how* bias can be measured but do not themselves address the legal conditions for using sensitive personal data — that is covered by [1] and [7] above.",
+      "cost_usd": 0.01879
+    },
+    {
+      "id": "D13",
+      "category": "direct",
+      "question": "Can the AI Office itself impose fines, and on whom?",
+      "elapsed_ms": 18549,
+      "search_ms": 101.99,
+      "generate_ms": 18060,
+      "tokens_in": 10196,
+      "tokens_out": 1632,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 10,
+      "cited_sections": [
+        "Article 100",
+        "Article 75",
+        "Article 75a",
+        "Article 75b",
+        "Article 75c",
+        "Article 75d",
+        "Article 99"
+      ],
+      "expected_sections": [
+        "Article 75c"
+      ],
+      "answer": "**Yes — but only over a specific, limited set of operators.**\n\nThe AI Office has its own supervisory and enforcement powers, modelled on those of a market surveillance authority [10]. However, its enforcement authority is not general: it is **\"exclusively competent for the supervision and enforcement of the obligations under this Regulation\"** only for certain categories of AI systems — mainly AI systems built on general-purpose AI models where the model and the system are developed by the same provider (or providers in the same corporate group), subject to several listed exceptions (e.g., certain products under EU harmonisation law, certain law-enforcement or border-management systems, and justice-administration systems) [26].\n\n**How the fining process works, according to the passages:**\n\n- When the AI Office finds that an operator within its competence is not complying with the Regulation (or with commitments it has made binding), it adopts a formal **decision establishing that non-compliance** [11].\n- In that decision, it can order the operator to take specific corrective measures within a set time and to report back on what it has done [5]. Before doing so, it may first try a \"structured dialogue\" with the operator, during which the operator can offer commitments instead [5][27].\n- The article governing this process is titled \"Non-compliance, fines and periodic penalty payments\" [11], indicating that fines and periodic penalties are part of this framework, but the specific fine amounts and conditions for imposing them are not included in the passages provided.\n- Separately, the passages do confirm that when the AI Office requests information from an operator (by simple request or by decision), it must warn the operator of \"the potential fines provided for in Article 99(5) for supplying incorrect or misleading information,\" and that decisions carry the right of judicial review by the Court of Justice of the EU [3]. The actual text/amounts of Article 99(5), however, are not among the passages given.\n- The AI Office can also seal premises and records during on-site inspections, with judicial authorisation where required under national law [4].\n- Its decisions on non-compliance and on commitments are published, naming the parties and stating \"the main content of the decision, including any penalties imposed\" [28], which confirms penalties are a possible outcome of these decisions, though again without stating figures.\n\n**What the passages do not answer:** They do not give the actual monetary fine amounts or percentages the AI Office may impose directly (Article 99(5) is referenced but not reproduced), so I cannot state the specific figures from these sources. The fine amounts shown elsewhere in the passages (e.g., up to €35,000,000 or 7% of global turnover under [2], and up to €1,500,000/€750,000 under [1]) relate respectively to Member State enforcement against operators generally and to EU institutions/bodies via the European Data Protection Supervisor — not to fines imposed by the AI Office itself, based on what's provided here.",
+      "cost_usd": 0.03671
+    },
+    {
+      "id": "X08",
+      "category": "cross_ref",
+      "question": "If we want to test our high-risk AI system on real people before launch, what are the rules?",
+      "elapsed_ms": 20468,
+      "search_ms": 161.13,
+      "generate_ms": 19809,
+      "tokens_in": 6772,
+      "tokens_out": 1756,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 7,
+      "cited_sections": [
+        "Annex IX",
+        "Article 60",
+        "Article 61",
+        "Article 9"
+      ],
+      "expected_sections": [
+        "Article 60",
+        "Article 60a"
+      ],
+      "answer": "Here's what the passages say about testing a high-risk AI system on real people before it's placed on the market.\n\n**Who can test, and what**\nProviders or prospective providers of high-risk AI systems listed in Annex III, or systems covered by the Union harmonisation legislation in Annex I Section A, may test in real world conditions before placing the system on the market or putting it into service [5][3]. This can be done by the provider alone or in partnership with one or more deployers or prospective deployers [3]. Testing must follow a \"real-world testing plan\" referred to in Article 60 [5], though the passages here don't spell out everything that plan must contain.\n\n**Relationship to other duties**\nTesting in real world conditions is one way of fulfilling the broader risk-management testing obligation: high-risk systems must be tested to identify appropriate risk-management measures and to confirm they perform consistently for their intended purpose, and this testing may include real-world testing under Article 60 [4]. That testing must happen at any point during development but, in any case, before the system is placed on the market or put into service, against pre-defined metrics and probabilistic thresholds suited to the system's purpose [2].\n\n**Oversight and reversibility**\nThe real-world testing must be effectively overseen by the provider (or prospective provider) and by deployers, through people who are suitably qualified, adequately trained, and have the authority to do the job [1]. The system's predictions, recommendations or decisions made during testing must be capable of being effectively reversed and disregarded [1].\n\n**Ethical review**\nTesting under Article 60 doesn't override any ethical review otherwise required by EU or national law — it applies \"without prejudice\" to those requirements [3].\n\n**Informed consent from test subjects**\nBefore anyone participates as a subject in this real-world testing, freely-given informed consent must be obtained [12]. They must first be given clear, understandable information covering [12]:\n- the nature, objectives, and possible inconveniences of the testing [12];\n- the conditions and expected duration of their participation [12];\n- their right to refuse or withdraw at any time, without detriment and without needing to justify it [12];\n- how to request that a decision made about them be reversed or disregarded [12];\n- the unique EU identification number of the test and contact details of the provider or its representative [12].\n\nConsent must be dated, documented, and a copy given to the subject or their legal representative [12].\n\n**Registration**\nTesting in real world conditions is tied to registration: information such as the test's unique identification number, contact details of the provider/prospective provider and deployers, a description of the system and its intended purpose, a summary of the testing plan, and information on suspension or termination of the test must be submitted and kept up to date under Annex IX [20].\n\n**What the passages don't cover**\nThe full list of conditions (a) through (i) that Article 60 sets for real-world testing is not included here — only points (j) and (k) are shown [1], and passage [5] cuts off mid-sentence referencing \"prohibitions under Article...\" without naming which prohibitions apply. So this answer can't tell you the complete checklist of preconditions for starting a real-world test, only the parts shown above.",
+      "cost_usd": 0.0311
+    },
+    {
+      "id": "C05",
+      "category": "cross_doc",
+      "question": "What does the Act require for cybersecurity of high-risk systems, and what attacks should we actually defend against?",
+      "elapsed_ms": 11782,
+      "search_ms": 155.55,
+      "generate_ms": 11124,
+      "tokens_in": 6829,
+      "tokens_out": 1070,
+      "refused": false,
+      "behaved": true,
+      "grounded": true,
+      "n_citations": 5,
+      "cited_sections": [
+        "Article 13",
+        "Article 15",
+        "Article 42",
+        "NIST AI 600-1, GOVERN 1.3 p.18",
+        "OWASP LLMZZ - Notes and caveats"
+      ],
+      "expected_sections": [
+        "Article 15"
+      ],
+      "answer": "Based on the passages, here's what the Act says about cybersecurity requirements for high-risk AI systems:\n\n**The core requirement**\n\nHigh-risk AI systems must be designed and developed to achieve an \"appropriate level\" of accuracy, robustness, and cybersecurity, and must perform consistently in these respects throughout the system's lifecycle [1]. Specifically, high-risk AI systems must be resilient against attempts by unauthorised third parties to alter their use, outputs, or performance by exploiting system vulnerabilities [1]. The technical solutions used must be \"appropriate to the relevant circumstances and the risks\" — the Act doesn't specify one-size-fits-all measures [1].\n\n**Specific attacks to defend against**\n\nThe Act names four categories of AI-specific vulnerabilities that technical solutions should address, \"where appropriate,\" through measures to prevent, detect, respond to, resolve and control for them [1]:\n\n1. **Data poisoning** — attacks trying to manipulate the training data set [1].\n2. **Model poisoning** — attacks on pre-trained components used in training [1].\n3. **Adversarial examples / model evasion** — inputs designed to cause the AI model to make a mistake [1].\n4. **Confidentiality attacks or model flaws** — [1].\n\n**Related robustness obligations**\n\nBeyond cybersecurity specifically, the Act also requires that high-risk systems be resilient to errors, faults, or inconsistencies, using technical and organisational measures such as redundancy, backups, or fail-safe plans [1]. Systems that keep learning after deployment must be designed to reduce the risk of biased outputs feeding back into future operations (feedback loops), with mitigation measures in place [1].\n\n**Documentation and disclosure**\n\nProviders must declare the accuracy levels and metrics in the instructions for use [1], and the instructions must also state the level of robustness and cybersecurity the system has been tested and validated against, plus any known circumstances that could affect that expected level [3].\n\n**Ways to demonstrate compliance**\n\nA system can be presumed to comply with the Article 15 cybersecurity requirements if it has been certified, or has a statement of conformity, under an EU cybersecurity certification scheme under Regulation (EU) 2019/881, provided the certificate's scope covers those requirements [4]. Systems falling within the scope of Regulation (EU) 2024/2847 that meet its Article 12(1) conditions are also deemed to comply with Article 15's cybersecurity requirements [4].\n\n**What the passages don't cover**\n\nThe passages do not specify measurable benchmarks or technical standards for \"appropriate\" cybersecurity levels beyond noting that the Commission is to encourage development of benchmarks and measurement methodologies for accuracy and robustness (not specifically cybersecurity) [1]. If you're looking for more granular or checklist-style technical controls (e.g., specific frameworks like NIST or OWASP mappings), that material isn't addressed in these passages in connection with this Article — the NIST and OWASP passages provided [6][7] concern different topics (generative AI risk tiers and an AISVS-to-Top-10 mapping note) and don't speak to Article 15's cybersecurity requirements.",
+      "cost_usd": 0.02436
+    }
+  ]
+}
