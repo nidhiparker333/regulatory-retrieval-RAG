@@ -146,6 +146,38 @@ So k=15 buys a better retrieval number for 2.3× the context, with no measured
 improvement in the answer. Paying that without evidence is the mistake this
 project exists to avoid; the sweep is recorded so the trade can be re-argued.
 
+### Chunk size was inherited. Swept, it turns out to be right — and overlap does nothing
+
+Where you cut decides what can ever be retrieved, which makes this the largest
+lever in the pipeline. It had never been tested. Each configuration re-chunked,
+re-embedded and re-scored:
+
+| target / max / overlap | chunks | strict | partial |
+|---|---|---|---|
+| **1800 / 2600 / 200** | 856 | **24/26** | **0.942** |
+| 2400 / 3400 / 250 | 731 | 24/26 | 0.942 |
+| 1800 / 2600 / **0** | 856 | 24/26 | 0.942 |
+| 1200 / 1800 / 150 | 1063 | 23/26 | 0.929 |
+| 900 / 1400 / 100 | 1227 | 23/26 | 0.929 |
+
+Smaller is worse, and consistently: both smaller configurations lose the same
+question. Cutting finer separates a provision from the conditions attached to
+it, which is the failure the chunker's numbering-aware boundaries exist to
+avoid.
+
+**Overlap contributes nothing measurable.** Dropping it entirely — 1800/2600/0 —
+scores identically to the shipped 200 characters, which cost 2.6% duplicated
+text across the corpus.
+
+That is not the same as overlap being useless. It guards against an answer
+straddling a cut, and on 26 questions that failure mode may simply not occur.
+Absence of evidence at this sample size is not evidence of absence, so it stays:
+the cost is small and known, the risk it covers is real and unmeasured. Worth
+revisiting on a larger question set.
+
+The shipped configuration was inherited and is now tested rather than assumed,
+which is the point of running this at all.
+
 ### The cross-reference cap was costing three questions
 
 Following stopped after four references — and the fourth is not reliably the
@@ -226,9 +258,6 @@ because the failures that matter here produce output that still reads perfectly.
 - **Sample size.** 30 questions, 26 answerable. Every figure is a fraction, not a
   percentage; one question is 3.8 points.
 - **Any corpus but this one**, and anything at scale.
-- **Chunk size.** `TARGET=1800`, `MAX=2600`, `OVERLAP=200` were inherited and
-  never swept. They are a primary lever and the sweep is free; it has not been
-  run.
 - **The embedding model.** `bge-small-en-v1.5` was never compared against a
   larger model or a different family. Whether a bigger encoder closes the
   vocabulary gap that D04 exposes is unknown.
