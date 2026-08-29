@@ -95,6 +95,32 @@ The two steps fix different failures and barely overlap. Following references
 recovers the multi-hop questions and does nothing for cross-document ones;
 diversity does the reverse. Together they are worth more than either alone.
 
+### How many passages to retrieve, measured rather than inherited
+
+`k` was carried over from the earlier project and had never been tested here.
+Swept against the question set, free:
+
+| k | strict | passages | context |
+|---|---|---|---|
+| 3 | 21/26 | 12.7 | 14,486 |
+| **5** | **24/26** | **16.7** | **18,638** |
+| 8 | 24/26 | 23.6 | 26,213 |
+| 10 | 24/26 | 29.4 | 32,443 |
+| 15 | 25/26 | 38.3 | 42,384 |
+| 20 | 25/26 | 44.8 | 50,050 |
+
+Three is too few. **Five to ten changes nothing at all** — the same flat stretch
+the multi-hop result found, now bounded: more passages of the same kind do not
+help. Fifteen adds one question and then twenty adds nothing, so the curve has
+an elbow rather than a slope.
+
+`k=5` still ships. The question k=15 recovers is X08, whose missing half —
+Article 60a — sits at rank 11. But X08 was already graded **correct** at k=5:
+it answered from Article 60, and grounding passes on any overlap with the key.
+So k=15 buys a better retrieval number for 2.3× the context, with no measured
+improvement in the answer. Paying that without evidence is the mistake this
+project exists to avoid; the sweep is recorded so the trade can be re-argued.
+
 ### The cross-reference cap was costing three questions
 
 Following stopped after four references — and the fourth is not reliably the
@@ -113,9 +139,10 @@ reaches Article 85, titled *"Right to lodge a complaint with a market
 surveillance authority"*. Asked in those words it returns at **rank 1, 0.901**.
 The article is perfectly findable; the everyday phrasing does not reach it.
 
-No retrieval arm recovers it — **0.00** on every one. Neither following
-references nor source diversity touches it, because both operate on what search
-already returned, and search never returns Article 85 at all. It needs the
+No retrieval arm recovers it, and neither does retrieving more: **Article 85
+does not appear in the top 50 of 856 passages.** Following references and source
+diversity both operate on what search returned, and search never returns it at
+any depth tested. It needs the
 question rewritten into the register of the source before searching, which is a
 different mechanism and is not built.
 
@@ -148,7 +175,7 @@ by printing the data and reading it.
 
 ## How the numbers are verified
 
-Seven scripts re-check every stage, each exiting non-zero on failure. They exist
+Nine scripts re-check every stage, each exiting non-zero on failure. They exist
 because the failures that matter here produce output that still reads perfectly.
 
 | Property | Why it would be invisible if broken |
@@ -174,6 +201,17 @@ because the failures that matter here produce output that still reads perfectly.
 - **Sample size.** 30 questions, 26 answerable. Every figure is a fraction, not a
   percentage; one question is 3.8 points.
 - **Any corpus but this one**, and anything at scale.
+- **Chunk size.** `TARGET=1800`, `MAX=2600`, `OVERLAP=200` were inherited and
+  never swept. They are a primary lever and the sweep is free; it has not been
+  run.
+- **The embedding model.** `bge-small-en-v1.5` was never compared against a
+  larger model or a different family. Whether a bigger encoder closes the
+  vocabulary gap that D04 exposes is unknown.
+- **Run-to-run variance.** Generation is stochastic and the evaluation was run
+  once. Every end-to-end figure here is a single sample, so a one-question
+  difference between two configurations cannot be distinguished from noise.
+- **Refusal rests on four questions**, which is the smallest sample in the set
+  and the most safety-critical behaviour in the system.
 - **Whether the answer keys are the only defensible ones.** They are one reading
   of what a complete answer requires.
 
