@@ -27,8 +27,11 @@ CLEAN = ROOT / "data" / "clean"
 OUT = CLEAN / "chunks.json"
 
 # Sizes in characters. Roughly 4 characters per token, so ~450 tokens target.
-# Legal provisions are long; cutting much smaller separates a rule from its
-# conditions, which is exactly the kind of half-answer we want to avoid.
+# Swept - see sweep_chunking.py and FINDINGS. 1800 and 2400 score alike; 1200
+# and 900 both lose C01. Not because they fragment Article 9 (it splits into
+# eight parts at every size) but because they change which passages win the
+# top five, and Article 9 is only ever reached through a cross-reference from
+# one of them. Chunk size moves multi-hop reach, which is not obvious.
 TARGET = 1800
 MAX = 2600
 OVERLAP = 200
