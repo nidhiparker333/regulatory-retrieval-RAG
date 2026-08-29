@@ -24,7 +24,7 @@ RAW = ROOT / "data" / "raw"
 
 # Some servers reject requests that don't look like a browser.
 HEADERS = {
-    "User-Agent": "governance-rag/0.1 (research project; contact via github)"
+    "User-Agent": "regulatory-retrieval/1.0 (research project; contact via github)"
 }
 
 # The four sources. `id` becomes the filename, so keep them short and stable.

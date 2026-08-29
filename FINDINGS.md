@@ -52,8 +52,9 @@ that low similarity would flag an unanswerable question.
 
 The unanswerable question scores *higher*. "What do the recitals say about
 high-risk classification" — asked against a corpus that provably contains no
-recitals — beats "is my CV screening tool high-risk", which has a correct and
-retrievable answer. **No threshold separates these two populations.**
+recitals — beats "is my CV screening tool for hiring considered high-risk",
+which has a correct and retrievable answer. **No threshold separates these two
+populations.**
 
 Enforced at generation instead: **4/4**. Each refusal names what it actually held
 and why that was not enough — the Colorado question identifies the passages as EU
@@ -382,13 +383,39 @@ Structural problems — cross-references, multi-hop, buried list items — are
 solved. What remains is the distance between how a person asks and how a
 legislature writes.
 
+### Two words decide the flagship question
+
+The same failure, on the question this project leads with, found by trying to
+run the README's own example from a fresh clone.
+
+| asked as | Annex III | Article 6 |
+|---|---|---|
+| *Is my CV screening tool **for hiring** considered high-risk?* | parts 1, 4, 5 | **yes** |
+| *Is my CV screening tool high-risk?* | part 1 only | **no** |
+
+Dropping *for hiring* costs Article 6 entirely. With it, search reaches Annex III
+parts 4 and 5 — the employment category — and those parts cite Article 6, so
+following references brings it in. Without it, only part 1 comes back, the
+heading, which does not carry that citation. The multi-hop machinery is intact
+and never gets the seed it needs.
+
+This is worth more than the D04 result above, because D04 is a question nobody
+tuned anything on and this is *the* demonstration question. Two words of
+practitioner vocabulary — the ones naming the Annex III category — are load
+bearing, and nothing in the pipeline would tell you which two.
+
+It also explains why the held-out numbers are what they are. Those questions were
+written by a model asked not to reuse the source's phrasing, so they are full of
+exactly this: the right question in the wrong words.
+
 ---
 
 ## The detour worth recording
 
 ### The sophisticated-looking failure had the least sophisticated cause
 
-The flagship question — *is my CV screening tool high-risk?* — first returned
+The flagship question — *Is my CV screening tool for hiring considered
+high-risk?* — first returned
 neither Article 6 nor Annex III. The obvious diagnosis was that the embeddings
 were too weak for this kind of question, which is the point at which most people
 reach for a bigger model or a reranker.

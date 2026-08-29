@@ -164,7 +164,8 @@ application.
 **Chunk boundaries come from the drafter's own numbering** (`1.`, `(a)`) before
 falling back to sentence ends, so provisions stay whole. Enumerated lists get one
 chunk per item with no packing — Annex III's eight high-risk categories are eight
-separate chunks, which is what makes "is my CV screening tool high-risk"
+separate chunks, which is what makes "is my CV screening tool for hiring
+considered high-risk"
 answerable at all.
 
 **Cross-references are extracted at parse time**, not inferred at query time.
@@ -215,7 +216,46 @@ python -m venv .venv
 .venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-Everything up to generation is free and needs no API key.
+**The corpus and the index are committed**, so retrieval works immediately —
+you do not have to rebuild anything to look around. Everything except
+generating an answer is free and needs no API key.
+
+Search, with no key and nothing to build:
+
+```bash
+.venv\Scripts\python.exe scripts\score_retrieval.py
+```
+
+Check that what is committed is what the documentation claims. These are the
+point of the repository more than the pipeline is — each exits non-zero on
+failure, and each exists because something it now checks was once silently
+wrong:
+
+```bash
+.venv\Scripts\python.exe scripts\validate.py
+```
+```bash
+.venv\Scripts\python.exe scripts\verify_sources.py
+```
+```bash
+.venv\Scripts\python.exe scripts\check_chunks.py
+```
+```bash
+.venv\Scripts\python.exe scripts\verify_index.py
+```
+```bash
+.venv\Scripts\python.exe scripts\verify_embeddings.py
+```
+```bash
+.venv\Scripts\python.exe scripts\test_scoring.py
+```
+```bash
+.venv\Scripts\python.exe scripts\check_docs.py
+```
+
+To rebuild the corpus from the published sources instead — about three minutes,
+mostly embedding on CPU. It is deterministic: `chunks.json` and `index.npz`
+come back byte-identical.
 
 ```bash
 .venv\Scripts\python.exe scripts\fetch.py
@@ -242,7 +282,7 @@ Everything up to generation is free and needs no API key.
 Ask a question (needs a key in `api-key.txt`, which is gitignored):
 
 ```bash
-.venv\Scripts\python.exe scripts\answer.py "is my CV screening tool high-risk?"
+.venv\Scripts\python.exe scripts\answer.py "Is my CV screening tool for hiring considered high-risk?"
 ```
 
 Score retrieval, compare every retrieval strategy, run the full evaluation:
@@ -255,6 +295,41 @@ Score retrieval, compare every retrieval strategy, run the full evaluation:
 ```
 ```bash
 .venv\Scripts\python.exe scripts\metrics.py
+```
+
+The held-out set and the blind grader — the checks that stop this being tuned
+on its own test set. `run_holdout.py` is free without `--generate`:
+
+```bash
+.venv\Scripts\python.exe scripts\run_holdout.py
+```
+```bash
+.venv\Scripts\python.exe scripts\grade_blind.py holdout
+```
+
+Sweeps, if you want to re-argue a decision rather than take it on trust. Both
+restore the shipped artefacts afterwards:
+
+```bash
+.venv\Scripts\python.exe scripts\sweep_chunking.py
+```
+```bash
+.venv\Scripts\python.exe scripts\run_variance.py
+```
+
+### The interface
+
+FastAPI over the same retrieval engine the evaluation scores, and a Next.js
+front end that shows the trace beside every answer:
+
+```bash
+.venv\Scripts\python.exe -m uvicorn api.server:app --reload --port 8000
+```
+```bash
+npm install --prefix ui
+```
+```bash
+npm run dev --prefix ui
 ```
 
 ## Verification
