@@ -1,0 +1,220 @@
+<meta charset="utf-8">
+<title>regulatory-retrieval — animated architecture</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1080px;height:1350px;background:#070A12;overflow:hidden}
+  body{
+    font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  #stage{position:relative;width:1080px;height:1350px}
+  .a{position:absolute}
+  .eyebrow{font-size:14px;letter-spacing:3.2px;color:#4A5468;font-weight:500}
+  .t1{font-size:46px;letter-spacing:-1px;color:#E9EDF5;font-weight:650}
+  .t2{font-size:46px;letter-spacing:-1px;color:#4FD8E8;font-weight:650}
+  .lab{font-size:12px;letter-spacing:2.6px;color:#4A5468;font-weight:500}
+  .sm{font-size:17px;color:#79839A}
+  .rule{height:1px;background:#1C2334}
+  .panel{background:#0C111C;border:1px solid #1C2334;border-radius:12px}
+  .dot{border-radius:50%}
+  svg{position:absolute;left:0;top:0;overflow:visible}
+</style>
+
+<div id="stage">
+  <!-- header -->
+  <div class="a eyebrow" style="left:80px;top:84px">RETRIEVAL-AUGMENTED GENERATION</div>
+  <div class="a t1" style="left:80px;top:106px">Retrieval is the system.</div>
+  <div class="a t2" style="left:80px;top:158px">So I measured it.</div>
+
+  <!-- corpus -->
+  <div class="a rule" style="left:80px;top:246px;width:920px"></div>
+  <div class="a lab" style="left:80px;top:266px">CORPUS</div>
+  <div class="a sm" style="left:188px;top:261px">EU AI Act &nbsp;·&nbsp; NIST AI RMF &nbsp;·&nbsp; NIST Generative AI Profile &nbsp;·&nbsp; OWASP LLM Top 10</div>
+  <div class="a sm" style="left:188px;top:289px">403 sections &nbsp;→&nbsp; 856 passages &nbsp;→&nbsp; 384-dimension index, 1.2 MB, no vector database</div>
+  <div id="cloud"></div>
+
+  <!-- pipeline -->
+  <div class="a lab" style="left:80px;top:340px">THE PIPELINE</div>
+  <div class="a panel" style="left:80px;top:368px;width:920px;height:54px;border-color:#242C3E">
+    <div class="a" style="left:24px;top:14px;font-size:20px;color:#E9EDF5">Is my CV screening tool for hiring considered high-risk?</div>
+    <div id="caret" class="a" style="left:878px;top:16px;width:2px;height:22px;background:#4FD8E8"></div>
+  </div>
+  <div class="a lab" style="left:560px;top:429px;letter-spacing:2.2px">SEARCH ALL 856 PASSAGES &nbsp;·&nbsp; 141 ms</div>
+
+  <div id="row0" class="a" style="left:80px;top:462px;width:920px;height:34px;background:#0C111C;border:1px solid #1C2334;border-radius:8px;overflow:hidden">
+    <div id="bar0" class="a" style="left:0;top:0;width:300px;height:34px;background:#5B8CFF;opacity:.105"></div>
+    <div class="a" style="left:22px;top:8px;font-size:15px;color:#4FD8E8;font-weight:500;letter-spacing:.6px">.678</div>
+    <div class="a" style="left:92px;top:7px;font-size:18px;color:#C3C9D6">Annex III&nbsp; (part 5 of 9)</div>
+    <div class="a lab" style="left:836px;top:11px;letter-spacing:1.6px">MATCH</div>
+  </div>
+  <div id="row1" class="a" style="left:80px;top:502px;width:920px;height:34px;background:#0C111C;border:1px solid #1C2334;border-radius:8px;overflow:hidden">
+    <div id="bar1" class="a" style="left:0;top:0;width:248px;height:34px;background:#5B8CFF;opacity:.105"></div>
+    <div class="a" style="left:22px;top:8px;font-size:15px;color:#4FD8E8;font-weight:500;letter-spacing:.6px">.649</div>
+    <div class="a" style="left:92px;top:7px;font-size:18px;color:#C3C9D6">NIST AI 600-1, GOVERN 1.3</div>
+    <div class="a lab" style="left:836px;top:11px;letter-spacing:1.6px">MATCH</div>
+  </div>
+  <div id="row2" class="a" style="left:80px;top:542px;width:920px;height:34px;background:#101827;border:1px solid #3A3358;border-radius:8px;overflow:hidden">
+    <div id="bar2" class="a" style="left:0;top:0;width:920px;height:34px;background:#A98BFF;opacity:.105"></div>
+    <div class="a" style="left:22px;top:8px;font-size:15px;color:#A98BFF;font-weight:500">—</div>
+    <div class="a" style="left:92px;top:7px;font-size:18px;color:#E9EDF5;font-weight:500">Article 6&nbsp; (part 1 of 8)</div>
+    <div class="a" style="left:786px;top:11px;font-size:12px;letter-spacing:1.6px;color:#A98BFF;font-weight:500">CITED BY [1]</div>
+  </div>
+
+  <div class="a" style="left:80px;top:592px;font-size:17px;color:#A98BFF">Article 6 was never in the top 5. It arrives because Annex III cites it.</div>
+
+  <div id="gate" class="a" style="left:310px;top:646px;width:460px;height:80px;background:#0E1220;border:1.5px solid rgba(169,139,255,.55);border-radius:13px;box-shadow:0 0 40px 2px rgba(169,139,255,.24)">
+    <div class="a" style="left:0;top:16px;width:460px;text-align:center;font-size:12px;letter-spacing:2.6px;color:#A98BFF;font-weight:500">EVIDENCE GATE</div>
+    <div class="a" style="left:0;top:38px;width:460px;text-align:center;font-size:21px;color:#E9EDF5;font-weight:500;letter-spacing:-.2px">Is the evidence enough to answer?</div>
+  </div>
+
+  <div id="cardA" class="a" style="left:80px;top:768px;width:440px;height:96px;background:#081619;border:1.5px solid rgba(79,216,232,.5);border-radius:12px;box-shadow:0 0 30px rgba(79,216,232,.16)">
+    <div class="a" style="left:24px;top:18px;font-size:12px;letter-spacing:2.4px;color:#4FD8E8;font-weight:500">ENOUGH EVIDENCE</div>
+    <div class="a" style="left:24px;top:38px;font-size:25px;color:#E9EDF5;font-weight:650;letter-spacing:-.4px">Cited answer</div>
+    <div class="a" style="left:0;top:46px;width:416px;text-align:right;font-size:13px;letter-spacing:1.4px;color:#4FD8E8;font-weight:500">EVERY CLAIM TRACED</div>
+  </div>
+  <div id="cardR" class="a" style="left:560px;top:768px;width:440px;height:96px;background:#0D0B16;border:1.5px solid rgba(169,139,255,.28);border-radius:12px;opacity:.6">
+    <div class="a" style="left:24px;top:18px;font-size:12px;letter-spacing:2.4px;color:#A98BFF;font-weight:500">EVIDENCE TOO WEAK</div>
+    <div class="a" style="left:24px;top:38px;font-size:25px;color:#E9EDF5;font-weight:650;letter-spacing:-.4px">Refusal</div>
+    <div class="a" style="left:0;top:46px;width:416px;text-align:right;font-size:13px;letter-spacing:1.4px;color:#A98BFF;font-weight:500">NOT IN THE SOURCES</div>
+  </div>
+
+  <!-- evaluation -->
+  <div class="a rule" style="left:80px;top:892px;width:920px"></div>
+  <div class="a lab" style="left:80px;top:912px">WHAT THE EVALUATION SHOWED</div>
+
+  <div class="a panel" style="left:80px;top:938px;width:920px;height:92px">
+    <div class="a" style="left:28px;top:24px;font-size:44px;color:#4A5468;font-weight:650;letter-spacing:-1.5px">3/8</div>
+    <div class="a" style="left:30px;top:73px;font-size:12px;letter-spacing:1.6px;color:#4A5468;font-weight:500">top 5</div>
+    <div class="a" style="left:132px;top:24px;font-size:44px;color:#4A5468;font-weight:650;letter-spacing:-1.5px">3/8</div>
+    <div class="a" style="left:134px;top:73px;font-size:12px;letter-spacing:1.6px;color:#4A5468;font-weight:500">top 10</div>
+    <div id="mhArrow" class="a" style="left:240px;top:30px;font-size:32px;color:#A98BFF">→</div>
+    <div id="mh78" class="a" style="left:296px;top:19px;font-size:50px;color:#4FD8E8;font-weight:650;letter-spacing:-1.8px">7/8</div>
+    <div class="a" style="left:298px;top:75px;font-size:12px;letter-spacing:1.6px;color:#4FD8E8;font-weight:500">following the citations</div>
+    <div class="a" style="left:470px;top:28px;font-size:19px;color:#E9EDF5">Doubling how much came back changed nothing.</div>
+    <div class="a" style="left:470px;top:54px;font-size:19px;color:#79839A">The other half was behind a reference.</div>
+  </div>
+
+  <div class="a panel" style="left:80px;top:1050px;width:286.67px;height:86px">
+    <div id="s0" class="a" style="left:24px;top:14px;font-size:38px;color:#E9EDF5;font-weight:650;letter-spacing:-1.2px">24/26</div>
+    <div class="a" style="left:24px;top:61px;font-size:14px;color:#79839A">evidence retrieved</div>
+  </div>
+  <div class="a panel" style="left:396.67px;top:1050px;width:286.67px;height:86px">
+    <div id="s1" class="a" style="left:24px;top:14px;font-size:38px;color:#4FD8E8;font-weight:650;letter-spacing:-1.2px">4/4</div>
+    <div class="a" style="left:24px;top:61px;font-size:14px;color:#79839A">refused when unsupported</div>
+  </div>
+  <div class="a panel" style="left:713.33px;top:1050px;width:286.67px;height:86px">
+    <div id="s2" class="a" style="left:24px;top:14px;font-size:38px;color:#4FD8E8;font-weight:650;letter-spacing:-1.2px">0</div>
+    <div class="a" style="left:24px;top:61px;font-size:14px;color:#79839A">answers without citations</div>
+  </div>
+
+  <div id="held" class="a" style="left:80px;top:1152px;width:920px;height:90px;background:#0D0B16;border:1.5px solid rgba(169,139,255,.34);border-radius:12px">
+    <div class="a" style="left:26px;top:16px;font-size:12px;letter-spacing:2.4px;color:#A98BFF;font-weight:500">NEVER TUNED AGAINST THESE</div>
+    <div class="a" style="left:26px;top:36px;font-size:22px;color:#E9EDF5;font-weight:500;letter-spacing:-.3px">45 held-out questions, graded blind by a separate model</div>
+    <div class="a" style="left:26px;top:67px;font-size:14px;color:#79839A">Retrieval failing is not the risk. Inventing an answer is.</div>
+    <div id="one" class="a" style="left:0;top:18px;width:866px;text-align:right;font-size:46px;color:#A98BFF;font-weight:650;letter-spacing:-1.6px">1</div>
+    <div class="a" style="left:0;top:70px;width:866px;text-align:right;font-size:12px;letter-spacing:1.6px;color:#A98BFF;font-weight:500">FABRICATED ANSWER</div>
+  </div>
+
+  <div class="a" style="left:80px;top:1282px;font-size:14px;color:#4A5468">Code, questions and results are public &nbsp;·&nbsp; github.com/nidhiparker333/regulatory-retrieval-RAG</div>
+
+  <!-- connectors + particles -->
+  <svg width="1080" height="1350">
+    <line x1="540" y1="422" x2="540" y2="446" stroke="#1C2334"/>
+    <line x1="540" y1="620" x2="540" y2="646" stroke="#1C2334"/>
+    <line id="forkA" x1="540" y1="726" x2="300" y2="764" stroke="#4FD8E8" stroke-width="1.5" opacity=".85"/>
+    <line id="forkR" x1="540" y1="726" x2="780" y2="764" stroke="#A98BFF" stroke-width="1.5" opacity=".45"/>
+    <circle id="pGate" cx="540" cy="606" r="4.5" fill="#4FD8E8" opacity="0"/>
+    <circle id="pA"    cx="540" cy="730" r="4.5" fill="#4FD8E8" opacity="0"/>
+    <circle id="pR"    cx="540" cy="730" r="4.5" fill="#A98BFF" opacity="0"/>
+  </svg>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const DUR=12;
+const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const ramp=(t,s,e)=>{const x=clamp((t-s)/(e-s));return x*x*(3-2*x);};
+// 0 -> 1 -> 0 pulse across [s,e] with the peak at p through the window
+const pulse=(t,s,e)=>{const x=clamp((t-s)/(e-s));return Math.sin(x*Math.PI);};
+
+// embedding cloud
+const cloud=[];
+let seed=57; const rnd=()=>(seed=(seed*1103515245+12345)%2147483648)/2147483648;
+for(let i=0;i<14;i++){
+  const d=document.createElement("div");
+  const r=2.5+rnd()*2;
+  d.className="a dot";
+  const x=812+rnd()*182, y=258+rnd()*44;
+  d.style.cssText=`left:${x}px;top:${y}px;width:${r}px;height:${r}px;background:${rnd()>.7?"#4FD8E8":"#5B8CFF"}`;
+  $("cloud").appendChild(d);
+  cloud.push({el:d, base:.30+rnd()*.40, amp:2.5+rnd()*4, dir:rnd()>.5?1:-1, ph:rnd()*Math.PI*2});
+}
+
+function render(t){
+  t=((t%DUR)+DUR)%DUR;
+  const out=1-ramp(t,DUR-0.5,DUR);              // gentle settle so the loop closes clean
+
+  // corpus dots breathe and drift
+  cloud.forEach(c=>{
+    const y=Math.sin(t/DUR*Math.PI*2 + c.ph)*c.amp*c.dir;
+    c.el.style.transform=`translateY(${y}px)`;
+    c.el.style.opacity=(c.base + 0.34*ramp(t,0.4,1.4)*(1-ramp(t,4,7)))*1;
+  });
+
+  // caret blinks while the question lands
+  $("caret").style.opacity = (t>0.9 && t<2.2) ? (Math.floor((t-0.9)/0.15)%2 ? 0 : 1) : 0;
+
+  // evidence rows light in sequence
+  for(let i=0;i<3;i++){
+    const s=2.35+i*0.40;
+    const v=0.105 + 0.36*pulse(t,s,s+1.6);
+    $("bar"+i).style.opacity=Math.max(0.105,v);
+  }
+  // the cited row nudges out as it arrives
+  $("row2").style.transform=`translateX(${16*pulse(t,2.95,4.55)}px)`;
+
+  // particles
+  const trav=(el,t0,dur,x0,y0,dx,dy)=>{
+    const p=clamp((t-t0)/dur);
+    const on=(t>=t0-0.05 && t<=t0+dur+0.05);
+    el.setAttribute("opacity", on ? (Math.sin(clamp((t-t0)/dur)*Math.PI)*1.6>1?1:Math.min(1,Math.sin(clamp((t-t0)/dur)*Math.PI)*1.6)) : 0);
+    const e=p*p*(3-2*p);
+    el.setAttribute("cx", x0+dx*e);
+    el.setAttribute("cy", y0+dy*e);
+  };
+  trav($("pGate"),4.30,0.50, 540,606,   0, 44);
+  trav($("pA"),   5.35,0.60, 540,730,-240, 36);
+  trav($("pR"),   6.95,0.60, 540,730, 240, 36);
+
+  // gate swells as the particle lands
+  const gp=pulse(t,4.70,5.90);
+  $("gate").style.boxShadow=`0 0 ${40+52*gp}px ${2+3*gp}px rgba(169,139,255,${.24+.22*gp})`;
+  $("gate").style.transform=`scale(${1+0.03*gp})`;
+
+  // fork alternates: answer, then refusal
+  const aLit=ramp(t,5.35,5.75)-ramp(t,6.8,7.3);
+  const rLit=ramp(t,6.95,7.45)-ramp(t,8.5,9.1);
+  $("forkA").setAttribute("opacity", 0.85+0.15*aLit);
+  $("forkR").setAttribute("opacity", 0.45+0.55*rLit);
+  $("cardA").style.boxShadow=`0 0 ${30+40*aLit}px rgba(79,216,232,${.16+.20*aLit})`;
+  $("cardA").style.opacity  = 1 - 0.66*rLit;
+  $("cardR").style.opacity  = 0.6 + 0.4*rLit;
+  $("cardR").style.boxShadow=`0 0 ${60*rLit}px rgba(169,139,255,${.30*rLit})`;
+
+  // evaluation numbers land in sequence
+  const pop=(el,s,peak)=>{ el.style.transform=`scale(${1+(peak-1)*pulse(t,s,s+1.3)})`; };
+  pop($("mhArrow"),8.85,1.22);
+  pop($("mh78"),  9.05,1.16);
+  pop($("s0"),    9.90,1.12);
+  pop($("s1"),   10.20,1.12);
+  pop($("s2"),   10.50,1.12);
+  pop($("one"),  11.00,1.24);
+  $("held").style.boxShadow=`0 0 ${46*pulse(t,10.9,12)}px rgba(169,139,255,${.26*pulse(t,10.9,12)})`;
+
+  document.getElementById("stage").style.opacity = out === 0 ? 1 : 1;   // scene holds; loop is value-continuous
+}
+
+const p=new URLSearchParams(location.search);
+if(p.has("t")) render(parseFloat(p.get("t")));
+else { const t0=performance.now(); (function l(){ render((performance.now()-t0)/1000); requestAnimationFrame(l); })(); }
+</script>
