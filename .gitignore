@@ -39,3 +39,10 @@ DEFENCE.md
 
 # Editor/agent tooling config, not part of the project.
 .claude/
+
+# Superseded LinkedIn drafts. Kept on disk, not published - five generations of
+# abandoned attempts is not something a visitor should have to read past.
+docs/linkedin/rag-light.*
+docs/linkedin/rag-reel.*
+docs/linkedin/rag-workflow.*
+docs/motion.html

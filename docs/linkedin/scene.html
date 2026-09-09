@@ -1,220 +1,336 @@
 <meta charset="utf-8">
-<title>regulatory-retrieval — animated architecture</title>
+<title>Retrieval-augmented generation, measured end to end</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
-  html,body{width:1080px;height:1350px;background:#070A12;overflow:hidden}
-  body{
-    font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
+  html,body{width:1080px;height:1350px;background:#FAFBFD;overflow:hidden}
+  body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
   #stage{position:relative;width:1080px;height:1350px}
   .a{position:absolute}
-  .eyebrow{font-size:14px;letter-spacing:3.2px;color:#4A5468;font-weight:500}
-  .t1{font-size:46px;letter-spacing:-1px;color:#E9EDF5;font-weight:650}
-  .t2{font-size:46px;letter-spacing:-1px;color:#4FD8E8;font-weight:650}
-  .lab{font-size:12px;letter-spacing:2.6px;color:#4A5468;font-weight:500}
-  .sm{font-size:17px;color:#79839A}
-  .rule{height:1px;background:#1C2334}
-  .panel{background:#0C111C;border:1px solid #1C2334;border-radius:12px}
-  .dot{border-radius:50%}
-  svg{position:absolute;left:0;top:0;overflow:visible}
+  .mono{font-family:'Cascadia Mono',Consolas,'SF Mono',Menlo,monospace;font-variant-numeric:tabular-nums}
+  .eye{font-size:11px;letter-spacing:2.6px;color:#8B94A6;font-weight:700}
+  .sec{font-size:10.5px;letter-spacing:2.4px;font-weight:700;color:#98A1B2}
+  .card{background:#FFF;border:1px solid #E3E7EE;border-radius:10px}
+  .rule{height:1px;background:#E6EAF1}
+  .il{fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  .cap{font-size:13px;font-weight:650;color:#111826;letter-spacing:-.1px}
+  .sub{font-size:10.5px;color:#8B94A6}
 </style>
 
 <div id="stage">
   <!-- header -->
-  <div class="a eyebrow" style="left:80px;top:84px">RETRIEVAL-AUGMENTED GENERATION</div>
-  <div class="a t1" style="left:80px;top:106px">Retrieval is the system.</div>
-  <div class="a t2" style="left:80px;top:158px">So I measured it.</div>
+  <div class="a" style="left:72px;top:64px;width:52px;height:3px;background:#0D8FA3;border-radius:2px"></div>
+  <div class="a eye" style="left:136px;top:58px">REGULATORY RETRIEVAL &nbsp;·&nbsp; RAG</div>
+  <div class="a" style="left:72px;top:82px;font-size:37px;font-weight:700;letter-spacing:-1.25px;color:#0C121D;line-height:1.15">Retrieval-augmented generation,<br><span style="color:#0D8FA3">measured end to end.</span></div>
+  <div class="a" style="left:72px;top:182px;width:700px;font-size:14px;color:#5C6579;line-height:1.55">Answers are written only from retrieved passages, each claim naming the article it came from, and the system abstains when the corpus cannot support one.</div>
 
-  <!-- corpus -->
-  <div class="a rule" style="left:80px;top:246px;width:920px"></div>
-  <div class="a lab" style="left:80px;top:266px">CORPUS</div>
-  <div class="a sm" style="left:188px;top:261px">EU AI Act &nbsp;·&nbsp; NIST AI RMF &nbsp;·&nbsp; NIST Generative AI Profile &nbsp;·&nbsp; OWASP LLM Top 10</div>
-  <div class="a sm" style="left:188px;top:289px">403 sections &nbsp;→&nbsp; 856 passages &nbsp;→&nbsp; 384-dimension index, 1.2 MB, no vector database</div>
-  <div id="cloud"></div>
+  <!-- 1 · corpus -->
+  <div class="a sec" style="left:72px;top:238px">THE EVIDENCE LIBRARY</div>
+  <div id="corpus"></div>
+  <div id="statStrip" class="a card" style="left:72px;top:376px;width:936px;height:44px;background:#F4F7FA;border-color:#E0E6EF"></div>
+  <div id="statRow"></div>
 
-  <!-- pipeline -->
-  <div class="a lab" style="left:80px;top:340px">THE PIPELINE</div>
-  <div class="a panel" style="left:80px;top:368px;width:920px;height:54px;border-color:#242C3E">
-    <div class="a" style="left:24px;top:14px;font-size:20px;color:#E9EDF5">Is my CV screening tool for hiring considered high-risk?</div>
-    <div id="caret" class="a" style="left:878px;top:16px;width:2px;height:22px;background:#4FD8E8"></div>
-  </div>
-  <div class="a lab" style="left:560px;top:429px;letter-spacing:2.2px">SEARCH ALL 856 PASSAGES &nbsp;·&nbsp; 141 ms</div>
+  <!-- 2 · build -->
+  <div class="a sec" style="left:72px;top:452px">BUILT ONCE, OFFLINE</div>
+  <div id="buildRow"></div>
 
-  <div id="row0" class="a" style="left:80px;top:462px;width:920px;height:34px;background:#0C111C;border:1px solid #1C2334;border-radius:8px;overflow:hidden">
-    <div id="bar0" class="a" style="left:0;top:0;width:300px;height:34px;background:#5B8CFF;opacity:.105"></div>
-    <div class="a" style="left:22px;top:8px;font-size:15px;color:#4FD8E8;font-weight:500;letter-spacing:.6px">.678</div>
-    <div class="a" style="left:92px;top:7px;font-size:18px;color:#C3C9D6">Annex III&nbsp; (part 5 of 9)</div>
-    <div class="a lab" style="left:836px;top:11px;letter-spacing:1.6px">MATCH</div>
+  <!-- 3 · answering -->
+  <div class="a rule" style="left:72px;top:614px;width:936px"></div>
+  <div class="a sec" style="left:72px;top:628px;color:#0D8FA3">ANSWERING A QUESTION</div>
+  <div id="person" class="a" style="left:72px;top:652px"></div>
+  <div id="bubble" class="a card" style="left:236px;top:664px;width:300px;height:62px;border-color:#CFE7EC;background:#F7FCFD">
+    <div class="a" style="left:16px;top:12px;width:270px;font-size:13px;color:#12303A;line-height:1.4">Is my CV screening tool for hiring considered high-risk?</div>
   </div>
-  <div id="row1" class="a" style="left:80px;top:502px;width:920px;height:34px;background:#0C111C;border:1px solid #1C2334;border-radius:8px;overflow:hidden">
-    <div id="bar1" class="a" style="left:0;top:0;width:248px;height:34px;background:#5B8CFF;opacity:.105"></div>
-    <div class="a" style="left:22px;top:8px;font-size:15px;color:#4FD8E8;font-weight:500;letter-spacing:.6px">.649</div>
-    <div class="a" style="left:92px;top:7px;font-size:18px;color:#C3C9D6">NIST AI 600-1, GOVERN 1.3</div>
-    <div class="a lab" style="left:836px;top:11px;letter-spacing:1.6px">MATCH</div>
-  </div>
-  <div id="row2" class="a" style="left:80px;top:542px;width:920px;height:34px;background:#101827;border:1px solid #3A3358;border-radius:8px;overflow:hidden">
-    <div id="bar2" class="a" style="left:0;top:0;width:920px;height:34px;background:#A98BFF;opacity:.105"></div>
-    <div class="a" style="left:22px;top:8px;font-size:15px;color:#A98BFF;font-weight:500">—</div>
-    <div class="a" style="left:92px;top:7px;font-size:18px;color:#E9EDF5;font-weight:500">Article 6&nbsp; (part 1 of 8)</div>
-    <div class="a" style="left:786px;top:11px;font-size:12px;letter-spacing:1.6px;color:#A98BFF;font-weight:500">CITED BY [1]</div>
+  <div id="flow"></div>
+
+  <!-- 4 · evaluation -->
+  <div class="a rule" style="left:72px;top:900px;width:936px"></div>
+  <div class="a sec" style="left:72px;top:914px;color:#6A45C8">HOW IT WAS EVALUATED</div>
+  <div class="a sec" style="left:0;top:914px;width:1008px;text-align:right;color:#A9B1C0">30 TUNING &nbsp;+&nbsp; 45 HELD-OUT QUESTIONS</div>
+
+  <div class="a card" style="left:72px;top:940px;width:456px;height:146px">
+    <div class="a sec" style="left:16px;top:14px;font-size:9.5px">WHAT EACH RETRIEVAL STEP IS WORTH</div>
+    <div id="ablRows"></div>
   </div>
 
-  <div class="a" style="left:80px;top:592px;font-size:17px;color:#A98BFF">Article 6 was never in the top 5. It arrives because Annex III cites it.</div>
-
-  <div id="gate" class="a" style="left:310px;top:646px;width:460px;height:80px;background:#0E1220;border:1.5px solid rgba(169,139,255,.55);border-radius:13px;box-shadow:0 0 40px 2px rgba(169,139,255,.24)">
-    <div class="a" style="left:0;top:16px;width:460px;text-align:center;font-size:12px;letter-spacing:2.6px;color:#A98BFF;font-weight:500">EVIDENCE GATE</div>
-    <div class="a" style="left:0;top:38px;width:460px;text-align:center;font-size:21px;color:#E9EDF5;font-weight:500;letter-spacing:-.2px">Is the evidence enough to answer?</div>
+  <div class="a card" style="left:552px;top:940px;width:456px;height:70px">
+    <div class="a sec" style="left:16px;top:12px;font-size:9.5px">FOLLOWING THE DOCUMENTS' OWN CITATIONS</div>
+    <div class="a mono" style="left:16px;top:32px;font-size:20px;color:#98A1B2;font-weight:700">3/8</div>
+    <div id="xbar" class="a" style="left:70px;top:41px;width:0;height:2px;background:#0D8FA3"></div>
+    <div id="x78" class="a mono" style="left:0;top:28px;width:440px;text-align:right;font-size:24px;color:#0D8FA3;font-weight:700">7/8</div>
+    <div class="a sub" style="left:16px;top:52px">top 5 and top 10 both return 3/8 &nbsp;·&nbsp; retrieving more changed nothing</div>
   </div>
 
-  <div id="cardA" class="a" style="left:80px;top:768px;width:440px;height:96px;background:#081619;border:1.5px solid rgba(79,216,232,.5);border-radius:12px;box-shadow:0 0 30px rgba(79,216,232,.16)">
-    <div class="a" style="left:24px;top:18px;font-size:12px;letter-spacing:2.4px;color:#4FD8E8;font-weight:500">ENOUGH EVIDENCE</div>
-    <div class="a" style="left:24px;top:38px;font-size:25px;color:#E9EDF5;font-weight:650;letter-spacing:-.4px">Cited answer</div>
-    <div class="a" style="left:0;top:46px;width:416px;text-align:right;font-size:13px;letter-spacing:1.4px;color:#4FD8E8;font-weight:500">EVERY CLAIM TRACED</div>
-  </div>
-  <div id="cardR" class="a" style="left:560px;top:768px;width:440px;height:96px;background:#0D0B16;border:1.5px solid rgba(169,139,255,.28);border-radius:12px;opacity:.6">
-    <div class="a" style="left:24px;top:18px;font-size:12px;letter-spacing:2.4px;color:#A98BFF;font-weight:500">EVIDENCE TOO WEAK</div>
-    <div class="a" style="left:24px;top:38px;font-size:25px;color:#E9EDF5;font-weight:650;letter-spacing:-.4px">Refusal</div>
-    <div class="a" style="left:0;top:46px;width:416px;text-align:right;font-size:13px;letter-spacing:1.4px;color:#A98BFF;font-weight:500">NOT IN THE SOURCES</div>
+  <div class="a card" style="left:552px;top:1022px;width:456px;height:64px">
+    <div class="a sec" style="left:16px;top:12px;font-size:9.5px">GIVING EACH SOURCE A SLOT</div>
+    <div class="a mono" style="left:16px;top:30px;font-size:20px;color:#98A1B2;font-weight:700">0/2</div>
+    <div id="sbar" class="a" style="left:70px;top:39px;width:0;height:2px;background:#6A45C8"></div>
+    <div id="s22" class="a mono" style="left:0;top:26px;width:440px;text-align:right;font-size:24px;color:#6A45C8;font-weight:700">2/2</div>
+    <div class="a sub" style="left:16px;top:48px">2 cross-document questions</div>
   </div>
 
-  <!-- evaluation -->
-  <div class="a rule" style="left:80px;top:892px;width:920px"></div>
-  <div class="a lab" style="left:80px;top:912px">WHAT THE EVALUATION SHOWED</div>
+  <div class="a sec" style="left:72px;top:1108px;color:#6A45C8">45 QUESTIONS IT WAS NEVER TUNED AGAINST &nbsp;·&nbsp; GRADED BLIND BY A SEPARATE MODEL</div>
+  <div id="hoRow"></div>
 
-  <div class="a panel" style="left:80px;top:938px;width:920px;height:92px">
-    <div class="a" style="left:28px;top:24px;font-size:44px;color:#4A5468;font-weight:650;letter-spacing:-1.5px">3/8</div>
-    <div class="a" style="left:30px;top:73px;font-size:12px;letter-spacing:1.6px;color:#4A5468;font-weight:500">top 5</div>
-    <div class="a" style="left:132px;top:24px;font-size:44px;color:#4A5468;font-weight:650;letter-spacing:-1.5px">3/8</div>
-    <div class="a" style="left:134px;top:73px;font-size:12px;letter-spacing:1.6px;color:#4A5468;font-weight:500">top 10</div>
-    <div id="mhArrow" class="a" style="left:240px;top:30px;font-size:32px;color:#A98BFF">→</div>
-    <div id="mh78" class="a" style="left:296px;top:19px;font-size:50px;color:#4FD8E8;font-weight:650;letter-spacing:-1.8px">7/8</div>
-    <div class="a" style="left:298px;top:75px;font-size:12px;letter-spacing:1.6px;color:#4FD8E8;font-weight:500">following the citations</div>
-    <div class="a" style="left:470px;top:28px;font-size:19px;color:#E9EDF5">Doubling how much came back changed nothing.</div>
-    <div class="a" style="left:470px;top:54px;font-size:19px;color:#79839A">The other half was behind a reference.</div>
+  <div id="verdict" class="a" style="left:72px;top:1216px;width:936px;height:52px;background:#F2FBFC;border:1px solid #BFE3EA;border-radius:10px">
+    <div id="shield" class="a" style="left:16px;top:12px"></div>
+    <div class="a" style="left:58px;top:11px;font-size:14.5px;color:#0C121D;font-weight:650;letter-spacing:-.15px">When retrieval fails, it declines rather than invents.</div>
+    <div class="a" style="left:58px;top:31px;font-size:11.5px;color:#5C6579">Of the 19 held-out questions where retrieval missed: 9 declined, 1 wrong.</div>
+    <div class="a sub" style="left:0;top:20px;width:916px;text-align:right">github.com/nidhiparker333/regulatory-retrieval-RAG</div>
   </div>
 
-  <div class="a panel" style="left:80px;top:1050px;width:286.67px;height:86px">
-    <div id="s0" class="a" style="left:24px;top:14px;font-size:38px;color:#E9EDF5;font-weight:650;letter-spacing:-1.2px">24/26</div>
-    <div class="a" style="left:24px;top:61px;font-size:14px;color:#79839A">evidence retrieved</div>
-  </div>
-  <div class="a panel" style="left:396.67px;top:1050px;width:286.67px;height:86px">
-    <div id="s1" class="a" style="left:24px;top:14px;font-size:38px;color:#4FD8E8;font-weight:650;letter-spacing:-1.2px">4/4</div>
-    <div class="a" style="left:24px;top:61px;font-size:14px;color:#79839A">refused when unsupported</div>
-  </div>
-  <div class="a panel" style="left:713.33px;top:1050px;width:286.67px;height:86px">
-    <div id="s2" class="a" style="left:24px;top:14px;font-size:38px;color:#4FD8E8;font-weight:650;letter-spacing:-1.2px">0</div>
-    <div class="a" style="left:24px;top:61px;font-size:14px;color:#79839A">answers without citations</div>
-  </div>
-
-  <div id="held" class="a" style="left:80px;top:1152px;width:920px;height:90px;background:#0D0B16;border:1.5px solid rgba(169,139,255,.34);border-radius:12px">
-    <div class="a" style="left:26px;top:16px;font-size:12px;letter-spacing:2.4px;color:#A98BFF;font-weight:500">NEVER TUNED AGAINST THESE</div>
-    <div class="a" style="left:26px;top:36px;font-size:22px;color:#E9EDF5;font-weight:500;letter-spacing:-.3px">45 held-out questions, graded blind by a separate model</div>
-    <div class="a" style="left:26px;top:67px;font-size:14px;color:#79839A">Retrieval failing is not the risk. Inventing an answer is.</div>
-    <div id="one" class="a" style="left:0;top:18px;width:866px;text-align:right;font-size:46px;color:#A98BFF;font-weight:650;letter-spacing:-1.6px">1</div>
-    <div class="a" style="left:0;top:70px;width:866px;text-align:right;font-size:12px;letter-spacing:1.6px;color:#A98BFF;font-weight:500">FABRICATED ANSWER</div>
-  </div>
-
-  <div class="a" style="left:80px;top:1282px;font-size:14px;color:#4A5468">Code, questions and results are public &nbsp;·&nbsp; github.com/nidhiparker333/regulatory-retrieval-RAG</div>
-
-  <!-- connectors + particles -->
-  <svg width="1080" height="1350">
-    <line x1="540" y1="422" x2="540" y2="446" stroke="#1C2334"/>
-    <line x1="540" y1="620" x2="540" y2="646" stroke="#1C2334"/>
-    <line id="forkA" x1="540" y1="726" x2="300" y2="764" stroke="#4FD8E8" stroke-width="1.5" opacity=".85"/>
-    <line id="forkR" x1="540" y1="726" x2="780" y2="764" stroke="#A98BFF" stroke-width="1.5" opacity=".45"/>
-    <circle id="pGate" cx="540" cy="606" r="4.5" fill="#4FD8E8" opacity="0"/>
-    <circle id="pA"    cx="540" cy="730" r="4.5" fill="#4FD8E8" opacity="0"/>
-    <circle id="pR"    cx="540" cy="730" r="4.5" fill="#A98BFF" opacity="0"/>
-  </svg>
+  <svg id="wires" width="1080" height="1350" style="position:absolute;left:0;top:0;overflow:visible"></svg>
 </div>
 
 <script>
 const $=id=>document.getElementById(id);
-const DUR=12;
+const NS="http://www.w3.org/2000/svg";
+const DUR=14;
 const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
 const ramp=(t,s,e)=>{const x=clamp((t-s)/(e-s));return x*x*(3-2*x);};
-// 0 -> 1 -> 0 pulse across [s,e] with the peak at p through the window
-const pulse=(t,s,e)=>{const x=clamp((t-s)/(e-s));return Math.sin(x*Math.PI);};
+const pulse=(t,s,e)=>Math.sin(clamp((t-s)/(e-s))*Math.PI);
+const el=(h,p)=>{const d=document.createElement("div");d.innerHTML=h;const n=d.firstElementChild;p.appendChild(n);return n;};
 
-// embedding cloud
-const cloud=[];
-let seed=57; const rnd=()=>(seed=(seed*1103515245+12345)%2147483648)/2147483648;
-for(let i=0;i<14;i++){
-  const d=document.createElement("div");
-  const r=2.5+rnd()*2;
-  d.className="a dot";
-  const x=812+rnd()*182, y=258+rnd()*44;
-  d.style.cssText=`left:${x}px;top:${y}px;width:${r}px;height:${r}px;background:${rnd()>.7?"#4FD8E8":"#5B8CFF"}`;
-  $("cloud").appendChild(d);
-  cloud.push({el:d, base:.30+rnd()*.40, amp:2.5+rnd()*4, dir:rnd()>.5?1:-1, ph:rnd()*Math.PI*2});
-}
+/* ---------- illustrations ---------- */
+const svg=(w,h,body,cls)=>`<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" ${cls?`class="${cls}"`:""}>${body}</svg>`;
+
+const docStack=(c)=>svg(60,54,`
+  <g class="il" stroke="${c}">
+    <path d="M12 8h18l10 10v28H12z" fill="#fff"/>
+    <path d="M30 8v10h10"/>
+    <path d="M18 28h20M18 34h16M18 40h11" opacity=".55"/>
+  </g>
+  <g class="il" stroke="${c}" opacity=".38">
+    <path d="M20 4h16l10 10v4"/>
+  </g>`);
+
+const chunkCards=(c)=>svg(60,54,`
+  <g class="il" stroke="${c}">
+    <rect x="10" y="8"  width="40" height="12" rx="2" fill="#fff"/>
+    <rect x="10" y="24" width="40" height="12" rx="2" fill="#fff"/>
+    <rect x="10" y="40" width="40" height="10" rx="2" fill="#fff"/>
+    <path d="M14 8v12M14 24v12M14 40v10" stroke-width="2.4"/>
+  </g>`);
+
+const scatter=(c)=>svg(60,54,`
+  <g class="il" stroke="${c}">
+    <path d="M14 46V12M14 46h34" opacity=".5"/>
+    <path d="M14 46l12-9" opacity=".35"/>
+    <circle cx="26" cy="24" r="2.4"/><circle cx="36" cy="18" r="2.4"/>
+    <circle cx="42" cy="30" r="2.4"/><circle cx="30" cy="36" r="2.4"/>
+    <circle cx="20" cy="32" r="2.4"/>
+    <path d="M26 24l10-6M30 36l12-6" opacity=".4"/>
+  </g>`);
+
+const cylinder=(c)=>svg(60,54,`
+  <g class="il" stroke="${c}">
+    <ellipse cx="30" cy="14" rx="17" ry="6" fill="#fff"/>
+    <path d="M13 14v13c0 3.3 7.6 6 17 6s17-2.7 17-6V14"/>
+    <path d="M13 27v13c0 3.3 7.6 6 17 6s17-2.7 17-6V27"/>
+  </g>`);
+
+const magnifier=(c)=>svg(52,52,`
+  <g class="il" stroke="${c}">
+    <circle cx="21" cy="21" r="12" fill="#fff"/>
+    <path d="M30 30l11 11"/>
+    <circle cx="17" cy="19" r="1.8" fill="${c}" stroke="none"/>
+    <circle cx="25" cy="23" r="1.8" fill="${c}" stroke="none"/>
+    <circle cx="21" cy="14" r="1.8" fill="${c}" stroke="none" opacity=".5"/>
+  </g>`);
+
+const podium=(c)=>svg(52,52,`
+  <g class="il" stroke="${c}">
+    <rect x="4"  y="26" width="13" height="18" rx="1.5" fill="#fff"/>
+    <rect x="19" y="16" width="13" height="28" rx="1.5" fill="#fff"/>
+    <rect x="34" y="32" width="13" height="12" rx="1.5" fill="#fff"/>
+  </g>
+  <text x="25.5" y="34" text-anchor="middle" font-size="9" font-weight="700" fill="${c}">1</text>`);
+
+const brackets=(c)=>svg(52,52,`
+  <g class="il" stroke="${c}">
+    <path d="M18 12h-5a3 3 0 00-3 3v6a3 3 0 01-3 3 3 3 0 013 3v6a3 3 0 003 3h5"/>
+    <path d="M34 12h5a3 3 0 013 3v6a3 3 0 003 3 3 3 0 00-3 3v6a3 3 0 01-3 3h-5"/>
+    <path d="M20 22h12M20 30h8" opacity=".55"/>
+  </g>`);
+
+const gateIco=(c)=>svg(52,52,`
+  <g class="il" stroke="${c}">
+    <path d="M26 7l19 19-19 19L7 26z" fill="#fff"/>
+    <path d="M20 26l4.5 4.5L34 21"/>
+  </g>`);
+
+const citedDoc=(c)=>svg(46,46,`
+  <g class="il" stroke="${c}">
+    <path d="M10 6h26v34H10z" fill="#fff"/>
+    <path d="M16 15h14M16 22h14M16 29h8" opacity=".55"/>
+    <circle cx="34" cy="32" r="8" fill="#fff"/>
+    <path d="M30.5 32l2.5 2.5 4.5-5.5"/>
+  </g>`);
+
+const stopIco=(c)=>svg(46,46,`
+  <g class="il" stroke="${c}">
+    <circle cx="23" cy="23" r="14" fill="#fff"/>
+    <path d="M13 13l20 20"/>
+  </g>`);
+
+const shieldIco=(c)=>svg(30,30,`
+  <g class="il" stroke="${c}">
+    <path d="M15 3l10 4v8c0 6-4.2 10.8-10 12.5C9.2 25.8 5 21 5 15V7z" fill="#fff"/>
+    <path d="M11 15l3 3 5.5-6.5"/>
+  </g>`);
+
+const personFig=(c)=>svg(148,120,`
+  <g class="il" stroke="${c}">
+    <rect x="40" y="6" width="96" height="60" rx="5" fill="#fff"/>
+    <path d="M52 22h48M52 33h36M52 44h24" opacity=".45"/>
+    <path d="M88 66v9M70 75h36"/>
+    <circle cx="34" cy="70" r="15" fill="#fff"/>
+    <path d="M8 116v-11a26 26 0 0152 0v11" fill="#fff"/>
+    <path d="M0 116h148" opacity=".35"/>
+  </g>`);
+
+/* ---------- 1 · corpus ---------- */
+const SRC=[["EU AI Act","Consolidated 27 Jul 2026","#2A5FD0"],
+           ["NIST AI RMF","Risk management framework","#0D8FA3"],
+           ["NIST GenAI Profile","Generative AI companion","#6A45C8"],
+           ["OWASP LLM Top 10","LLM application security","#B0561A"]];
+const srcEls=SRC.map((s,i)=>el(
+  `<div class="a card" style="left:${72+i*240}px;top:260px;width:222px;height:98px">
+     <div class="a" style="left:14px;top:20px">${docStack(s[2])}</div>
+     <div class="a cap" style="left:84px;top:30px;color:${s[2]}">${s[0]}</div>
+     <div class="a sub" style="left:84px;top:50px;width:126px;line-height:1.35">${s[1]}</div>
+   </div>`, $("corpus")));
+
+const ST=[["403","sections · 111 cross-referenced"],["856","passages · 384-dim embeddings"],
+          ["~204K","tokens · 1.2 MB index"],["141 ms","median retrieval, on CPU"],["$0.0216","per question"]];
+ST.forEach((s,i)=>{const x=72+i*187.2;
+  el(`<div class="a" style="left:${x+16}px;top:386px">
+        <div class="a mono" style="left:0;top:0;font-size:14px;color:#111826;font-weight:700;white-space:nowrap">${s[0]}</div>
+        <div class="a" style="left:0;top:18px;font-size:9.5px;color:#8B94A6;white-space:nowrap">${s[1]}</div>
+      </div>`, $("statRow"));
+  if(i){const l=document.createElementNS(NS,"line");
+    l.setAttribute("x1",x);l.setAttribute("y1",384);l.setAttribute("x2",x);l.setAttribute("y2",412);
+    l.setAttribute("stroke","#E0E6EF");$("wires").appendChild(l);}});
+
+/* ---------- 2 · build ---------- */
+const BUILD=[["Parse",docStack("#2A5FD0"),"structure kept"],
+             ["Chunk",chunkCards("#2A5FD0"),"split on sections"],
+             ["Embed",scatter("#2A5FD0"),"passages as vectors"],
+             ["Index",cylinder("#2A5FD0"),"one 1.2 MB file"]];
+const buildEls=BUILD.map((s,i)=>el(
+  `<div class="a card" style="left:${72+i*240}px;top:474px;width:222px;height:110px">
+     <div class="a" style="left:16px;top:28px">${s[1]}</div>
+     <div class="a cap" style="left:88px;top:38px">${s[0]}</div>
+     <div class="a sub" style="left:88px;top:58px">${s[2]}</div>
+   </div>`, $("buildRow")));
+const wire=(x1,y1,x2,y2,col)=>{const l=document.createElementNS(NS,"line");
+  l.setAttribute("x1",x1);l.setAttribute("y1",y1);l.setAttribute("x2",x2);l.setAttribute("y2",y2);
+  l.setAttribute("stroke",col||"#CBD3DF");$("wires").appendChild(l);return l;};
+for(let i=0;i<3;i++) wire(72+i*240+222,529,72+(i+1)*240,529);
+
+/* ---------- 3 · answering ---------- */
+$("person").innerHTML=personFig("#3E4B60");
+
+const FLOW=[["Semantic search",magnifier("#0D8FA3"),556],
+            ["Rank and select",podium("#0D8FA3"),700],
+            ["Query + evidence",brackets("#0D8FA3"),844]];
+const flowEls=FLOW.map((f,i)=>el(
+  /* The icon is scaled to 34px and centred rather than sitting at its native
+     52px: at full size it ran from y=5 to y=57 inside a 62px card and struck
+     straight through the label at y=44. The podium showed it worst because its
+     bars reach the bottom of the viewBox, but all three chips collided. */
+  `<div class="a card" style="left:${f[2]}px;top:664px;width:132px;height:62px">
+     <div class="a" style="left:0;top:4px;width:132px;text-align:center">
+       <span style="display:inline-block;transform:scale(0.655);transform-origin:top center">${f[1]}</span>
+     </div>
+     <div class="a" style="left:0;top:42px;width:132px;text-align:center;font-size:11px;color:#3E4B60;font-weight:650">${f[0]}</div>
+   </div>`, $("flow")));
+
+const gateEl=el(`<div class="a card" style="left:236px;top:756px;width:740px;height:56px;border-color:#DDD2F5;background:#FBF9FF">
+    <div class="a" style="left:12px;top:2px">${gateIco("#6A45C8")}</div>
+    <div class="a" style="left:62px;top:11px;font-size:9.5px;letter-spacing:2px;color:#6A45C8;font-weight:700">THE EVIDENCE GATE</div>
+    <div class="a" style="left:62px;top:27px;font-size:13px;color:#241638;font-weight:600">Does the evidence support an answer?</div>
+  </div>`, $("flow"));
+
+const okEl=el(`<div class="a card" style="left:236px;top:826px;width:360px;height:52px;border-color:#9FD8E1;background:#F2FBFC">
+    <div class="a" style="left:8px;top:3px">${citedDoc("#0A7A8B")}</div>
+    <div class="a" style="left:56px;top:11px;font-size:12.5px;color:#0A5B67;font-weight:650;line-height:1.25">Grounded answer<br>with citations</div>
+  </div>`, $("flow"));
+const noEl=el(`<div class="a card" style="left:616px;top:826px;width:360px;height:52px;border-color:#CFC0EE;background:#F9F7FE">
+    <div class="a" style="left:8px;top:3px">${stopIco("#5C39B8")}</div>
+    <div class="a" style="left:56px;top:19px;font-size:12.5px;color:#3F2680;font-weight:650">Abstain</div>
+  </div>`, $("flow"));
+
+wire(536,695,556,695);                       // bubble -> search
+wire(688,695,700,695); wire(832,695,844,695); // between flow cards
+wire(766,726,766,756,"#D8CCF2");              // into gate
+wire(606,812,416,826,"#9FD8E1"); wire(606,812,796,826,"#CFC0EE");
+$("shield").innerHTML=shieldIco("#0A7A8B");
+
+/* ---------- 4 · evaluation ---------- */
+const ABL=[["Semantic search alone","17 / 26",0.65,false],
+           ["+ following citations","22 / 26",0.85,false],
+           ["+ one slot per source","19 / 26",0.73,false],
+           ["+ both  ·  shipped","24 / 26",0.92,true]];
+const ablEls=ABL.map((a,i)=>el(
+  `<div class="a" style="left:16px;top:${38+i*26}px;width:424px;height:21px">
+     <div class="abar a" style="left:0;top:0;width:0;height:21px;background:${a[3]?"#E6F7F9":"#F1F4F8"};border-radius:4px"></div>
+     <div class="a" style="left:8px;top:4px;font-size:11.5px;color:${a[3]?"#0A7A8B":"#4A5468"};font-weight:${a[3]?700:500}">${a[0]}</div>
+     <div class="a mono" style="left:0;top:3px;width:416px;text-align:right;font-size:11.5px;color:${a[3]?"#0A7A8B":"#5C6579"};font-weight:700">${a[1]}</div>
+   </div>`, $("ablRows")));
+const abars=ablEls.map(e=>e.querySelector(".abar"));
+
+const HO=[["27","CORRECT","#0D8FA3"],["6","PARTIAL","#5C6579"],["11","DECLINED","#5C6579"],
+          ["1","WRONG","#6A45C8"],["0","UNCITED","#0D8FA3"]];
+const hoEls=HO.map((s,i)=>el(
+  `<div class="a card" style="left:${72+i*189.6}px;top:1132px;width:171.6px;height:64px">
+     <div class="a mono" style="left:0;top:11px;width:171.6px;text-align:center;font-size:25px;color:${s[2]};font-weight:700">${s[0]}</div>
+     <div class="a" style="left:0;top:42px;width:171.6px;text-align:center;font-size:9.5px;letter-spacing:1.2px;color:#8B94A6;font-weight:700">${s[1]}</div>
+   </div>`, $("hoRow")));
 
 function render(t){
   t=((t%DUR)+DUR)%DUR;
-  const out=1-ramp(t,DUR-0.5,DUR);              // gentle settle so the loop closes clean
+  const lift=(e,on)=>{e.style.transform=`translateY(${-4*on}px)`;
+    e.style.boxShadow=`0 ${2+4*on}px ${8+12*on}px rgba(20,32,60,${0.04+0.07*on})`;};
 
-  // corpus dots breathe and drift
-  cloud.forEach(c=>{
-    const y=Math.sin(t/DUR*Math.PI*2 + c.ph)*c.amp*c.dir;
-    c.el.style.transform=`translateY(${y}px)`;
-    c.el.style.opacity=(c.base + 0.34*ramp(t,0.4,1.4)*(1-ramp(t,4,7)))*1;
-  });
+  srcEls.forEach((e,i)=>{const a=ramp(t,0.25+i*0.10,0.8+i*0.10);
+    e.style.opacity=0.55+0.45*a; lift(e,pulse(t,0.25+i*0.10,1.5+i*0.10));});
+  $("statStrip").style.borderColor=`rgba(13,143,163,${0.10+0.30*pulse(t,1.1,2.2)})`;
 
-  // caret blinks while the question lands
-  $("caret").style.opacity = (t>0.9 && t<2.2) ? (Math.floor((t-0.9)/0.15)%2 ? 0 : 1) : 0;
+  buildEls.forEach((e,i)=>{const s=2.3+i*0.30, p=pulse(t,s,s+1.0);
+    e.style.borderColor=p>0.04?`rgba(42,95,208,${0.18+0.52*p})`:"#E3E7EE";
+    lift(e,p);});
 
-  // evidence rows light in sequence
-  for(let i=0;i<3;i++){
-    const s=2.35+i*0.40;
-    const v=0.105 + 0.36*pulse(t,s,s+1.6);
-    $("bar"+i).style.opacity=Math.max(0.105,v);
-  }
-  // the cited row nudges out as it arrives
-  $("row2").style.transform=`translateX(${16*pulse(t,2.95,4.55)}px)`;
+  $("person").style.opacity=0.45+0.55*ramp(t,3.9,4.4);
+  $("bubble").style.opacity=ramp(t,4.2,4.7);
+  $("bubble").style.transform=`translateX(${-10*(1-ramp(t,4.2,4.7))}px)`;
 
-  // particles
-  const trav=(el,t0,dur,x0,y0,dx,dy)=>{
-    const p=clamp((t-t0)/dur);
-    const on=(t>=t0-0.05 && t<=t0+dur+0.05);
-    el.setAttribute("opacity", on ? (Math.sin(clamp((t-t0)/dur)*Math.PI)*1.6>1?1:Math.min(1,Math.sin(clamp((t-t0)/dur)*Math.PI)*1.6)) : 0);
-    const e=p*p*(3-2*p);
-    el.setAttribute("cx", x0+dx*e);
-    el.setAttribute("cy", y0+dy*e);
-  };
-  trav($("pGate"),4.30,0.50, 540,606,   0, 44);
-  trav($("pA"),   5.35,0.60, 540,730,-240, 36);
-  trav($("pR"),   6.95,0.60, 540,730, 240, 36);
+  flowEls.forEach((e,i)=>{const s=5.0+i*0.45, p=pulse(t,s,s+1.1);
+    e.style.borderColor=p>0.04?`rgba(13,143,163,${0.20+0.55*p})`:"#E3E7EE";
+    lift(e,p);});
 
-  // gate swells as the particle lands
-  const gp=pulse(t,4.70,5.90);
-  $("gate").style.boxShadow=`0 0 ${40+52*gp}px ${2+3*gp}px rgba(169,139,255,${.24+.22*gp})`;
-  $("gate").style.transform=`scale(${1+0.03*gp})`;
+  const gp=pulse(t,6.5,7.5);
+  gateEl.style.boxShadow=`0 0 ${22*gp}px rgba(106,69,200,${0.22*gp})`;
+  gateEl.style.borderColor=`rgba(106,69,200,${0.22+0.45*gp})`;
 
-  // fork alternates: answer, then refusal
-  const aLit=ramp(t,5.35,5.75)-ramp(t,6.8,7.3);
-  const rLit=ramp(t,6.95,7.45)-ramp(t,8.5,9.1);
-  $("forkA").setAttribute("opacity", 0.85+0.15*aLit);
-  $("forkR").setAttribute("opacity", 0.45+0.55*rLit);
-  $("cardA").style.boxShadow=`0 0 ${30+40*aLit}px rgba(79,216,232,${.16+.20*aLit})`;
-  $("cardA").style.opacity  = 1 - 0.66*rLit;
-  $("cardR").style.opacity  = 0.6 + 0.4*rLit;
-  $("cardR").style.boxShadow=`0 0 ${60*rLit}px rgba(169,139,255,${.30*rLit})`;
+  const aL=ramp(t,7.2,7.6)-ramp(t,8.2,8.6), rL=ramp(t,8.3,8.7)-ramp(t,9.3,9.7);
+  okEl.style.boxShadow=`0 0 ${20*aL}px rgba(13,143,163,${0.26*aL})`;
+  okEl.style.opacity=1-0.4*rL;
+  noEl.style.boxShadow=`0 0 ${20*rL}px rgba(106,69,200,${0.24*rL})`;
+  noEl.style.opacity=0.7+0.3*rL;
 
-  // evaluation numbers land in sequence
-  const pop=(el,s,peak)=>{ el.style.transform=`scale(${1+(peak-1)*pulse(t,s,s+1.3)})`; };
-  pop($("mhArrow"),8.85,1.22);
-  pop($("mh78"),  9.05,1.16);
-  pop($("s0"),    9.90,1.12);
-  pop($("s1"),   10.20,1.12);
-  pop($("s2"),   10.50,1.12);
-  pop($("one"),  11.00,1.24);
-  $("held").style.boxShadow=`0 0 ${46*pulse(t,10.9,12)}px rgba(169,139,255,${.26*pulse(t,10.9,12)})`;
+  abars.forEach((b,i)=>{const s=9.9+i*0.28;
+    b.style.width=(424*[0.65,0.85,0.73,0.92][i]*ramp(t,s,s+0.5))+"px";});
+  $("xbar").style.width=(300*ramp(t,10.9,11.5))+"px";
+  $("x78").style.transform=`scale(${1+0.13*pulse(t,11.4,12.1)})`;
+  $("sbar").style.width=(300*ramp(t,11.4,12.0))+"px";
+  $("s22").style.transform=`scale(${1+0.13*pulse(t,11.9,12.6)})`;
 
-  document.getElementById("stage").style.opacity = out === 0 ? 1 : 1;   // scene holds; loop is value-continuous
+  hoEls.forEach((e,i)=>{const s=12.4+i*0.18; lift(e,pulse(t,s,s+0.8));});
+  const pv=pulse(t,13.2,13.95);
+  $("verdict").style.boxShadow=`0 0 ${24*pv}px rgba(13,143,163,${0.22*pv})`;
 }
 
-const p=new URLSearchParams(location.search);
-if(p.has("t")) render(parseFloat(p.get("t")));
+const q=new URLSearchParams(location.search);
+if(q.has("t")) render(parseFloat(q.get("t")));
 else { const t0=performance.now(); (function l(){ render((performance.now()-t0)/1000); requestAnimationFrame(l); })(); }
 </script>

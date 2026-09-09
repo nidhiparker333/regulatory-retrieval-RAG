@@ -5,13 +5,16 @@
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
   :root {
-    --bg:    #0B0D12;
-    --ink:   #F3F1EE;
-    --dim:   #8B919B;
-    --faint: #5C6470;
-    --amber: #F0A63C;
-    --rule:  #1F2530;
-    --card:  #12151C;
+    /* Warm paper rather than white: a flat #fff reads as a slide deck, this
+       reads as a printed page. Ink is near-black but not black, for the same
+       reason. */
+    --bg:    #FBFAF7;
+    --panel: #F4F1EA;
+    --ink:   #15171B;
+    --dim:   #565C66;
+    --faint: #8B9098;
+    --amber: #A25C09;   /* deepened from the dark deck's #F0A63C to hold contrast on paper */
+    --rule:  #E3DFD6;
     --serif: Georgia, "Times New Roman", serif;
     --sans:  system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     --mono:  "Cascadia Mono", Consolas, "SF Mono", Menlo, monospace;
@@ -30,11 +33,11 @@
   }
   .slide:last-child { page-break-after: auto; }
 
-  /* a soft light source, so the deck reads as one object */
+  /* One soft warm wash, so twelve pages read as one object. */
   .slide::before {
-    content: ""; position: absolute; top: -260px; left: -180px;
-    width: 900px; height: 620px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(240,166,60,0.11), rgba(240,166,60,0) 68%);
+    content: ""; position: absolute; top: -300px; left: -220px;
+    width: 1000px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(162,92,9,0.055), rgba(162,92,9,0) 70%);
   }
   .slide > * { position: relative; }
 
@@ -45,6 +48,7 @@
   h1 { font: 400 88px/1.04 var(--serif); color: var(--ink); letter-spacing: -1.5px; }
   h1 .amber { color: var(--amber); }
   h2 { font: 400 62px/1.14 var(--serif); color: var(--ink); letter-spacing: -0.8px; }
+  h2.sm { font-size: 52px; }
   p  { font: 400 27px/1.62 var(--sans); color: var(--dim); max-width: 20ch; }
   p.wide { max-width: none; }
   p.lead { color: var(--ink); font-size: 30px; }
@@ -56,36 +60,46 @@
     font: 500 17px/1 var(--mono); color: var(--faint); letter-spacing: 1.4px;
   }
 
-  ul { list-style: none; }
-  li {
-    font: 400 27px/1.5 var(--sans); color: var(--ink);
-    padding: 22px 0; border-bottom: 1px solid var(--rule);
-    display: flex; justify-content: space-between; align-items: baseline; gap: 28px;
-  }
-  li span { font: 500 19px/1 var(--mono); color: var(--faint); letter-spacing: 1px; text-align: right; white-space: nowrap; }
-
-  .stat { display: flex; align-items: baseline; gap: 26px; padding: 26px 0; border-bottom: 1px solid var(--rule); }
-  .stat b { font: 600 62px/1 var(--mono); color: var(--ink); min-width: 210px; letter-spacing: -1px; }
-  .stat b.on { color: var(--amber); }
-  .stat i { font: 400 25px/1.4 var(--sans); color: var(--dim); font-style: normal; }
-
-  .huge { font: 600 172px/1 var(--mono); color: var(--amber); letter-spacing: -6px; }
   .rule { height: 1px; background: var(--rule); margin: 44px 0; }
 
   .chip {
     display: inline-block; font: 500 19px/1 var(--mono); letter-spacing: 1.2px;
-    color: var(--amber); border: 1px solid #6B4E1E; background: #15120C;
+    color: var(--amber); border: 1px solid #D9C6A4; background: #F7EFE1;
     padding: 13px 20px; border-radius: 8px; margin-bottom: 34px;
   }
 
   .hop { display: flex; align-items: center; gap: 26px; margin: 16px 0; }
   .hop .box {
-    flex: 1; background: var(--card); border: 1px solid var(--rule); border-radius: 12px; padding: 26px 28px;
+    flex: 1; background: var(--panel); border: 1px solid var(--rule); border-radius: 12px; padding: 26px 28px;
   }
-  .hop .box.lit { border-color: #6B4E1E; background: #15120C; }
+  .hop .box.lit { border-color: #D9C6A4; background: #F7EFE1; }
   .hop .box b { display: block; font: 600 27px/1.3 var(--sans); color: var(--ink); }
   .hop .box i { display: block; font: 400 21px/1.45 var(--sans); color: var(--dim); font-style: normal; margin-top: 8px; }
   .hop .arrow { font: 400 34px/1 var(--sans); color: var(--amber); }
+
+  /* Evidence library: one card per source, tagged by legal force. */
+  .src {
+    background: var(--panel); border: 1px solid var(--rule); border-left: 3px solid #CFC8BA;
+    border-radius: 10px; padding: 26px 30px; margin-bottom: 18px;
+  }
+  .src.binding { border-left-color: var(--amber); }
+  .src .top { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; }
+  .src b { font: 600 30px/1.25 var(--sans); color: var(--ink); }
+  .src .tag { font: 500 16px/1 var(--mono); letter-spacing: 1.3px; color: var(--faint); white-space: nowrap; }
+  .src .tag.on { color: var(--amber); }
+  .src i { display: block; font: 400 22px/1.5 var(--sans); color: var(--dim); font-style: normal; margin-top: 12px; }
+
+  /* Vertical pipeline. */
+  .band { font: 600 15px/1 var(--mono); letter-spacing: 3px; color: var(--faint);
+          text-transform: uppercase; margin: 0 0 20px; }
+  .flow { display: flex; flex-direction: column; gap: 0; }
+  .step { display: flex; align-items: baseline; gap: 24px; padding: 19px 0; }
+  .step .n { font: 600 17px/1.4 var(--mono); color: var(--faint); min-width: 34px; letter-spacing: 1px; }
+  .step .t { font: 500 27px/1.35 var(--sans); color: var(--ink); }
+  .step .t em { font-style: normal; color: var(--dim); font-size: 23px; display: block; margin-top: 6px; }
+  .step.on .n { color: var(--amber); }
+  .step.on .t { color: var(--amber); }
+  .tick { height: 1px; background: var(--rule); }
 </style>
 
 <!-- 1 ................................................................. -->
@@ -93,8 +107,9 @@
   <div class="eyebrow">Retrieval-augmented generation</div>
   <div class="spacer"></div>
   <h1>What it takes to<br>make RAG work on<br><span class="amber">regulation.</span></h1>
-  <p class="wide lead" style="margin-top:44px; max-width:26ch">
-    Four AI-governance documents. 30 questions to test it, then 45 more it had never seen.
+  <p class="wide lead" style="margin-top:44px; max-width:28ch">
+    Four AI-governance documents, a system that answers only from them, and an
+    evaluation built to locate where it fails.
   </p>
   <div class="spacer"></div>
   <div class="foot"><span>NIDHI PARKER</span><span>01</span></div>
@@ -102,144 +117,239 @@
 
 <!-- 2 ................................................................. -->
 <div class="slide">
-  <div class="eyebrow">The problem</div>
+  <div class="eyebrow">The mechanism</div>
   <div class="spacer"></div>
-  <h2>A model on its own<br>generates from what<br>it learned in training.</h2>
+  <h2>The model does not<br>answer from what it<br>learned in training.</h2>
   <div class="rule"></div>
-  <p class="wide" style="max-width:24ch">
-    It doesn't inherently give you source-level provenance, and its knowledge has a cutoff.
+  <p class="wide lead" style="max-width:29ch">
+    It answers from passages fetched out of a fixed corpus at query time, and is
+    constrained to those passages.
   </p>
-  <p class="wide lead" style="margin-top:40px; max-width:24ch">
-    On regulation, that gap matters. An answer you can't trace back to the source is hard to trust.
+  <p class="wide" style="margin-top:38px; max-width:31ch">
+    Which relocates the problem. System quality is no longer model quality &mdash;
+    it is <span style="color:var(--amber)">whether retrieval put the right
+    evidence in front of it</span>, and that is the part this measures.
   </p>
   <div class="spacer"></div>
-  <div class="foot"><span>THE PROBLEM</span><span>02</span></div>
+  <div class="foot"><span>WHAT RAG IS</span><span>02</span></div>
 </div>
 
 <!-- 3 ................................................................. -->
 <div class="slide">
-  <div class="eyebrow">What RAG changes</div>
+  <div class="eyebrow">Why this corpus</div>
   <div class="spacer"></div>
-  <h2>Retrieve first.<br>Then answer only<br>from what came back.</h2>
-  <p class="wide" style="margin:44px 0 56px; max-width:26ch">
-    Built over four real-world governance sources:
+  <h2>On regulation, an<br>unciteable answer<br>is not an answer.</h2>
+  <div class="rule"></div>
+  <p class="wide lead" style="max-width:30ch">
+    The AI Act was amended in July 2026. A model answering from training text
+    cannot tell you which version it learned, or point you at the clause.
   </p>
-  <ul>
-    <li>EU AI Act <span>BINDING REGULATION</span></li>
-    <li>NIST AI Risk Management Framework <span>RISK GUIDANCE</span></li>
-    <li>NIST Generative AI Profile <span>GENAI RISK</span></li>
-    <li>OWASP LLM Top 10 <span>SECURITY</span></li>
-  </ul>
+  <p class="wide" style="margin-top:38px; max-width:31ch">
+    Every claim here carries a citation to the article, annex or page it came
+    from, so the reader can verify it rather than trust it.
+  </p>
   <div class="spacer"></div>
-  <div class="foot"><span>THE CORPUS</span><span>03</span></div>
+  <div class="foot"><span>WHY IT MATTERS</span><span>03</span></div>
 </div>
 
 <!-- 4 ................................................................. -->
 <div class="slide">
-  <div class="eyebrow">The corpus</div>
+  <div class="eyebrow">The evidence library</div>
+  <h2 class="sm" style="margin-bottom:40px">Four sources that<br>overlap in subject and<br>differ in force.</h2>
+
+  <div class="src binding">
+    <div class="top"><b>EU AI Act</b><span class="tag on">BINDING LAW</span></div>
+    <i>The regulation. Defines high-risk classification and the obligations that
+      follow from it. Consolidated text, including the 2026 amendments.</i>
+  </div>
+
+  <div class="src">
+    <div class="top"><b>NIST AI Risk Management Framework</b><span class="tag">VOLUNTARY</span></div>
+    <i>A structure for risk work &mdash; govern, map, measure, manage. Prescribes
+      practice, imposes no obligation.</i>
+  </div>
+
+  <div class="src">
+    <div class="top"><b>NIST Generative AI Profile</b><span class="tag">VOLUNTARY</span></div>
+    <i>The same framework narrowed to generative systems, enumerating risks
+      specific to models that produce text and images.</i>
+  </div>
+
+  <div class="src">
+    <div class="top"><b>OWASP LLM Top 10</b><span class="tag">PRACTITIONER</span></div>
+    <i>Failure modes observed in deployed LLM applications: prompt injection,
+      sensitive data disclosure, supply chain, excessive agency.</i>
+  </div>
+
   <div class="spacer"></div>
-  <div class="stat"><b>403</b><i>sections parsed from four documents</i></div>
-  <div class="stat"><b>856</b><i>passages, chunked so no rule is split from its conditions</i></div>
-  <div class="stat"><b>204K</b><i>tokens of source material</i></div>
-  <div class="stat"><b class="on">1.2 MB</b><i>the entire search index. No vector database</i></div>
-  <div class="spacer"></div>
-  <p class="wide" style="max-width:28ch">
-    At this size an exact search across every passage takes 141 milliseconds.
-  </p>
   <div class="foot"><span>THE CORPUS</span><span>04</span></div>
 </div>
 
 <!-- 5 ................................................................. -->
 <div class="slide">
-  <div class="eyebrow">What the evaluation found</div>
+  <div class="eyebrow">The constraint that shapes retrieval</div>
   <div class="spacer"></div>
-  <h2>Retrieving more<br>context didn't help<br>the hard questions.</h2>
+  <h2 class="sm">Overlapping subject,<br>different legal force.</h2>
   <div class="rule"></div>
-  <div class="stat"><b>3/8</b><i>top 5 passages</i></div>
-  <div class="stat"><b>3/8</b><i>top 10 passages &mdash; twice as much, no change</i></div>
+  <p class="wide lead" style="max-width:31ch">
+    Passages from a voluntary framework and a binding regulation are near
+    neighbours in meaning. An answer citing NIST for an obligation the Act
+    imposes is fluent and wrong.
+  </p>
+  <p class="wide" style="margin-top:38px; max-width:31ch">
+    Which is why the citation stays attached to the claim rather than being
+    summarised away: the reader can see which instrument the answer rests on.
+  </p>
   <div class="spacer"></div>
-  <div class="foot"><span>THE FINDING</span><span>05</span></div>
+  <div class="foot"><span>THE CORPUS</span><span>05</span></div>
 </div>
 
 <!-- 6 ................................................................. -->
 <div class="slide">
-  <div class="eyebrow">Why more didn't work</div>
-  <div class="spacer"></div>
-  <p class="wide lead" style="max-width:27ch; margin-bottom:44px">
-    Some answers required following a trail. One section points at another, and neither means anything alone.
-  </p>
-  <div class="hop">
-    <div class="box"><b>Annex III</b><i>lists CV screening as high-risk</i></div>
-    <div class="arrow">&rarr;</div>
-    <div class="box lit"><b>Article 6</b><i>defines the conditions</i></div>
+  <div class="eyebrow">Architecture</div>
+  <h2 class="sm" style="margin-bottom:38px">Built once. Then run<br>on every question.</h2>
+
+  <div class="band">Built once, offline</div>
+  <div class="flow">
+    <div class="step"><span class="n">01</span><span class="t">Parse each document into citable sections
+      <em>Articles, annexes, numbered sections &mdash; the unit a reader would cite</em></span></div>
+    <div class="tick"></div>
+    <div class="step"><span class="n">02</span><span class="t">Split into passages
+      <em>Boundaries chosen so a rule is never severed from its conditions</em></span></div>
+    <div class="tick"></div>
+    <div class="step"><span class="n">03</span><span class="t">Embed each passage
+      <em>Local model, CPU. The index is a file that ships with the application</em></span></div>
   </div>
-  <p class="wide" style="margin-top:40px; max-width:28ch">
-    111 of the 403 sections cite another section like this. In retrieval terms: multi-hop.
-  </p>
+
+  <div class="band" style="margin:38px 0 20px">Per question</div>
+  <div class="flow">
+    <div class="step"><span class="n">04</span><span class="t">Rank every passage by semantic similarity</span></div>
+    <div class="tick"></div>
+    <div class="step on"><span class="n">05</span><span class="t">Expand: the article's opening, then its cross-references
+      <em>The two deterministic steps that carry the work</em></span></div>
+    <div class="tick"></div>
+    <div class="step"><span class="n">06</span><span class="t">Answer with citations, or abstain</span></div>
+  </div>
+
   <div class="spacer"></div>
-  <div class="foot"><span>MULTI-HOP</span><span>06</span></div>
+  <div class="foot"><span>THE PIPELINE</span><span>06</span></div>
 </div>
 
 <!-- 7 ................................................................. -->
 <div class="slide">
-  <div class="eyebrow">Following the citations instead</div>
+  <div class="eyebrow">Where similarity alone fails</div>
   <div class="spacer"></div>
-  <p class="wide" style="max-width:24ch; margin-bottom:18px">Cross-reference questions answered</p>
-  <div class="huge">7/8</div>
-  <p class="wide lead" style="margin-top:34px; max-width:27ch">
-    Up from 3/8. The system records every cross-reference when it parses the documents, then follows them at query time.
+  <p class="wide lead" style="max-width:29ch; margin-bottom:44px">
+    Some provisions are split across two sections, and neither is sufficient
+    alone.
   </p>
-  <div class="rule"></div>
-  <p class="wide" style="max-width:29ch">
-    No agent. No second model call. It can't invent a link that isn't in the text.
+  <div class="hop">
+    <div class="box"><b>Annex III</b><i>lists CV screening as high-risk</i></div>
+    <div class="arrow">&rarr;</div>
+    <div class="box lit"><b>Article 6</b><i>states the conditions that apply</i></div>
+  </div>
+  <p class="wide" style="margin-top:40px; max-width:32ch">
+    Retrieving more passages does not surface the second. It is not semantically
+    near the question &mdash; it is
+    <span style="color:var(--amber)">referenced by the first</span>.
   </p>
   <div class="spacer"></div>
-  <div class="foot"><span>THE FIX</span><span>07</span></div>
+  <div class="foot"><span>MULTI-HOP</span><span>07</span></div>
 </div>
 
 <!-- 8 ................................................................. -->
 <div class="slide">
-  <div class="eyebrow">Across the full evaluation</div>
+  <div class="eyebrow">The mechanism that resolves it</div>
   <div class="spacer"></div>
-  <div class="stat"><b>24/26</b><i>retrieved the evidence needed</i></div>
-  <div class="stat"><b class="on">4/4</b><i>unsupported questions correctly refused</i></div>
-  <div class="stat"><b class="on">0</b><i>answers returned without citations</i></div>
-  <div class="spacer"></div>
-  <p class="wide" style="max-width:28ch">
-    Refusal is enforced where the answer is written, not by a confidence score. The highest-scoring unanswerable question outscored the lowest-scoring answerable one.
+  <h2>Cross-references are<br>extracted at parse time<br>and followed at query time.</h2>
+  <div class="rule"></div>
+  <p class="wide lead" style="max-width:30ch">
+    When a retrieved passage cites another section, that section is pulled into
+    context with it.
   </p>
-  <div class="foot"><span>RESULTS</span><span>08</span></div>
+  <p class="wide" style="margin-top:38px; max-width:32ch">
+    Deterministic: no agent, no planner, no second model call, and no capacity to
+    invent a link that is absent from the text.
+  </p>
+  <div class="spacer"></div>
+  <div class="foot"><span>THE MECHANISM</span><span>08</span></div>
 </div>
 
 <!-- 9 ................................................................. -->
 <div class="slide">
-  <div class="eyebrow">One evaluation set is never enough</div>
+  <div class="eyebrow">Abstention</div>
   <div class="spacer"></div>
-  <div class="chip">45 QUESTIONS IT HAD NEVER BEEN TESTED AGAINST</div>
-  <h2>One fabricated<br>answer in 45.</h2>
-  <p class="wide lead" style="margin-top:40px; max-width:28ch">
-    Graded by a separate model against the source material, blind to how the system produced the answers.
-  </p>
+  <h2>Similarity search always<br>returns its nearest<br>passages.</h2>
   <div class="rule"></div>
-  <p class="wide" style="max-width:30ch">
-    When retrieval fell short, it declined nine times for every answer it got wrong.
+  <p class="wide lead" style="max-width:31ch">
+    However far away they are. There is no native signal for
+    <span style="color:var(--amber)">&ldquo;this corpus does not contain the
+    answer.&rdquo;</span>
+  </p>
+  <p class="wide" style="margin-top:38px; max-width:32ch">
+    Measured here, retrieval confidence could not separate answerable questions
+    from unanswerable ones. Abstention is therefore enforced at generation,
+    against the retrieved text, rather than by thresholding a score.
   </p>
   <div class="spacer"></div>
-  <div class="foot"><span>HELD OUT</span><span>09</span></div>
+  <div class="foot"><span>ABSTENTION</span><span>09</span></div>
 </div>
 
 <!-- 10 ................................................................ -->
+<div class="slide">
+  <div class="eyebrow">Building it is the tractable half</div>
+  <div class="spacer"></div>
+  <h2>Any RAG system will<br>produce a fluent answer<br>to any question.</h2>
+  <div class="rule"></div>
+  <p class="wide lead" style="max-width:31ch">
+    Fluency is not evidence that retrieval succeeded. A demonstration answer
+    establishes nothing about the system that produced it.
+  </p>
+  <p class="wide" style="margin-top:38px; max-width:32ch">
+    The questions that matter: did it retrieve the sections the answer requires,
+    did it ground each claim in them, and did it abstain when it could not.
+  </p>
+  <div class="spacer"></div>
+  <div class="foot"><span>EVALUATION</span><span>10</span></div>
+</div>
+
+<!-- 11 ................................................................ -->
+<div class="slide">
+  <div class="eyebrow">The flaw in the first evaluation</div>
+  <div class="spacer"></div>
+  <div class="chip">HELD-OUT SET &middot; BLIND GRADING</div>
+  <h2 class="sm">Retrieval parameters were<br>selected against the same<br>set used to report results.</h2>
+  <p class="wide lead" style="margin-top:40px; max-width:32ch">
+    Every figure was in-sample. So: a second set, written from sections the first
+    never touched, keys committed before execution, and both sets graded by a
+    separate model blind to the pipeline.
+  </p>
+  <div class="rule"></div>
+  <p class="wide" style="max-width:32ch">
+    Scores fell. The independent grader also surfaced a defect in my own refusal
+    detection that self-review had not.
+  </p>
+  <div class="spacer"></div>
+  <div class="foot"><span>HELD OUT</span><span>11</span></div>
+</div>
+
+<!-- 12 ................................................................ -->
 <div class="slide">
   <div class="eyebrow">What I'd take from it</div>
   <div class="spacer"></div>
   <h2>RAG isn't &ldquo;put<br>documents in a model<br>and ask questions.&rdquo;</h2>
   <div class="rule"></div>
-  <p class="wide lead" style="max-width:30ch">
+  <p class="wide lead" style="max-width:31ch">
     It's the source data. The retrieval logic. The failure modes.
   </p>
-  <p class="wide lead" style="margin-top:34px; max-width:30ch">
-    And whether your evaluation is actually testing the system, or <span style="color:var(--amber)">quietly validating the choices you already made.</span>
+  <p class="wide lead" style="margin-top:34px; max-width:31ch">
+    And whether the evaluation is testing the system, or
+    <span style="color:var(--amber)">confirming the choices already made.</span>
+  </p>
+  <p class="wide" style="margin-top:38px; max-width:33ch">
+    Method, figures, and the failures that remain &mdash; including one question it
+    has never retrieved &mdash; are in the repository.
   </p>
   <div class="spacer"></div>
-  <div class="foot"><span>github.com/nidhiparker333/regulatory-retrieval-RAG</span><span>10</span></div>
+  <div class="foot"><span>github.com/nidhiparker333/regulatory-retrieval-RAG</span><span>12</span></div>
 </div>
