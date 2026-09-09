@@ -34,8 +34,9 @@ MODEL = "claude-sonnet-5"
 
 # 700 was enough when the model answered without thinking. It is not now.
 #
-# Sonnet 5 runs adaptive thinking whenever `thinking` is omitted, and thinking
-# tokens come out of max_tokens. At 700 the budget was spent before a single
+# The answering model runs adaptive thinking whenever `thinking` is omitted, and
+# thinking tokens come out of max_tokens. At 700 the budget was spent before a
+# single
 # word of the answer: stop_reason came back "max_tokens", output_tokens landed
 # exactly on 700, and the only content block was `thinking` - whose text is
 # empty by default on this model, because display is "omitted".
@@ -52,7 +53,8 @@ THINKING = {"type": "adaptive"}
 
 # Prices per million tokens, for the cost line in the trace.
 #
-# NOTE: these are Sonnet 5 *introductory* rates, which run to 31 August 2026.
+# NOTE: these are *introductory* rates for the answering model, running to
+# 31 August 2026.
 # After that the list price is $3.00 / $15.00 and every cost figure computed
 # here understates by half until these two numbers are updated.
 PRICE_IN, PRICE_OUT = 2.00, 10.00

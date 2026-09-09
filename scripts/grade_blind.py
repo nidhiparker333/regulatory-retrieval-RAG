@@ -18,8 +18,8 @@ WHAT THE GRADER IS AND IS NOT SHOWN
              retrieved, whether retrieval scored a hit, the tuning set, any
              previous verdict, or the fact that I built any of it.
 
-  Model:     Opus 5. The answers were written by Sonnet 5. A model does not
-             grade its own work here.
+  Model:     a different model from the one that wrote the answers. Nothing
+             here grades its own work.
 
 The grader cannot know whether retrieval succeeded, so it cannot be lenient
 towards a near miss or harsh towards one. It reads the answer against the
@@ -46,6 +46,9 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 CLEAN = ROOT / "data" / "clean"
 EVAL = ROOT / "data" / "eval"
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from answer import MODEL as ANSWERER   # noqa: E402  - single source for the id
 
 MODEL = "claude-opus-5"
 PRICE_IN, PRICE_OUT = 5.00, 25.00
@@ -160,7 +163,7 @@ def main() -> int:
                 print(f"    {g['id']}: {g['why'][:70]}")
 
     (out).write_text(json.dumps(
-        {"_about": {"grader": MODEL, "answerer": "claude-sonnet-5",
+        {"_about": {"grader": MODEL, "answerer": ANSWERER,
                     "blind_to": ["the pipeline", "what was retrieved",
                                  "whether retrieval hit", "any previous verdict"],
                     "cost_usd": round(cost, 4)},

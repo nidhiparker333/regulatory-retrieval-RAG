@@ -137,7 +137,7 @@ Every chunk carries the article and annex numbers its section cites, including
 chunks that never mention them — Article 6 and Annex III are different documents
 and can never share a chunk, so the link survives only as metadata.
 
-**Generation is a single call** to `claude-sonnet-5` with adaptive thinking,
+**Generation is a single call** to the answering model, with adaptive thinking,
 constrained to the retrieved passages, with refusal and per-claim citation
 required by the system prompt and verified afterwards in code.
 

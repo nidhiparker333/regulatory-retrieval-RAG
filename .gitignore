@@ -46,3 +46,11 @@ docs/linkedin/rag-light.*
 docs/linkedin/rag-reel.*
 docs/linkedin/rag-workflow.*
 docs/motion.html
+
+# LinkedIn / promotional assets and the scripts that render them. Kept on disk,
+# deliberately not published - they are marketing material, not the project.
+docs/linkedin/
+docs/carousel.html
+docs/regulatory-retrieval-carousel.pdf
+scripts/build_carousel.py
+scripts/build_scene.py

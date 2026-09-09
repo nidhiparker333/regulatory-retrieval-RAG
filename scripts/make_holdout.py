@@ -31,8 +31,8 @@ Four properties, each one checkable rather than asserted:
      question was written by reading that section, so that section answers
      it by construction. This is the property questions.json cannot claim.
 
-  3. A DIFFERENT MODEL WRITES THE QUESTIONS. Generation is Opus 5; answering
-     is Sonnet 5. The question author is not the answerer.
+  3. A DIFFERENT MODEL WRITES THE QUESTIONS. The model that generates them is
+     not the model that answers them. The question author is not the answerer.
 
   4. THE GENERATOR IS BLIND. It sees one section of source text. It never
      sees the pipeline, the retrieval design, the tuning set, or any result.
@@ -65,6 +65,9 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 CLEAN = ROOT / "data" / "clean"
 EVAL = ROOT / "data" / "eval"
 OUT = EVAL / "holdout.json"
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from answer import MODEL as ANSWERER   # noqa: E402  - single source for the id
 
 MODEL = "claude-opus-5"          # deliberately not the answering model
 PER_SOURCE = 15
@@ -186,7 +189,7 @@ def main() -> int:
         "_about": {
             "purpose": "Held-out set. The system was never tuned against these.",
             "generated_by": MODEL,
-            "answered_by": "claude-sonnet-5 (deliberately a different model)",
+            "answered_by": f"{ANSWERER} (deliberately a different model)",
             "seed": SEED,
             "per_source_sampled": PER_SOURCE,
             "excluded": "every section used as a key by data/eval/questions.json",

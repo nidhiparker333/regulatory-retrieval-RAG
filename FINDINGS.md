@@ -220,7 +220,8 @@ were each **chosen by scoring against those same 30 questions**. Every
 retrieval figure above is in-sample. No commit timestamp touches that.
 
 So: **45 held-out questions**, generated from 203 sections the tuning set never
-used as a key, by Opus 5, which was shown one section of source text and nothing
+used as a key, by a different model from the one that answers, shown one
+section of source text and nothing
 about this system. The key is the section each question was written from —
 mechanical, not a judgement about what a complete answer needs. Seeded and
 recorded. Committed before being run. 15 per source, none discarded.
@@ -285,7 +286,7 @@ built specifically for multi-hop, and that has not been done.
 Every correctness verdict here was mine, in one pass, and I built the pipeline.
 That was disclosed as a weakness in three places. Disclosure is not repair.
 
-**Opus 5 grades Sonnet 5's answers.** It sees the question, the answer, and the
+**The grading model is not the answering model.** It sees the question, the answer, and the
 ground-truth source text. It does not see the pipeline, the retrieval design,
 which passages were retrieved, whether retrieval hit, or any earlier verdict —
 so it cannot be lenient towards a near miss, because it cannot tell one from a
@@ -456,7 +457,8 @@ because the failures that matter here produce output that still reads perfectly.
   summary, not merely a supported one, is unassessed.
 - **Human correctness was graded by one reader in one pass**, and that reader
   built the pipeline. That is now cross-checked rather than merely disclosed:
-  Opus 5 grades both sets blind, disagrees on 8 of 23, and is harsher in five.
+  a second model grades both sets blind, disagrees on 8 of 23, and is harsher
+  in five.
   Both graders are still models or me — **no second human has read these
   answers**, and a second model is not an independent human.
 - **Sample size.** 30 questions, 26 answerable, plus 45 held out. Every figure is

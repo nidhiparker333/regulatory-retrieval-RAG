@@ -20,6 +20,10 @@ import pathlib
 import statistics as stats
 
 import numpy as np
+import sys
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from answer import MODEL as ANSWER_MODEL   # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 EVAL = ROOT / "data" / "eval"
@@ -146,7 +150,7 @@ v = store["vectors"]
 print(f"  Index                 {v.shape[0]} x {v.shape[1]} float32, "
       f"{index_bytes/1_000_000:.1f} MB on disk")
 print(f"  Embedding model       {str(store['model'])} (local, no API)")
-print(f"  Generation model      claude-sonnet-5")
+print(f"  Generation model      {ANSWER_MODEL}")
 print(f"  Infrastructure        none - no vector database, no server for search")
 
 rule("WHAT IS NOT MEASURED")
