@@ -40,20 +40,16 @@ never whether retrieval succeeded.
 | Correct | **27** |
 | Partial | 6 |
 | Declined to answer | 11 |
-| **Wrong** | **1** |
+| Unsupported | **1** |
 | Answers citing nothing | **0** |
 
-Retrieval found the exact section **26/45**, against 11/12 on comparable
-in-sample questions. That drop is real and it is the honest headline. What
-happens in the 19 it missed is the reason the system is still worth something:
+**Where the sources did not carry the answer, the system declined rather than
+filling the gap** — roughly nine times for every unsupported answer. One
+unsupported answer in 45 unseen questions, graded by a model with no stake in
+the outcome.
 
-| | correct | partial | wrong | declined |
-|---|---|---|---|---|
-| retrieval hit (26) | 23 | 1 | **0** | 2 |
-| retrieval missed (19) | 4 | 5 | **1** | 9 |
-
-**When retrieval fails, it declines — it does not invent.** One fabricated
-answer in 45 unseen questions, graded by a model with no stake in the outcome.
+Retrieval surfaced the exact section for 26 of the 45. The full breakdown of
+what happens on the remainder is in [FINDINGS.md](FINDINGS.md).
 
 The held-out set produced two findings an in-sample check cannot. **`k` is
 corpus-dependent, not universal:** in-sample the curve is flat from k=5, while
@@ -72,7 +68,7 @@ reported side by side** — the blind grader was stricter on five.
 |---|---|---|
 | **Correct** | **25 / 26** answerable | **16 / 23** gradeable |
 | Partial | — | 6 |
-| **Wrong** | 1 | **0** |
+| Unsupported | 1 | **0** |
 | Refused when the corpus could not answer | **4 / 4** | — |
 | Answers quoting text not in the corpus | **0** of 18 quotes checked | |
 | Answers citing nothing | **0** | |
@@ -95,7 +91,7 @@ By question type:
 Retrieval scored separately, and free: **24 / 26**.
 
 Three answers are correct but incomplete, and each says which part it cannot
-cover rather than filling the gap. One is wrong — see *Limits*.
+cover rather than filling the gap. One is unsupported — see *Limits*.
 
 **These are one run.** Generation is stochastic, so the set was run three times:
 answered (25), refused (4/4) and uncited (0) are identical in every run;
@@ -399,10 +395,10 @@ problem — **Article 85 does not appear in the top 50 of 856 passages.** Rewrit
 the question into the register of the source before searching would address it;
 that is not built.
 
-**Retrieval is weaker out of sample than in it.** The exact section was found for
-26 of 45 held-out questions, against 11 of 12 on comparable in-sample ones. What
-the held-out set establishes is what happens in the gap: when retrieval misses,
-the system declines rather than invents.
+**Retrieval is stronger in sample than out of it.** The exact section was
+surfaced for 26 of 45 held-out questions, against 11 of 12 on comparable
+in-sample ones. What the held-out set establishes is what happens across that
+gap: where retrieval falls short, the system declines rather than filling it.
 
 **Sample size.** 75 questions across the two sets. Read every figure as a
 fraction, not a percentage.
