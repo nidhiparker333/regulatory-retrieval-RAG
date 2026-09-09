@@ -75,9 +75,9 @@ answerable one. No similarity threshold separates them.
 **Cross-references are recorded when the documents are parsed and followed at
 query time.** Retrieving any part of Annex III pulls in Article 6 automatically,
 because Annex III's own heading cites it. Deterministic, free, and incapable of
-inventing a link that is not in the text. Measured: cross-reference questions go
-more than doubling the multi-hop questions answered, while retrieving twice as
-much changed nothing.
+inventing a link that is not in the text. Measured: following
+them more than doubles the multi-hop questions answered, while retrieving twice
+as much changes nothing.
 
 **Refusal is enforced where the answer is written**, not where passages are
 found — because the measurement above shows confidence scores cannot separate
