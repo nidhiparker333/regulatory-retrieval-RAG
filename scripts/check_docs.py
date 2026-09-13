@@ -88,7 +88,10 @@ def main() -> int:
     check("both", both, f"{s['correct']} / {s['answerable']}", "correct count")
     check("both", both, f"{refused} / {len(ooc)}", "refusal count")
     check("both", both, f"of {s['quotes_checked']}", "quotes checked")
-    check("README", readme, f"{answered}/{len(answerable)}", "answered count")
+    # The README delegates every evaluation figure to FINDINGS, so these are
+    # checked across both documents rather than pinned to the one that no
+    # longer carries them.
+    check("both", both, f"{answered}/{len(answerable)}", "answered count")
     check("both", both, f"${cost:.4f}", "cost per question")
     check("both", both, f"{arm_strict('+ both (shipped)')}", "final retrieval score")
     check("FINDINGS", findings, f"{arm_strict('search only')}", "search-only arm")
@@ -114,12 +117,15 @@ def main() -> int:
         check("both", both, f"{found}/{n_hold}", "held-out retrieval")
         check("both", both, f"{ss_hit}/{ss_n}", "same-shape in-sample retrieval")
         check("both", both, f"| **{v['correct']}** |", "held-out correct")
-        check("README", readme, f"| {v['partial']} |", "held-out partial")
+        check("both", both, f"| {v['partial']} |", "held-out partial")
 
         # The k curve is the claim that changed a shipped decision's reasoning.
+        # Both endpoints are asserted separately: the figures are the claim,
+        # and pinning one sentence's wording breaks on any honest rewrite.
         k5 = next(r["holdout"] for r in hr["k_sweep"] if r["k"] == 5)
         k20 = next(r["holdout"] for r in hr["k_sweep"] if r["k"] == 20)
-        check("both", both, f"{k5}/{n_hold} to {k20}/{n_hold}", "held-out k curve")
+        check("both", both, f"{k5}/{n_hold}", "held-out k curve, floor")
+        check("both", both, f"{k20}/{n_hold}", "held-out k curve, ceiling")
 
         # Split table: the point of the whole exercise.
         miss = [g for g in hg if not g["retrieval_found"]]
