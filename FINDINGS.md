@@ -35,10 +35,15 @@ The middle column is the result worth reporting. The second half of the answer
 is only reachable through a citation the document makes itself — not by
 retrieving more of what already came back.
 
-References are recorded at parse time and followed at query time. No agent, no
-second model call, no per-question cost, and it cannot invent a link that is not
-in the text. The usual answer to multi-hop retrieval is an agent that decides
-what to look up next; on this corpus, reading the footnotes beats it.
+References are recorded at parse time and followed at query time: no second model
+call, no per-question cost, and it cannot follow a link the text does not
+contain.
+
+Multi-hop is more often handled at query time, by a step that reads what came
+back and decides what to fetch next. Here the citation graph is already written
+into the corpus, so it is extracted once and resolved from structure instead.
+**That is a design argument, not a measurement** — the comparison above is
+against retrieving more, and no query-time alternative was built or scored.
 
 ### Refusal has to be enforced where the answer is written
 
@@ -120,6 +125,36 @@ free, so nothing is in the pipeline on the strength of sounding sensible.
 The two steps fix different failures and barely overlap. Following references
 recovers the multi-hop questions and does nothing for cross-document ones;
 diversity does the reverse. Together they are worth more than either alone.
+
+### Hybrid retrieval was built, measured, and removed
+
+Dense vectors plus BM25, fused with reciprocal rank fusion, is close to standard
+advice for this problem. It was built and then scored against the same question
+set as everything else:
+
+| | Strict |
+|---|---|
+| BM25 alone | 14/26 |
+| RRF fusion | 16/26 |
+| **Dense alone** | **17/26** |
+
+| with expansion and diversity | Strict |
+|---|---|
+| RRF fusion | 23/26 |
+| **Dense alone (shipped)** | **24/26** |
+
+The fusion is beaten by the simpler half of itself, at both ends of the
+pipeline. The code, the `bm25s` dependency and every mention of it are gone.
+
+BM25 wins where it should: asked for *"Article 75c"* it returns all three
+parts, where dense returns Article 75d first, because to an embedding 75c and
+75d mean nearly the same thing. It loses on plain-English questions, and the
+direct-lookup category is where the gap is widest — 8/13 against 11/13.
+
+**The honest limit on this finding.** Hybrid was rejected on questions phrased
+the way these 30 are. Users typing article numbers directly would change the
+picture, and this question set cannot detect that. If identifier-style questions
+are ever added, re-run this before concluding anything.
 
 ### How many passages to retrieve, measured rather than inherited
 

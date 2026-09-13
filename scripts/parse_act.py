@@ -8,7 +8,8 @@ entire free half of our evaluation.
 
 We also record cross-references. When Article 6 says "referred to in Annex
 III", we store that link. Later, retrieving Article 6 can automatically pull
-in Annex III - which is how we solve multi-hop questions without an agent.
+in Annex III - which is how multi-hop questions resolve from structure, at no
+per-question cost.
 
 Run:  .venv\\Scripts\\python.exe scripts\\parse_act.py
 """
