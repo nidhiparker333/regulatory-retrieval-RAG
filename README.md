@@ -61,9 +61,12 @@ detection that self-review had not caught, since fixed. Both are in
 Two properties of this material break ordinary retrieval.
 
 **The answer is often not where you look for it.** 111 of 403 sections cite
-another section. Article 6 defines "high-risk" by pointing at Annex III; Annex
-III's title points back at Article 6. Neither means anything alone, and a single
-similarity search returns one of them.
+another section — **all of them in the Act**, which is the only source here that
+numbers its own provisions and points at them. Article 6 defines "high-risk" by
+pointing at Annex III; Annex III's title points back at Article 6. Neither means
+anything alone, and a single similarity search returns one of them. The NIST and
+OWASP documents carry no such graph, so cross-reference following never fires on
+them and the multi-hop result below is an Act result.
 
 **A retrieval system cannot tell when it does not know.** Ask for the five
 nearest passages and you always get five, however far away they are. Measured

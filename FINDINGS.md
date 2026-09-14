@@ -35,6 +35,12 @@ The middle column is the result worth reporting. The second half of the answer
 is only reachable through a citation the document makes itself — not by
 retrieving more of what already came back.
 
+**This is an Act result.** All 111 cross-referencing sections are in the
+Regulation, which is the only source here that numbers its provisions and cites
+them. NIST and OWASP contribute none, so this arm never fires on those two
+documents and nothing here says what it would be worth on a corpus without a
+citation graph.
+
 References are recorded at parse time and followed at query time: no second model
 call, no per-question cost, and it cannot follow a link the text does not
 contain.
@@ -327,6 +333,24 @@ which passages were retrieved, whether retrieval hit, or any earlier verdict —
 so it cannot be lenient towards a near miss, because it cannot tell one from a
 direct hit.
 
+### Where this grader is not independent
+
+Answers are written by `claude-sonnet-5`. Both the grader and the held-out
+question generator are `claude-opus-5`. So on the held-out set **the same model
+wrote a question from a section and then graded the answer against that same
+section.** The tuning set does not have this problem — those questions are mine.
+
+The risk is leniency towards an answer that happens to match how the question
+was framed. Two things argue against that having happened here: the grader is
+**harsher** than I was, downgrading five answers I had marked correct, and it
+found a defect in `answer.py` — the refusal-detection gap below — that no check
+in this repository could have found. Neither is what a captured grader looks
+like.
+
+It is still a weaker instrument than one that shares nothing with the question
+author. Regenerating the held-out set with a third model, or grading with one,
+is the obvious next step and has not been done.
+
 ### On the held-out set
 
 | | of 45 |
@@ -512,9 +536,12 @@ because the failures that matter here produce output that still reads perfectly.
 - **The embedding model.** `bge-small-en-v1.5` was never compared against a
   larger model or a different family. Whether a bigger encoder closes the
   vocabulary gap that D04 exposes is unknown.
-- **Run-to-run variance.** Generation is stochastic and the evaluation was run
-  once. Every end-to-end figure here is a single sample, so a one-question
-  difference between two configurations cannot be distinguished from noise.
+- **Run-to-run variance is bounded, not eliminated.** Generation is stochastic.
+  The end-to-end evaluation was run three times — `data/eval/variance_run_1..3`,
+  reported under *Run it three times and one question moves* above. Refusal and
+  uncited answers do not move; grounding moves by one. So a one-question
+  difference between two configurations still cannot be distinguished from
+  noise, and every configuration comparison in this file rests on a single run.
 - **Refusal rests on four questions**, which is the smallest sample in the set
   and the most safety-critical behaviour in the system.
 - **Whether the answer keys are the only defensible ones.** They are one reading
