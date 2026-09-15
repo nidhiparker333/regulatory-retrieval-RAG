@@ -1,5 +1,6 @@
 """
-Check every figure in README.md and FINDINGS.md against the pipeline.
+Check every figure in README.md, FINDINGS.md and data/eval/README.md against
+the pipeline.
 
 Documentation drift is not a cosmetic problem. The predecessor to this project
 reported 925 chunks and a 1.3 MB index long after both had changed, claimed in
@@ -38,6 +39,31 @@ def load():
     )
 
 
+NUM_WORDS = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five",
+             6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten"}
+
+
+def squash(text: str) -> str:
+    """Collapse whitespace runs to single spaces.
+
+    Prose assertions are made against this rather than the raw file. A
+    sentence that wraps across two lines is the same sentence, and a check
+    that fails when a paragraph is reflowed trains people to reflow less
+    rather than to keep the figure true. Case goes the same way: a capital at
+    the start of a sentence is not a change of figure.
+    """
+    return re.sub(r"\s+", " ", text).casefold()
+
+
+def check_phrase(doc: str, text: str, phrase: str, label: str) -> None:
+    """Assert a sentence appears, ignoring how it happens to be wrapped."""
+    ok = squash(phrase) in squash(text)
+    print(f"  [{'ok ' if ok else 'FAIL'}]  {doc:<12} {label}")
+    if not ok:
+        print(f"           expected to find: {phrase!r}")
+        failures.append(f"{doc}: {label}")
+
+
 def check(doc: str, text: str, needle: str, label: str) -> None:
     """Assert a rendered figure appears in the document."""
     ok = needle in text
@@ -52,6 +78,11 @@ def main() -> int:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     findings = (ROOT / "FINDINGS.md").read_text(encoding="utf-8")
     both = readme + findings
+    # data/eval/README.md describes the artefacts sitting beside it and quotes
+    # figures out of them. It is checked separately rather than folded into
+    # `both`, so a figure required in the prose cannot be satisfied by the
+    # guide happening to mention it, or the reverse.
+    eval_doc = (EVAL / "README.md").read_text(encoding="utf-8") if (EVAL / "README.md").exists() else ""
 
     answerable = [r for r in results if r["category"] != "out_of_corpus"]
     ooc = [r for r in results if r["category"] == "out_of_corpus"]
@@ -169,6 +200,65 @@ def main() -> int:
         print("\n  [FAIL]  docs/architecture.svg missing; README embeds it")
         failures.append("architecture.svg absent")
 
+    # ------------------------------------------------- data/eval/README.md
+    #
+    # The guide to the evaluation artefacts quotes figures out of them, and
+    # generation is stochastic: re-running run_variance.py resamples all three
+    # files. Without this block the guide could go quietly wrong while every
+    # other check stayed green - the same drift this script exists to stop,
+    # one directory further down.
+    print("\n  data/eval/README.md")
+    if not eval_doc:
+        print("  [FAIL]  data/eval/README.md missing; it documents this directory")
+        failures.append("data/eval/README.md absent")
+    else:
+        var = sorted(EVAL.glob("variance_run_*.json"))
+        n_var = NUM_WORDS.get(len(var), str(len(var)))
+        check_phrase("eval guide", eval_doc, f"{n_var} independent end-to-end runs",
+                     "variance run count")
+
+        def tally(path: pathlib.Path) -> tuple[int, int, int]:
+            rows = json.loads(path.read_text(encoding="utf-8"))
+            rows = rows["results"] if isinstance(rows, dict) else rows
+            ans = [r for r in rows if r["category"] != "out_of_corpus"]
+            out = [r for r in rows if r["category"] == "out_of_corpus"]
+            refused = sum(1 for r in out if r["behaved"])
+            uncited = sum(1 for r in ans if r["n_citations"] == 0 and not r["refused"])
+            grounded = sum(1 for r in ans if r["grounded"])
+            return refused, uncited, grounded
+
+        tallies = [tally(p) for p in var]
+        refusals = {t[0] for t in tallies}
+        uncits = {t[1] for t in tallies}
+        groundings = {t[2] for t in tallies}
+
+        # The guide says refusal and uncited hold still while grounding moves
+        # by one. Each half is asserted, because either could stop being true.
+        ok = len(refusals) == 1 and len(uncits) == 1
+        print(f"  [{'ok ' if ok else 'FAIL'}]  eval guide    refusal and uncited are stable across runs")
+        if not ok:
+            print(f"           refused {sorted(refusals)}, uncited {sorted(uncits)}")
+            failures.append("variance: stability claim")
+
+        spread = max(groundings) - min(groundings)
+        claim = f"Grounding moves by {NUM_WORDS.get(spread, spread)} question"
+        ok = spread == 1 and squash(claim) in squash(eval_doc)
+        print(f"  [{'ok ' if ok else 'FAIL'}]  eval guide    grounding moves by one")
+        if not ok:
+            print(f"           grounded across runs: {sorted(groundings)} (spread {spread})")
+            failures.append("variance: grounding spread")
+
+        # The arm names are the guide's own table, and compare_arms.py owns them.
+        for arm in arms:
+            check("eval guide", eval_doc, f"`{arm}`", f"arm named: {arm}")
+
+        # Every artefact in the directory should be accounted for by the guide.
+        for f in sorted(EVAL.glob("*.json")):
+            ok = f.stem in eval_doc
+            print(f"  [{'ok ' if ok else 'FAIL'}]  eval guide    documents {f.name}")
+            if not ok:
+                failures.append(f"undocumented artefact: {f.name}")
+
     for img in ("docs/ui-answer.png", "docs/ui-refusal.png"):
         ok = (ROOT / img).exists() and img in readme
         print(f"  [{'ok ' if ok else 'FAIL'}]  README        embeds {img}")
@@ -205,7 +295,8 @@ def main() -> int:
             print(f"    - {f}")
         print("\n  Re-run the pipeline, or update the prose. Do not do neither.")
         return 1
-    print("  Every figure in README.md and FINDINGS.md matches the pipeline.")
+    print("  Every figure in README.md, FINDINGS.md and data/eval/README.md")
+    print("  matches the pipeline.")
     return 0
 
 
