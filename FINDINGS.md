@@ -335,10 +335,13 @@ direct hit.
 
 ### Where this grader is not independent
 
-Answers are written by `claude-sonnet-5`. Both the grader and the held-out
-question generator are `claude-opus-5`. So on the held-out set **the same model
+The grader is a different model from the one that answers — but it is **the same
+model that generated the held-out questions**. So on the held-out set one model
 wrote a question from a section and then graded the answer against that same
-section.** The tuning set does not have this problem — those questions are mine.
+section. The tuning set does not have this problem: those questions are mine.
+
+Which model played which role is recorded in the `_about` block of each artefact
+in `data/eval/`, so the pairing can be checked rather than taken on trust.
 
 The risk is leniency towards an answer that happens to match how the question
 was framed. Two things argue against that having happened here: the grader is
