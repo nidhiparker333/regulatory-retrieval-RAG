@@ -1,9 +1,9 @@
 # regulatory-retrieval
 
-Question answering across the documents that govern AI — a binding EU regulation,
-two US risk frameworks, and a security standard — where every answer cites the
-article, annex or page it came from, and the system declines when the documents
-cannot answer.
+Question answering across the documents that govern AI — a binding EU
+regulation, a US risk framework with its generative-AI profile, and a community
+security standard — where every answer cites the article, annex or page it came
+from, and the system declines when the documents cannot answer.
 
 Retrieval-augmented generation: the model answers from passages fetched out of
 these four documents at query time, not from what it learned in training. Which
@@ -17,6 +17,20 @@ which says a CV screening tool is high-risk — and step 03 followed Annex III's
 own citation to Article 6, which says under what conditions. Neither section
 answers the question alone, and no amount of retrieving more would have found
 the second one.*
+
+## Where things are
+
+```
+data/raw/      The published sources, byte-for-byte, with sha256 checksums
+data/clean/    Parsed sections, chunks, and the 1.2 MB vector index
+data/eval/     Question sets and recorded evaluation runs - see data/eval/README.md
+scripts/       The pipeline, the verification suite, and the evaluation
+api/           FastAPI over scripts/answer.py - the same code path the evaluation scores
+ui/            Next.js front end showing the retrieval trace beside each answer
+```
+
+`FINDINGS.md` is the engineering write-up: what was measured, what was rejected,
+and what is still unmeasured. It is the document worth reading after this one.
 
 ## Results
 
@@ -146,14 +160,27 @@ required by the system prompt and verified afterwards in code.
 
 ## The corpus
 
-| Source | Format | Sections |
-|---|---|---|
-| EU AI Act — Regulation (EU) 2024/1689, consolidated 27 July 2026 | HTML | 133 |
-| NIST AI 100-1 and AI 600-1 — Risk Management Framework and Generative AI Profile | PDF | 95 |
-| OWASP LLM Top 10 (2026) | Markdown | 175 |
+| Source | Status | Format | Sections |
+|---|---|---|---|
+| EU AI Act — Regulation (EU) 2024/1689, consolidated 27 July 2026 | **Binding law** | HTML | 133 |
+| NIST AI 100-1 — Risk Management Framework | Voluntary framework | PDF | 28 |
+| NIST AI 600-1 — Generative AI Profile | Voluntary profile of AI 100-1 | PDF | 67 |
+| OWASP LLM Top 10 (2026) | Community standard | Markdown | 175 |
 
 403 sections, 815,171 characters, split into 856 chunks. The index is
 **1.2 MB** — no vector database; it ships with the application.
+
+**The Status column is load-bearing, not decoration.** These four documents
+overlap almost entirely in subject and differ completely in what they oblige
+anyone to do. An answer that cites voluntary guidance for something the Act
+requires reads perfectly and misstates the obligation, which is why a citation
+stays bound to the claim it supports rather than appended to the answer.
+
+The two NIST publications are **one source group** in the pipeline, not two.
+AI 600-1 is a profile built on AI 100-1 — one publisher, one level of force —
+and the retrieval step that reserves a slot per unrepresented source works on
+groups, so there are three: the Act, NIST, and OWASP. Citations still name the
+individual document (`NIST AI 100-1, p.9`).
 
 **The Act is taken as HTML, not PDF.** EUR-Lex publishes it in 24 languages and
 two formats; the HTML carries the document's own structural markup (`id="art_6"`,
